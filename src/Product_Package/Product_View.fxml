@@ -83,17 +83,17 @@
                     <columns>
                       <TableColumn prefWidth="75.0" style="-fx-background-radius: 20; -fx-alignment: Center;" text="N°" />
                       <TableColumn prefWidth="75.0" style="-fx-background-radius: 20; -fx-alignment: Center;" text="Ref" />
-                        <TableColumn prefWidth="130.33334350585938" style="-fx-background-radius: 20;" text="Désigniation" />
-                        <TableColumn minWidth="1.6666717529296875" prefWidth="86.66665649414062" text="Nbr Pcs/crt" />
-                        <TableColumn prefWidth="65.0" text="Quantité" />
-                        <TableColumn prefWidth="63.0" text="Nbr pcs" />
-                        <TableColumn prefWidth="83.33331298828125" text="Code à Bare" />
-                        <TableColumn prefWidth="92.66668701171875" text="Date d'entre" />
-                        <TableColumn prefWidth="49.6666259765625" text="Alert" />
-                        <TableColumn prefWidth="85.3333740234375" text="Expiration" />
-                        <TableColumn prefWidth="86.66668701171875" text="Prix d'achat" />
-                        <TableColumn prefWidth="79.66668701171875" text="Prix de vent" />
-                        <TableColumn prefWidth="152.666748046875" text="Fournisseur" />
+                        <TableColumn prefWidth="300.0" style="-fx-background-radius: 20;" text="Désigniation" />
+                        <TableColumn minWidth="1.6666717529296875" prefWidth="70.0" text="Nbr Pcs/crt" />
+                        <TableColumn prefWidth="90.0" text="Quantité" />
+                        <TableColumn prefWidth="50.0" text="Nbr pcs" />
+                        <TableColumn prefWidth="120.0" text="Code à Bare" />
+                        <TableColumn text="Date d'entre" />
+                        <TableColumn prefWidth="50.0" text="Alert" />
+                        <TableColumn text="Expiration" />
+                        <TableColumn text="Prix d'achat" />
+                        <TableColumn text="Prix de vent" />
+                        <TableColumn prefWidth="200.0" text="Fournisseur" />
                     </columns>
                      <VBox.margin>
                         <Insets bottom="30.0" />
