@@ -1,8 +1,8 @@
 package Utilities_Package;
 
-    public class Person {
+         public class Person {
 
-    private String name,address,phone_Number,register_Number;
+         private String name,address,phone_Number,register_Number;
         private double sold,sold_Max;
         int sold_duration;
 
@@ -28,7 +28,6 @@ package Utilities_Package;
         public void setSold_duration(int sold_duration) {
             this.sold_duration = sold_duration;
         }
-
      //  Getters
         public String getName() {
             return name;
@@ -52,8 +51,8 @@ package Utilities_Package;
             return sold_duration;
         }
 
-    // Clients Constructor
-    public Person(String Name,String Address,String Phone,String Register,double Sold,double Sold_Max,int Sold_duration){
+        // Clients Constructor
+        public Person(String Name,String Address,String Phone,String Register,double Sold,double Sold_Max,int Sold_duration){
 
         name   = Name   ;
         address = Address;
@@ -63,8 +62,8 @@ package Utilities_Package;
         sold_duration = Sold_duration;
         sold_Max = Sold_Max;
     }
-    // Fournisseur Constructor
-    public Person(String Name,String Address,String Phone,String Register,double Sold){
+        // Fournisseur Constructor
+        public Person(String Name,String Address,String Phone,String Register,double Sold){
 
         name    = Name   ;
         address = Address;
@@ -73,6 +72,7 @@ package Utilities_Package;
         sold = Sold;
 
     }
+
 
 
 

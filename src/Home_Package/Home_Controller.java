@@ -13,15 +13,16 @@ import java.util.ResourceBundle;
 
 public class Home_Controller implements Initializable {
     @FXML
-    private Button products_btn;
+    private Button products_btn,client_btn,stock_btn,fournisseur_btn;
 
-
-
+   // produits
+    @FXML
     public void Open_Product_Window(Event event) throws IOException {
 
         new Utility("/Product_Package/Product_View.fxml","Products Page", event );
 
     }
+
 
     @FXML
     public void open_Product_WindowFunction(Event event) throws IOException     {
@@ -34,6 +35,27 @@ public class Home_Controller implements Initializable {
         }
 
     }
+
+
+    // Stock
+    @FXML
+    public void Open_Stock_Window(Event event) throws IOException {
+        new Utility("/Stock_Package/Stock_View.fxml","Stock Page", event );
+    }
+    // Client
+    @FXML
+    public void Open_Client_Window(Event event) throws IOException {
+        new Utility("/Client_Package/Client_View.fxml","Client Page", event );
+    }
+    // Fournisseur
+    @FXML
+    public void Open_Fournisseur_Window(Event event) throws IOException {
+        new Utility("/Fournisseur_Package/Fournisseur_View.fxml","Fournisseur Page", event );
+    }
+
+
+
+
 
 
     @Override
