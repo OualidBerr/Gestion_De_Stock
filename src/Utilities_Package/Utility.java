@@ -40,7 +40,8 @@ import java.io.IOException;
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle(title);
-        stage.setFullScreen(true);
+        stage.setFullScreen(false);
+        stage.setResizable(false);
         stage.show();
 
     }
@@ -54,6 +55,7 @@ import java.io.IOException;
         App_Stage.hide();
         App_Stage.setScene(Home_page_Scene);
         App_Stage.setTitle(title);
+        App_Stage.setFullScreen(true);
         App_Stage.show();
 
 }
