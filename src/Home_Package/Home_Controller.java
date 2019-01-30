@@ -17,13 +17,6 @@ public class Home_Controller implements Initializable {
 
 
 
-
-
-
-
-
-
-
     public void Open_Product_Window(Event event) throws IOException {
 
         new Utility("/Product_Package/Product_View.fxml","Products Page", event );
