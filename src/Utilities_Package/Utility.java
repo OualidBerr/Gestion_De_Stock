@@ -48,13 +48,13 @@ import java.io.IOException;
    // Switching Scenes
     public void switchScene(String Actual_Window,String title, Event event) throws IOException {
 
- Parent Home_page_Parent = FXMLLoader.load(getClass().getResource(Actual_Window));
- Scene  Home_page_Scene  = new Scene(Home_page_Parent);
- Stage App_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
- App_Stage.hide();
- App_Stage.setScene(Home_page_Scene);
- App_Stage.setTitle(title);
- App_Stage.show();
+         Parent Home_page_Parent = FXMLLoader.load(getClass().getResource(Actual_Window));
+        Scene  Home_page_Scene  = new Scene(Home_page_Parent);
+        Stage App_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        App_Stage.hide();
+        App_Stage.setScene(Home_page_Scene);
+        App_Stage.setTitle(title);
+        App_Stage.show();
 
 }
 
