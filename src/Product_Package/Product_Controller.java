@@ -13,23 +13,24 @@ import java.util.ResourceBundle;
 public class Product_Controller implements Initializable {
 
     @FXML
-    private Button goHome_btn;
+    private Button goHome_btn,newProduct_btn;
+
+    @FXML
     public void goBack_To_Home_Window(Event event) throws IOException {
 
         new Utility("/Home_Package/Home_View.fxml","Home Page", event );
 
     }
     @FXML
-    public void open_Product_WindowFunction(Event event) throws IOException     {
+    public void open_Add_New_Product_Form(Event event) throws IOException{
 
-        try {
-            goBack_To_Home_Window(event);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        new Utility().openNewStage("/Product_Package/New_Product_View.fxml","Ajouter Nouveau Produit");
     }
+
+
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

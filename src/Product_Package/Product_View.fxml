@@ -101,7 +101,7 @@
                   </TableView>
                   <HBox prefHeight="50.0" prefWidth="1180.0">
                      <children>
-                        <Button fx:id="goHome_btn1" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goBack_To_Home_Window" prefHeight="50.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Nouveux produit">
+                        <Button fx:id="newProduct_btn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Add_New_Product_Form" prefHeight="50.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Nouveux produit">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
