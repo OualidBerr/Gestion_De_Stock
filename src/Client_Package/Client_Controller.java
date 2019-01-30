@@ -34,6 +34,14 @@ public class Client_Controller implements Initializable {
         new Utility().openNewStage("/Client_Package/New_Client_View.fxml","Ajouter Nouveau Client");
     }
 
+    // Reglement Form
+    @FXML
+    public void open_Reglement_Form(Event event) throws IOException{
+
+        new Utility().openNewStage("/Reglement_Package/Reglement_View.fxml","Reglement de Client : ");
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

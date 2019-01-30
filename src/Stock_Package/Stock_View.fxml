@@ -44,7 +44,7 @@
             </TableView>
             <HBox prefHeight="50.0" prefWidth="1180.0">
                <children>
-                  <Button fx:id="newProduct_btn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Nouveux produit">
+                  <Button fx:id="newProduct_btn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Add_New_Product_Form" prefHeight="50.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Nouveux produit">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -124,6 +124,21 @@
                </font>
             </Button>
             <Button fx:id="produit_btn" layoutX="10.0" layoutY="13.0" mnemonicParsing="false" onAction="#go_Back_To_Product_Window" prefHeight="53.0" prefWidth="117.0" style="-fx-background-radius: 20;" text="Produits">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="produit_btn1" layoutX="131.0" layoutY="13.0" mnemonicParsing="false" onAction="#go_Back_To_Product_Window" prefHeight="53.0" prefWidth="117.0" style="-fx-background-radius: 20;" text="Founisseurs">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="produit_btn11" layoutX="252.0" layoutY="13.0" mnemonicParsing="false" onAction="#go_Back_To_Product_Window" prefHeight="53.0" prefWidth="117.0" style="-fx-background-radius: 20;" text="Clients">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="produit_btn111" layoutX="373.0" layoutY="13.0" mnemonicParsing="false" onAction="#go_Back_To_Product_Window" prefHeight="53.0" prefWidth="117.0" style="-fx-background-radius: 20;" text="Caisse">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

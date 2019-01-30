@@ -39,6 +39,14 @@ public class Fournisseur_Controller implements Initializable
         new Utility().openNewStage("/Fournisseur_Package/New_Fournisseur_View.fxml","Ajouter Nouveau Fournisseur");
     }
 
+    // Reglement Form
+    @FXML
+    public void open_Reglement_Form(Event event) throws IOException{
+
+        new Utility().openNewStage("/Reglement_Package/Reglement_View.fxml","Verssement Vers Fournisseur : ");
+    }
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

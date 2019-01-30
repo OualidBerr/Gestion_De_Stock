@@ -30,7 +30,7 @@
                      <children>
                         <AnchorPane layoutX="7.0" layoutY="8.0" prefHeight="327.0" prefWidth="385.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;">
                            <children>
-                              <VBox layoutX="16.0" layoutY="75.0" prefHeight="210.0" prefWidth="341.0" style="-fx-alignment: Center; -fx-background-color: #5DADE2;" AnchorPane.topAnchor="75.0">
+                              <VBox layoutX="16.0" layoutY="75.0" prefHeight="210.0" prefWidth="341.0" style="-fx-alignment: Center; -fx-background-color: #5DADE2; -fx-background-radius: 20;" AnchorPane.topAnchor="75.0">
                                  <children>
                                     <ComboBox fx:id="admcambo" prefHeight="25.0" prefWidth="250.0" promptText="                       Admin" style="-fx-background-radius: 20; -fx-alignment: Center;">
                                        <opaqueInsets>

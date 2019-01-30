@@ -140,6 +140,11 @@
                               <Insets left="50.0" right="50.0" />
                            </HBox.margin>
                         </Button>
+                        <Button fx:id="verssement_btn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Reglement_Form" prefHeight="50.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Verssement">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
                      </children>
                   </HBox>
                </children>
