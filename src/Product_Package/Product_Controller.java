@@ -30,7 +30,7 @@ public class Product_Controller implements Initializable {
         new Utility().openNewStage("/Product_Package/New_Product_View.fxml","Ajouter Nouveau Produit");
     }
 
-    // Go To Stock
+    // Go To Produits
     @FXML
     public void open_Stock_Window(Event event) throws IOException {
 
