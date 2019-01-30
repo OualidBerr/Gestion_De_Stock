@@ -116,7 +116,7 @@
             </Menu>
          </menus>
       </MenuBar>
-      <ToolBar layoutX="-4.0" layoutY="35.0" prefHeight="69.0" prefWidth="1318.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+      <ToolBar layoutX="-4.0" layoutY="35.0" prefHeight="69.0" prefWidth="1318.0" style="-fx-background-color: #1a0000;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
          <items>
             <Button fx:id="goHome_btn" mnemonicParsing="false" onAction="#goBack_To_Home_Window" prefHeight="53.0" prefWidth="117.0" style="-fx-background-radius: 20;" text="Home">
                <font>

@@ -70,6 +70,21 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
+                  <Button fx:id="products_btn1" layoutX="125.0" layoutY="10.0" mnemonicParsing="false" onAction="#open_Product_WindowFunction" prefHeight="44.0" prefWidth="111.0" style="-fx-background-radius: 20;" text="Stock">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="products_btn11" layoutX="240.0" layoutY="10.0" mnemonicParsing="false" onAction="#open_Product_WindowFunction" prefHeight="44.0" prefWidth="111.0" style="-fx-background-radius: 20;" text="Fournisseurs">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="products_btn111" layoutX="355.0" layoutY="10.0" mnemonicParsing="false" onAction="#open_Product_WindowFunction" prefHeight="44.0" prefWidth="111.0" style="-fx-background-radius: 20;" text="Clients">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
               </items>
             </ToolBar>
       </children>
