@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 public class Stock_Controller  implements Initializable {
 
 @FXML
-private Button goHome_btn,produit_btn;
+private Button goHome_btn,produit_btn,charge_btn;
 
     @FXML
     public void goBack_To_Home_Window(Event event) throws IOException {
@@ -25,10 +25,15 @@ private Button goHome_btn,produit_btn;
     @FXML
     public void go_Back_To_Product_Window(Event event) throws IOException {
 
-
         new Utility().switchScene("/Product_Package/Product_View.fxml","Produits Window",event);
+    }
+    @FXML
+   public void go_To_Charge_Stock_Window(Event event) throws IOException{
+        new Utility().openNewStage("/Stock_Package/Charge_View.fxml","Charge Stock");
 
     }
+
+
 
 
     @Override

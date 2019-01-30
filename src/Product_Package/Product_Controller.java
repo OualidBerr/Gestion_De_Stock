@@ -15,7 +15,6 @@ public class Product_Controller implements Initializable {
     @FXML
     private Button goHome_btn,newProduct_btn,stock_btn;
 
-
     // Go Home Page
     @FXML
     public void goBack_To_Home_Window(Event event) throws IOException {
