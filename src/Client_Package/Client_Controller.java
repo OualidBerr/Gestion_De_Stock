@@ -34,8 +34,6 @@ public class Client_Controller implements Initializable {
         new Utility().openNewStage("/Client_Package/New_Client_View.fxml","Ajouter Nouveau Client");
     }
 
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 
 public class Home_Controller implements Initializable {
     @FXML
-    private Button products_btn,client_btn,stock_btn,fournisseur_btn;
+    private Button products_btn,client_btn,stock_btn,fournisseur_btn,logout_btn;
 
    // produits
     @FXML
@@ -50,6 +50,13 @@ public class Home_Controller implements Initializable {
         new Utility("/Fournisseur_Package/Fournisseur_View.fxml","Fournisseur Page", event );
     }
 
+
+    // Logout
+    // Fournisseur
+    @FXML
+    public void log_Out_Function(Event event) throws IOException {
+        new Utility("/Login_Package/Login_View.fxml","Login Page", event );
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
