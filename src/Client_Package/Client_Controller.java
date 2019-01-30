@@ -27,7 +27,12 @@ public class Client_Controller implements Initializable {
 
     }
 
+    // Open New Client Form
+    @FXML
+    public void open_Add_New_Client_Form(Event event) throws IOException{
 
+        new Utility().openNewStage("/Client_Package/New_Client_View.fxml","Ajouter Nouveau Client");
+    }
 
 
 

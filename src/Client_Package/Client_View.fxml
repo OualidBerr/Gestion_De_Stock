@@ -110,7 +110,7 @@
                   </TableView>
                   <HBox prefHeight="50.0" prefWidth="1180.0">
                      <children>
-                        <Button fx:id="newProduct_btn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Nouveux Client">
+                        <Button fx:id="new_Client_btn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Add_New_Client_Form" prefHeight="50.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Nouveux Client">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
