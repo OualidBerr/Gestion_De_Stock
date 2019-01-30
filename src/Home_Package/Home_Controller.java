@@ -5,10 +5,8 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class Home_Controller implements Initializable {
@@ -22,7 +20,6 @@ public class Home_Controller implements Initializable {
         new Utility("/Product_Package/Product_View.fxml","Products Page", event );
 
     }
-
 
     @FXML
     public void open_Product_WindowFunction(Event event) throws IOException     {
@@ -52,10 +49,6 @@ public class Home_Controller implements Initializable {
     public void Open_Fournisseur_Window(Event event) throws IOException {
         new Utility("/Fournisseur_Package/Fournisseur_View.fxml","Fournisseur Page", event );
     }
-
-
-
-
 
 
     @Override
