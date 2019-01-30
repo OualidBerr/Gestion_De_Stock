@@ -59,9 +59,17 @@
             <Font size="18.0" />
           </font>
         </Label>
-            <ToolBar prefHeight="40.0" prefWidth="640.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ToolBar prefHeight="54.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
-                <Button mnemonicParsing="false" text="Button" />
+                <Button fx:id="Home_btn" mnemonicParsing="false" prefHeight="44.0" prefWidth="111.0" text="Home">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Button>
+                  <Button fx:id="products_btn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Product_Window" prefHeight="44.0" prefWidth="111.0" text="Produits">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
               </items>
             </ToolBar>
       </children>

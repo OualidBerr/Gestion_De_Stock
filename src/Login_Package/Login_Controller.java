@@ -45,7 +45,7 @@ private PasswordField txtpassword;
     String password = txtpassword.getText();
     String role_User = admcambo.getValue().toString();
 
-String query = "SELECT * FROM demo.users Where username = '"+username+"' &&  password = '"+password+"' && role = '"+role_User+"' ";
+    String query = "SELECT * FROM demo.users Where username = '"+username+"' &&  password = '"+password+"' && role = '"+role_User+"' ";
 
 
     try    {
@@ -92,7 +92,6 @@ String query = "SELECT * FROM demo.users Where username = '"+username+"' &&  pas
 
     }
 
-    public void sayHello(){}
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

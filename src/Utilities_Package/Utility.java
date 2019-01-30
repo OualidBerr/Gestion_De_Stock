@@ -33,13 +33,13 @@ import java.io.IOException;
     }
 
    // Starting new Stage Function
-    public void openNewStage(Utility utility_Object) throws IOException {
+    public void openNewStage(String View, String title) throws IOException {
 
-        Parent parent = FXMLLoader.load(getClass().getResource(utility_Object.view_Window));
+        Parent parent = FXMLLoader.load(getClass().getResource(View));
         Scene scene = new Scene(parent);
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.setTitle(utility_Object.view_title);
+        stage.setTitle(title);
         stage.setFullScreen(true);
         stage.show();
 
