@@ -147,7 +147,7 @@
                               <Insets left="50.0" />
                            </HBox.margin>
                         </Button>
-                        <Button layoutX="244.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Charge">
+                        <Button layoutX="244.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Bon Fournisseur">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

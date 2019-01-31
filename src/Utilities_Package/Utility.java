@@ -90,6 +90,10 @@ import java.io.IOException;
             switchScene("/Caisse_Package/Caisse_View.fxml","Caisse Page", event);
         }
 
+        // Go Bon Command Window
+        public void go_Bon_Command(Event event)  throws IOException{
+            switchScene("/Bon_Command_Package/Bon_Command_View.fxml","Bon Command Page", event);
+        }
 
     // ShowAndWait a New Window
 

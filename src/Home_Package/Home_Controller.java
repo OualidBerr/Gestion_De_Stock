@@ -44,6 +44,13 @@ public class Home_Controller implements Initializable {
         new Utility().go_Caisse(event);
     }
 
+    // Open_Bon_Command_Window
+    @FXML
+    public void Open_Bon_Command_Window(Event event) throws IOException {
+        new Utility().go_Bon_Command(event);
+    }
+
+
     // Logout
     @FXML
     public void log_Out_Function(Event event) throws IOException {
