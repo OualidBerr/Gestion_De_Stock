@@ -13,46 +13,32 @@ public class Home_Controller implements Initializable {
     @FXML
     private Button products_btn,client_btn,stock_btn,fournisseur_btn,logout_btn;
 
-   // produits
+   // product
     @FXML
     public void Open_Product_Window(Event event) throws IOException {
 
-        new Utility("/Product_Package/Product_View.fxml","Products Page", event );
+        new Utility().go_Pruduct(event);
 
     }
-
-    @FXML
-    public void open_Product_WindowFunction(Event event) throws IOException     {
-
-        try {
-            Open_Product_Window(event);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
 
     // Stock
     @FXML
     public void Open_Stock_Window(Event event) throws IOException {
-        new Utility("/Stock_Package/Stock_View.fxml","Stock Page", event );
+        new Utility().go_Stock(event);
     }
     // Client
     @FXML
     public void Open_Client_Window(Event event) throws IOException {
-        new Utility("/Client_Package/Client_View.fxml","Client Page", event );
+        new Utility().go_Client(event);
     }
     // Fournisseur
     @FXML
     public void Open_Fournisseur_Window(Event event) throws IOException {
-        new Utility("/Fournisseur_Package/Fournisseur_View.fxml","Fournisseur Page", event );
+        new Utility().go_Fournisseur(event);
     }
 
-
     // Logout
-    // Fournisseur
+
     @FXML
     public void log_Out_Function(Event event) throws IOException {
         new Utility("/Login_Package/Login_View.fxml","Login Page", event );

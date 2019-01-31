@@ -78,7 +78,7 @@ import java.io.IOException;
 
     // go Client
     public void go_Client(Event event)  throws IOException{
-    switchScene("/Client_Package/Client_View.fxml","Stock Page", event);
+    switchScene("/Client_Package/Client_View.fxml","Client Page", event);
         }
     // Go Fournisseur
         public void go_Fournisseur(Event event)  throws IOException{

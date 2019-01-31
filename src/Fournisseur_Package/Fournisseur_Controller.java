@@ -20,30 +20,37 @@ public class Fournisseur_Controller implements Initializable
     @FXML
     public void goBack_To_Home_Window(Event event) throws IOException {
 
-        new Utility("/Home_Package/Home_View.fxml","Home Page", event );
+        new Utility().go_Home(event);
     }
     @FXML
     public void open_Stock_Window(Event event) throws IOException {
 
-        // new Utility("/Stock_Package/Stock_View.fxml","Stock Window");
+        new Utility().go_Stock(event);
+    }
+    @FXML
+    public void open_Product_Window(Event event) throws IOException {
 
-        new Utility().switchScene("/Stock_Package/Stock_View.fxml","Stock Window",event);
-
+        new Utility().go_Pruduct(event);
     }
 
+    @FXML
+    public void open_Client_Window(Event event) throws IOException {
+
+        new Utility().go_Client(event);
+    }
 
     // Open New Fournisseur Form
     @FXML
     public void open_Add_New_Fournisseur_Form(Event event) throws IOException{
 
-        new Utility().openNewStage("/Fournisseur_Package/New_Fournisseur_View.fxml","Ajouter Nouveau Fournisseur");
+        new Utility().show_New_Fournisseur_Window(event);
     }
 
     // Reglement Form
     @FXML
     public void open_Reglement_Form(Event event) throws IOException{
 
-        new Utility().openNewStage("/Reglement_Package/Reglement_View.fxml","Verssement Vers Fournisseur : ");
+        new Utility().show_Reglement_Window("Fournissur :",event);
     }
 
 
