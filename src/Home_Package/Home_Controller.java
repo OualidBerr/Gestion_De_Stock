@@ -5,6 +5,9 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.MenuItem;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,6 +15,9 @@ import java.util.ResourceBundle;
 public class Home_Controller implements Initializable {
     @FXML
     private Button products_btn,client_btn,stock_btn,fournisseur_btn,logout_btn;
+
+    @FXML
+    private MenuItem manage_Users;
 
    // product
     @FXML
@@ -44,6 +50,12 @@ public class Home_Controller implements Initializable {
         new Utility().go_Caisse(event);
     }
 
+
+    @FXML
+    public void manage_Users()throws IOException {
+      new Utility().show_Manage_Users();
+
+    }
     // Open_Bon_Command_Window
     @FXML
     public void Open_Bon_Command_Window(Event event) throws IOException {
@@ -59,6 +71,7 @@ public class Home_Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
 
     }
 }

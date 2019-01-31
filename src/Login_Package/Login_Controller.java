@@ -45,6 +45,16 @@ private PasswordField txtpassword;
     String password = txtpassword.getText();
     String role_User = admcambo.getValue().toString();
 
+    String dbuser = db_usernametxt.getText();
+    String dbpas = db_passwordtxt.getText();
+    String DB = db_txt.getText();
+
+        Db_Connection.USERNAME = dbuser;
+        Db_Connection.PASSWORD = dbpas;
+        Db_Connection.DB_Chema = DB;
+        Db_Connection.Server = "localhost";
+
+
     String query = "SELECT * FROM demo.users Where username = '"+username+"' &&  password = '"+password+"' && role = '"+role_User+"' ";
 
 
@@ -60,6 +70,7 @@ private PasswordField txtpassword;
                  {
                      if (role_User.equals("Admin")){
                          new Utility().log_In("Admin",event);
+
                          utility.showAlert("Done Successfully .. Admin!");
                        }
                      else if (role_User.equals("User")){

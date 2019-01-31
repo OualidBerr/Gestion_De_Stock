@@ -9,10 +9,11 @@ import java.util.logging.Logger;
 
 public class Db_Connection {
 
-   private final static String USERNAME  = "root";
-   private final static String PASSWORD  = "gamadev";
-  private final static String DB_Chema  = "demo";
-  private final static String   URL    = "jdbc:mysql://localhost:3306/"+DB_Chema;
+    public   static String USERNAME  = "root";
+    public  static String PASSWORD  = "gamadev";
+    public  static String DB_Chema  = "demo";
+    public  static String Server  = "localhost";
+    public  static String   URL    = "jdbc:mysql://"+Server+":3306/"+DB_Chema;
 
     public Connection connect() throws SQLException {
 

@@ -17,7 +17,7 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem mnemonicParsing="false" text="New" />
+            <MenuItem fx:id="manage_Users" mnemonicParsing="false" onAction="#manage_Users" text="Manage Users" />
             <MenuItem mnemonicParsing="false" text="Open…" />
             <Menu mnemonicParsing="false" text="Open Recent" />
             <SeparatorMenuItem mnemonicParsing="false" />
@@ -50,6 +50,11 @@
             <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
           </items>
         </Menu>
+            <Menu mnemonicParsing="false" text="Unspecified Menu">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
       </menus>
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" VBox.vgrow="ALWAYS">

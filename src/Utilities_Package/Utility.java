@@ -13,10 +13,14 @@ import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-    public class Utility {
+public class Utility {
 
     private String view_Window, view_title;
+    Db_Connection getConnected  ;
 
     public Utility(){}
 
@@ -90,6 +94,10 @@ import java.io.IOException;
             switchScene("/Caisse_Package/Caisse_View.fxml","Caisse Page", event);
         }
 
+
+
+
+
         // Go Bon Command Window
         public void go_Bon_Command(Event event)  throws IOException{
             switchScene("/Bon_Command_Package/Bon_Command_View.fxml","Bon Command Page", event);
@@ -116,6 +124,14 @@ import java.io.IOException;
 
             openNewStage("/Client_Package/New_Client_View.fxml","Ajouter Nouveau Client Form");
         }
+
+       // Manage Users
+        public void show_Manage_Users() throws IOException {
+            openNewStage("/Login_Package/Manage_Users_View.fxml","Ajouter Nouveau User Form");
+
+        }
+
+
 
         // Add new Reglement Window
         public void show_Reglement_Window(String person,Event e) throws IOException {
@@ -148,5 +164,9 @@ import java.io.IOException;
                 note.showConfirm();
 
         }
+
+
+
+
 
 }
