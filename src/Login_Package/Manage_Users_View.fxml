@@ -18,13 +18,13 @@
 
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login_Package.Manage_Users_Controller">
    <children>
-      <TableView layoutX="21.0" layoutY="270.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="301.0" prefWidth="600.0" AnchorPane.topAnchor="270.0">
+      <TableView fx:id="usertableView" layoutX="21.0" layoutY="270.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="301.0" prefWidth="600.0" AnchorPane.topAnchor="270.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="N" />
-          <TableColumn prefWidth="150.0" text="User Name" />
-            <TableColumn prefWidth="150.0" text="Password" />
-            <TableColumn prefWidth="100.0" text="Role" />
-            <TableColumn prefWidth="120.0" text="Date" />
+          <TableColumn fx:id="Idcolumn" prefWidth="75.0" text="N" />
+          <TableColumn fx:id="usernamecolumn" prefWidth="150.0" text="User Name" />
+            <TableColumn fx:id="passwordcolumn" prefWidth="150.0" text="Password" />
+            <TableColumn fx:id="rolecolumn" prefWidth="100.0" text="Role" />
+            <TableColumn fx:id="datecolumn" prefWidth="120.0" text="Date" />
         </columns>
       </TableView>
       <VBox layoutX="144.0" layoutY="62.0" prefHeight="152.0" prefWidth="363.0" style="-fx-background-color: #5DADE2; -fx-alignment: Center; -fx-background-radius: 20;" AnchorPane.topAnchor="62.0">
@@ -99,7 +99,7 @@
       </VBox>
       <HBox layoutX="146.0" layoutY="224.0" prefHeight="25.0" prefWidth="363.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#addPerson" prefHeight="41.0" prefWidth="75.0" text="Add ">
+            <Button mnemonicParsing="false" onAction="#add_New_User" prefHeight="41.0" prefWidth="75.0" text="Add ">
                <HBox.margin>
                   <Insets left="20.0" right="50.0" />
                </HBox.margin>

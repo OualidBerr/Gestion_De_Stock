@@ -1,8 +1,6 @@
 package Utilities_Package;
 
-         public class Person {
-
-         private String name,address,phone_Number,register_Number;
+         public class Person { private String name,address,phone_Number,register_Number;
         private double sold,sold_Max;
         int sold_duration;
 
