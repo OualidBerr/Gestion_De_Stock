@@ -41,7 +41,7 @@ public class Home_Controller implements Initializable {
 
     @FXML
     public void log_Out_Function(Event event) throws IOException {
-        new Utility("/Login_Package/Login_View.fxml","Login Page", event );
+        new Utility().log_Out(event);
     }
 
     @Override

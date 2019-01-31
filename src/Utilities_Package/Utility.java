@@ -113,6 +113,18 @@ import java.io.IOException;
             openNewStage("/Reglement_Package/Reglement_View.fxml","Reglement de " + person);
         }
 
+        // Log in
+        public void log_In(String person ,Event event) throws IOException {
+
+            switchScene("/Home_Package/Home_View.fxml","Home Page", event);
+        }
+
+
+        // Login out
+        public void log_Out(Event event) throws IOException {
+
+            switchScene("/Login_Package/Login_View.fxml","Login Page", event);
+        }
 
         // Showing Alert Message
         public void showAlert(String s){

@@ -59,15 +59,13 @@ private PasswordField txtpassword;
              else
                  {
                      if (role_User.equals("Admin")){
-                         new Utility("/Home_Package/Home_View.fxml","Home Page* Admin", event );
+                         new Utility().log_In("Admin",event);
                          utility.showAlert("Done Successfully .. Admin!");
                        }
                      else if (role_User.equals("User")){
-                         new Utility("/Home_Package/Home_View.fxml","Home Page* User", event );
+                         new Utility().log_In("User",event);
                          utility.showAlert("Done Successfully! .. User");
                       }
-
-
 
                  }
 

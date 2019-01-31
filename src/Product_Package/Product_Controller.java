@@ -25,21 +25,34 @@ public class Product_Controller implements Initializable {
     @FXML
     public void open_Add_New_Product_Form(Event event) throws IOException{
 
-        new Utility().openNewStage("/Product_Package/New_Product_View.fxml","Ajouter Nouveau Produit");
+        new Utility().show_New_Product_Window(event);
     }
 
     // Go To Stock
     @FXML
     public void open_Stock_Window(Event event) throws IOException {
 
-       // new Utility("/Stock_Package/Stock_View.fxml","Stock Window");
-
-        new Utility().switchScene("/Stock_Package/Stock_View.fxml","Stock Window",event);
+        new Utility().go_Stock(event);
 
     }
 
+    // Go Client
+    @FXML
+    public void Open_Client_Window(Event event) throws IOException {
+        new Utility().go_Client(event);
+    }
 
+    // Go Fournisseur
+    @FXML
+    public void Open_Fournisseur_Window(Event event) throws IOException {
+        new Utility().go_Fournisseur(event);
+    }
 
+    // Log out
+   @FXML
+    public void log_Out_Function(Event event) throws IOException {
+     new Utility().log_Out(event);
+     }
 
 
 
