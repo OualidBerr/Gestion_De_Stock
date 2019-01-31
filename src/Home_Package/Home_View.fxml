@@ -85,7 +85,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="caisse_btn1" layoutX="585.0" layoutY="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="111.0" style="-fx-background-radius: 20;" text="Caisse">
+                  <Button fx:id="caisse_btn1" layoutX="585.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Caisse_Window" prefHeight="44.0" prefWidth="111.0" style="-fx-background-radius: 20;" text="Caisse">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

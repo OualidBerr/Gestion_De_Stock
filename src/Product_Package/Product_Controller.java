@@ -48,6 +48,13 @@ public class Product_Controller implements Initializable {
         new Utility().go_Fournisseur(event);
     }
 
+    // Go Caisse
+
+    @FXML
+    public void Open_Caisse_Window(Event event) throws IOException {
+        new Utility().go_Caisse(event);
+    }
+
     // Log out
    @FXML
     public void log_Out_Function(Event event) throws IOException {

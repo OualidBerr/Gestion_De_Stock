@@ -39,6 +39,13 @@ public class Fournisseur_Controller implements Initializable
         new Utility().go_Client(event);
     }
 
+    // Caisse
+
+    @FXML
+    public void Open_Caisse_Window(Event event) throws IOException {
+        new Utility().go_Caisse(event);
+    }
+
     // Open New Fournisseur Form
     @FXML
     public void open_Add_New_Fournisseur_Form(Event event) throws IOException{

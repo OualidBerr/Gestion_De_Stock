@@ -43,8 +43,12 @@ private Button goHome_btn,produit_btn,charge_btn,newProduct_btn;
     public void Open_Fournisseur_Window(Event event) throws IOException {
         new Utility().go_Fournisseur(event);
     }
+    // Caisse
 
-
+    @FXML
+    public void Open_Caisse_Window(Event event) throws IOException {
+        new Utility().go_Caisse(event);
+    }
 
 
     @FXML

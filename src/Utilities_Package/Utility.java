@@ -85,6 +85,12 @@ import java.io.IOException;
             switchScene("/Fournisseur_Package/Fournisseur_View.fxml","Fournisseur Page", event);
         }
 
+        // Go Caisse
+        public void go_Caisse(Event event)  throws IOException{
+            switchScene("/Caisse_Package/Caisse_View.fxml","Caisse Page", event);
+        }
+
+
     // ShowAndWait a New Window
 
      // Add new Product Window
@@ -112,6 +118,7 @@ import java.io.IOException;
 
             openNewStage("/Reglement_Package/Reglement_View.fxml","Reglement de " + person);
         }
+
 
         // Log in
         public void log_In(String person ,Event event) throws IOException {

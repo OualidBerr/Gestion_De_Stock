@@ -39,6 +39,14 @@ public class Client_Controller implements Initializable {
 
     }
 
+    // Caisse
+
+    @FXML
+    public void Open_Caisse_Window(Event event) throws IOException {
+        new Utility().go_Caisse(event);
+    }
+
+
 
 
     // Open New Client Form
@@ -53,6 +61,7 @@ public class Client_Controller implements Initializable {
 
         new Utility().show_Reglement_Window("Client :",event);
     }
+
 
     // Logout
     @FXML
