@@ -19,7 +19,7 @@ public class Product_Controller implements Initializable {
     @FXML
     public void goBack_To_Home_Window(Event event) throws IOException {
 
-        new Utility("/Home_Package/Home_View.fxml","Home Page", event );
+        new Utility( ).go_Home(event);
     }
     // Go New Product
     @FXML

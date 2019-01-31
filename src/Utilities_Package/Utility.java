@@ -56,11 +56,65 @@ import java.io.IOException;
         App_Stage.setScene(Home_page_Scene);
         App_Stage.setTitle(title);
         App_Stage.setFullScreen(true);
+        App_Stage.setResizable(true);
         App_Stage.show();
 
-}
+    }
 
-    // Showing Alert Message
+    // go Home
+     public void go_Home(Event event)  throws IOException{
+       switchScene("/Home_Package/Home_View.fxml","Home Page", event);
+     }
+
+    // go Pruduct
+    public void go_Pruduct(Event event)  throws IOException{
+    switchScene("/Product_Package/Product_View.fxml","Product Page", event);
+        }
+
+    // Go Stock
+    public void go_Stock(Event event)  throws IOException{
+    switchScene("/Stock_Package/Stock_View.fxml","Stock Page", event);
+      }
+
+    // go Client
+    public void go_Client(Event event)  throws IOException{
+    switchScene("/Client_Package/Client_View.fxml","Stock Page", event);
+        }
+    // Go Fournisseur
+        public void go_Fournisseur(Event event)  throws IOException{
+            switchScene("/Fournisseur_Package/Fournisseur_View.fxml","Fournisseur Page", event);
+        }
+
+    // ShowAndWait a New Window
+
+     // Add new Product Window
+        public void show_New_Product_Window(Event e) throws IOException {
+
+        openNewStage("/Product_Package/New_Product_View.fxml","Ajouter Nouveau Produit Form");
+
+        }
+
+        // Add new Fournisseur Window
+        public void show_New_Fournisseur_Window(Event e) throws IOException {
+
+            openNewStage("/Fournisseur_Package/New_Fournisseur_View.fxml","Ajouter Nouveau Fournisseur Form");
+
+        }
+
+        // Add new Client Window
+        public void show_New_Client_Window(Event e) throws IOException {
+
+            openNewStage("/Client_Package/New_Client_View.fxml","Ajouter Nouveau Client Form");
+        }
+
+        // Add new Reglement Window
+        public void show_Reglement_Window(String person,Event e) throws IOException {
+
+            openNewStage("/Reglement_Package/Reglement_View.fxml","Reglement de " + person);
+        }
+
+
+        // Showing Alert Message
         public void showAlert(String s){
 
                 Notifications note = Notifications.create()
@@ -71,9 +125,5 @@ import java.io.IOException;
                 note.showConfirm();
 
         }
-
-
-
-
 
 }

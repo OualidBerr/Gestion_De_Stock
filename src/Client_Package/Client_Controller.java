@@ -15,30 +15,43 @@ public class Client_Controller implements Initializable {
     @FXML
     public void goBack_To_Home_Window(Event event) throws IOException {
 
-        new Utility("/Home_Package/Home_View.fxml","Home Page", event );
+        new Utility().go_Home(event);
     }
 
     @FXML
     public void open_Stock_Window(Event event) throws IOException {
 
-        // new Utility("/Stock_Package/Stock_View.fxml","Stock Window");
-
-        new Utility().switchScene("/Stock_Package/Stock_View.fxml","Stock Window",event);
+        new Utility().go_Stock(event);
 
     }
+
+    @FXML
+    public void open_Product_Window(Event event) throws IOException {
+
+        new Utility().go_Pruduct(event);
+
+    }
+
+    @FXML
+    public void open_Founisseur_Window(Event event) throws IOException {
+
+        new Utility().go_Fournisseur(event);
+
+    }
+
+
 
     // Open New Client Form
     @FXML
     public void open_Add_New_Client_Form(Event event) throws IOException{
-
-        new Utility().openNewStage("/Client_Package/New_Client_View.fxml","Ajouter Nouveau Client");
+        new Utility().show_New_Client_Window(event);
     }
 
     // Reglement Form
     @FXML
     public void open_Reglement_Form(Event event) throws IOException{
 
-        new Utility().openNewStage("/Reglement_Package/Reglement_View.fxml","Reglement de Client : ");
+        new Utility().show_Reglement_Window("Client :",event);
     }
 
 
