@@ -114,10 +114,10 @@
                       <TableColumn prefWidth="75.0" style="-fx-background-radius: 20; -fx-alignment: Center;" text="N°" />
                       <TableColumn prefWidth="300.0" style="-fx-background-radius: 20; -fx-alignment: Center;" text="Nom et Prénom" />
                         <TableColumn prefWidth="310.0" style="-fx-background-radius: 20;" text="Address" />
-                        <TableColumn minWidth="1.6666717529296875" prefWidth="210.0" text="Télephone" />
-                        <TableColumn prefWidth="150.0" text="Sold" />
-                        <TableColumn prefWidth="150.0" text="Sold Max" />
-                        <TableColumn prefWidth="100.0" text="Period Sold" />
+                        <TableColumn minWidth="1.6666717529296875" prefWidth="210.0" style="-fx-background-radius: 20;" text="Télephone" />
+                        <TableColumn prefWidth="150.0" style="-fx-background-radius: 20;" text="Sold" />
+                        <TableColumn prefWidth="150.0" style="-fx-background-radius: 20;" text="Sold Max" />
+                        <TableColumn prefWidth="100.0" style="-fx-background-radius: 20;" text="Period Sold" />
                     </columns>
                      <VBox.margin>
                         <Insets bottom="30.0" />

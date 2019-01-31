@@ -78,7 +78,6 @@ private PasswordField txtpassword;
 
 }
 
-
     @FXML
     public void LoginBtnFunction(ActionEvent event) throws IOException {
 

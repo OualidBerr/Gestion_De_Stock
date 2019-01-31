@@ -116,7 +116,7 @@ import java.io.IOException;
         // Log in
         public void log_In(String person ,Event event) throws IOException {
 
-            switchScene("/Home_Package/Home_View.fxml","Home Page", event);
+            switchScene("/Home_Package/Home_View.fxml","Home Page*" + person, event);
         }
 
 
