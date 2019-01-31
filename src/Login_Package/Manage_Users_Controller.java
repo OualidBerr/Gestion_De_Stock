@@ -30,28 +30,29 @@ public class Manage_Users_Controller implements Initializable {
     Db_Connection conn = new Db_Connection();
     PreparedStatement  preparesStatemnt = null;
     ResultSet resultSet = null;
+
     Utility utility = new Utility();
 
 
     @FXML
     public void addPerson() throws SQLException {
 
+       int max_id = 0;
+        max_id  = utility.getMax_ID("users","id") +1;
 
-        String query = "select max(id) from demo.users";
-        int idmax= 0;
+       String userName = usernametxt.getText();
+       String passWord = passtxt.getText();
+       String role = camboBox.getValue().toString();
 
-        Connection cnn = conn.connect();
-        preparesStatemnt = cnn.prepareStatement(query);
-        resultSet = preparesStatemnt.executeQuery();
+        String query = "INSERT INTO demo.users (id,username,password,role) VALUES (?,?,?,?)";
 
-        if(resultSet.next()){
-
-            idmax = resultSet.getInt(1);
-        }
-
-
-       System.out.println(idmax);
-
+        preparesStatemnt = conn.connect().prepareStatement(query);
+        preparesStatemnt.setInt(1, max_id);
+        preparesStatemnt.setString(2, userName);
+        preparesStatemnt.setString(3, passWord);
+        preparesStatemnt.setString(4, role);
+        preparesStatemnt.execute();
+        preparesStatemnt.close();
 
 
     }

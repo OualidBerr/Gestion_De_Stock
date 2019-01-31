@@ -1,6 +1,7 @@
 package Utilities_Package;
 
 import javafx.event.Event;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -14,13 +15,16 @@ import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Utility {
 
     private String view_Window, view_title;
-    Db_Connection getConnected  ;
+    Db_Connection conn = new Db_Connection()  ;
+    PreparedStatement preparesStatemnt = null;
+    ResultSet resultSet = null;
 
     public Utility(){}
 
@@ -152,6 +156,30 @@ public class Utility {
 
             switchScene("/Login_Package/Login_View.fxml","Login Page", event);
         }
+
+
+
+
+        // Find Max
+        @FXML
+        public int getMax_ID(String tableName,String colName) throws SQLException {
+
+           // String query = "select max(id) from " + tableName;
+            String query = "SELECT max("+colName+") from "+tableName;
+
+
+            int idmax= 0;
+            Connection cnn = conn.connect();
+            preparesStatemnt = cnn.prepareStatement(query);
+            resultSet = preparesStatemnt.executeQuery();
+            if(resultSet.next()){
+                idmax = resultSet.getInt(1);
+                }
+
+            return  idmax;
+
+              }
+
 
         // Showing Alert Message
         public void showAlert(String s){

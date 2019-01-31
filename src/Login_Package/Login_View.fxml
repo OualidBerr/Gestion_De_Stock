@@ -158,7 +158,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                      <children>
-                        <VBox layoutX="21.0" layoutY="80.0" prefHeight="122.0" prefWidth="363.0" style="-fx-background-color: #5DADE2; -fx-alignment: Center; -fx-background-radius: 20;" AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="70.0">
+                        <VBox layoutX="31.0" layoutY="90.0" prefHeight="193.0" prefWidth="363.0" style="-fx-background-color: #5DADE2; -fx-alignment: Center; -fx-background-radius: 20;" AnchorPane.leftAnchor="21.0" AnchorPane.topAnchor="80.0">
                            <children>
                               <GridPane prefHeight="112.0" prefWidth="359.0">
                                 <columnConstraints>
@@ -169,6 +169,7 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
                                     <Label prefHeight="50.0" prefWidth="139.0" text="User name" textFill="#fffbfb">
@@ -206,6 +207,19 @@
                                        </GridPane.margin>
                                     </TextField>
                                     <TextField fx:id="db_usernametxt" layoutX="139.0" layoutY="54.0" prefHeight="25.0" prefWidth="160.0" promptText="Root" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="root" GridPane.columnIndex="1">
+                                       <GridPane.margin>
+                                          <Insets left="10.0" right="10.0" />
+                                       </GridPane.margin>
+                                    </TextField>
+                                    <Label layoutX="20.0" layoutY="66.0" prefHeight="50.0" prefWidth="139.0" text="Server" textFill="#fffbfb" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                       <GridPane.margin>
+                                          <Insets left="10.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <TextField fx:id="Server_txt" layoutX="156.0" layoutY="68.0" prefHeight="25.0" prefWidth="199.0" promptText="Dadabase name" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="localhost" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <GridPane.margin>
                                           <Insets left="10.0" right="10.0" />
                                        </GridPane.margin>

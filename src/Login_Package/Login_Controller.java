@@ -29,7 +29,7 @@ private ComboBox admcambo,admcambo_2;
 @FXML
 private Button loginbtn;
 @FXML
-private TextField txtusername,db_txt,db_usernametxt,db_passwordtxt;
+private TextField txtusername,db_txt,db_usernametxt,db_passwordtxt,Server_txt;
 @FXML
 private PasswordField txtpassword;
 
@@ -48,11 +48,12 @@ private PasswordField txtpassword;
     String dbuser = db_usernametxt.getText();
     String dbpas = db_passwordtxt.getText();
     String DB = db_txt.getText();
+    String server = Server_txt.getText();
 
         Db_Connection.USERNAME = dbuser;
         Db_Connection.PASSWORD = dbpas;
         Db_Connection.DB_Chema = DB;
-        Db_Connection.Server = "localhost";
+        Db_Connection.Server = server;
 
 
     String query = "SELECT * FROM demo.users Where username = '"+username+"' &&  password = '"+password+"' && role = '"+role_User+"' ";
