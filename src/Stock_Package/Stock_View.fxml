@@ -118,27 +118,32 @@
       </MenuBar>
       <ToolBar layoutX="-4.0" layoutY="35.0" prefHeight="69.0" prefWidth="1318.0" style="-fx-background-color: #1a0000;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
          <items>
-            <Button fx:id="goHome_btn" mnemonicParsing="false" onAction="#goBack_To_Home_Window" prefHeight="53.0" prefWidth="117.0" style="-fx-background-radius: 20;" text="Home">
+            <Button fx:id="goHome_btn" mnemonicParsing="false" onAction="#goBack_To_Home_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Home">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="produit_btn" layoutX="10.0" layoutY="13.0" mnemonicParsing="false" onAction="#go_Back_To_Product_Window" prefHeight="53.0" prefWidth="117.0" style="-fx-background-radius: 20;" text="Produits">
+            <Button fx:id="produit_btn" layoutX="10.0" layoutY="13.0" mnemonicParsing="false" onAction="#go_Back_To_Product_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Produits">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="produit_btn1" layoutX="131.0" layoutY="13.0" mnemonicParsing="false" onAction="#go_Back_To_Product_Window" prefHeight="53.0" prefWidth="117.0" style="-fx-background-radius: 20;" text="Founisseurs">
+            <Button fx:id="produit_btn1" layoutX="131.0" layoutY="13.0" mnemonicParsing="false" onAction="#Open_Fournisseur_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Founisseurs">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="produit_btn11" layoutX="252.0" layoutY="13.0" mnemonicParsing="false" onAction="#go_Back_To_Product_Window" prefHeight="53.0" prefWidth="117.0" style="-fx-background-radius: 20;" text="Clients">
+            <Button fx:id="produit_btn11" layoutX="252.0" layoutY="13.0" mnemonicParsing="false" onAction="#Open_Client_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Clients">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="produit_btn111" layoutX="373.0" layoutY="13.0" mnemonicParsing="false" onAction="#go_Back_To_Product_Window" prefHeight="53.0" prefWidth="117.0" style="-fx-background-radius: 20;" text="Caisse">
+            <Button layoutX="373.0" layoutY="13.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Caisse">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="logout_btn" mnemonicParsing="false" onAction="#log_Out_Function" prefHeight="50.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Deconnexion">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

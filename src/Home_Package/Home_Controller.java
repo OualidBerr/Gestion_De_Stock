@@ -38,7 +38,6 @@ public class Home_Controller implements Initializable {
     }
 
     // Logout
-
     @FXML
     public void log_Out_Function(Event event) throws IOException {
         new Utility().log_Out(event);

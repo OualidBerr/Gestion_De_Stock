@@ -54,6 +54,12 @@ public class Client_Controller implements Initializable {
         new Utility().show_Reglement_Window("Client :",event);
     }
 
+    // Logout
+    @FXML
+    public void log_Out_Function(Event event) throws IOException {
+        new Utility().log_Out(event);
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
