@@ -16,7 +16,7 @@ public class User {
 
 
 
-    public User(Integer id,String name,String username,String password,String role, String date){
+    public User(int id,String name,String username,String password,String role, String date){
 
         this.id     = new SimpleIntegerProperty(id);
         this.name = new SimpleStringProperty(name);

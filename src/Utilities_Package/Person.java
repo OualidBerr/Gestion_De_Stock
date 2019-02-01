@@ -1,82 +1,71 @@
 package Utilities_Package;
 
-         public class Person { private String name,address,phone_Number,register_Number;
-        private double sold,sold_Max;
-        int sold_duration;
+import javafx.beans.property.*;
 
-     // Setters
-        public void setName(String name) {
-            this.name = name;
-        }
-        public void setAddress(String address) {
-            this.address = address;
-        }
-        public void setPhone_Number(String phone_Number) {
-            this.phone_Number = phone_Number;
-        }
-        public void setRegister_Number(String register_Number) {
-            this.register_Number = register_Number;
-        }
-        public void setSold(double sold) {
-            this.sold = sold;
-        }
-        public void setSold_Max(double sold_Max) {
-            this.sold_Max = sold_Max;
-        }
-        public void setSold_duration(int sold_duration) {
-            this.sold_duration = sold_duration;
-        }
-     //  Getters
-        public String getName() {
-            return name;
-        }
-        public String getAddress() {
-            return address;
-        }
-        public String getPhone_Number() {
-            return phone_Number;
-        }
-        public String getRegister_Number() {
-            return register_Number;
-        }
-        public double getSold() {
-            return sold;
-        }
-        public double getSold_Max() {
-            return sold_Max;
-        }
-        public int getSold_duration() {
-            return sold_duration;
-        }
 
-        // Clients Constructor
-        public Person(String Name,String Address,String Phone,String Register,double Sold,double Sold_Max,int Sold_duration){
+public class Person {
 
-        name   = Name   ;
-        address = Address;
-        phone_Number = Phone;
-        register_Number = Register;
-        sold = Sold;
-        sold_duration = Sold_duration;
-        sold_Max = Sold_Max;
-    }
-        // Fournisseur Constructor
-        public Person(String Name,String Address,String Phone,String Register,double Sold){
+    private final IntegerProperty id;
+    private final StringProperty name;
+    private final StringProperty addresse;
+    private final StringProperty telephone;
+    private final DoubleProperty sold;
+    // Fournisseur Constructor
+    public Person(Integer id, String Name,String Address,String Telephone,Double Sold) {
+        this.id      = new SimpleIntegerProperty(id);
+        this.name    = new SimpleStringProperty(Name);
+        this.addresse = new SimpleStringProperty(Address);
+        this.telephone = new SimpleStringProperty(Telephone);
+        this.sold      =   new SimpleDoubleProperty(Sold);
 
-        name    = Name   ;
-        address = Address;
-        phone_Number = Phone;
-        register_Number = Register;
-        sold = Sold;
 
     }
-
-
-
-
-
-
-
-
+    // Getters
+    public int getid() {
+        return id.get();
+    }
+    public IntegerProperty idProperty() {
+        return id;
+    }
+    public String getname() {
+        return name.get();
+    }
+    public StringProperty nameProperty() {
+        return name;
+    }
+    public String getAddresse() {
+        return addresse.get();
+    }
+    public StringProperty addresseProperty() {
+        return addresse;
+    }
+    public String getTelephone() {
+        return telephone.get();
+    }
+    public StringProperty telephoneProperty() {
+        return telephone;
+    }
+    public double getSold() {
+        return sold.get();
+    }
+    public DoubleProperty soldProperty() {
+        return sold;
+    }
+    // setters
+    public void setid(int id) {
+        this.id.set(id);
+    }
+    public void setname(String name) {
+        this.name.set(name);
+    }
+    public void setAddresse(String addresse) {
+        this.addresse.set(addresse);
+    }
+    public void setTelephone(String telephone) {
+        this.telephone.set(telephone);
+    }
+    public void setSold(double sold) {
+        this.sold.set(sold);
+    }
 
 }

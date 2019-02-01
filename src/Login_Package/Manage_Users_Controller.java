@@ -58,17 +58,85 @@ public class Manage_Users_Controller implements Initializable {
 
     Utility utility = new Utility();
 
-    public Boolean isTableRowSelected(){
+    // Add
+    @FXML
+    public void add_New_User() throws SQLException {
 
-        if ( ! usertableView.getSelectionModel().isEmpty() ){
+        int max_id = 0;
+        max_id  = utility.getMax_ID("users","id") ;
 
-            return false;
-           }
+        if (!usernametxt.getText().isEmpty() && !passtxt.getText().isEmpty() && !nametxt.getText().isEmpty()){
 
-        return true;
+
+            String userName = usernametxt.getText();
+            String Name = nametxt.getText();
+            String passWord = passtxt.getText();
+            String role = camboBox.getValue().toString();
+            String date = date_txt.getValue().toString();
+
+            String query = "INSERT INTO demo.users (id,name,username,password,role,date) VALUES (?,?,?,?,?,?)";
+
+            preparesStatemnt = conn.connect().prepareStatement(query);
+            preparesStatemnt.setInt(1, max_id+1);
+            preparesStatemnt.setString(2, Name);
+            preparesStatemnt.setString(3, userName);
+            preparesStatemnt.setString(4, passWord);
+            preparesStatemnt.setString(5, role);
+            preparesStatemnt.setString(6, date);
+            preparesStatemnt.execute();
+            preparesStatemnt.close();
+
+            usernametxt.clear();
+            passtxt.clear();
+
+            nametxt.clear();
+            loadData();
+            utility.showAlert("New User added successfully");
+        }
+
+        else{
+            utility.showAlert("Data Can not be Dulicated");
+        }
+    }
+    // Update
+    @FXML
+    public  int update_User() throws SQLException {
+
+        if(! usertableView.getSelectionModel().isEmpty()) {
+            User user = usertableView.getSelectionModel().getSelectedItem();
+            int  id = user.getid();
+            user.setNname(nametxt.getText());
+            user.setPassword(passtxt.getText());
+            user.setUserName(usernametxt.getText());
+            user.setRole(camboBox.getValue().toString());
+            //user.getDate( (Date) date_txt.getValue() );
+
+            try{
+                String query = "UPDATE users SET name =?, username =?, password =?, role =? Where id="+id;
+                Connection cnn = conn.connect();
+                preparesStatemnt = cnn.prepareStatement(query);
+                preparesStatemnt.setString(1,user.getNname());
+                preparesStatemnt.setString(2,user.getUsername());
+                preparesStatemnt.setString(3,user.getPassword());
+                preparesStatemnt.setString(4,user.getRole());
+                preparesStatemnt.executeUpdate();
+                loadData();
+                utility.showAlert("User has been Updated");
+                cnn.close();
+
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
+        }
+
+
+        return 0;
     }
 
-
+    // Delete
     @FXML
     private void deletUser() throws SQLException{
 
@@ -97,6 +165,8 @@ public class Manage_Users_Controller implements Initializable {
 
 
     }
+
+
 
     public void loadData() throws SQLException{
 
@@ -130,45 +200,7 @@ public class Manage_Users_Controller implements Initializable {
 
     }
 
-    @FXML
-    public void add_New_User() throws SQLException {
 
-        int max_id = 0;
-        max_id  = utility.getMax_ID("users","id") ;
-
-       if (!usernametxt.getText().isEmpty() && !passtxt.getText().isEmpty() && !nametxt.getText().isEmpty()){
-
-
-           String userName = usernametxt.getText();
-           String Name = nametxt.getText();
-           String passWord = passtxt.getText();
-           String role = camboBox.getValue().toString();
-           String date = date_txt.getValue().toString();
-
-           String query = "INSERT INTO demo.users (id,name,username,password,role,date) VALUES (?,?,?,?,?,?)";
-
-           preparesStatemnt = conn.connect().prepareStatement(query);
-           preparesStatemnt.setInt(1, max_id+1);
-           preparesStatemnt.setString(2, Name);
-           preparesStatemnt.setString(3, userName);
-           preparesStatemnt.setString(4, passWord);
-           preparesStatemnt.setString(5, role);
-           preparesStatemnt.setString(6, date);
-           preparesStatemnt.execute();
-           preparesStatemnt.close();
-
-           usernametxt.clear();
-           passtxt.clear();
-
-           nametxt.clear();
-           loadData();
-           utility.showAlert("New User added successfully");
-       }
-
-       else{
-           utility.showAlert("Data Can not be Dulicated");
-       }
-    }
 
     @FXML
     public void showOnClick()throws SQLException{
@@ -196,43 +228,7 @@ public class Manage_Users_Controller implements Initializable {
 
     }
 
-    // Update
-    @FXML
-    public  int update_User() throws SQLException {
 
-        if(! usertableView.getSelectionModel().isEmpty()) {
-            User user = usertableView.getSelectionModel().getSelectedItem();
-         int  id = user.getid();
-            user.setNname(nametxt.getText());
-            user.setPassword(passtxt.getText());
-            user.setUserName(usernametxt.getText());
-            user.setRole(camboBox.getValue().toString());
-            //user.getDate( (Date) date_txt.getValue() );
-
-            try{
-                String query = "UPDATE users SET name =?, username =?, password =?, role =? Where id="+id;
-                Connection cnn = conn.connect();
-                preparesStatemnt = cnn.prepareStatement(query);
-                preparesStatemnt.setString(1,user.getNname());
-                preparesStatemnt.setString(2,user.getUsername());
-                preparesStatemnt.setString(3,user.getPassword());
-                preparesStatemnt.setString(4,user.getRole());
-                preparesStatemnt.executeUpdate();
-                loadData();
-                utility.showAlert("User has been Updated");
-                cnn.close();
-
-                 }
-                  catch (Exception e)
-                {
-                e.printStackTrace();
-                }
-
-                      }
-
-
-                   return 0;
-           }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

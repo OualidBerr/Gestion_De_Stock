@@ -33,8 +33,6 @@ private TextField txtusername,db_txt,db_usernametxt,db_passwordtxt,Server_txt;
 @FXML
 private PasswordField txtpassword;
 
-
-
     Db_Connection conn = new Db_Connection();
     PreparedStatement  preparesStatemnt = null;
     ResultSet resultSet = null;
@@ -90,7 +88,6 @@ private PasswordField txtpassword;
 
 
 }
-
     @FXML
     public void LoginBtnFunction(ActionEvent event) throws IOException {
 
@@ -101,8 +98,6 @@ private PasswordField txtpassword;
         }
 
     }
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
