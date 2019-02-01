@@ -39,6 +39,7 @@ private PasswordField txtpassword;
     Utility utility = new Utility();
 
     public void Login(Event event) throws SQLException {
+
     String username = txtusername.getText();
     String password = txtpassword.getText();
     String role_User = admcambo.getValue().toString();
@@ -55,10 +56,10 @@ private PasswordField txtpassword;
 
 
     String query = "SELECT * FROM demo.users Where username = '"+username+"' &&  password = '"+password+"' && role = '"+role_User+"' ";
-
+        Connection cnn = conn.connect();
 
     try    {
-            Connection cnn = conn.connect();
+
 
              preparesStatemnt = cnn.prepareStatement(query);
             resultSet = preparesStatemnt.executeQuery(query);
@@ -86,7 +87,7 @@ private PasswordField txtpassword;
                  e.printStackTrace();
              }
 
-
+          cnn.close();
 }
     @FXML
     public void LoginBtnFunction(ActionEvent event) throws IOException {

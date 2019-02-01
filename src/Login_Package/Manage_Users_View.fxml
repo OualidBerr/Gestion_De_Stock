@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="772.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login_Package.Manage_Users_Controller">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#loadData" prefHeight="599.0" prefWidth="772.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login_Package.Manage_Users_Controller">
    <children>
       <TableView fx:id="usertableView" layoutX="9.0" layoutY="268.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showOnClick" prefHeight="326.0" prefWidth="755.0" AnchorPane.topAnchor="268.0">
         <columns>

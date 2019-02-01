@@ -131,7 +131,7 @@
                               <Insets left="180.0" />
                            </HBox.margin>
                         </Button>
-                        <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Modifié">
+                        <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#show_Edit_Window" prefHeight="50.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Modifié">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -139,7 +139,7 @@
                               <Insets left="50.0" />
                            </HBox.margin>
                         </Button>
-                        <Button layoutX="127.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Suprime">
+                        <Button layoutX="127.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete_Fournisseur" prefHeight="50.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Suprime">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

@@ -58,6 +58,10 @@ public class Manage_Users_Controller implements Initializable {
 
     Utility utility = new Utility();
 
+
+
+
+
     // Add
     @FXML
     public void add_New_User() throws SQLException {
@@ -110,10 +114,10 @@ public class Manage_Users_Controller implements Initializable {
             user.setUserName(usernametxt.getText());
             user.setRole(camboBox.getValue().toString());
             //user.getDate( (Date) date_txt.getValue() );
-
+            Connection cnn = conn.connect();
             try{
                 String query = "UPDATE users SET name =?, username =?, password =?, role =? Where id="+id;
-                Connection cnn = conn.connect();
+
                 preparesStatemnt = cnn.prepareStatement(query);
                 preparesStatemnt.setString(1,user.getNname());
                 preparesStatemnt.setString(2,user.getUsername());
@@ -129,7 +133,7 @@ public class Manage_Users_Controller implements Initializable {
             {
                 e.printStackTrace();
             }
-
+          cnn.close();
         }
 
 
@@ -140,7 +144,7 @@ public class Manage_Users_Controller implements Initializable {
     @FXML
     private void deletUser() throws SQLException{
 
-        if(! usertableView.getSelectionModel().isEmpty()    ) {
+        if(! usertableView.getSelectionModel().isEmpty() ) {
 
             try{
                 String query = "DELETE FROM users WHERE id =?";
@@ -153,7 +157,7 @@ public class Manage_Users_Controller implements Initializable {
                 preparesStatemnt.close();
                 loadData();
                 utility.showAlert("User has been deleted");
-
+                conn.connect().close();
             }
 
             catch(SQLException e){
@@ -162,17 +166,12 @@ public class Manage_Users_Controller implements Initializable {
 
         }
 
-
-
     }
-
-
-
     public void loadData() throws SQLException{
-
+        Connection cnn = conn.connect();
         try{
 
-            Connection cnn = conn.connect();
+
             data = FXCollections.observableArrayList();
 
             ResultSet rs = cnn.createStatement().executeQuery("SELECT * FROM demo.users");
@@ -193,15 +192,11 @@ public class Manage_Users_Controller implements Initializable {
         rolecolumn.setCellValueFactory(new PropertyValueFactory<>("role"));
         datecolumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 
-
         usertableView.setItems(null);
         usertableView.setItems(data);
-
+        cnn.close();
 
     }
-
-
-
     @FXML
     public void showOnClick()throws SQLException{
 
@@ -219,7 +214,6 @@ public class Manage_Users_Controller implements Initializable {
             camboBox.setValue(user.getRole());
 
             preparesStatemnt.close();
-
         }
 
         catch(SQLException ex){
@@ -227,8 +221,6 @@ public class Manage_Users_Controller implements Initializable {
         }
 
     }
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

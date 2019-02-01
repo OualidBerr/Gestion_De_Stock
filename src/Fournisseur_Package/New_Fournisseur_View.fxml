@@ -66,6 +66,7 @@
                   <TextField fx:id="addresstxt" layoutX="255.0" layoutY="49.0" style="-fx-alignment: Center; -fx-background-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField fx:id="telephonetxt" layoutX="255.0" layoutY="83.0" style="-fx-alignment: Center; -fx-background-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <TextField layoutX="255.0" layoutY="117.0" style="-fx-alignment: Center; -fx-background-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="idetxt" GridPane.columnIndex="1" />
                </children>
             </GridPane>
             <HBox prefHeight="51.0" prefWidth="489.0">
@@ -78,15 +79,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="delete_fournisseurbtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Suprimer">
-                     <HBox.margin>
-                        <Insets right="20.0" top="10.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="101.0" layoutY="10.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Modifier">
+                  <Button layoutX="101.0" layoutY="10.0" mnemonicParsing="false" onAction="#update_Fournisseur" prefHeight="37.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Modifier">
                      <HBox.margin>
                         <Insets top="10.0" />
                      </HBox.margin>

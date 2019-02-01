@@ -10,6 +10,11 @@ public class Person {
     private final StringProperty addresse;
     private final StringProperty telephone;
     private final DoubleProperty sold;
+
+
+
+
+
     // Fournisseur Constructor
     public Person(Integer id, String Name,String Address,String Telephone,Double Sold) {
         this.id      = new SimpleIntegerProperty(id);
@@ -18,8 +23,8 @@ public class Person {
         this.telephone = new SimpleStringProperty(Telephone);
         this.sold      =   new SimpleDoubleProperty(Sold);
 
-
     }
+
     // Getters
     public int getid() {
         return id.get();

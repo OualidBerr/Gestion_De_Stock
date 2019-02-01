@@ -9,28 +9,40 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class New_Fournisseur_Controller extends Fournisseur_Controller implements Initializable {
+public class New_Fournisseur_Controller implements Initializable {
 
     @FXML
-    private TextField nametxt;
+    public TextField nametxt;
     @FXML
     private TextField  addresstxt;
     @FXML
     private TextField    telephonetxt;
     @FXML
+    private TextField    idetxt;
+
+    @FXML
     private Button    add_Fournisseur_btn;
     @FXML
     private Button   delete_fournisseurbtn;
+
+    public static String NAME    ;
+    public static String ADDRESS ;
+    public static String PHONE   ;
+    public static int ID;
+    public static  Person PERSON;
+
 
     public ObservableList<Person> data;
 
@@ -40,6 +52,9 @@ public class New_Fournisseur_Controller extends Fournisseur_Controller implement
     ResultSet resultSet = null;
 
     Utility utility = new Utility();
+
+
+
 
 
 
@@ -83,6 +98,27 @@ public class New_Fournisseur_Controller extends Fournisseur_Controller implement
 
 
     }
+    // Update
+    @FXML
+    public void update_Fournisseur(){
+
+        String Id        = idetxt.getText();
+        String name      = nametxt.getText();
+        String telephone = telephonetxt.getText();
+        String adress    = addresstxt.getText();
+
+        System.out.println("Id" + Id + "name" + name+ "Telephone: " + telephone + "address: " + adress);
+
+
+
+
+
+
+    }
+
+
+
+
 
 
 
@@ -91,6 +127,11 @@ public class New_Fournisseur_Controller extends Fournisseur_Controller implement
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+      new Fournisseur_Controller();
 
+        nametxt.setText(NAME);
+        addresstxt.setText(ADDRESS);
+        telephonetxt.setText(PHONE);
+        idetxt.setText(ID+"");
     }
 }

@@ -2,6 +2,7 @@ package Fournisseur_Package;
 
 import Utilities_Package.Db_Connection;
 import Utilities_Package.Person;
+
 import Utilities_Package.User;
 import Utilities_Package.Utility;
 import javafx.collections.FXCollections;
@@ -35,33 +36,27 @@ public class Fournisseur_Controller implements Initializable
     public  TableColumn<Person,String> telephone_column;
     public  TableColumn<Person,Double> sold_column;
 
+    public static Person PERSON ;
+
+
     public ObservableList<Person> data;
 
     Db_Connection conn = new Db_Connection();
     PreparedStatement preparesStatemnt = null;
     ResultSet resultSet = null;
     Utility utility = new Utility();
-    Connection cnn;
 
-    {
-        try {
-            cnn = conn.connect();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+
+
+
 
     public  void loadData() throws SQLException {
-
+        Connection cnn = conn.connect();
         try{
 
-
             data = FXCollections.observableArrayList();
-
             ResultSet rs = cnn.createStatement().executeQuery("SELECT * FROM demo.fournisseur_table");
-
             while(rs.next()){
-
                 data.add(new Person(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDouble(5)));
             }
         }
@@ -74,9 +69,9 @@ public class Fournisseur_Controller implements Initializable
         adress_column.setCellValueFactory(new PropertyValueFactory<>("addresse"));
         telephone_column.setCellValueFactory(new PropertyValueFactory<>("telephone"));
         sold_column.setCellValueFactory(new PropertyValueFactory<>("sold"));
-
         Fournisseur_Table.setItems(null);
         Fournisseur_Table.setItems(data);
+        cnn.close();
 
 
     }
@@ -102,21 +97,66 @@ public class Fournisseur_Controller implements Initializable
         }
 
     }
+    @FXML
+    private void delete_Fournisseur() throws SQLException{
+
+        if(! Fournisseur_Table.getSelectionModel().isEmpty()    ) {
+
+            try{
+                String query = "DELETE FROM demo.fournisseur_table WHERE id =?";
+                Person person =  Fournisseur_Table.getSelectionModel().getSelectedItem();
+                int i = person.getid();
+                String s = String.valueOf(i);
+                preparesStatemnt = conn.connect().prepareStatement(query);
+                preparesStatemnt.setString(1, s);
+                preparesStatemnt.executeUpdate();
+                preparesStatemnt.close();
+                loadData();
+                utility.showAlert("User has been deleted");
+                conn.connect().close();
+            }
+
+            catch(SQLException e){
+                e.printStackTrace();
+            }
+
+        }
+
+    }
 
 
 
 
 
 
+      @FXML
+      public void show_Edit_Window(Event e)throws IOException{
+
+          if(! Fournisseur_Table.getSelectionModel().isEmpty() ) {
+              Person person =  Fournisseur_Table.getSelectionModel().getSelectedItem();
+
+              New_Fournisseur_Controller.NAME =    person.getname()        ;
+              New_Fournisseur_Controller.ADDRESS = person.getAddresse()    ;
+              New_Fournisseur_Controller.PHONE =   person.getTelephone()   ;
+              New_Fournisseur_Controller.ID =   person.getid()   ;
+              New_Fournisseur_Controller.PERSON =   person   ;
+
+              utility.show_New_Fournisseur_Window(e);
+
+             }
+          else
+              {
+                  utility.showAlert("Nothing is Selected");
+
+              }
+
+          New_Fournisseur_Controller.NAME =    null;
+          New_Fournisseur_Controller.ADDRESS = null;
+          New_Fournisseur_Controller.PHONE =   null;
+          New_Fournisseur_Controller.ID =      0   ;
 
 
-
-
-
-
-
-
-
+    }
 
     @FXML
     public void goBack_To_Home_Window(Event event) throws IOException {
@@ -163,6 +203,9 @@ public class Fournisseur_Controller implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+
+
         try {
             loadData();
         } catch (SQLException e) {
