@@ -48,7 +48,7 @@ public class New_Fournisseur_Controller implements Initializable {
 
     Db_Connection conn = new Db_Connection();
 
-    PreparedStatement preparesStatemnt = null;
+
     ResultSet resultSet = null;
 
     Utility utility = new Utility();
@@ -73,7 +73,7 @@ public class New_Fournisseur_Controller implements Initializable {
             String Telephon = telephonetxt.getText();
             double Sold = 0.25;
 
-
+            PreparedStatement  preparesStatemnt = null;
             String query = "INSERT INTO demo.fournisseur_table (id,name,address,telephone,sold) VALUES (?,?,?,?,?)";
 
             preparesStatemnt = conn.connect().prepareStatement(query);
@@ -100,17 +100,40 @@ public class New_Fournisseur_Controller implements Initializable {
     }
     // Update
     @FXML
-    public void update_Fournisseur(){
+    public void update_Fournisseur() throws SQLException{
 
-        String Id        = idetxt.getText();
+        String id        = idetxt.getText();
         String name      = nametxt.getText();
         String telephone = telephonetxt.getText();
         String adress    = addresstxt.getText();
 
-        System.out.println("Id" + Id + "name" + name+ "Telephone: " + telephone + "address: " + adress);
+       Person person  = new Person(0,"","","");
+
+        person.setFournisseurName(name);
+        person.setFournisseurAdress(adress);
+        person.setFournisseurTelephone(telephone);
+
+
+        try{
+            PreparedStatement  preparesStatemnt = null;
+
+            String query  = "UPDATE demo.fournisseur_table SET name =?, address =?, telephone =? Where id="+id;
+            preparesStatemnt = conn.connect().prepareStatement(query);
+            preparesStatemnt.setString(1,person.getFournisseurName());
+            preparesStatemnt.setString(2,person.getFournisseurAdress());
+            preparesStatemnt.setString(3,person.getFournisseurTelephone());
+
+            preparesStatemnt.executeUpdate();
+
+            utility.showAlert("User has been Updated");
 
 
 
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
 
 
 

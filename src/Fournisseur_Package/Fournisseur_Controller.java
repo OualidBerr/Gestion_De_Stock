@@ -66,7 +66,7 @@ public class Fournisseur_Controller implements Initializable
 
         Id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
         name_column.setCellValueFactory(new PropertyValueFactory<>("name"));
-        adress_column.setCellValueFactory(new PropertyValueFactory<>("addresse"));
+        adress_column.setCellValueFactory(new PropertyValueFactory<>("address"));
         telephone_column.setCellValueFactory(new PropertyValueFactory<>("telephone"));
         sold_column.setCellValueFactory(new PropertyValueFactory<>("sold"));
         Fournisseur_Table.setItems(null);
@@ -83,7 +83,7 @@ public class Fournisseur_Controller implements Initializable
 
             String qyery = ("SELECT * FROM demo.users");
             preparesStatemnt = conn.connect().prepareStatement(qyery);
-            int i = person.getid();
+            int i = person.getFournisseurId();
             String s = String.valueOf(i);
 
             loadData();
@@ -105,7 +105,7 @@ public class Fournisseur_Controller implements Initializable
             try{
                 String query = "DELETE FROM demo.fournisseur_table WHERE id =?";
                 Person person =  Fournisseur_Table.getSelectionModel().getSelectedItem();
-                int i = person.getid();
+                int i = person.getFournisseurId();
                 String s = String.valueOf(i);
                 preparesStatemnt = conn.connect().prepareStatement(query);
                 preparesStatemnt.setString(1, s);
@@ -135,11 +135,11 @@ public class Fournisseur_Controller implements Initializable
           if(! Fournisseur_Table.getSelectionModel().isEmpty() ) {
               Person person =  Fournisseur_Table.getSelectionModel().getSelectedItem();
 
-              New_Fournisseur_Controller.NAME =    person.getname()        ;
-              New_Fournisseur_Controller.ADDRESS = person.getAddresse()    ;
-              New_Fournisseur_Controller.PHONE =   person.getTelephone()   ;
-              New_Fournisseur_Controller.ID =   person.getid()   ;
-              New_Fournisseur_Controller.PERSON =   person   ;
+              New_Fournisseur_Controller.NAME =    person.getFournisseurName()        ;
+              New_Fournisseur_Controller.ADDRESS = person.getFournisseurAdress()    ;
+              New_Fournisseur_Controller.PHONE =   person.getFournisseurTelephone()   ;
+              New_Fournisseur_Controller.ID =   person.getFournisseurId()   ;
+
 
               utility.show_New_Fournisseur_Window(e);
 

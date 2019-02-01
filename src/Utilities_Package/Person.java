@@ -5,72 +5,96 @@ import javafx.beans.property.*;
 
 public class Person {
 
-    private final IntegerProperty id;
-    private final StringProperty name;
-    private final StringProperty addresse;
-    private final StringProperty telephone;
-    private final DoubleProperty sold;
+       private  IntegerProperty id ;
+       private  StringProperty name ;
+       private  StringProperty address;
+       private  StringProperty telephone ;
+       private  DoubleProperty sold  ;
 
-
-
-
-
-    // Fournisseur Constructor
-    public Person(Integer id, String Name,String Address,String Telephone,Double Sold) {
+    public Person(Integer id, String Name,String Address,String Telephone) {
         this.id      = new SimpleIntegerProperty(id);
         this.name    = new SimpleStringProperty(Name);
-        this.addresse = new SimpleStringProperty(Address);
+        this.address = new SimpleStringProperty(Address);
         this.telephone = new SimpleStringProperty(Telephone);
-        this.sold      =   new SimpleDoubleProperty(Sold);
 
     }
 
-    // Getters
-    public int getid() {
+
+
+
+    public Person(Integer id, String Name,String Address,String Telephone, double sold) {
+        this.id      = new SimpleIntegerProperty(id);
+        this.name    = new SimpleStringProperty(Name);
+        this.address = new SimpleStringProperty(Address);
+        this.telephone = new SimpleStringProperty(Telephone);
+        this.sold = new SimpleDoubleProperty(sold);
+    }
+
+
+
+    public Person(){}
+
+
+
+    // setters
+    public void setFournisseurId(int value) {
+        id.set(value);
+    }
+    public void setFournisseurName(String value) {
+        name.set(value);
+    }
+
+    public void setFournisseurAdress(String value) {
+        address.set(value);
+    }
+    public void setFournisseurTelephone(String value) {
+        telephone.set(value);
+    }
+
+    public void setFournisseurSold(double value) {
+        sold.set(value);
+    }
+
+
+    //Getters
+    public int getFournisseurId() {
         return id.get();
     }
+
+    public String getFournisseurName() {
+        return name.get();
+    }
+
+    public String getFournisseurAdress() {
+        return address.get();
+    }
+    public String getFournisseurTelephone() {
+        return telephone.get();
+    }
+    public double getFournisseurSold() {
+        return sold.get();
+    }
+
+   // Properties
+
     public IntegerProperty idProperty() {
         return id;
-    }
-    public String getname() {
-        return name.get();
     }
     public StringProperty nameProperty() {
         return name;
     }
-    public String getAddresse() {
-        return addresse.get();
-    }
-    public StringProperty addresseProperty() {
-        return addresse;
-    }
-    public String getTelephone() {
-        return telephone.get();
+    public StringProperty adressProperty() {
+        return address;
     }
     public StringProperty telephoneProperty() {
         return telephone;
     }
-    public double getSold() {
-        return sold.get();
+    public StringProperty soldProperty() {
+        return address;
     }
-    public DoubleProperty soldProperty() {
-        return sold;
-    }
-    // setters
-    public void setid(int id) {
-        this.id.set(id);
-    }
-    public void setname(String name) {
-        this.name.set(name);
-    }
-    public void setAddresse(String addresse) {
-        this.addresse.set(addresse);
-    }
-    public void setTelephone(String telephone) {
-        this.telephone.set(telephone);
-    }
-    public void setSold(double sold) {
-        this.sold.set(sold);
-    }
+
+
+
+
 
 }
