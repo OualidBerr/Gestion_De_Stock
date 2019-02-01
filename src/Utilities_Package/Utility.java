@@ -1,6 +1,7 @@
 package Utilities_Package;
 
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -11,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
@@ -27,9 +29,6 @@ public class Utility {
     Db_Connection conn = new Db_Connection()  ;
     PreparedStatement preparesStatemnt = null;
     ResultSet resultSet = null;
-
-
-
 
     public Utility(){}
 
@@ -50,6 +49,7 @@ public class Utility {
 
         Parent parent = FXMLLoader.load(getClass().getResource(View));
         Scene scene = new Scene(parent);
+
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle(title);
@@ -66,6 +66,42 @@ public class Utility {
         Scene  Home_page_Scene  = new Scene(Home_page_Parent);
         Stage App_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         App_Stage.hide();
+
+
+          Home_page_Scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+              @Override
+              public void handle(KeyEvent event)  {
+                  switch (event.getCode()) {
+                      case BACK_SPACE: try{
+
+                          Parent parent = FXMLLoader.load(getClass().getResource("/Product_Package/Product_View.fxml"));
+                          Scene scene = new Scene(parent);
+
+                          Stage stage = new Stage();
+                          stage.setScene(scene);
+                          stage.setTitle("Event Handler");
+                          stage.setFullScreen(false);
+                          stage.setResizable(false);
+                          stage.show();
+
+
+
+                      } catch (Exception e){
+
+
+                      } break;
+
+
+
+
+                      case SHIFT:
+                          System.out.println("Key Down");
+                          showAlert("Event Handler");
+                          break;
+
+                  }
+              }
+          });
         App_Stage.setScene(Home_page_Scene);
         App_Stage.setTitle(title);
         App_Stage.setFullScreen(true);
@@ -73,6 +109,12 @@ public class Utility {
         App_Stage.show();
 
     }
+
+   // switch scene Test
+
+
+
+
 
       // go Home
          public void go_Home(Event event)  throws IOException{
@@ -97,6 +139,10 @@ public class Utility {
         public void go_Fournisseur(Event event)  throws IOException{
             switchScene("/Fournisseur_Package/Fournisseur_View.fxml","Fournisseur Page", event);
         }
+
+
+
+
 
         // Go Caisse
         public void go_Caisse(Event event)  throws IOException{
