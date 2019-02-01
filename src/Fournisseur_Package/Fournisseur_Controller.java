@@ -8,12 +8,17 @@ import Utilities_Package.Utility;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -122,10 +127,13 @@ public class Fournisseur_Controller implements Initializable
 
         }
 
+        else {
+
+            utility.showAlert("Nothing is selected");
+        }
+
+
     }
-
-
-
 
 
 
@@ -202,7 +210,7 @@ public class Fournisseur_Controller implements Initializable
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources)  {
 
 
 

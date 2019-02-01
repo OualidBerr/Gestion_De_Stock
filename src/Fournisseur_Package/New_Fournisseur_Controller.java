@@ -6,6 +6,7 @@ import Utilities_Package.User;
 import Utilities_Package.Utility;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -55,9 +56,6 @@ public class New_Fournisseur_Controller implements Initializable {
 
 
 
-
-
-
     // Add
     @FXML
     public void add_Fournisseur() throws Exception{
@@ -88,13 +86,14 @@ public class New_Fournisseur_Controller implements Initializable {
             nametxt.clear();
             addresstxt.clear();
             telephonetxt.clear();
+            idetxt.clear();
 
             utility.showAlert("New User added successfully");
         }
 
-        else{
-            utility.showAlert("Data Can not be Dulicated");
-        }
+        else if  (nametxt.getText().isEmpty() && addresstxt.getText().isEmpty() && telephonetxt.getText().isEmpty()){
+            utility.showAlert("Some fields are empty");
+            }
 
 
     }
@@ -102,39 +101,49 @@ public class New_Fournisseur_Controller implements Initializable {
     @FXML
     public void update_Fournisseur() throws SQLException{
 
-        String id        = idetxt.getText();
-        String name      = nametxt.getText();
-        String telephone = telephonetxt.getText();
-        String adress    = addresstxt.getText();
-
-       Person person  = new Person(0,"","","");
-
-        person.setFournisseurName(name);
-        person.setFournisseurAdress(adress);
-        person.setFournisseurTelephone(telephone);
+        if (!idetxt.getText().isEmpty() && !nametxt.getText().isEmpty() && !addresstxt.getText().isEmpty() && !telephonetxt.getText().isEmpty()) {
 
 
-        try{
-            PreparedStatement  preparesStatemnt = null;
+            String id        = idetxt.getText();
+            String name      = nametxt.getText();
+            String telephone = telephonetxt.getText();
+            String adress    = addresstxt.getText();
 
-            String query  = "UPDATE demo.fournisseur_table SET name =?, address =?, telephone =? Where id="+id;
-            preparesStatemnt = conn.connect().prepareStatement(query);
-            preparesStatemnt.setString(1,person.getFournisseurName());
-            preparesStatemnt.setString(2,person.getFournisseurAdress());
-            preparesStatemnt.setString(3,person.getFournisseurTelephone());
+            Person person  = new Person(0,"","","");
 
-            preparesStatemnt.executeUpdate();
+            person.setFournisseurName(name);
+            person.setFournisseurAdress(adress);
+            person.setFournisseurTelephone(telephone);
 
-            utility.showAlert("User has been Updated");
+            try{
+                PreparedStatement  preparesStatemnt = null;
 
+                String query  = "UPDATE demo.fournisseur_table SET name =?, address =?, telephone =? Where id="+id;
+                preparesStatemnt = conn.connect().prepareStatement(query);
+                preparesStatemnt.setString(1,person.getFournisseurName());
+                preparesStatemnt.setString(2,person.getFournisseurAdress());
+                preparesStatemnt.setString(3,person.getFournisseurTelephone());
 
+                preparesStatemnt.executeUpdate();
 
+                utility.showAlert("User has been Updated");
 
+                idetxt.clear();
+                nametxt.clear();
+                telephonetxt.clear();
+                addresstxt.clear();
+                idetxt.clear();
+                conn.connect().close();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
         }
-        catch (Exception e){
-            e.printStackTrace();
-        }
 
+        else{
+
+            utility.showAlert("Fields are not filled");
+          }
 
 
     }
@@ -142,15 +151,8 @@ public class New_Fournisseur_Controller implements Initializable {
 
 
 
-
-
-
-
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-      new Fournisseur_Controller();
 
         nametxt.setText(NAME);
         addresstxt.setText(ADDRESS);

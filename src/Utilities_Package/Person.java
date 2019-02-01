@@ -19,9 +19,6 @@ public class Person {
 
     }
 
-
-
-
     public Person(Integer id, String Name,String Address,String Telephone, double sold) {
         this.id      = new SimpleIntegerProperty(id);
         this.name    = new SimpleStringProperty(Name);
@@ -83,14 +80,14 @@ public class Person {
     public StringProperty nameProperty() {
         return name;
     }
-    public StringProperty adressProperty() {
+    public StringProperty addressProperty() {
         return address;
     }
     public StringProperty telephoneProperty() {
         return telephone;
     }
-    public StringProperty soldProperty() {
-        return address;
+    public DoubleProperty soldProperty() {
+        return sold;
     }
 
 

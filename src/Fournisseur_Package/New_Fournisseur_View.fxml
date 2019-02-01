@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="642.0" prefWidth="731.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Fournisseur_Package.New_Fournisseur_Controller">
+<AnchorPane prefHeight="642.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Fournisseur_Package.New_Fournisseur_Controller">
    <children>
       <VBox layoutX="173.0" layoutY="130.0" prefHeight="310.0" prefWidth="420.0" style="-fx-background-color: #ccffcc; -fx-background-radius: 20;" AnchorPane.bottomAnchor="202.0" AnchorPane.leftAnchor="173.0" AnchorPane.rightAnchor="138.0" AnchorPane.topAnchor="130.0">
          <children>
@@ -73,7 +73,7 @@
                <children>
                   <Button fx:id="add_Fournisseur_btn" mnemonicParsing="false" onAction="#add_Fournisseur" prefHeight="37.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Ajouter">
                      <HBox.margin>
-                        <Insets left="20.0" right="20.0" top="10.0" />
+                        <Insets left="60.0" right="50.0" top="10.0" />
                      </HBox.margin>
                      <font>
                         <Font name="System Bold" size="12.0" />
