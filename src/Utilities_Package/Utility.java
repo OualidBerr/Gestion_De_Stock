@@ -28,20 +28,20 @@ public class Utility {
 
     public Utility(){}
 
-    //Custom Constructor --> 1
-    public Utility(String view, String title  ){
+     //Custom Constructor --> 1
+      public Utility(String view, String title  ){
         view_Window = view;
         view_title = title;
 
     }
 
-    // Custom Constructor --> 2
-    public Utility (String actualWindow,String title, Event event  ) throws IOException {
+       // Custom Constructor --> 2
+     public Utility (String actualWindow,String title, Event event  ) throws IOException {
         switchScene(actualWindow,title,event);
     }
 
-   // Starting new Stage Function
-    public void openNewStage(String View, String title) throws IOException {
+      // Starting new Stage Function
+       public void openNewStage(String View, String title) throws IOException {
 
         Parent parent = FXMLLoader.load(getClass().getResource(View));
         Scene scene = new Scene(parent);
@@ -54,8 +54,8 @@ public class Utility {
 
     }
 
-   // Switching Scenes
-    public void switchScene(String Actual_Window,String title, Event event) throws IOException {
+         // Switching Scenes
+      public void switchScene(String Actual_Window,String title, Event event) throws IOException {
 
          Parent Home_page_Parent = FXMLLoader.load(getClass().getResource(Actual_Window));
         Scene  Home_page_Scene  = new Scene(Home_page_Parent);
@@ -69,26 +69,26 @@ public class Utility {
 
     }
 
-    // go Home
-     public void go_Home(Event event)  throws IOException{
+      // go Home
+         public void go_Home(Event event)  throws IOException{
        switchScene("/Home_Package/Home_View.fxml","Home Page", event);
      }
 
-    // go Pruduct
-    public void go_Pruduct(Event event)  throws IOException{
+      // go Pruduct
+      public void go_Pruduct(Event event)  throws IOException{
     switchScene("/Product_Package/Product_View.fxml","Product Page", event);
         }
 
-    // Go Stock
-    public void go_Stock(Event event)  throws IOException{
+      // Go Stock
+          public void go_Stock(Event event)  throws IOException{
     switchScene("/Stock_Package/Stock_View.fxml","Stock Page", event);
       }
 
-    // go Client
-    public void go_Client(Event event)  throws IOException{
+       // go Client
+        public void go_Client(Event event)  throws IOException{
     switchScene("/Client_Package/Client_View.fxml","Client Page", event);
         }
-    // Go Fournisseur
+       // Go Fournisseur
         public void go_Fournisseur(Event event)  throws IOException{
             switchScene("/Fournisseur_Package/Fournisseur_View.fxml","Fournisseur Page", event);
         }
@@ -99,17 +99,14 @@ public class Utility {
         }
 
 
-
-
-
         // Go Bon Command Window
         public void go_Bon_Command(Event event)  throws IOException{
             switchScene("/Bon_Command_Package/Bon_Command_View.fxml","Bon Command Page", event);
         }
 
-    // ShowAndWait a New Window
+       // ShowAndWait a New Window
 
-     // Add new Product Window
+        // Add new Product Window
         public void show_New_Product_Window(Event e) throws IOException {
 
         openNewStage("/Product_Package/New_Product_View.fxml","Ajouter Nouveau Produit Form");
@@ -134,15 +131,11 @@ public class Utility {
             openNewStage("/Login_Package/Manage_Users_View.fxml","Ajouter Nouveau User Form");
 
         }
-
-
-
         // Add new Reglement Window
         public void show_Reglement_Window(String person,Event e) throws IOException {
 
             openNewStage("/Reglement_Package/Reglement_View.fxml","Reglement de " + person);
         }
-
 
         // Log in
         public void log_In(String person ,Event event) throws IOException {
@@ -150,18 +143,13 @@ public class Utility {
             switchScene("/Home_Package/Home_View.fxml","Home Page*" + person, event);
         }
 
-
         // Login out
         public void log_Out(Event event) throws IOException {
 
             switchScene("/Login_Package/Login_View.fxml","Login Page", event);
         }
 
-
-
-
         // Find Max
-        @FXML
         public int getMax_ID(String tableName,String colName) throws SQLException {
 
            // String query = "select max(id) from " + tableName;
@@ -179,6 +167,7 @@ public class Utility {
             return  idmax;
 
               }
+
 
 
         // Showing Alert Message

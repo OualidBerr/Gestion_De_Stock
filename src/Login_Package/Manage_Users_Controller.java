@@ -23,14 +23,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Manage_Users_Controller implements Initializable {
+    @FXML
+    private Label showlb;
+
     @FXML
     public TableView<User> usertableView ;
     @FXML
     public TableColumn<User,Integer> Idcolumn ;
     @FXML
+    public TableColumn<User,String> namecolumn ;
     public TableColumn<User,String> usernamecolumn ;
     public TableColumn<User,String> passwordcolumn ;
     public TableColumn<User,String> rolecolumn ;
@@ -39,7 +45,7 @@ public class Manage_Users_Controller implements Initializable {
     @FXML
     private ComboBox camboBox;
     @FXML
-    private TextField  usernametxt, passtxt;
+    private TextField  usernametxt, passtxt, nametxt;
     @FXML
     private DatePicker date_txt;
 
@@ -90,7 +96,7 @@ public class Manage_Users_Controller implements Initializable {
 
             while(rs.next()){
 
-                    data.add(new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)));
+                    data.add(new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)));
                }
         }
         catch(SQLException eX){
@@ -98,6 +104,7 @@ public class Manage_Users_Controller implements Initializable {
         }
 
         Idcolumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        namecolumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         usernamecolumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         passwordcolumn.setCellValueFactory(new PropertyValueFactory<>("password"));
         rolecolumn.setCellValueFactory(new PropertyValueFactory<>("role"));
@@ -117,34 +124,86 @@ public class Manage_Users_Controller implements Initializable {
         max_id  = utility.getMax_ID("users","id") +1;
 
        String userName = usernametxt.getText();
+        String Name = nametxt.getText();
        String passWord = passtxt.getText();
        String role = camboBox.getValue().toString();
        String date = date_txt.getValue().toString();
 
-        String query = "INSERT INTO demo.users (id,username,password,role,date) VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO demo.users (id,name,username,password,role,date) VALUES (?,?,?,?,?,?)";
 
         preparesStatemnt = conn.connect().prepareStatement(query);
         preparesStatemnt.setInt(1, max_id);
-        preparesStatemnt.setString(2, userName);
-        preparesStatemnt.setString(3, passWord);
-        preparesStatemnt.setString(4, role);
-        preparesStatemnt.setString(5, date);
+        preparesStatemnt.setString(2, Name);
+        preparesStatemnt.setString(3, userName);
+        preparesStatemnt.setString(4, passWord);
+        preparesStatemnt.setString(5, role);
+        preparesStatemnt.setString(6, date);
         preparesStatemnt.execute();
         preparesStatemnt.close();
 
         usernametxt.clear();
         passtxt.clear();
+        date_txt.setValue(null);
+        nametxt.clear();
         loadData();
         utility.showAlert("New User added successfully");
 
     }
 
+    @FXML
+    public void showOnClick()throws SQLException{
+
+        try{
+            User user = usertableView.getSelectionModel().getSelectedItem();
+
+            String qyery = ("SELECT * FROM demo.users");
+            preparesStatemnt = conn.connect().prepareStatement(qyery);
+            int i = user.getid();
+            String s = String.valueOf(i);
+
+            usernametxt.setText(user.getUsername());
+            nametxt.setText(user.getNname());
+            passtxt.setText(user.getPassword());
+            camboBox.setValue(user.getRole());
+
+            preparesStatemnt.close();
+
+        }
+
+        catch(SQLException ex){
+
+        }
+
+
+
+    }
+
+    @FXML void myEvent() throws SQLException {
+
+   showlb.setText("Hello World ... this is working!");
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-       // Calendar cal = Calendar.getInstance();
+       date_txt.setValue(LocalDate.now());
 
-        date_txt.setValue(LocalDate.now());
+        /////// Value changed listener in the Table
+        usertableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+                    if (newSelection != null) {
+                        try {
+                            showOnClick();
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Manage_Users_Controller.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    }
+                }
+        );
+
+
+
+
 
 
         try {
@@ -156,5 +215,6 @@ public class Manage_Users_Controller implements Initializable {
         camboBox.setValue("User");
         camboBox.getStyleClass().add("center-aligned");
     }
+
 
 }
