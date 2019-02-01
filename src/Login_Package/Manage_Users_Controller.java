@@ -16,6 +16,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 
@@ -46,6 +52,32 @@ public class Manage_Users_Controller implements Initializable {
 
     Utility utility = new Utility();
 
+    @FXML
+    private void deletUser() throws SQLException{
+
+        if(! usertableView.getSelectionModel().isEmpty()) {
+
+            try{
+                String query = "DELETE FROM users WHERE id =?";
+                User user = (User) usertableView.getSelectionModel().getSelectedItem();
+                int i = user.getid();
+                String s = String.valueOf(i);
+                preparesStatemnt = conn.connect().prepareStatement(query);
+                preparesStatemnt.setString(1, s);
+                preparesStatemnt.executeUpdate();
+                preparesStatemnt.close();
+                loadData();
+              utility.showAlert("User has been deleted");
+
+            }
+
+            catch(SQLException e){
+                e.printStackTrace();
+            }
+
+        }
+
+    }
 
     public void loadData() throws SQLException{
 
@@ -71,23 +103,12 @@ public class Manage_Users_Controller implements Initializable {
         rolecolumn.setCellValueFactory(new PropertyValueFactory<>("role"));
         datecolumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 
+
         usertableView.setItems(null);
         usertableView.setItems(data);
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
     @FXML
     public void add_New_User() throws SQLException {
@@ -113,13 +134,18 @@ public class Manage_Users_Controller implements Initializable {
 
         usernametxt.clear();
         passtxt.clear();
-
+        loadData();
         utility.showAlert("New User added successfully");
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+       // Calendar cal = Calendar.getInstance();
+
+        date_txt.setValue(LocalDate.now());
+
 
         try {
             loadData();
