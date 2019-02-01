@@ -28,7 +28,6 @@ public class User {
     }
 
 
-
    //Getters
     public int getid() {
        return id.get();
@@ -80,10 +79,7 @@ public class User {
         date.set(value);
     }
 
-
-
     // properties
-
     public IntegerProperty idProperty() {
     return id;
     }
@@ -91,7 +87,7 @@ public class User {
         return username;
     }
     public StringProperty nameProperty() {
-        return username;
+        return name;
     }
     public StringProperty roleProperty() {
         return role;

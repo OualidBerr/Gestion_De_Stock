@@ -66,6 +66,7 @@ private PasswordField txtpassword;
             resultSet = preparesStatemnt.executeQuery(query);
              if (!resultSet.next()){
               System.out.println("Enter Valid username and password");
+                 utility.showAlert("Please Enter Valid Username and Password");
              }
              else
                  {

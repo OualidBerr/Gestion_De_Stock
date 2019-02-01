@@ -58,10 +58,21 @@ public class Manage_Users_Controller implements Initializable {
 
     Utility utility = new Utility();
 
+    public Boolean isTableRowSelected(){
+
+        if ( ! usertableView.getSelectionModel().isEmpty() ){
+
+            return false;
+           }
+
+        return true;
+    }
+
+
     @FXML
     private void deletUser() throws SQLException{
 
-        if(! usertableView.getSelectionModel().isEmpty()) {
+        if(! usertableView.getSelectionModel().isEmpty()    ) {
 
             try{
                 String query = "DELETE FROM users WHERE id =?";
@@ -73,7 +84,7 @@ public class Manage_Users_Controller implements Initializable {
                 preparesStatemnt.executeUpdate();
                 preparesStatemnt.close();
                 loadData();
-              utility.showAlert("User has been deleted");
+                utility.showAlert("User has been deleted");
 
             }
 
@@ -82,6 +93,8 @@ public class Manage_Users_Controller implements Initializable {
             }
 
         }
+
+
 
     }
 
@@ -120,34 +133,41 @@ public class Manage_Users_Controller implements Initializable {
     @FXML
     public void add_New_User() throws SQLException {
 
-       int max_id = 0;
-        max_id  = utility.getMax_ID("users","id") +1;
+        int max_id = 0;
+        max_id  = utility.getMax_ID("users","id") ;
 
-       String userName = usernametxt.getText();
-        String Name = nametxt.getText();
-       String passWord = passtxt.getText();
-       String role = camboBox.getValue().toString();
-       String date = date_txt.getValue().toString();
+       if (!usernametxt.getText().isEmpty() && !passtxt.getText().isEmpty() && !nametxt.getText().isEmpty()){
 
-        String query = "INSERT INTO demo.users (id,name,username,password,role,date) VALUES (?,?,?,?,?,?)";
 
-        preparesStatemnt = conn.connect().prepareStatement(query);
-        preparesStatemnt.setInt(1, max_id);
-        preparesStatemnt.setString(2, Name);
-        preparesStatemnt.setString(3, userName);
-        preparesStatemnt.setString(4, passWord);
-        preparesStatemnt.setString(5, role);
-        preparesStatemnt.setString(6, date);
-        preparesStatemnt.execute();
-        preparesStatemnt.close();
+           String userName = usernametxt.getText();
+           String Name = nametxt.getText();
+           String passWord = passtxt.getText();
+           String role = camboBox.getValue().toString();
+           String date = date_txt.getValue().toString();
 
-        usernametxt.clear();
-        passtxt.clear();
-        date_txt.setValue(null);
-        nametxt.clear();
-        loadData();
-        utility.showAlert("New User added successfully");
+           String query = "INSERT INTO demo.users (id,name,username,password,role,date) VALUES (?,?,?,?,?,?)";
 
+           preparesStatemnt = conn.connect().prepareStatement(query);
+           preparesStatemnt.setInt(1, max_id+1);
+           preparesStatemnt.setString(2, Name);
+           preparesStatemnt.setString(3, userName);
+           preparesStatemnt.setString(4, passWord);
+           preparesStatemnt.setString(5, role);
+           preparesStatemnt.setString(6, date);
+           preparesStatemnt.execute();
+           preparesStatemnt.close();
+
+           usernametxt.clear();
+           passtxt.clear();
+
+           nametxt.clear();
+           loadData();
+           utility.showAlert("New User added successfully");
+       }
+
+       else{
+           utility.showAlert("Data Can not be Dulicated");
+       }
     }
 
     @FXML
@@ -174,15 +194,45 @@ public class Manage_Users_Controller implements Initializable {
 
         }
 
-
-
     }
 
-    @FXML void myEvent() throws SQLException {
+    // Update
+    @FXML
+    public  int update_User() throws SQLException {
 
-   showlb.setText("Hello World ... this is working!");
-    }
+        if(! usertableView.getSelectionModel().isEmpty()) {
+            User user = usertableView.getSelectionModel().getSelectedItem();
+         int  id = user.getid();
+            user.setNname(nametxt.getText());
+            user.setPassword(passtxt.getText());
+            user.setUserName(usernametxt.getText());
+            user.setRole(camboBox.getValue().toString());
+            //user.getDate( (Date) date_txt.getValue() );
 
+            try{
+                String query = "UPDATE users SET name =?, username =?, password =?, role =? Where id="+id;
+                Connection cnn = conn.connect();
+                preparesStatemnt = cnn.prepareStatement(query);
+                preparesStatemnt.setString(1,user.getNname());
+                preparesStatemnt.setString(2,user.getUsername());
+                preparesStatemnt.setString(3,user.getPassword());
+                preparesStatemnt.setString(4,user.getRole());
+                preparesStatemnt.executeUpdate();
+                loadData();
+                utility.showAlert("User has been Updated");
+                cnn.close();
+
+                 }
+                  catch (Exception e)
+                {
+                e.printStackTrace();
+                }
+
+                      }
+
+
+                   return 0;
+           }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -202,10 +252,6 @@ public class Manage_Users_Controller implements Initializable {
         );
 
 
-
-
-
-
         try {
             loadData();
         } catch (SQLException e) {
@@ -215,6 +261,5 @@ public class Manage_Users_Controller implements Initializable {
         camboBox.setValue("User");
         camboBox.getStyleClass().add("center-aligned");
     }
-
 
 }
