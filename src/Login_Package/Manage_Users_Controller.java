@@ -171,11 +171,8 @@ public class Manage_Users_Controller implements Initializable {
         Connection cnn = conn.connect();
         try{
 
-
             data = FXCollections.observableArrayList();
-
             ResultSet rs = cnn.createStatement().executeQuery("SELECT * FROM demo.users");
-
             while(rs.next()){
 
                     data.add(new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)));

@@ -7,12 +7,50 @@ import java.util.Date;
 public class Reglement {
 
     private IntegerProperty id ;
+    private StringProperty name ;
     private StringProperty date ;
     private  StringProperty mode;
     private  DoubleProperty amount ;
     private DoubleProperty old_sold;
     private DoubleProperty sold;
     private StringProperty note ;
+
+    // Constructor
+    public Reglement(int ID, String DATE, String MODE,String NAME, double AMOUNT, double OLD_SOLD, double SOLD,String NOTE){
+
+        this.id       = new SimpleIntegerProperty(ID);
+        this.name     = new SimpleStringProperty(NAME);
+        this.date     = new SimpleStringProperty(DATE);
+        this.mode     = new SimpleStringProperty(MODE);
+        this.note     = new SimpleStringProperty(NOTE);
+        this.amount   = new SimpleDoubleProperty(AMOUNT);
+        this.old_sold = new SimpleDoubleProperty(OLD_SOLD);
+        this.sold     = new SimpleDoubleProperty(SOLD);
+
+    }
+    public Reglement(int ID, String DATE, String MODE, double AMOUNT, double OLD_SOLD, double SOLD,String NOTE){
+
+        this.id       = new SimpleIntegerProperty(ID);
+        this.date     = new SimpleStringProperty(DATE);
+        this.mode     = new SimpleStringProperty(MODE);
+        this.note     = new SimpleStringProperty(NOTE);
+        this.amount   = new SimpleDoubleProperty(AMOUNT);
+        this.old_sold = new SimpleDoubleProperty(OLD_SOLD);
+        this.sold     = new SimpleDoubleProperty(SOLD);
+
+    }
+
+    public void setName(String name) {
+        this.name.set(name);
+    }
+
+    public String getName() {
+        return name.get();
+    }
+
+    public StringProperty nameProperty() {
+        return name;
+    }
 
     public void setNote(String note) {
         this.note.set(note);
@@ -28,18 +66,6 @@ public class Reglement {
 
 
 
-    // Constructor
-    public Reglement(int ID, String DATE, String MODE, double AMOUNT, double OLD_SOLD, double SOLD,String NOTE){
-
-        this.id    = new SimpleIntegerProperty(ID);
-        this.date  = new SimpleStringProperty(DATE);
-        this.mode  = new SimpleStringProperty(MODE);
-        this.note  = new SimpleStringProperty(NOTE);
-        this.amount = new SimpleDoubleProperty(AMOUNT);
-        this.old_sold = new SimpleDoubleProperty(OLD_SOLD);
-        this.sold = new SimpleDoubleProperty(SOLD);
-
-    }
 
 
     // Getters

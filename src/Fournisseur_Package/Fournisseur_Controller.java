@@ -4,6 +4,7 @@ import Reglement_Package.Reglement_Controller;
 import Utilities_Package.Db_Connection;
 import Utilities_Package.Fournisseur;
 
+import Utilities_Package.Reglement;
 import Utilities_Package.Utility;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -42,13 +43,17 @@ public class Fournisseur_Controller implements Initializable
     public TextField filterField;
     public static Fournisseur Fournisseur;
     public ObservableList<Fournisseur> data;
+    public ObservableList<Reglement> data_2;
 
     Db_Connection conn = new Db_Connection();
     PreparedStatement preparesStatemnt = null;
     ResultSet resultSet = null;
     Utility utility = new Utility();
+
     @FXML
-    public void fournisseurSearchThread() throws SQLException{
+    public void fournisseurSearchThread( ) throws SQLException{
+
+
 
         name_column.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         adress_column.setCellValueFactory(cellData -> cellData.getValue().addressProperty());
@@ -235,7 +240,7 @@ public class Fournisseur_Controller implements Initializable
     }
     // Reglement Form
     @FXML
-    public void open_Reglement_Form(Event event) throws IOException{
+    public void open_Reglement_Form(Event event) throws IOException, SQLException {
 
         if(! Fournisseur_Table.getSelectionModel().isEmpty() ) {
             Fournisseur fournisseur =  Fournisseur_Table.getSelectionModel().getSelectedItem();
@@ -245,10 +250,10 @@ public class Fournisseur_Controller implements Initializable
             Reglement_Controller.FOURNISSEUR_PHONE    =   fournisseur.getFournisseurTelephone() ;
             Reglement_Controller.FOURNISSEUR_ID       =   fournisseur.getFournisseurId()  ;
             Reglement_Controller.FOURNISSEUR_OLD_SOLD =   fournisseur.getFournisseurSold()  ;
+
             String Titel = "Fournisseur : " +fournisseur.getFournisseurName()+ "    Address : " +fournisseur.getFournisseurAdress()+ "    Numero de Telephone : "+fournisseur.getFournisseurTelephone() ;
 
             new Utility().show_Reglement_Window(Titel,event);
-
 
         }
         else
@@ -263,7 +268,8 @@ public class Fournisseur_Controller implements Initializable
         Reglement_Controller.FOURNISSEUR_OLD_SOLD = 0.25;
 
     }
-    // Logout
+
+        // Logout
     @FXML
     public void log_Out_Function(Event event) throws IOException {
         new Utility().log_Out(event);

@@ -84,7 +84,7 @@
       </VBox>
       <TableView fx:id="reglement_tableView" layoutX="13.0" layoutY="254.0" prefHeight="369.0" prefWidth="1123.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="250.0">
         <columns>
-          <TableColumn fx:id="Id_column" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="N" />
+          <TableColumn fx:id="Id_column" prefWidth="100.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="N" />
           <TableColumn fx:id="date_column" prefWidth="160.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="La date" />
             <TableColumn fx:id="mode_column" prefWidth="150.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="Mode" />
             <TableColumn fx:id="amount_column" prefWidth="200.0" style="-fx-background-radius: 20; -fx-font-weight: Bold; -fx-alignment: Center;" text="Montant de paiment" />

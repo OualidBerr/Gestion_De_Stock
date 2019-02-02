@@ -200,7 +200,7 @@ public class Utility {
             if(resultSet.next()){
                 idmax = resultSet.getInt(1);
                 }
-
+            cnn.close();
             return  idmax;
 
               }
