@@ -1,5 +1,6 @@
 package Utilities_Package;
 
+import javafx.beans.property.StringProperty;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -44,7 +46,7 @@ public class Utility {
         switchScene(actualWindow,title,event);
     }
 
-      // Starting new Stage Function
+    // Starting new Stage Function
        public void openNewStage(String View, String title) throws IOException {
 
         Parent parent = FXMLLoader.load(getClass().getResource(View));
@@ -73,32 +75,24 @@ public class Utility {
               public void handle(KeyEvent event)  {
                   switch (event.getCode()) {
                       case BACK_SPACE: try{
-
-                          Parent parent = FXMLLoader.load(getClass().getResource("/Product_Package/Product_View.fxml"));
+                          Parent parent = FXMLLoader.load(getClass().getResource("/Home_Package/Home_View.fxml"));
                           Scene scene = new Scene(parent);
-
                           Stage stage = new Stage();
                           stage.setScene(scene);
-                          stage.setTitle("Event Handler");
+                          stage.setTitle("Home Page");
                           stage.setFullScreen(false);
                           stage.setResizable(false);
                           stage.show();
-
-
 
                       } catch (Exception e){
 
 
                       } break;
 
-
-
-
                       case SHIFT:
                           System.out.println("Key Down");
                           showAlert("Event Handler");
                           break;
-
                   }
               }
           });
@@ -109,12 +103,6 @@ public class Utility {
         App_Stage.show();
 
     }
-
-   // switch scene Test
-
-
-
-
 
       // go Home
          public void go_Home(Event event)  throws IOException{
@@ -139,10 +127,6 @@ public class Utility {
         public void go_Fournisseur(Event event)  throws IOException{
             switchScene("/Fournisseur_Package/Fournisseur_View.fxml","Fournisseur Page", event);
         }
-
-
-
-
 
         // Go Caisse
         public void go_Caisse(Event event)  throws IOException{

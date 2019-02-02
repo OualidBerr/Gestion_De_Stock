@@ -1,24 +1,21 @@
 package Fournisseur_Package;
 
 import Utilities_Package.Db_Connection;
-import Utilities_Package.Person;
+import Utilities_Package.Fournisseur;
 
-import Utilities_Package.User;
 import Utilities_Package.Utility;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,27 +30,68 @@ public class Fournisseur_Controller implements Initializable
     @FXML
     private Button new_Fournisseur_btn;
     @FXML
-    public  TableView<Person> Fournisseur_Table;
+    public  TableView<Fournisseur> Fournisseur_Table;
     @FXML
-    public  TableColumn<Person,Integer> Id_column;
-    public  TableColumn<Person,String> name_column;
-    public  TableColumn<Person,String> adress_column;
-    public  TableColumn<Person,String> telephone_column;
-    public  TableColumn<Person,Double> sold_column;
-
-    public static Person PERSON ;
-
-
-    public ObservableList<Person> data;
+    public  TableColumn<Fournisseur,Integer> Id_column;
+    public  TableColumn<Fournisseur,String> name_column;
+    public  TableColumn<Fournisseur,String> adress_column;
+    public  TableColumn<Fournisseur,String> telephone_column;
+    public  TableColumn<Fournisseur,Double> sold_column;
+    @FXML
+    public TextField filterField;
+    public static Fournisseur Fournisseur;
+    public ObservableList<Fournisseur> data;
 
     Db_Connection conn = new Db_Connection();
     PreparedStatement preparesStatemnt = null;
     ResultSet resultSet = null;
     Utility utility = new Utility();
+    @FXML
+    public void fournisseurSearchThread() throws SQLException{
+
+        name_column.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        adress_column.setCellValueFactory(cellData -> cellData.getValue().addressProperty());
+        telephone_column.setCellValueFactory(cellData -> cellData.getValue().telephoneProperty());
+        // 1. Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<Fournisseur> filteredData = new FilteredList<>(data, p -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(fournisseur -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (fournisseur.getFournisseurName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches name
+                } else if (fournisseur.getFournisseurAdress().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches adress.
+
+                }
+                else if (fournisseur.getFournisseurTelephone().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches name.
+
+                }
+
+                return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Fournisseur> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(Fournisseur_Table.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        Fournisseur_Table.setItems(sortedData);
 
 
-
-
+    }
 
     public  void loadData() throws SQLException {
         Connection cnn = conn.connect();
@@ -62,7 +100,7 @@ public class Fournisseur_Controller implements Initializable
             data = FXCollections.observableArrayList();
             ResultSet rs = cnn.createStatement().executeQuery("SELECT * FROM demo.fournisseur_table");
             while(rs.next()){
-                data.add(new Person(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDouble(5)));
+                data.add(new Fournisseur(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDouble(5)));
             }
         }
         catch(SQLException eX){
@@ -84,11 +122,11 @@ public class Fournisseur_Controller implements Initializable
     public void showOnClick()throws SQLException{
 
         try{
-            Person person = Fournisseur_Table.getSelectionModel().getSelectedItem();
+            Fournisseur fournisseur = Fournisseur_Table.getSelectionModel().getSelectedItem();
 
             String qyery = ("SELECT * FROM demo.users");
             preparesStatemnt = conn.connect().prepareStatement(qyery);
-            int i = person.getFournisseurId();
+            int i = fournisseur.getFournisseurId();
             String s = String.valueOf(i);
 
             loadData();
@@ -109,8 +147,8 @@ public class Fournisseur_Controller implements Initializable
 
             try{
                 String query = "DELETE FROM demo.fournisseur_table WHERE id =?";
-                Person person =  Fournisseur_Table.getSelectionModel().getSelectedItem();
-                int i = person.getFournisseurId();
+                Fournisseur fournisseur =  Fournisseur_Table.getSelectionModel().getSelectedItem();
+                int i = fournisseur.getFournisseurId();
                 String s = String.valueOf(i);
                 preparesStatemnt = conn.connect().prepareStatement(query);
                 preparesStatemnt.setString(1, s);
@@ -134,19 +172,16 @@ public class Fournisseur_Controller implements Initializable
 
 
     }
-
-
-
       @FXML
       public void show_Edit_Window(Event e)throws IOException{
 
           if(! Fournisseur_Table.getSelectionModel().isEmpty() ) {
-              Person person =  Fournisseur_Table.getSelectionModel().getSelectedItem();
+              Fournisseur fournisseur =  Fournisseur_Table.getSelectionModel().getSelectedItem();
 
-              New_Fournisseur_Controller.NAME =    person.getFournisseurName()        ;
-              New_Fournisseur_Controller.ADDRESS = person.getFournisseurAdress()    ;
-              New_Fournisseur_Controller.PHONE =   person.getFournisseurTelephone()   ;
-              New_Fournisseur_Controller.ID =   person.getFournisseurId()   ;
+              New_Fournisseur_Controller.NAME =    fournisseur.getFournisseurName()        ;
+              New_Fournisseur_Controller.ADDRESS = fournisseur.getFournisseurAdress()    ;
+              New_Fournisseur_Controller.PHONE =   fournisseur.getFournisseurTelephone()   ;
+              New_Fournisseur_Controller.ID =   fournisseur.getFournisseurId()   ;
 
 
               utility.show_New_Fournisseur_Window(e);

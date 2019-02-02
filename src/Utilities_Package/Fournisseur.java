@@ -3,7 +3,7 @@ package Utilities_Package;
 import javafx.beans.property.*;
 
 
-public class Person {
+public class Fournisseur {
 
        private  IntegerProperty id ;
        private  StringProperty name ;
@@ -11,7 +11,7 @@ public class Person {
        private  StringProperty telephone ;
        private  DoubleProperty sold  ;
 
-    public Person(Integer id, String Name,String Address,String Telephone) {
+    public Fournisseur(Integer id, String Name, String Address, String Telephone) {
         this.id      = new SimpleIntegerProperty(id);
         this.name    = new SimpleStringProperty(Name);
         this.address = new SimpleStringProperty(Address);
@@ -19,7 +19,7 @@ public class Person {
 
     }
 
-    public Person(Integer id, String Name,String Address,String Telephone, double sold) {
+    public Fournisseur(Integer id, String Name, String Address, String Telephone, double sold) {
         this.id      = new SimpleIntegerProperty(id);
         this.name    = new SimpleStringProperty(Name);
         this.address = new SimpleStringProperty(Address);
@@ -29,7 +29,7 @@ public class Person {
 
 
 
-    public Person(){}
+    public Fournisseur(){}
 
 
 

@@ -1,22 +1,16 @@
 package Fournisseur_Package;
 
 import Utilities_Package.Db_Connection;
-import Utilities_Package.Person;
-import Utilities_Package.User;
+import Utilities_Package.Fournisseur;
 import Utilities_Package.Utility;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,10 +36,10 @@ public class New_Fournisseur_Controller implements Initializable {
     public static String ADDRESS ;
     public static String PHONE   ;
     public static int ID;
-    public static  Person PERSON;
+    public static Fournisseur Fournisseur;
 
 
-    public ObservableList<Person> data;
+    public ObservableList<Fournisseur> data;
 
     Db_Connection conn = new Db_Connection();
 
@@ -109,20 +103,20 @@ public class New_Fournisseur_Controller implements Initializable {
             String telephone = telephonetxt.getText();
             String adress    = addresstxt.getText();
 
-            Person person  = new Person(0,"","","");
+            Fournisseur fournisseur = new Fournisseur(0,"","","");
 
-            person.setFournisseurName(name);
-            person.setFournisseurAdress(adress);
-            person.setFournisseurTelephone(telephone);
+            fournisseur.setFournisseurName(name);
+            fournisseur.setFournisseurAdress(adress);
+            fournisseur.setFournisseurTelephone(telephone);
 
             try{
                 PreparedStatement  preparesStatemnt = null;
 
                 String query  = "UPDATE demo.fournisseur_table SET name =?, address =?, telephone =? Where id="+id;
                 preparesStatemnt = conn.connect().prepareStatement(query);
-                preparesStatemnt.setString(1,person.getFournisseurName());
-                preparesStatemnt.setString(2,person.getFournisseurAdress());
-                preparesStatemnt.setString(3,person.getFournisseurTelephone());
+                preparesStatemnt.setString(1, fournisseur.getFournisseurName());
+                preparesStatemnt.setString(2, fournisseur.getFournisseurAdress());
+                preparesStatemnt.setString(3, fournisseur.getFournisseurTelephone());
 
                 preparesStatemnt.executeUpdate();
 
