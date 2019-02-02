@@ -79,7 +79,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button layoutX="101.0" layoutY="10.0" mnemonicParsing="false" onAction="#update_Fournisseur" prefHeight="37.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Modifier">
+                  <Button fx:id="update_fournisseurbtn" layoutX="101.0" layoutY="10.0" mnemonicParsing="false" onAction="#update_Fournisseur" prefHeight="37.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Modifier">
                      <HBox.margin>
                         <Insets top="10.0" />
                      </HBox.margin>

@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 
 import java.net.URL;
@@ -30,7 +31,7 @@ public class New_Fournisseur_Controller implements Initializable {
     @FXML
     private Button    add_Fournisseur_btn;
     @FXML
-    private Button   delete_fournisseurbtn;
+    private Button   update_fournisseurbtn;
 
     public static String NAME    ;
     public static String ADDRESS ;
@@ -117,16 +118,22 @@ public class New_Fournisseur_Controller implements Initializable {
                 preparesStatemnt.setString(1, fournisseur.getFournisseurName());
                 preparesStatemnt.setString(2, fournisseur.getFournisseurAdress());
                 preparesStatemnt.setString(3, fournisseur.getFournisseurTelephone());
-
+                utility.showAlert("User has been Updated");
                 preparesStatemnt.executeUpdate();
 
-                utility.showAlert("User has been Updated");
+
 
                 idetxt.clear();
                 nametxt.clear();
                 telephonetxt.clear();
                 addresstxt.clear();
                 idetxt.clear();
+
+                // get a handle to the stage
+                Stage stage = (Stage) update_fournisseurbtn.getScene().getWindow();
+                // do what you have to do
+                stage.close();
+
                 conn.connect().close();
             }
             catch (Exception e){

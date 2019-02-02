@@ -5,6 +5,7 @@ package Login_Package;
 import Utilities_Package.Db_Connection;
 import Utilities_Package.Utility;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -108,7 +109,12 @@ private PasswordField txtpassword;
         admcambo_2.getItems().addAll("User","Admin");
         admcambo_2.setValue("Admin");
 
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                txtusername.requestFocus();
+            }
+        });
 
 
 

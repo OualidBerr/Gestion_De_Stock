@@ -1,5 +1,6 @@
 package Utilities_Package;
 
+import Fournisseur_Package.Fournisseur_Controller;
 import javafx.beans.property.StringProperty;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -74,16 +75,8 @@ public class Utility {
               @Override
               public void handle(KeyEvent event)  {
                   switch (event.getCode()) {
-                      case BACK_SPACE: try{
-                          Parent parent = FXMLLoader.load(getClass().getResource("/Home_Package/Home_View.fxml"));
-                          Scene scene = new Scene(parent);
-                          Stage stage = new Stage();
-                          stage.setScene(scene);
-                          stage.setTitle("Home Page");
-                          stage.setFullScreen(false);
-                          stage.setResizable(false);
-                          stage.show();
-
+                      case F3: try{
+                          new Fournisseur_Controller().open_Reglement_Form(event);
                       } catch (Exception e){
 
 
@@ -184,6 +177,9 @@ public class Utility {
         public void log_Out(Event event) throws IOException {
 
             switchScene("/Login_Package/Login_View.fxml","Login Page", event);
+
+
+
         }
 
         // Find Max
