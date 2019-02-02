@@ -1,5 +1,6 @@
 package Fournisseur_Package;
 
+import Reglement_Package.Reglement_Controller;
 import Utilities_Package.Db_Connection;
 import Utilities_Package.Fournisseur;
 
@@ -236,7 +237,28 @@ public class Fournisseur_Controller implements Initializable
     @FXML
     public void open_Reglement_Form(Event event) throws IOException{
 
-        new Utility().show_Reglement_Window("Fournissur :",event);
+        if(! Fournisseur_Table.getSelectionModel().isEmpty() ) {
+            Fournisseur fournisseur =  Fournisseur_Table.getSelectionModel().getSelectedItem();
+
+            Reglement_Controller.FOURNISSEUR_NAME     =   fournisseur.getFournisseurName()   ;
+            Reglement_Controller.FOURNISSEUR_ADDESS   =   fournisseur.getFournisseurAdress()   ;
+            Reglement_Controller.FOURNISSEUR_PHONE    =   fournisseur.getFournisseurTelephone() ;
+            Reglement_Controller.FOURNISSEUR_ID       =   fournisseur.getFournisseurId()  ;
+            Reglement_Controller.FOURNISSEUR_OLD_SOLD =   fournisseur.getFournisseurSold()  ;
+
+            new Utility().show_Reglement_Window("Fournissur :",event);
+        }
+        else
+        {
+            utility.showAlert("Nothing is Selected");
+        }
+
+        Reglement_Controller.FOURNISSEUR_NAME =    null;
+        Reglement_Controller.FOURNISSEUR_ADDESS = null;
+        Reglement_Controller.FOURNISSEUR_PHONE =   null;
+        Reglement_Controller.FOURNISSEUR_ID    =     0 ;
+        Reglement_Controller.FOURNISSEUR_OLD_SOLD = 0.25;
+
     }
     // Logout
     @FXML

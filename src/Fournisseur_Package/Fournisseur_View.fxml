@@ -18,7 +18,7 @@
 
 <VBox prefHeight="675.0" prefWidth="1408.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Fournisseur_Package.Fournisseur_Controller">
   <children>
-    <MenuBar prefHeight="24.0" prefWidth="1219.0" VBox.vgrow="NEVER">
+    <MenuBar onMouseClicked="#loadData" prefHeight="24.0" prefWidth="1219.0" VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
@@ -64,7 +64,7 @@
             <Font size="18.0" />
           </font>
         </Label>
-            <ToolBar prefHeight="69.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ToolBar onMouseClicked="#loadData" prefHeight="69.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
                 <Button fx:id="goHome_btn" mnemonicParsing="false" onAction="#goBack_To_Home_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Home">
                      <font>
@@ -121,7 +121,7 @@
                         <Insets bottom="30.0" />
                      </VBox.margin>
                   </TableView>
-                  <HBox prefHeight="50.0" prefWidth="1180.0">
+                  <HBox onMouseClicked="#loadData" prefHeight="50.0" prefWidth="1180.0">
                      <children>
                         <Button fx:id="new_Fournisseur_btn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Add_New_Fournisseur_Form" prefHeight="50.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Nouveux Fournisseur">
                            <font>
