@@ -315,10 +315,6 @@ public class Reglement_Controller implements Initializable {
 
 
 
-
-
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try { loadData();} catch (Exception e) {}
