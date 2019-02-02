@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="650.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Reglement_Package.Reglement_Controller">
+<AnchorPane prefHeight="650.0" prefWidth="1250.0" style="-fx-background-color: #E8DAEF;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Reglement_Package.Reglement_Controller">
    <children>
       <VBox alignment="CENTER" layoutX="76.0" layoutY="19.0" prefHeight="243.0" prefWidth="379.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="5.0">
          <children>
@@ -84,18 +84,18 @@
       </VBox>
       <TableView fx:id="reglement_tableView" layoutX="13.0" layoutY="254.0" prefHeight="369.0" prefWidth="1123.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="250.0">
         <columns>
-          <TableColumn fx:id="Id_column" style="-fx-background-radius: 20;" text="N" />
-          <TableColumn fx:id="date_column" prefWidth="160.0" style="-fx-background-radius: 20;" text="La date" />
-            <TableColumn fx:id="mode_column" prefWidth="150.0" style="-fx-background-radius: 20;" text="Mode" />
-            <TableColumn fx:id="amount_column" prefWidth="200.0" style="-fx-background-radius: 20;" text="Montant de paiment" />
-            <TableColumn fx:id="old_sold_column" prefWidth="200.0" style="-fx-background-radius: 20;" text="Ancient Sold" />
-            <TableColumn fx:id="sold_column" prefWidth="200.0" style="-fx-background-radius: 20;" text="Sold" />
-            <TableColumn fx:id="note_column" prefWidth="250.0" style="-fx-background-radius: 20;" text="Remarque" />
+          <TableColumn fx:id="Id_column" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="N" />
+          <TableColumn fx:id="date_column" prefWidth="160.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="La date" />
+            <TableColumn fx:id="mode_column" prefWidth="150.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="Mode" />
+            <TableColumn fx:id="amount_column" prefWidth="200.0" style="-fx-background-radius: 20; -fx-font-weight: Bold; -fx-alignment: Center;" text="Montant de paiment" />
+            <TableColumn fx:id="old_sold_column" prefWidth="200.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="Ancient Sold" />
+            <TableColumn fx:id="sold_column" prefWidth="200.0" style="-fx-background-radius: 20; -fx-font-weight: Bold; -fx-alignment: Center;" text="Sold" />
+            <TableColumn fx:id="note_column" prefWidth="250.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="Remarque" />
         </columns>
       </TableView>
       <VBox layoutX="740.0" layoutY="77.0" prefHeight="148.0" prefWidth="174.0" style="-fx-background-color: #5DADE2; -fx-background-radius: 20;">
          <children>
-            <Button fx:id="reglement_add_btn" mnemonicParsing="false" prefHeight="25.0" prefWidth="178.0" style="-fx-background-radius: 20;" text="Ajouter">
+            <Button fx:id="reglement_add_btn" mnemonicParsing="false" onAction="#add_Reglement_To_Fournisseur" prefHeight="25.0" prefWidth="178.0" style="-fx-background-radius: 20;" text="Ajouter">
                <VBox.margin>
                   <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
@@ -121,14 +121,14 @@
             </Button>
          </children>
       </VBox>
-      <TextField fx:id="f_Id_txt" alignment="CENTER" layoutX="53.0" layoutY="65.0" prefHeight="25.0" prefWidth="200.0">
+      <TextField fx:id="f_Id_txt" alignment="CENTER" editable="false" layoutX="53.0" layoutY="65.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #EAEDED;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="f_name_txt" alignment="CENTER" layoutX="53.0" layoutY="98.0" prefHeight="25.0" prefWidth="201.0" />
-      <TextField fx:id="f_phone_txt" alignment="CENTER" layoutX="52.0" layoutY="130.0" prefHeight="25.0" prefWidth="200.0" />
-      <TextField fx:id="f_address_txt" alignment="CENTER" layoutX="52.0" layoutY="159.0" prefHeight="25.0" prefWidth="200.0" />
-      <TextField fx:id="f_old_sold_txt" alignment="CENTER" layoutX="50.0" layoutY="189.0" prefHeight="25.0" prefWidth="200.0" />
+      <TextField fx:id="f_name_txt" alignment="CENTER" editable="false" layoutX="53.0" layoutY="98.0" prefHeight="25.0" prefWidth="201.0" style="-fx-background-color: #EAEDED;" />
+      <TextField fx:id="f_phone_txt" alignment="CENTER" editable="false" layoutX="52.0" layoutY="130.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #EAEDED;" />
+      <TextField fx:id="f_address_txt" alignment="CENTER" editable="false" layoutX="52.0" layoutY="159.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #EAEDED;" />
+      <TextField fx:id="f_old_sold_txt" alignment="CENTER" editable="false" layoutX="50.0" layoutY="189.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #EAEDED;" />
    </children>
 </AnchorPane>

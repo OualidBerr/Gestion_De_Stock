@@ -57,7 +57,7 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" style="-fx-background-color: White;" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" style="-fx-background-color: #3498DB;" VBox.vgrow="ALWAYS">
       <children>
         <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
           <font>
@@ -102,7 +102,7 @@
                   </Button>
               </items>
             </ToolBar>
-            <VBox layoutX="-1.0" layoutY="69.0" onMouseClicked="#loadData" prefHeight="571.0" prefWidth="1388.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="69.0">
+            <VBox layoutX="-1.0" layoutY="69.0" onMouseClicked="#loadData" prefHeight="571.0" prefWidth="1388.0" style="-fx-background-color: #EAFAF1;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="69.0">
                <children>
                   <TextField fx:id="filterField" onMouseClicked="#fournisseurSearchThread" promptText="Search" style="-fx-background-radius: 20;">
                      <VBox.margin>

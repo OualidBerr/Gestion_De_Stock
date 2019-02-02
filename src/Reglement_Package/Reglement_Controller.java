@@ -94,6 +94,60 @@ public class Reglement_Controller implements Initializable {
         cnn.close();
     }
 
+    // Add Verssement
+    @FXML
+    public void add_Reglement_To_Fournisseur() throws Exception{
+
+        int max_id = 0;
+        max_id  = utility.getMax_ID("demo.fournisseur_reglement_table","id") ;
+
+        if (!reglement_amount_txt.getText().isEmpty() && !reglement_datePicker.getValue().toString().isEmpty() && !payement_Mod_cambo.getItems().isEmpty()){
+
+            int ID = max_id + 1;    // id
+            String Date = reglement_datePicker.getValue().toString(); // Date
+            String Mode = payement_Mod_cambo.getValue().toString(); // Mode
+            String Amount_Value = reglement_amount_txt.getText();
+            double Amount = Double.parseDouble(Amount_Value);  // Amount
+            String Old_Sold_Value =  f_old_sold_txt.getText();
+            double Old_Sold = Double.parseDouble(Old_Sold_Value);// Old Sold
+            double New_Sold = Old_Sold - Amount;    // Sold
+            String Note = reglement_note_txt.getText(); // Note
+
+            PreparedStatement  preparesStatemnt = null;
+            String query = "INSERT INTO fournisseur_reglement_table (id,date,mode,amount,oldsold,sold,note) VALUES (?,?,?,?,?,?,?)";
+            preparesStatemnt = conn.connect().prepareStatement(query);
+            preparesStatemnt.setInt(1, max_id+1);
+            preparesStatemnt.setString(2, Date);
+            preparesStatemnt.setString(3, Mode);
+            preparesStatemnt.setDouble(4, Amount);
+            preparesStatemnt.setDouble(5, Old_Sold);
+            preparesStatemnt.setDouble(6, New_Sold);
+            preparesStatemnt.setString(7, Note);
+            preparesStatemnt.execute();
+            preparesStatemnt.close();
+            reglement_amount_txt.clear();
+            reglement_note_txt.clear();
+
+            utility.showAlert("New User added successfully");
+        }
+
+        else if  (reglement_amount_txt.getText().isEmpty() && reglement_datePicker.getValue().toString().isEmpty() && payement_Mod_cambo.getItems().isEmpty()){
+            utility.showAlert("Some fields are empty");
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -106,8 +160,7 @@ public class Reglement_Controller implements Initializable {
 
         payement_Mod_cambo.getItems().addAll("Espece","Check","Verssement");
         payement_Mod_cambo.setValue("Espece");
-
-        reglement_datePicker.setValue(LocalDate.now());
+         reglement_datePicker.setValue(LocalDate.now());
          f_Id_txt.setText(FOURNISSEUR_ID+"");
          f_name_txt.setText(FOURNISSEUR_NAME);
          f_address_txt.setText(FOURNISSEUR_ADDESS);
@@ -115,4 +168,5 @@ public class Reglement_Controller implements Initializable {
          f_phone_txt.setText(FOURNISSEUR_PHONE);
 
     }
+
 }
