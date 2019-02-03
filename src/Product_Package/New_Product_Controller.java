@@ -71,7 +71,6 @@ public class New_Product_Controller implements Initializable {
 
         cnn.close();
     }
-
     // Open New Fournisseur Form
     @FXML
     public void open_Add_New_Fournisseur_Form(Event event) throws IOException, SQLException {
@@ -125,32 +124,6 @@ public class New_Product_Controller implements Initializable {
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @FXML
     private void closeButtonAction(){

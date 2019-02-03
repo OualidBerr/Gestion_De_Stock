@@ -62,8 +62,6 @@ public class Fournisseur_Controller implements Initializable
     @FXML
     public void fournisseurSearchThread( ) throws SQLException{
 
-
-
         name_column.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         adress_column.setCellValueFactory(cellData -> cellData.getValue().addressProperty());
         telephone_column.setCellValueFactory(cellData -> cellData.getValue().telephoneProperty());
@@ -266,7 +264,6 @@ public class Fournisseur_Controller implements Initializable
 
             String Titel = "Fournisseur : " +fournisseur.getFournisseurName()+ "    Address : " +fournisseur.getFournisseurAdress()+ "  Numero de Telephone : "+fournisseur.getFournisseurTelephone() ;
 
-
             new Utility().show_Reglement_Window(Titel,event);
 
 
@@ -277,7 +274,7 @@ public class Fournisseur_Controller implements Initializable
         }
 
         Reglement_Controller.FOURNISSEUR_NAME =    null;
-        Reglement_Controller.FOURNISSEUR_ADDESS = null;
+        Reglement_Controller.FOURNISSEUR_ADDESS =  null;
         Reglement_Controller.FOURNISSEUR_PHONE =   null;
         Reglement_Controller.FOURNISSEUR_ID    =     0 ;
         Reglement_Controller.FOURNISSEUR_OLD_SOLD = 0.25;
@@ -307,6 +304,8 @@ public class Fournisseur_Controller implements Initializable
                     goBack_To_Home_Window(event);break;
             case P:
                     open_Product_Window(event);break;
+            case F5:
+                loadData();break;
 
         }
     }

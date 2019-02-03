@@ -200,11 +200,6 @@ public class Reglement_Controller implements Initializable {
             });
 
 
-
-
-
-
-
             utility.showAlert("New User added successfully");
         }
 
@@ -363,8 +358,6 @@ public class Reglement_Controller implements Initializable {
          f_phone_txt.setText("Tel: "+FOURNISSEUR_PHONE);
          reglement_note_txt.setText("/");
 
-
-
         /////// Value changed listener in the Table
         reglement_tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
                     if (newSelection != null) {
@@ -376,10 +369,6 @@ public class Reglement_Controller implements Initializable {
 
                     }
                 }
-        );
-
-
-
-    }
+        );}
 
 }

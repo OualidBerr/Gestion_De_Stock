@@ -19,7 +19,6 @@
    <children>
       <VBox alignment="CENTER" layoutX="76.0" layoutY="19.0" prefHeight="243.0" prefWidth="379.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="5.0">
          <children>
-            <DatePicker fx:id="reglement_datePicker" />
             <VBox alignment="CENTER_RIGHT" prefHeight="148.0" prefWidth="379.0" style="-fx-background-color: #5DADE2; -fx-alignment: Center; -fx-background-radius: 20;">
                <children>
                   <GridPane prefHeight="123.0" prefWidth="379.0">
@@ -79,6 +78,15 @@
                               <Insets />
                            </opaqueInsets>
                         </ComboBox>
+                        <DatePicker fx:id="reglement_datePicker" prefHeight="25.0" prefWidth="242.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label layoutX="20.0" layoutY="72.0" prefHeight="50.0" prefWidth="139.0" text="Date" textFill="#fffbfb" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin>
+                        </Label>
                      </children>
                   </GridPane>
                </children>
@@ -132,7 +140,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="f_name_txt" alignment="CENTER" editable="false" layoutX="53.0" layoutY="99.0" prefHeight="25.0" prefWidth="201.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20;" AnchorPane.leftAnchor="25.0">
+      <TextField fx:id="f_name_txt" alignment="CENTER" editable="false" layoutX="53.0" layoutY="99.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20;" AnchorPane.leftAnchor="25.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></TextField>
@@ -179,7 +187,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="show_Label" alignment="CENTER" contentDisplay="CENTER" layoutX="636.0" layoutY="10.0" prefHeight="38.0" prefWidth="344.0" style="-fx-background-color: Black; -fx-background-radius: 20;" text="Fournisseur " textFill="#e80f0f">
+      <Label fx:id="show_Label" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="14.0" prefHeight="38.0" prefWidth="437.0" style="-fx-background-color: Black; -fx-background-radius: 20;" text="Fournisseur " textFill="#e80f0f">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

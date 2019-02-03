@@ -1,25 +1,14 @@
 package Utilities_Package;
 
-import Fournisseur_Package.Fournisseur_Controller;
 import javafx.application.Platform;
-import javafx.beans.property.StringProperty;
 import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
@@ -128,7 +117,11 @@ public class Utility {
 
         }
 
+         // Edit Product
+        public void show_Edit_Product_Window() throws IOException {
 
+            openNewStage("/Product_Package/Product_Edit_View.fxml","Edit Product Window");
+        }
 
         // Add new Client Window
         public void show_New_Client_Window(Event e) throws IOException {

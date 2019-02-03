@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="610.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Product_Package.Product_Edit_Controller">
+   <children>
+      <VBox layoutX="9.0" layoutY="7.0" prefHeight="589.0" prefWidth="586.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <children>
+            <TextField fx:id="id_txt" style="-fx-border-radius: 20;" />
+            <GridPane onMouseClicked="#handlekeyPressed">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <VBox.margin>
+                  <Insets left="100.0" right="100.0" top="100.0" />
+               </VBox.margin>
+               <children>
+                  <TextField fx:id="ref_txt" style="-fx-border-radius: 20;" GridPane.columnIndex="1" />
+                  <Label prefHeight="18.0" prefWidth="99.0" text="Reference">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="16.0" prefHeight="18.0" prefWidth="99.0" text="Desegniation" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
+                  <Label layoutX="10.0" layoutY="46.0" prefHeight="18.0" prefWidth="162.0" text="Nomber de piece / Carton" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
+                  <Label layoutX="10.0" layoutY="76.0" prefHeight="18.0" prefWidth="99.0" text="Quantite" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
+                  <Label layoutX="10.0" layoutY="136.0" prefHeight="18.0" prefWidth="99.0" text="La date " GridPane.rowIndex="7">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
+                  <Label layoutX="10.0" layoutY="166.0" prefHeight="19.0" prefWidth="120.0" text="Qantite D' Alert " GridPane.rowIndex="8">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
+                  <TextField fx:id="des_txt" layoutX="205.0" layoutY="12.0" style="-fx-border-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="nbr_pcs_crt_txt" layoutX="205.0" layoutY="42.0" style="-fx-border-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="nbr_pcs_txt" layoutX="205.0" layoutY="72.0" style="-fx-border-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="quant_txt" layoutX="205.0" layoutY="132.0" style="-fx-border-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label layoutX="10.0" layoutY="106.0" prefHeight="18.0" prefWidth="147.0" text="Nomber total de piece " GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
+                  <TextField fx:id="code_bare_txt" layoutX="205.0" layoutY="132.0" style="-fx-border-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label layoutX="10.0" layoutY="136.0" prefHeight="18.0" prefWidth="99.0" text="Code a bare" GridPane.rowIndex="5">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
+                  <TextField fx:id="alert_txt" layoutX="205.0" layoutY="222.0" style="-fx-border-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <Label layoutX="10.0" layoutY="256.0" prefHeight="18.0" prefWidth="99.0" text="Expiration" GridPane.rowIndex="9">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
+                  <TextField fx:id="expiration_txt" layoutX="205.0" layoutY="252.0" style="-fx-border-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                  <Label layoutX="10.0" layoutY="286.0" prefHeight="18.0" prefWidth="99.0" text="Prix d' acht" GridPane.rowIndex="10">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
+                  <TextField fx:id="prix_achat_txt" layoutX="205.0" layoutY="282.0" style="-fx-border-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                  <Label layoutX="10.0" layoutY="316.0" prefHeight="18.0" prefWidth="99.0" text="Prix de vent" GridPane.rowIndex="11">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
+                  <TextField fx:id="prix_vent_txt" layoutX="205.0" layoutY="312.0" style="-fx-border-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                  <Label layoutX="10.0" layoutY="346.0" prefHeight="18.0" prefWidth="99.0" text="Fournisseur" GridPane.rowIndex="6">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
+                  <TextField fx:id="fournisseur_txt" layoutX="205.0" layoutY="342.0" style="-fx-border-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <DatePicker fx:id="date_DatePicker" prefHeight="21.0" prefWidth="199.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+               </children>
+            </GridPane>
+            <HBox prefHeight="41.0" prefWidth="539.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="111.0" text="EDIT">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets right="170.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="closeButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="38.0" prefWidth="111.0" text="CLOSE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="100.0" right="100.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
