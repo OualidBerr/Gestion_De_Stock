@@ -4,6 +4,7 @@ import Utilities_Package.Utility;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -62,11 +63,27 @@ public class Client_Controller implements Initializable {
         new Utility().show_Reglement_Window("Client :",event);
     }
 
-
     // Logout
     @FXML
     public void log_Out_Function(Event event) throws IOException {
         new Utility().log_Out(event);
+    }
+
+    // Event Handler
+    @FXML
+    public void handlekeyPressed(KeyEvent event) throws Exception {
+
+        switch (event.getCode()) {
+            case F:
+                open_Founisseur_Window(event); break;
+            case C:
+                Open_Caisse_Window(event);break;
+            case H:
+                goBack_To_Home_Window(event);break;
+            case P:
+                open_Product_Window(event);break;
+
+        }
     }
 
 

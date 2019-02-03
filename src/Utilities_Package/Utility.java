@@ -1,6 +1,7 @@
 package Utilities_Package;
 
 import Fournisseur_Package.Fournisseur_Controller;
+import javafx.application.Platform;
 import javafx.beans.property.StringProperty;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -13,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -191,6 +193,15 @@ public class Utility {
 
         }
 
+        // request Focus
+        public void setTextFieldFocus(TextField textField){
 
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    textField.requestFocus();
+                }
+            });
+        }
 
 }

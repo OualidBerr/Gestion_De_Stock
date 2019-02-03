@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="675.0" prefWidth="1336.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Product_Package.Product_Controller">
+<VBox onKeyPressed="#handlekeyPressed" prefHeight="675.0" prefWidth="1336.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Product_Package.Product_Controller">
   <children>
     <MenuBar prefHeight="24.0" prefWidth="1219.0" VBox.vgrow="NEVER">
       <menus>
@@ -109,21 +109,21 @@
                         <Insets bottom="10.0" left="20.0" right="800.0" />
                      </VBox.margin>
                   </TextField>
-                  <TableView prefHeight="429.0" prefWidth="1180.0">
+                  <TableView fx:id="product_Table" prefHeight="429.0" prefWidth="1180.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" style="-fx-background-radius: 20; -fx-alignment: Center;" text="N°" />
-                      <TableColumn prefWidth="75.0" style="-fx-background-radius: 20; -fx-alignment: Center;" text="Ref" />
-                        <TableColumn prefWidth="300.0" style="-fx-background-radius: 20;" text="Désigniation" />
-                        <TableColumn minWidth="1.6666717529296875" prefWidth="70.0" text="Nbr Pcs/crt" />
-                        <TableColumn prefWidth="90.0" text="Quantité" />
-                        <TableColumn prefWidth="50.0" text="Nbr pcs" />
-                        <TableColumn prefWidth="120.0" text="Code à Bare" />
-                        <TableColumn text="Date d'entre" />
-                        <TableColumn prefWidth="50.0" text="Alert" />
-                        <TableColumn text="Expiration" />
-                        <TableColumn text="Prix d'achat" />
-                        <TableColumn text="Prix de vent" />
-                        <TableColumn prefWidth="200.0" text="Fournisseur" />
+                      <TableColumn fx:id="id_column" prefWidth="75.0" style="-fx-background-radius: 20; -fx-alignment: Center;" text="N°" />
+                      <TableColumn fx:id="ref_column" prefWidth="75.0" style="-fx-background-radius: 20; -fx-alignment: Center;" text="Ref" />
+                        <TableColumn fx:id="des_column" prefWidth="300.0" style="-fx-background-radius: 20;" text="Désigniation" />
+                        <TableColumn fx:id="nbr_pcs_crt__column" minWidth="1.6666717529296875" prefWidth="70.0" text="Nbr Pcs/crt" />
+                        <TableColumn fx:id="quantity_column" prefWidth="90.0" text="Quantité" />
+                        <TableColumn fx:id="nbr_pcs_column" prefWidth="50.0" text="Nbr pcs" />
+                        <TableColumn fx:id="code_bare_column" prefWidth="120.0" text="Code à Bare" />
+                        <TableColumn fx:id="date_entre_column" text="Date d'entre" />
+                        <TableColumn fx:id="alert_column" prefWidth="50.0" text="Alert" />
+                        <TableColumn fx:id="expiration_column" text="Expiration" />
+                        <TableColumn fx:id="prix_achat_column" text="Prix d'achat" />
+                        <TableColumn fx:id="prix_vent_column" text="Prix de vent" />
+                        <TableColumn fx:id="fournisseur_column" prefWidth="200.0" text="Fournisseur" />
                     </columns>
                      <VBox.margin>
                         <Insets bottom="30.0" />

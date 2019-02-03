@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1364.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Caisse_Package.Caisse_Controller">
+<AnchorPane onKeyPressed="#handlekeyPressed" prefHeight="600.0" prefWidth="1364.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Caisse_Package.Caisse_Controller">
    <children>
       <VBox layoutX="11.0" layoutY="130.0" prefHeight="464.0" prefWidth="779.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="120.0">
          <children>

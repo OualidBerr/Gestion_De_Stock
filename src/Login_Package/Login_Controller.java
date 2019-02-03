@@ -91,7 +91,7 @@ private PasswordField txtpassword;
           cnn.close();
 }
     @FXML
-    public void LoginBtnFunction(KeyEvent event) throws IOException {
+    public void LoginBtnFunction(Event event) throws IOException {
 
         try {
             Login(event);
@@ -110,9 +110,6 @@ private PasswordField txtpassword;
 
         }
     }
-
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

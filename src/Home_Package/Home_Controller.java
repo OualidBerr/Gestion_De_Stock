@@ -97,12 +97,6 @@ public class Home_Controller implements Initializable {
         }
     }
 
-
-
-
-
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

@@ -107,6 +107,7 @@ public class Fournisseur_Controller implements Initializable
 
 
     }
+
     public  void loadData() throws SQLException {
         Connection cnn = conn.connect();
         try{
@@ -130,6 +131,7 @@ public class Fournisseur_Controller implements Initializable
         sold_column.setCellValueFactory(new PropertyValueFactory<>("sold"));
         Fournisseur_Table.setItems(null);
         Fournisseur_Table.setItems(data);
+        filterField.clear();
         cnn.close();
 
 
@@ -296,12 +298,16 @@ public class Fournisseur_Controller implements Initializable
             case ENTER:
                break;
             case N:
-                open_Add_New_Fournisseur_Form( event);break;
-
+                     open_Add_New_Fournisseur_Form( event);break;
             case SHIFT:
-                show_Edit_Window(event);break;
+                     show_Edit_Window(event);break;
             case DELETE:
-                delete_Fournisseur();break;
+                    delete_Fournisseur();break;
+            case H:
+                    goBack_To_Home_Window(event);break;
+            case P:
+                    open_Product_Window(event);break;
+
         }
     }
     @Override

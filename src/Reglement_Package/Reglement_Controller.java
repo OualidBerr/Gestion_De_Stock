@@ -44,7 +44,6 @@ public class Reglement_Controller implements Initializable {
      public TextField show__sold_txt;
      public TextField show__note_txt;
 
-
     @FXML
     public  TextField f_Id_txt;
     public TextField f_name_txt;
@@ -255,7 +254,6 @@ public class Reglement_Controller implements Initializable {
 
         refresh();
     }
-
     // Update
     @FXML
     public  int update_Reglement() throws SQLException {
@@ -292,8 +290,6 @@ public class Reglement_Controller implements Initializable {
 
         return 0;
     }
-
-
     // Delete
     @FXML
     private void delet_Reglement() throws SQLException{
@@ -331,9 +327,6 @@ public class Reglement_Controller implements Initializable {
         // do what you have to do
         stage.close();
     }
-
-
-
    @FXML
    public void handlekeyPressed(KeyEvent event) throws Exception {
 
@@ -348,7 +341,6 @@ public class Reglement_Controller implements Initializable {
                    closeButtonAction();break;
            }
        }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

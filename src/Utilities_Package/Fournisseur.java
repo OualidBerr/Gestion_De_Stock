@@ -27,12 +27,6 @@ public class Fournisseur {
         this.sold = new SimpleDoubleProperty(sold);
     }
 
-
-
-    public Fournisseur(){}
-
-
-
     // setters
     public void setFournisseurId(int value) {
         id.set(value);

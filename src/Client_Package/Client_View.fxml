@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="675.0" prefWidth="1408.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client_Package.Client_Controller">
+<VBox onKeyPressed="#handlekeyPressed" prefHeight="675.0" prefWidth="1408.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client_Package.Client_Controller">
   <children>
     <MenuBar prefHeight="24.0" prefWidth="1219.0" VBox.vgrow="NEVER">
       <menus>
