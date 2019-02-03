@@ -4,6 +4,7 @@ import Utilities_Package.Db_Connection;
 import Utilities_Package.Fournisseur;
 import Utilities_Package.Reglement;
 import Utilities_Package.Utility;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -35,9 +36,17 @@ public class New_Product_Controller implements Initializable {
     @FXML
     private DatePicker new_Product_datePicker;
     @FXML
-    private ComboBox fournisseur_Cambo;
-    @FXML
     private TextField fournisseur_TXT;
+    @FXML
+    private TextField des_TXT;
+    @FXML
+    private TextField code_bare_TXT;
+    @FXML
+    private TextField alert_TXT;
+    @FXML
+    private TextField nbr_pc_crt_TXT;
+    @FXML
+    private DatePicker expiratiob_datePicker;
 
     Db_Connection conn = new Db_Connection();
     PreparedStatement preparesStatemnt = null;
@@ -71,6 +80,78 @@ public class New_Product_Controller implements Initializable {
 
     }
 
+    // Add New Product
+
+    @FXML
+    public void add_New_Produit() throws Exception{
+
+        int max_id = 0;
+        max_id  = utility.getMax_ID("demo.product_table","id") ;
+
+        if (       !fournisseur_TXT.getText().isEmpty()
+                && !new_Product_datePicker.getValue().toString().isEmpty()
+                && !des_TXT.getText().isEmpty()   && !nbr_pc_crt_TXT.getText().isEmpty()
+                && !alert_TXT.getText().isEmpty() && !expiratiob_datePicker.getValue().toString().isEmpty()
+           ){
+
+            int ID = max_id + 1;                                                     // id
+            String fournisseur = fournisseur_TXT.getText();                         // fournisseur
+            String reference = "REF0" + max_id + 5;                                // reference
+            String des = des_TXT.getText();                                        // Designation
+            String code_bare = code_bare_TXT.getText();                           // code bare
+            int Alert = Integer.parseInt(alert_TXT.getText());                    // Alert
+            String Expiration = expiratiob_datePicker.getValue().toString();                        // Expiration
+            String date_entre = new_Product_datePicker.getValue().toString();    // Date d entre
+            int Nbr_pcs =  Integer.parseInt(nbr_pc_crt_TXT.getText()) ;        // Nombre de pieces
+
+            PreparedStatement  preparesStatemnt = null;
+            String query = "INSERT INTO product_table (id,ref,des,nbr_pcs_crt,code_bare,date_entre,alert,expiration,fournisseur) VALUES (?,?,?,?,?,?,?,?,?)";
+            preparesStatemnt = conn.connect().prepareStatement(query);
+            preparesStatemnt.setInt(   1,  ID       );
+            preparesStatemnt.setString(2,  reference);
+            preparesStatemnt.setString(3,  des      );
+            preparesStatemnt.setInt(   4,  Nbr_pcs  );
+            preparesStatemnt.setString(5,  code_bare );
+            preparesStatemnt.setString(6,  date_entre);
+            preparesStatemnt.setInt(   7,  Alert     );
+            preparesStatemnt.setString(8,  Expiration);
+            preparesStatemnt.setString(9,  fournisseur);
+            preparesStatemnt.execute();
+            loadData();
+            preparesStatemnt.close();
+
+            utility.showAlert("New User added successfully");
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @FXML
     private void closeButtonAction(){
         // get a handle to the stage
@@ -79,7 +160,6 @@ public class New_Product_Controller implements Initializable {
         stage.close();
     }
     // Event Handler
-
     @FXML
     public void handlekeyPressed(KeyEvent event) throws Exception {
 
@@ -89,7 +169,6 @@ public class New_Product_Controller implements Initializable {
 
         }
     }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

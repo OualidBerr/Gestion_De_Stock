@@ -83,30 +83,6 @@ public class Product_Controller implements Initializable {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @FXML
     private Button goHome_btn,newProduct_btn,stock_btn;
 
