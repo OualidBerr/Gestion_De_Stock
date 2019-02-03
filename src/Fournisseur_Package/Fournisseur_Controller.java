@@ -6,18 +6,25 @@ import Utilities_Package.Fournisseur;
 
 import Utilities_Package.Reglement;
 import Utilities_Package.Utility;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,6 +38,8 @@ public class Fournisseur_Controller implements Initializable
 {
     @FXML
     private Button new_Fournisseur_btn;
+    private Button verssement_btn;
+
     @FXML
     public  TableView<Fournisseur> Fournisseur_Table;
     @FXML
@@ -98,7 +107,6 @@ public class Fournisseur_Controller implements Initializable
 
 
     }
-
     public  void loadData() throws SQLException {
         Connection cnn = conn.connect();
         try{
@@ -112,6 +120,8 @@ public class Fournisseur_Controller implements Initializable
         catch(SQLException eX){
             System.out.println("error ! Not Connected to Db****");
         }
+
+
 
         Id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
         name_column.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -178,8 +188,8 @@ public class Fournisseur_Controller implements Initializable
 
 
     }
-      @FXML
-      public void show_Edit_Window(Event e)throws IOException{
+    @FXML
+    public void show_Edit_Window(Event e)throws IOException{
 
           if(! Fournisseur_Table.getSelectionModel().isEmpty() ) {
               Fournisseur fournisseur =  Fournisseur_Table.getSelectionModel().getSelectedItem();
@@ -206,7 +216,6 @@ public class Fournisseur_Controller implements Initializable
 
 
     }
-
     @FXML
     public void goBack_To_Home_Window(Event event) throws IOException {
 
@@ -251,9 +260,13 @@ public class Fournisseur_Controller implements Initializable
             Reglement_Controller.FOURNISSEUR_ID       =   fournisseur.getFournisseurId()  ;
             Reglement_Controller.FOURNISSEUR_OLD_SOLD =   fournisseur.getFournisseurSold()  ;
 
-            String Titel = "Fournisseur : " +fournisseur.getFournisseurName()+ "    Address : " +fournisseur.getFournisseurAdress()+ "    Numero de Telephone : "+fournisseur.getFournisseurTelephone() ;
+
+
+            String Titel = "Fournisseur : " +fournisseur.getFournisseurName()+ "    Address : " +fournisseur.getFournisseurAdress()+ "  Numero de Telephone : "+fournisseur.getFournisseurTelephone() ;
+
 
             new Utility().show_Reglement_Window(Titel,event);
+
 
         }
         else
@@ -268,26 +281,36 @@ public class Fournisseur_Controller implements Initializable
         Reglement_Controller.FOURNISSEUR_OLD_SOLD = 0.25;
 
     }
-
         // Logout
     @FXML
     public void log_Out_Function(Event event) throws IOException {
         new Utility().log_Out(event);
     }
+    // Event Handler
+    @FXML
+    public void handlekeyPressed(KeyEvent event) throws Exception {
 
+        switch (event.getCode()) {
+            case V :
+                open_Reglement_Form(event); break;
+            case ENTER:
+               break;
+            case N:
+                open_Add_New_Fournisseur_Form( event);break;
+
+            case SHIFT:
+                show_Edit_Window(event);break;
+            case DELETE:
+                delete_Fournisseur();break;
+        }
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources)  {
-
-
-
         try {
             loadData();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
-
-
 
 }

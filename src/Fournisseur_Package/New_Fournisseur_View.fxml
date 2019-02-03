@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="642.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Fournisseur_Package.New_Fournisseur_Controller">
+<AnchorPane prefHeight="536.0" prefWidth="691.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Fournisseur_Package.New_Fournisseur_Controller">
    <children>
-      <VBox layoutX="173.0" layoutY="130.0" prefHeight="310.0" prefWidth="420.0" style="-fx-background-color: #ccffcc; -fx-background-radius: 20;" AnchorPane.bottomAnchor="202.0" AnchorPane.leftAnchor="173.0" AnchorPane.rightAnchor="138.0" AnchorPane.topAnchor="130.0">
+      <VBox layoutX="173.0" layoutY="130.0" onKeyPressed="#handlekeyPressed" prefHeight="315.0" prefWidth="420.0" style="-fx-background-color: #ccffcc; -fx-background-radius: 20;" AnchorPane.bottomAnchor="91.0" AnchorPane.leftAnchor="173.0" AnchorPane.rightAnchor="138.0" AnchorPane.topAnchor="130.0">
          <children>
             <GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="217.0" prefWidth="400.0">
               <columnConstraints>
@@ -99,5 +99,10 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
+      <Button fx:id="closeButton" layoutX="473.0" layoutY="462.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="37.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="EXIT">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

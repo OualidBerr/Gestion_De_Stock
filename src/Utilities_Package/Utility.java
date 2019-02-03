@@ -17,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
@@ -49,46 +50,23 @@ public class Utility {
 
     // Starting new Stage Function
        public void openNewStage(String View, String title) throws IOException {
-
         Parent parent = FXMLLoader.load(getClass().getResource(View));
         Scene scene = new Scene(parent);
-
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle(title);
         stage.setFullScreen(false);
         stage.setResizable(false);
         stage.show();
-
     }
 
          // Switching Scenes
       public void switchScene(String Actual_Window,String title, Event event) throws IOException {
 
-         Parent Home_page_Parent = FXMLLoader.load(getClass().getResource(Actual_Window));
+        Parent Home_page_Parent = FXMLLoader.load(getClass().getResource(Actual_Window));
         Scene  Home_page_Scene  = new Scene(Home_page_Parent);
         Stage App_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         App_Stage.hide();
-
-
-          Home_page_Scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-              @Override
-              public void handle(KeyEvent event)  {
-                  switch (event.getCode()) {
-                      case F3: try{
-                          new Fournisseur_Controller().open_Reglement_Form(event);
-                      } catch (Exception e){
-
-
-                      } break;
-
-                      case SHIFT:
-                          System.out.println("Key Down");
-                          showAlert("Event Handler");
-                          break;
-                  }
-              }
-          });
         App_Stage.setScene(Home_page_Scene);
         App_Stage.setTitle(title);
         App_Stage.setFullScreen(true);

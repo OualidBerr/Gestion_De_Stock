@@ -2,17 +2,27 @@ package Home_Package;
 
 import Utilities_Package.Utility;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Home_Controller implements Initializable {
+
+
+    Utility utility;
     @FXML
     private Button products_btn,client_btn,stock_btn,fournisseur_btn,logout_btn;
 
@@ -40,7 +50,8 @@ public class Home_Controller implements Initializable {
     // Fournisseur
     @FXML
     public void Open_Fournisseur_Window(Event event) throws IOException {
-        new Utility().go_Fournisseur(event);
+
+       new Utility().go_Fournisseur(event);
     }
 
     // Caisse
@@ -61,13 +72,36 @@ public class Home_Controller implements Initializable {
     public void Open_Bon_Command_Window(Event event) throws IOException {
         new Utility().go_Bon_Command(event);
     }
-
-
     // Logout
     @FXML
     public void log_Out_Function(Event event) throws IOException {
         new Utility().log_Out(event);
     }
+
+    // Event Handler
+    @FXML
+    public void handlekeyPressed(KeyEvent event) throws Exception {
+
+        switch (event.getCode()) {
+            case F:
+                Open_Fournisseur_Window(event);  break;
+            case P:
+                Open_Product_Window(event);break;
+            case C:
+                Open_Client_Window(event);break;
+            case S:
+                Open_Stock_Window(event);break;
+            case ALT_GRAPH:
+                Open_Caisse_Window(event);break;
+
+        }
+    }
+
+
+
+
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -3,11 +3,16 @@ package Fournisseur_Package;
 import Utilities_Package.Db_Connection;
 import Utilities_Package.Fournisseur;
 import Utilities_Package.Utility;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 
@@ -29,7 +34,7 @@ public class New_Fournisseur_Controller implements Initializable {
     private TextField    idetxt;
 
     @FXML
-    private Button    add_Fournisseur_btn;
+    private Button    add_Fournisseur_btn,closeButton;
     @FXML
     private Button   update_fournisseurbtn;
 
@@ -129,10 +134,7 @@ public class New_Fournisseur_Controller implements Initializable {
                 addresstxt.clear();
                 idetxt.clear();
 
-                // get a handle to the stage
-                Stage stage = (Stage) update_fournisseurbtn.getScene().getWindow();
-                // do what you have to do
-                stage.close();
+
 
                 conn.connect().close();
             }
@@ -147,6 +149,30 @@ public class New_Fournisseur_Controller implements Initializable {
           }
 
 
+    }
+
+    @FXML
+    private void closeButtonAction(){
+        // get a handle to the stage
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        // do what you have to do
+        stage.close();
+    }
+
+    // Event Handler
+    @FXML
+    public void handlekeyPressed(KeyEvent event) throws Exception {
+
+        switch (event.getCode()) {
+            case ENTER:
+                add_Fournisseur();  break;
+            case SHIFT:
+                update_Fournisseur();break;
+            case ESCAPE:
+                closeButtonAction();break;
+
+
+        }
     }
 
 

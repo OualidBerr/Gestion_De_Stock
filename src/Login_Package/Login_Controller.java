@@ -6,7 +6,6 @@ import Utilities_Package.Db_Connection;
 import Utilities_Package.Utility;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -91,7 +91,7 @@ private PasswordField txtpassword;
           cnn.close();
 }
     @FXML
-    public void LoginBtnFunction(ActionEvent event) throws IOException {
+    public void LoginBtnFunction(KeyEvent event) throws IOException {
 
         try {
             Login(event);
@@ -100,6 +100,20 @@ private PasswordField txtpassword;
         }
 
     }
+
+    @FXML
+    public void handlekeyPressed(KeyEvent event) throws Exception {
+
+        switch (event.getCode()) {
+            case ENTER:
+                LoginBtnFunction(event);  break;
+
+        }
+    }
+
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

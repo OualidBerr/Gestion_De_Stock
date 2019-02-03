@@ -5,11 +5,17 @@ import Utilities_Package.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.net.URL;
@@ -26,6 +32,9 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static javafx.scene.input.KeyCode.F3;
+import static javafx.scene.input.KeyCode.SHIFT;
+
 public class Reglement_Controller implements Initializable {
      @FXML
      public TextField show_operation_N_txt;
@@ -34,7 +43,7 @@ public class Reglement_Controller implements Initializable {
      public TextField show_encient_sold_txt;
      public TextField show__sold_txt;
      public TextField show__note_txt;
-     public Label show_Label;
+
 
     @FXML
     public  TextField f_Id_txt;
@@ -51,6 +60,7 @@ public class Reglement_Controller implements Initializable {
     public Button reglement_add_btn;
     public Button reglement_edit_btn;
     public Button reglement_delete_btn;
+    public Button closeButton;
     @FXML
     public TableView<Reglement> reglement_tableView    ;
     public TableColumn<Reglement,Integer>  Id_column    ;
@@ -66,6 +76,7 @@ public class Reglement_Controller implements Initializable {
      public static String FOURNISSEUR_PHONE;
      public static String FOURNISSEUR_ADDESS;
      public static int    FOURNISSEUR_ID ;
+     public  Label show_Label;
 
 
     public ObservableList<Reglement> data;
@@ -148,8 +159,6 @@ public class Reglement_Controller implements Initializable {
 
     }
 
-
-
     // Add Verssement
     @FXML
     public void add_Reglement_To_Fournisseur() throws Exception{
@@ -193,6 +202,10 @@ public class Reglement_Controller implements Initializable {
 
 
 
+
+
+
+
             utility.showAlert("New User added successfully");
         }
 
@@ -201,7 +214,6 @@ public class Reglement_Controller implements Initializable {
         }
 
     }
-
     @FXML
     public void showOnClick() throws SQLException {
 
@@ -234,6 +246,13 @@ public class Reglement_Controller implements Initializable {
         reglement_note_txt.setText("/");
         reglement_datePicker.setValue(LocalDate.now());
         payement_Mod_cambo.setValue("Espece");
+        show_operation_N_txt.clear();
+        show_date_txt.clear();
+        show_montant_txt.clear();
+        show_encient_sold_txt.clear();
+        show__sold_txt.clear();
+        show__note_txt.clear();
+
         refresh();
     }
 
@@ -305,18 +324,36 @@ public class Reglement_Controller implements Initializable {
         }
 
     }
-
     @FXML
-    private void OnlyNumbers(KeyEvent event){
-
-
-
+    private void closeButtonAction(){
+        // get a handle to the stage
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        // do what you have to do
+        stage.close();
     }
 
 
 
+   @FXML
+   public void handlekeyPressed(KeyEvent event) throws Exception {
+
+           switch (event.getCode()) {
+               case DELETE:
+                   delet_Reglement() ; break;
+               case ENTER:
+                   add_Reglement_To_Fournisseur();break;
+               case SHIFT:
+                   update_Reglement();break;
+               case ESCAPE:
+                   closeButtonAction();break;
+           }
+       }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        NumberTextField.setStyle("-fx-text-fill: blue; -fx-font-size: 14px; -fx-background-radius: 20; -fx-alignment : Center; -fx-font-weight: Bold;");
+
         try { loadData();} catch (Exception e) {}
         Platform.runLater(new Runnable() {
             @Override
