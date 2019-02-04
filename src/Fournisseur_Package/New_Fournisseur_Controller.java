@@ -126,15 +126,11 @@ public class New_Fournisseur_Controller implements Initializable {
                 utility.showAlert("User has been Updated");
                 preparesStatemnt.executeUpdate();
 
-
-
                 idetxt.clear();
                 nametxt.clear();
                 telephonetxt.clear();
                 addresstxt.clear();
                 idetxt.clear();
-
-
 
                 conn.connect().close();
             }

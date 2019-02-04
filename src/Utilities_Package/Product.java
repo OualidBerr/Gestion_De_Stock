@@ -16,13 +16,13 @@ public class Product {
     private StringProperty   date_entre ;
     private StringProperty   designiation ;
     private StringProperty   ref;
-    private StringProperty  expiration ;
+    private StringProperty   expiration ;
 
     // Constructor
     public Product(    Integer ID,        String REF,        String DESIGNATION,  Integer  NBR_PCS_CRT,
                        Integer QUANTITY ,Integer NBR_PCS,    String CODE_BARE,    String   DATE_ENTRE
-            ,Integer ALERT,     String EXPIRATION, Double PRIX_ACHAT,   Double   PRIX_VENT
-            ,String FOURNISSEUR  )
+                       ,Integer ALERT,   String EXPIRATION,  Double PRIX_ACHAT,   Double   PRIX_VENT
+                       ,String FOURNISSEUR  )
     {
         this.id             = new SimpleIntegerProperty(ID);
         this.ref            = new SimpleStringProperty(REF);

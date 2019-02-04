@@ -260,19 +260,14 @@ public class Fournisseur_Controller implements Initializable
             Reglement_Controller.FOURNISSEUR_ID       =   fournisseur.getFournisseurId()  ;
             Reglement_Controller.FOURNISSEUR_OLD_SOLD =   fournisseur.getFournisseurSold()  ;
 
-
-
             String Titel = "Fournisseur : " +fournisseur.getFournisseurName()+ "    Address : " +fournisseur.getFournisseurAdress()+ "  Numero de Telephone : "+fournisseur.getFournisseurTelephone() ;
 
             new Utility().show_Reglement_Window(Titel,event);
-
-
         }
         else
         {
             utility.showAlert("Nothing is Selected");
         }
-
         Reglement_Controller.FOURNISSEUR_NAME =    null;
         Reglement_Controller.FOURNISSEUR_ADDESS =  null;
         Reglement_Controller.FOURNISSEUR_PHONE =   null;
