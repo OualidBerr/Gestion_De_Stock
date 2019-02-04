@@ -288,11 +288,11 @@ import java.util.ResourceBundle;
        alert_txt.setText(ALERT+"");
        prix_achat_txt.setText(Prix_ACHAT+"");
        prix_vent_txt.setText(Prix_VENT+"");
-       date_DatePicker.setValue(utility.stringToDateConverter(DATE));
+      date_DatePicker.setValue(utility.stringToDateConverter(DATE));
        id_txt.setText(ID+"");
        des_txt.setText(DESIGNIATON);
        show_lb.setText(DESIGNIATON);
-       experation_DatePicker.setValue(utility.stringToDateConverter(EXPIRATION));
+      experation_DatePicker.setValue(utility.stringToDateConverter(EXPIRATION));
 
     }
              }

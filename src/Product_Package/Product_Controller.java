@@ -56,7 +56,7 @@ public class Product_Controller implements Initializable {
         try{
 
             data = FXCollections.observableArrayList();
-            ResultSet rs = cnn.createStatement().executeQuery("SELECT * FROM demo.product_table");
+            ResultSet rs = cnn.createStatement().executeQuery("SELECT  id,ref,des,nbr_pcs_crt,quan,nbr_pcs,code_bare,DATE_FORMAT(date_entre, '%d-%m-%Y') date_entre,alert,DATE_FORMAT(expiration, '%d-%m-%Y') expiration,prix_achat,prix_vent,fournisseur FROM demo.product_table");
             while(rs.next()){
                 data.add(new Product(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getInt(5),rs.getInt(6),rs.getString(7),rs.getString(8),rs.getInt(9),rs.getString(10), rs.getDouble(11),rs.getDouble(12),rs.getString(13)));
               }
@@ -203,33 +203,7 @@ public class Product_Controller implements Initializable {
     public void log_Out_Function(Event event) throws IOException {
      new Utility().log_Out(event);
      }
-    @FXML
-    public void handlekeyPressed(KeyEvent event) throws Exception {
 
-        switch (event.getCode()) {
-            case N:
-                open_Add_New_Product_Form(event);break;
-            case F:
-                Open_Fournisseur_Window(event);break;
-
-            case C:
-                Open_Client_Window(event);break;
-            case S:
-                open_Stock_Window(event);break;
-            case ALT_GRAPH:
-                Open_Caisse_Window(event);break;
-            case H:
-                goBack_To_Home_Window(event);break;
-            case DELETE:
-                delete_Product();break;
-            case M:
-                open_Edit_Product_Window(event);break;
-            case F5:
-               loadData();break;
-
-
-        }
-    }
     @FXML
     public void open_Edit_Product_Window(Event event)throws IOException {
 
@@ -258,11 +232,40 @@ public class Product_Controller implements Initializable {
 
     else {
 
+
      utility.showAlert("Nothing is Selected");
          }
 
 
 
+    }
+
+    @FXML
+    public void handlekeyPressed(KeyEvent event) throws Exception {
+
+        switch (event.getCode()) {
+            case N:
+                open_Add_New_Product_Form(event);break;
+            case F:
+                Open_Fournisseur_Window(event);break;
+            case C:
+                Open_Client_Window(event);break;
+            case S:
+                open_Stock_Window(event);break;
+            case ALT_GRAPH:
+                Open_Caisse_Window(event);break;
+            case H:
+                goBack_To_Home_Window(event);break;
+            case DELETE:
+                delete_Product();break;
+            case M:
+                open_Edit_Product_Window(event);break;
+            case F5:
+                loadData();break;
+
+
+
+        }
     }
 
     @Override

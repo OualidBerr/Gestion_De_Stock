@@ -60,7 +60,7 @@ public class New_Product_Controller implements Initializable {
 
         try{
             data_2 = new ArrayList();
-            ResultSet rs = cnn.createStatement().executeQuery("SELECT  id,ref,des,nbr_pcs_crt,quan,nbr_pcs,code_bare,DATE_FORMAT(date_entre, '%d-%m-%Y') date_entre,alert,expiration,prix_achat,prix_vent,fournisseur FROM demo.product_table;");
+            ResultSet rs = cnn.createStatement().executeQuery("SELECT * FROM demo.product_table;");
             while(rs.next()){
                 data_2.add(rs.getString(2));
             }
@@ -106,7 +106,7 @@ public class New_Product_Controller implements Initializable {
             PreparedStatement  preparesStatemnt = null;
 
             String query = "INSERT INTO product_table " +
-                    " (id,ref,des,nbr_pcs_crt,code_bare,DATE_FORMAT(date_entre, '%d-%m-%Y')date_entre,alert,expiration,fournisseur) " +
+                    " (id,ref,des,nbr_pcs_crt,code_bare,date_entre,alert,expiration,fournisseur) " +
                     "VALUES (?,?,?,?,?,?,?,?,?)";
 
 
@@ -123,14 +123,22 @@ public class New_Product_Controller implements Initializable {
             preparesStatemnt.setString(9,  fournisseur);
             preparesStatemnt.execute();
             loadData();
-            preparesStatemnt.close();
 
+            preparesStatemnt.close();
+            clear();
             utility.showAlert("New User added successfully");
         }
 
-
     }
 
+    public void clear(){
+
+        des_TXT.clear();
+        code_bare_TXT.clear();
+        alert_TXT.clear();
+        nbr_pc_crt_TXT.clear();
+        expiratiob_datePicker.setValue(null) ;
+    }
     @FXML
     private void closeButtonAction(){
         // get a handle to the stage

@@ -82,5 +82,7 @@ private Button goHome_btn,produit_btn,charge_btn,newProduct_btn;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        new Utility().Button_request_focus(goHome_btn);
+
     }
 }

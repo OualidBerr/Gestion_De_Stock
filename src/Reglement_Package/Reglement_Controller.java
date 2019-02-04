@@ -75,6 +75,8 @@ public class Reglement_Controller implements Initializable {
      public static String FOURNISSEUR_PHONE;
      public static String FOURNISSEUR_ADDESS;
      public static int    FOURNISSEUR_ID ;
+    public static String  FOURNISSEUR_DATE;
+
      public  Label show_Label;
 
 
@@ -92,7 +94,7 @@ public class Reglement_Controller implements Initializable {
 
             data = FXCollections.observableArrayList();
 
-            ResultSet rs = conn.connect().createStatement().executeQuery("SELECT * FROM fournisseur_reglement_table Where name = '"+f_name_txt.getText()+"'");
+            ResultSet rs = conn.connect().createStatement().executeQuery("SELECT id,name,DATE_FORMAT(date, '%d-%m-%Y') date,mode,amount,oldsold,sold,note FROM fournisseur_reglement_table Where name = '"+f_name_txt.getText()+"'");
             while(rs.next()){
                 data.add(new Reglement(
                         rs.getInt(   1),
@@ -128,7 +130,7 @@ public class Reglement_Controller implements Initializable {
 
             data = FXCollections.observableArrayList();
 
-            ResultSet rs = cnn.createStatement().executeQuery("SELECT * FROM fournisseur_reglement_table Where name = '"+FOURNISSEUR_NAME+"'");
+            ResultSet rs = cnn.createStatement().executeQuery("SELECT id,name,DATE_FORMAT(date, '%d-%m-%Y') date,mode,amount,oldsold,sold,note FROM fournisseur_reglement_table Where name = '"+FOURNISSEUR_NAME+"'");
             while(rs.next()){
                 data.add(new Reglement(
                         rs.getInt(   1),
@@ -157,7 +159,6 @@ public class Reglement_Controller implements Initializable {
         cnn.close();
 
     }
-
     // Add Verssement
     @FXML
     public void add_Reglement_To_Fournisseur() throws Exception{
@@ -165,7 +166,7 @@ public class Reglement_Controller implements Initializable {
         int max_id = 0;
         max_id  = utility.getMax_ID("demo.fournisseur_reglement_table","id") ;
 
-        if (!NumberTextField.getText().isEmpty() && !reglement_datePicker.getValue().toString().isEmpty() && !payement_Mod_cambo.getItems().isEmpty()){
+        if (!(NumberTextField.getText().isEmpty() ) ){
 
             int ID = max_id + 1;    // id
             String Name = f_name_txt.getText(); // Name
@@ -199,13 +200,12 @@ public class Reglement_Controller implements Initializable {
                 }
             });
 
-
             utility.showAlert("New User added successfully");
         }
 
-        else if  (NumberTextField.getText().isEmpty() && reglement_datePicker.getValue().toString().isEmpty() && payement_Mod_cambo.getItems().isEmpty()){
+        else if ( NumberTextField.getText().isEmpty()   )  {
             utility.showAlert("Some fields are empty");
-        }
+            }
 
     }
     @FXML
@@ -219,12 +219,15 @@ public class Reglement_Controller implements Initializable {
         int i = reglement.getId();
         String value_amount = reglement.getAmount()+"";
         String note = reglement.getNote();
-
+        String ddate = reglement.getDate();
         String mode = reglement.getMode();
+
+        reglement_datePicker.setValue(utility.stringToDateConverter(ddate));
         NumberTextField.setText(value_amount);
         reglement_note_txt.setText(note);
         payement_Mod_cambo.setValue(mode);
-        preparesStatemnt.close();
+
+
         show_operation_N_txt.setText(i+"");
         show_date_txt.setText(reglement.getDate());
         show_montant_txt.setText( reglement.getAmount()+"");
@@ -232,7 +235,7 @@ public class Reglement_Controller implements Initializable {
         show__sold_txt.setText(reglement.getSold()+"");
         show__note_txt.setText(reglement.getNote());
         show_Label.setText(f_name_txt.getText());
-
+        preparesStatemnt.close();
     }
     @FXML
     public void clear(){
@@ -261,6 +264,7 @@ public class Reglement_Controller implements Initializable {
             reglement.setNote(reglement_note_txt.getText());
             reglement.setDate(reglement_datePicker.getValue().toString());
             reglement.setMode(payement_Mod_cambo.getValue().toString());
+            reglement.setDate(reglement_datePicker.getValue().toString());
             Connection cnn = conn.connect();
             try{
                 String query = "UPDATE demo.fournisseur_reglement_table SET amount =?, date =?, mode =?, note =? Where id="+id;
@@ -352,14 +356,15 @@ public class Reglement_Controller implements Initializable {
         });
         payement_Mod_cambo.getItems().addAll("Espece","Check","Verssement");
         payement_Mod_cambo.setValue("Espece");
-         reglement_datePicker.setValue(LocalDate.now());
+
+
          f_Id_txt.setText(FOURNISSEUR_ID+"");
          f_name_txt.setText(FOURNISSEUR_NAME);
          f_address_txt.setText(FOURNISSEUR_ADDESS);
          f_old_sold_txt.setText(FOURNISSEUR_OLD_SOLD+"");
          f_phone_txt.setText("Tel: "+FOURNISSEUR_PHONE);
          reglement_note_txt.setText("/");
-
+        reglement_datePicker.setValue(LocalDate.now());
         /////// Value changed listener in the Table
         reglement_tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
                     if (newSelection != null) {

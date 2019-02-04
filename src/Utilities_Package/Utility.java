@@ -7,6 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -175,16 +176,27 @@ public class Utility {
 
         }
 
-
         // String Date Converter
          public LocalDate stringToDateConverter(String stringDate){
 
         String[] date_Sperator = stringDate.split("-");
-             LocalDate myDate = LocalDate.of(Integer.parseInt(date_Sperator[0])
+             LocalDate myDate = LocalDate.of(Integer.parseInt(date_Sperator[2])
+                ,Integer.parseInt(date_Sperator[1])
+                ,Integer.parseInt(date_Sperator[0]));
+        return myDate;
+        }
+
+    // String Date Converter
+    public LocalDate stringToDateConverter_Reversed(String stringDate){
+
+        String[] date_Sperator = stringDate.split("-");
+        LocalDate myDate = LocalDate.of(Integer.parseInt(date_Sperator[0])
                 ,Integer.parseInt(date_Sperator[1])
                 ,Integer.parseInt(date_Sperator[2]));
         return myDate;
-        }
+    }
+
+
 
         // Date Formatter
         public String DateToFormatedString(Date L_date){
@@ -194,7 +206,7 @@ public class Utility {
               return stringDate;
         }
 
-    public void change_Sytle(TextField textField) {
+        public void change_Sytle(TextField textField) {
         String style = "-fx-text-fill: Red ; -fx-font-size: 12px;" +
                 " -fx-background-radius: 20; -fx-alignment : Center;" +
                 " -fx-font-weight: Bold;";
@@ -202,11 +214,7 @@ public class Utility {
 
     }
 
-
-
-
-
-        // request Focus
+        //Textfield request Focus
         public void setTextFieldFocus(TextField textField){
 
             Platform.runLater(new Runnable() {
@@ -216,5 +224,18 @@ public class Utility {
                 }
             });
         }
+        // Button request focus
+        public void Button_request_focus(Button btn){
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    btn.requestFocus();
+                }
+            });
+
+        }
+
+
+
 
 }

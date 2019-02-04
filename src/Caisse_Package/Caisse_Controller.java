@@ -4,13 +4,16 @@ import Utilities_Package.Utility;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Caisse_Controller implements Initializable {
+    public class Caisse_Controller implements Initializable {
+    @FXML
+    public Button goHome_btn;
 
     @FXML
     public void goBack_To_Home_Window(Event event) throws IOException {
@@ -67,6 +70,6 @@ public class Caisse_Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        new Utility().Button_request_focus(goHome_btn);
     }
 }

@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -30,6 +32,8 @@ import java.util.logging.Logger;
 public class Manage_Users_Controller implements Initializable {
     @FXML
     private Label showlb;
+    @FXML
+    private Button closeButton;
 
     @FXML
     public TableView<User> usertableView ;
@@ -58,7 +62,13 @@ public class Manage_Users_Controller implements Initializable {
 
     Utility utility = new Utility();
 
+    public void clear(){
+        usernametxt.clear();
+        passtxt.clear();
+        nametxt.clear();
+        date_txt.setValue(null);
 
+    }
 
 
 
@@ -90,10 +100,6 @@ public class Manage_Users_Controller implements Initializable {
             preparesStatemnt.execute();
             preparesStatemnt.close();
 
-            usernametxt.clear();
-            passtxt.clear();
-
-            nametxt.clear();
             loadData();
             utility.showAlert("New User added successfully");
         }
@@ -139,7 +145,6 @@ public class Manage_Users_Controller implements Initializable {
 
         return 0;
     }
-
     // Delete
     @FXML
     private void deletUser() throws SQLException{
@@ -172,7 +177,7 @@ public class Manage_Users_Controller implements Initializable {
         try{
 
             data = FXCollections.observableArrayList();
-            ResultSet rs = cnn.createStatement().executeQuery("SELECT * FROM demo.users");
+            ResultSet rs = cnn.createStatement().executeQuery("SELECT id,name,username,password,role,DATE_FORMAT(date, '%d-%m-%Y')date FROM demo.users");
             while(rs.next()){
 
                     data.add(new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)));
@@ -191,6 +196,7 @@ public class Manage_Users_Controller implements Initializable {
 
         usertableView.setItems(null);
         usertableView.setItems(data);
+        clear();
         cnn.close();
 
     }
@@ -218,6 +224,29 @@ public class Manage_Users_Controller implements Initializable {
         }
 
     }
+
+    @FXML
+    private void closeButtonAction(){
+        // get a handle to the stage
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        // do what you have to do
+        stage.close();
+    }
+    // Event Handler
+    @FXML
+    public void handlekeyPressed(KeyEvent event) throws Exception {
+
+        switch (event.getCode()) {
+            case ESCAPE: closeButtonAction();
+                break;
+            case ENTER: add_New_User();
+                break;
+
+
+        }
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

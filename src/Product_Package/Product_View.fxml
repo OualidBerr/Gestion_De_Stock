@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox onKeyPressed="#handlekeyPressed" onMouseClicked="#loadData" prefHeight="675.0" prefWidth="1336.0" style="-fx-background-color: #FDEDEC;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Product_Package.Product_Controller">
+<VBox onMouseClicked="#loadData" prefHeight="675.0" prefWidth="1336.0" style="-fx-background-color: #FDEDEC;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Product_Package.Product_Controller">
   <children>
     <MenuBar prefHeight="24.0" prefWidth="1219.0" VBox.vgrow="NEVER">
       <menus>
@@ -57,14 +57,14 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handlekeyPressed" prefHeight="650.0" prefWidth="1200.0" VBox.vgrow="ALWAYS">
       <children>
         <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
           <font>
             <Font size="18.0" />
           </font>
         </Label>
-            <ToolBar prefHeight="69.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ToolBar onKeyPressed="#handlekeyPressed" prefHeight="69.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
                 <Button fx:id="goHome_btn" mnemonicParsing="false" onAction="#goBack_To_Home_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Home">
                      <font>

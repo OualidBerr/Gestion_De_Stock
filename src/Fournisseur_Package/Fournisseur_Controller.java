@@ -260,6 +260,7 @@ public class Fournisseur_Controller implements Initializable
             Reglement_Controller.FOURNISSEUR_ID       =   fournisseur.getFournisseurId()  ;
             Reglement_Controller.FOURNISSEUR_OLD_SOLD =   fournisseur.getFournisseurSold()  ;
 
+
             String Titel = "Fournisseur : " +fournisseur.getFournisseurName()+ "    Address : " +fournisseur.getFournisseurAdress()+ "  Numero de Telephone : "+fournisseur.getFournisseurTelephone() ;
 
             new Utility().show_Reglement_Window(Titel,event);
@@ -301,6 +302,8 @@ public class Fournisseur_Controller implements Initializable
                     open_Product_Window(event);break;
             case F5:
                 loadData();break;
+            case M:
+                show_Edit_Window(event);break;
 
         }
     }
