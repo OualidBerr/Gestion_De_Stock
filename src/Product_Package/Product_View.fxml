@@ -114,9 +114,9 @@
                       <TableColumn fx:id="id_column" prefWidth="75.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="N°" />
                       <TableColumn fx:id="ref_column" prefWidth="75.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="Ref" />
                         <TableColumn fx:id="des_column" prefWidth="300.0" style="-fx-background-radius: 20; -fx-font-weight: Bold;" text="Désigniation" />
-                        <TableColumn fx:id="nbr_pcs_crt__column" minWidth="1.6666717529296875" prefWidth="70.0" style="-fx-font-weight: Bold;" text="Nbr Pcs/crt" />
-                        <TableColumn fx:id="quantity_column" prefWidth="90.0" style="-fx-font-weight: Bold;" text="Quantité" />
-                        <TableColumn fx:id="nbr_pcs_column" prefWidth="50.0" style="-fx-font-weight: Bold;" text="Nbr pcs" />
+                        <TableColumn fx:id="nbr_pcs_crt__column" minWidth="1.6666717529296875" prefWidth="70.0" style="-fx-font-weight: Bold; -fx-alignment: Center;" text="Nbr Pcs/crt" />
+                        <TableColumn fx:id="quantity_column" prefWidth="90.0" style="-fx-font-weight: Bold; -fx-alignment: Center;" text="Quantité" />
+                        <TableColumn fx:id="nbr_pcs_column" prefWidth="50.0" style="-fx-font-weight: Bold; -fx-alignment: Center;" text="Nbr pcs" />
                         <TableColumn fx:id="code_bare_column" prefWidth="120.0" style="-fx-font-weight: Bold;" text="Code à Bare" />
                         <TableColumn fx:id="date_entre_column" style="-fx-font-weight: Bold;" text="Date d'entre" />
                         <TableColumn fx:id="alert_column" prefWidth="50.0" style="-fx-font-weight: Bold;" text="Alert" />

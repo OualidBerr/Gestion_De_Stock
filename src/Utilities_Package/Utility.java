@@ -17,6 +17,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 
 public class Utility {
 
@@ -70,17 +74,14 @@ public class Utility {
          public void go_Home(Event event)  throws IOException{
        switchScene("/Home_Package/Home_View.fxml","Home Page", event);
      }
-
       // go Pruduct
       public void go_Pruduct(Event event)  throws IOException{
     switchScene("/Product_Package/Product_View.fxml","Product Page", event);
         }
-
       // Go Stock
           public void go_Stock(Event event)  throws IOException{
     switchScene("/Stock_Package/Stock_View.fxml","Stock Page", event);
       }
-
        // go Client
         public void go_Client(Event event)  throws IOException{
     switchScene("/Client_Package/Client_View.fxml","Client Page", event);
@@ -89,34 +90,27 @@ public class Utility {
         public void go_Fournisseur(Event event)  throws IOException{
             switchScene("/Fournisseur_Package/Fournisseur_View.fxml","Fournisseur Page", event);
         }
-
         // Go Caisse
         public void go_Caisse(Event event)  throws IOException{
             switchScene("/Caisse_Package/Caisse_View.fxml","Caisse Page", event);
         }
-
-
         // Go Bon Command Window
         public void go_Bon_Command(Event event)  throws IOException{
             switchScene("/Bon_Command_Package/Bon_Command_View.fxml","Bon Command Page", event);
         }
-
        // ShowAndWait a New Window
-
         // Add new Product Window
         public void show_New_Product_Window(Event e) throws IOException {
 
         openNewStage("/Product_Package/New_Product_View.fxml","Ajouter Nouveau Produit Form");
 
         }
-
         // Add new Fournisseur Window
         public void show_New_Fournisseur_Window(Event e) throws IOException {
 
             openNewStage("/Fournisseur_Package/New_Fournisseur_View.fxml","Ajouter Nouveau Fournisseur Form");
 
         }
-
          // Edit Product
         public void show_Edit_Product_Window() throws IOException {
 
@@ -128,7 +122,6 @@ public class Utility {
 
             openNewStage("/Client_Package/New_Client_View.fxml","Ajouter Nouveau Client Form");
         }
-
        // Manage Users
         public void show_Manage_Users() throws IOException {
             openNewStage("/Login_Package/Manage_Users_View.fxml","Ajouter Nouveau User Form");
@@ -139,13 +132,11 @@ public class Utility {
 
             openNewStage("/Reglement_Package/Reglement_View.fxml","Reglement de " + person);
         }
-
         // Log in
         public void log_In(String person ,Event event) throws IOException {
 
             switchScene("/Home_Package/Home_View.fxml","Home Page*" + person, event);
         }
-
         // Login out
         public void log_Out(Event event) throws IOException {
 
@@ -154,7 +145,6 @@ public class Utility {
 
 
         }
-
         // Find Max
         public int getMax_ID(String tableName,String colName) throws SQLException {
 
@@ -173,7 +163,6 @@ public class Utility {
             return  idmax;
 
               }
-
         // Showing Alert Message
         public void showAlert(String s){
 
@@ -185,6 +174,37 @@ public class Utility {
                 note.showConfirm();
 
         }
+
+
+        // String Date Converter
+         public LocalDate stringToDateConverter(String stringDate){
+
+        String[] date_Sperator = stringDate.split("-");
+             LocalDate myDate = LocalDate.of(Integer.parseInt(date_Sperator[0])
+                ,Integer.parseInt(date_Sperator[1])
+                ,Integer.parseInt(date_Sperator[2]));
+        return myDate;
+        }
+
+        // Date Formatter
+        public String DateToFormatedString(Date L_date){
+              Format formatter;
+              formatter = new SimpleDateFormat("yyyy-MM-dd");
+              String stringDate = formatter.format(L_date);
+              return stringDate;
+        }
+
+    public void change_Sytle(TextField textField) {
+        String style = "-fx-text-fill: Red ; -fx-font-size: 12px;" +
+                " -fx-background-radius: 20; -fx-alignment : Center;" +
+                " -fx-font-weight: Bold;";
+        textField.setStyle(style);
+
+    }
+
+
+
+
 
         // request Focus
         public void setTextFieldFocus(TextField textField){

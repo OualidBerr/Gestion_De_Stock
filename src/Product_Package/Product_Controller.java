@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class Product_Controller implements Initializable {
@@ -248,6 +249,9 @@ public class Product_Controller implements Initializable {
            Product_Edit_Controller.FOURNISSEUR     = product.getFournisseur();
            Product_Edit_Controller.Prix_ACHAT      = product.getPrix_achat();
            Product_Edit_Controller.Prix_VENT       = product.getPrix_ventt();
+           Product_Edit_Controller.DATE            = product.getDate_entre();
+
+
 
         new Utility().show_Edit_Product_Window();
     }

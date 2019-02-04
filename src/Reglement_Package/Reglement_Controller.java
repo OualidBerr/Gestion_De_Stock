@@ -339,7 +339,9 @@ public class Reglement_Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        NumberTextField.setStyle("-fx-text-fill: blue; -fx-font-size: 14px; -fx-background-radius: 20; -fx-alignment : Center; -fx-font-weight: Bold;");
+        NumberTextField.setStyle("-fx-text-fill: blue; -fx-font-size: 14px;" +
+                " -fx-background-radius: 20; -fx-alignment : Center;" +
+                " -fx-font-weight: Bold;");
 
         try { loadData();} catch (Exception e) {}
         Platform.runLater(new Runnable() {

@@ -18,18 +18,21 @@ public class Product {
     private StringProperty   ref;
     private StringProperty   expiration ;
 
+
     // Constructor
     public Product(    Integer ID,        String REF,        String DESIGNATION,  Integer  NBR_PCS_CRT,
                        Integer QUANTITY ,Integer NBR_PCS,    String CODE_BARE,    String   DATE_ENTRE
                        ,Integer ALERT,   String EXPIRATION,  Double PRIX_ACHAT,   Double   PRIX_VENT
                        ,String FOURNISSEUR  )
     {
+        int I = NBR_PCS_CRT*QUANTITY;
+
         this.id             = new SimpleIntegerProperty(ID);
         this.ref            = new SimpleStringProperty(REF);
         this.designiation   = new SimpleStringProperty(DESIGNATION);
         this.Nbr_pcs_crt    = new SimpleIntegerProperty(NBR_PCS_CRT);
         this.quantite       = new SimpleIntegerProperty(QUANTITY);
-        this.Nbr_pcs        = new SimpleIntegerProperty(NBR_PCS);
+        this.Nbr_pcs        = new SimpleIntegerProperty(I);
         this.code_bare      = new SimpleStringProperty(CODE_BARE);
         this.date_entre     = new SimpleStringProperty(DATE_ENTRE);
         this.alert          = new SimpleIntegerProperty(ALERT);

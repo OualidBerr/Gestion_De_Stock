@@ -60,7 +60,7 @@ public class New_Product_Controller implements Initializable {
 
         try{
             data_2 = new ArrayList();
-            ResultSet rs = cnn.createStatement().executeQuery("SELECT * FROM demo.fournisseur_table");
+            ResultSet rs = cnn.createStatement().executeQuery("SELECT  id,ref,des,nbr_pcs_crt,quan,nbr_pcs,code_bare,DATE_FORMAT(date_entre, '%d-%m-%Y') date_entre,alert,expiration,prix_achat,prix_vent,fournisseur FROM demo.product_table;");
             while(rs.next()){
                 data_2.add(rs.getString(2));
             }
@@ -104,7 +104,13 @@ public class New_Product_Controller implements Initializable {
             int Nbr_pcs =  Integer.parseInt(nbr_pc_crt_TXT.getText()) ;        // Nombre de pieces
 
             PreparedStatement  preparesStatemnt = null;
-            String query = "INSERT INTO product_table (id,ref,des,nbr_pcs_crt,code_bare,date_entre,alert,expiration,fournisseur) VALUES (?,?,?,?,?,?,?,?,?)";
+
+            String query = "INSERT INTO product_table " +
+                    " (id,ref,des,nbr_pcs_crt,code_bare,DATE_FORMAT(date_entre, '%d-%m-%Y')date_entre,alert,expiration,fournisseur) " +
+                    "VALUES (?,?,?,?,?,?,?,?,?)";
+
+
+        //    DATE_FORMAT(date_entre, '%d-%m-%Y')
             preparesStatemnt = conn.connect().prepareStatement(query);
             preparesStatemnt.setInt(   1,  ID       );
             preparesStatemnt.setString(2,  reference);
