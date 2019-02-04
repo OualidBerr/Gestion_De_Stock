@@ -174,6 +174,7 @@ public class Reglement_Controller implements Initializable {
             String Mode = payement_Mod_cambo.getValue().toString(); // Mode
             String Amount_Value = NumberTextField.getText();
             double Amount = Double.parseDouble(Amount_Value);  // Amount
+
             String Old_Sold_Value =  f_old_sold_txt.getText();
             double Old_Sold = Double.parseDouble(Old_Sold_Value);// Old Sold
             double New_Sold = Old_Sold - Amount;    // Sold
@@ -190,6 +191,10 @@ public class Reglement_Controller implements Initializable {
             preparesStatemnt.setDouble(7, New_Sold);
             preparesStatemnt.setString(8, Note);
             preparesStatemnt.execute();
+            //////////////////////////////
+            int fournisseurId = Integer.parseInt(f_Id_txt.getText());
+            utility.verssementFun(Amount,Old_Sold,fournisseurId);
+
             clear();
             preparesStatemnt.close();
 

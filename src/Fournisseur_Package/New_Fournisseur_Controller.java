@@ -48,8 +48,6 @@ public class New_Fournisseur_Controller implements Initializable {
     public ObservableList<Fournisseur> data;
 
     Db_Connection conn = new Db_Connection();
-
-
     ResultSet resultSet = null;
 
     Utility utility = new Utility();

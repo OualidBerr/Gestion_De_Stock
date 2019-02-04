@@ -235,6 +235,20 @@ public class Utility {
 
         }
 
+       public void verssementFun(double amount, double old_sold, int fournisseurID) throws SQLException {
+
+           Db_Connection conn = new Db_Connection();
+           ResultSet resultSet = null;
+           PreparedStatement  preparesStatemnt = null;
+           double new_Sold = (old_sold - amount);
+           String query    = "UPDATE demo.fournisseur_table SET sold =? Where id="+fournisseurID;
+           preparesStatemnt = conn.connect().prepareStatement(query);
+           preparesStatemnt.setDouble(1, new_Sold);
+           preparesStatemnt.executeUpdate();
+           conn.connect().close();
+
+       }
+
 
 
 

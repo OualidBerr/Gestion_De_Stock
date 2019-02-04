@@ -60,7 +60,7 @@ public class New_Product_Controller implements Initializable {
 
         try{
             data_2 = new ArrayList();
-            ResultSet rs = cnn.createStatement().executeQuery("SELECT * FROM demo.product_table;");
+            ResultSet rs = cnn.createStatement().executeQuery("SELECT * FROM demo.fournisseur_table");
             while(rs.next()){
                 data_2.add(rs.getString(2));
             }
