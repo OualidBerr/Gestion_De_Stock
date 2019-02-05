@@ -107,25 +107,17 @@
             <TableColumn fx:id="note_column" prefWidth="250.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="Remarque" />
         </columns>
       </TableView>
-      <VBox layoutX="754.0" layoutY="75.0" prefHeight="148.0" prefWidth="174.0" style="-fx-background-color: #5DADE2; -fx-background-radius: 20;" AnchorPane.leftAnchor="754.0" AnchorPane.topAnchor="75.0">
+      <VBox layoutX="754.0" layoutY="75.0" prefHeight="133.0" prefWidth="174.0" style="-fx-background-color: #5DADE2; -fx-background-radius: 20;" AnchorPane.leftAnchor="754.0" AnchorPane.topAnchor="75.0">
          <children>
-            <Button fx:id="reglement_add_btn" mnemonicParsing="false" onAction="#add_Reglement_To_Fournisseur" prefHeight="25.0" prefWidth="178.0" style="-fx-background-radius: 20;" text="Ajouter   Enter">
+            <Button fx:id="reglement_add_btn" mnemonicParsing="false" onAction="#add_Reglement_To_Fournisseur" prefHeight="48.0" prefWidth="154.0" style="-fx-background-radius: 20;" text="Ajouter   Enter">
                <VBox.margin>
-                  <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="reglement_edit_btn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#update_Reglement" prefHeight="25.0" prefWidth="178.0" style="-fx-background-radius: 20;" text="Edit  Shift">
-               <VBox.margin>
-                  <Insets bottom="20.0" left="10.0" right="10.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
-            <Button fx:id="reglement_delete_btn" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" onAction="#delet_Reglement" prefHeight="25.0" prefWidth="178.0" style="-fx-background-radius: 20;" text="Delete">
+            <Button fx:id="reglement_delete_btn" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" onAction="#delet_Reglement" prefHeight="50.0" prefWidth="154.0" style="-fx-background-radius: 20;" text="Delete">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
@@ -197,5 +189,6 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
+      <Button layoutX="688.0" layoutY="21.0" mnemonicParsing="false" onAction="#show_Summount" text="Button" />
    </children>
 </AnchorPane>

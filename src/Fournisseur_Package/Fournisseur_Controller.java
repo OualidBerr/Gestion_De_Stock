@@ -158,16 +158,15 @@ public class Fournisseur_Controller implements Initializable
     }
     @FXML
     private void delete_Fournisseur() throws SQLException{
-
+        ;
         if(! Fournisseur_Table.getSelectionModel().isEmpty()    ) {
 
             try{
-                String query = "DELETE FROM demo.fournisseur_table WHERE id =?";
-                Fournisseur fournisseur =  Fournisseur_Table.getSelectionModel().getSelectedItem();
-                int i = fournisseur.getFournisseurId();
-                String s = String.valueOf(i);
+                Fournisseur fournisseur = Fournisseur_Table.getSelectionModel().getSelectedItem();
+                int   fournisseurID = fournisseur.getFournisseurId();
+                String query = "DELETE FROM demo.fournisseur_table WHERE id ="+fournisseurID;
+
                 preparesStatemnt = conn.connect().prepareStatement(query);
-                preparesStatemnt.setString(1, s);
                 preparesStatemnt.executeUpdate();
                 preparesStatemnt.close();
                 loadData();

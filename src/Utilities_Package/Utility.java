@@ -152,7 +152,6 @@ public class Utility {
            // String query = "select max(id) from " + tableName;
             String query = "SELECT max("+colName+") from "+tableName;
 
-
             int idmax= 0;
             Connection cnn = conn.connect();
             preparesStatemnt = cnn.prepareStatement(query);
@@ -164,6 +163,27 @@ public class Utility {
             return  idmax;
 
               }
+
+    // Find Sum
+    public double get_Sum_Amount(int fournisseurID) throws SQLException {
+
+        String query = "SELECT SUM(amount) FROM demo.fournisseur_reglement_table WHERE fournisseurID ="+fournisseurID;
+
+        double Sum_amount = 0.25;
+        Connection cnn = conn.connect();
+        preparesStatemnt = cnn.prepareStatement(query);
+        resultSet = preparesStatemnt.executeQuery();
+
+        if(resultSet.next()){
+            Sum_amount = resultSet.getDouble(1);
+        }
+
+        cnn.close();
+        return  Sum_amount;
+
+    }
+
+
         // Showing Alert Message
         public void showAlert(String s){
 
@@ -235,19 +255,89 @@ public class Utility {
 
         }
 
-       public void verssementFun(double amount, double old_sold, int fournisseurID) throws SQLException {
+        public void verssementFun(double amount, double old_sold, int id) throws SQLException {
 
            Db_Connection conn = new Db_Connection();
            ResultSet resultSet = null;
            PreparedStatement  preparesStatemnt = null;
+
            double new_Sold = (old_sold - amount);
-           String query    = "UPDATE demo.fournisseur_table SET sold =? Where id="+fournisseurID;
+           String query    = "UPDATE demo.fournisseur_table SET sold =? Where id="+id;
            preparesStatemnt = conn.connect().prepareStatement(query);
            preparesStatemnt.setDouble(1, new_Sold);
            preparesStatemnt.executeUpdate();
            conn.connect().close();
 
        }
+        public void retreive_reglement(double amount, double old_sold, int fournisseurID) throws SQLException {
+
+        Db_Connection conn = new Db_Connection();
+        ResultSet resultSet = null;
+        PreparedStatement  preparesStatemnt = null;
+        double new_Sold = (old_sold + amount );
+        String query    = "UPDATE demo.fournisseur_table SET sold =? Where id="+fournisseurID;
+        preparesStatemnt = conn.connect().prepareStatement(query);
+        preparesStatemnt.setDouble(1, new_Sold);
+        preparesStatemnt.executeUpdate();
+        conn.connect().close();
+
+    }
+        public double get_Sold(int fournisseurID) throws SQLException {
+
+             double updatedsold = 0.025;
+             String query = "SELECT sold from demo.fournisseur_table  where id ="+fournisseurID;
+
+                 Connection cnn = conn.connect();
+                 preparesStatemnt = cnn.prepareStatement(query);
+                 resultSet = preparesStatemnt.executeQuery();
+              if(resultSet.next()){
+               updatedsold = resultSet.getDouble(1);
+           }
+           cnn.close();
+
+             return updatedsold;
+          }
+
+          // Get Fournisseur ID
+          public int getFournisseur_ID(String  fournisseurName) throws SQLException {
+              int fournisseurID = 0;
+              String query = "SELECT id from demo.fournisseur_table  where name = '"+fournisseurName+"'";
+              Connection cnn = conn.connect();
+              preparesStatemnt = cnn.prepareStatement(query);
+              resultSet = preparesStatemnt.executeQuery();
+              if(resultSet.next()){
+                  fournisseurID = resultSet.getInt(1);
+                   }
+                cnn.close();
+               return fournisseurID;
+          }
+
+
+        public void update_sold(int fournisseurID) throws SQLException {
+
+           double total_amount = get_Sum_Amount(fournisseurID);
+           double new_sold = get_Sold(fournisseurID) - total_amount;
+
+            Db_Connection conn = new Db_Connection();
+            ResultSet resultSet = null;
+            PreparedStatement  preparesStatemnt = null;
+
+            String query    = "UPDATE demo.fournisseur_table SET sold =? Where id="+fournisseurID;
+            preparesStatemnt = conn.connect().prepareStatement(query);
+            preparesStatemnt.setDouble(1, new_sold);
+            preparesStatemnt.executeUpdate();
+            conn.connect().close();
+
+           }
+
+
+
+
+
+
+
+
+
 
 
 

@@ -2,7 +2,7 @@ package Utilities_Package;
 
 import javafx.beans.property.*;
 
-import java.util.Date;
+
 
 public class Reglement {
 
@@ -14,9 +14,10 @@ public class Reglement {
     private DoubleProperty old_sold;
     private DoubleProperty sold;
     private StringProperty note ;
+    private IntegerProperty fournisseurID;
 
     // Constructor
-    public Reglement(int ID, String DATE, String MODE,String NAME, double AMOUNT, double OLD_SOLD, double SOLD,String NOTE){
+    public Reglement(int ID, String NAME, String DATE,String MODE, double AMOUNT, double OLD_SOLD, double SOLD,String NOTE,Integer fournisseurID){
 
         this.id       = new SimpleIntegerProperty(ID);
         this.name     = new SimpleStringProperty(NAME);
@@ -26,6 +27,7 @@ public class Reglement {
         this.amount   = new SimpleDoubleProperty(AMOUNT);
         this.old_sold = new SimpleDoubleProperty(OLD_SOLD);
         this.sold     = new SimpleDoubleProperty(SOLD);
+        this.fournisseurID       = new SimpleIntegerProperty(fournisseurID);
 
     }
     public Reglement(int ID, String DATE, String MODE, double AMOUNT, double OLD_SOLD, double SOLD,String NOTE){
@@ -63,9 +65,6 @@ public class Reglement {
     public StringProperty noteProperty() {
         return note;
     }
-
-
-
 
 
     // Getters
@@ -117,10 +116,6 @@ public class Reglement {
         return sold;
     }
 
-
-
-
-
     // Setters
     public void setId(int id) {
         this.id.set(id);
@@ -146,7 +141,17 @@ public class Reglement {
         this.sold.set(sold);
     }
 
+    public void setFournisseurID(int fournisseurID) {
+        this.fournisseurID.set(fournisseurID);
+    }
 
+    public int getFournisseurID() {
+        return fournisseurID.get();
+    }
+
+    public IntegerProperty fournisseurIDProperty() {
+        return fournisseurID;
+    }
 
 
 

@@ -79,31 +79,33 @@ public class Reglement_Controller implements Initializable {
 
      public  Label show_Label;
 
-
     public ObservableList<Reglement> data;
     public ObservableList<Reglement> data_2;
-
     Db_Connection conn = new Db_Connection();
     PreparedStatement preparesStatemnt = null;
     ResultSet resultSet = null;
     Utility utility = new Utility();
-    @FXML
-      public void refresh(){
 
+    @FXML
+      public void refresh() throws SQLException {
+        int fournisseurID = utility.getFournisseur_ID(f_name_txt.getText());
         try{
 
             data = FXCollections.observableArrayList();
 
-            ResultSet rs = conn.connect().createStatement().executeQuery("SELECT id,name,DATE_FORMAT(date, '%d-%m-%Y') date,mode,amount,oldsold,sold,note FROM fournisseur_reglement_table Where name = '"+f_name_txt.getText()+"'");
+            ResultSet rs = conn.connect().createStatement().executeQuery("SELECT id,name,DATE_FORMAT(date, '%d-%m-%Y') date,mode,amount,oldsold,sold,note,fournisseurID FROM demo.fournisseur_reglement_table Where fournisseurID ="+fournisseurID);
             while(rs.next()){
                 data.add(new Reglement(
+
                         rs.getInt(   1),
+                        rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
                         rs.getDouble(5),
                         rs.getDouble(6),
                         rs.getDouble(7),
-                        rs.getString(8)
+                        rs.getString(8),
+                        rs.getInt(   9)
                 ));
 
             }
@@ -121,25 +123,28 @@ public class Reglement_Controller implements Initializable {
         note_column.setCellValueFactory(new PropertyValueFactory<>("note"));
         reglement_tableView.setItems(data);
 
-      }
+        f_old_sold_txt.setText(utility.get_Sold(fournisseurID)+"");
 
+      }
      public void  loadData() throws SQLException {
 
         Connection cnn = conn.connect();
         try{
+           int fournisseurID = utility.getFournisseur_ID(FOURNISSEUR_NAME);
 
             data = FXCollections.observableArrayList();
-
-            ResultSet rs = cnn.createStatement().executeQuery("SELECT id,name,DATE_FORMAT(date, '%d-%m-%Y') date,mode,amount,oldsold,sold,note FROM fournisseur_reglement_table Where name = '"+FOURNISSEUR_NAME+"'");
+            ResultSet rs = cnn.createStatement().executeQuery("SELECT id,name,DATE_FORMAT(date, '%d-%m-%Y') date,mode,amount,oldsold,sold,note,fournisseurID FROM demo.fournisseur_reglement_table Where fournisseurID ="+fournisseurID);
             while(rs.next()){
                 data.add(new Reglement(
                         rs.getInt(   1),
+                        rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
                         rs.getDouble(5),
                         rs.getDouble(6),
                         rs.getDouble(7),
-                        rs.getString(8)
+                        rs.getString(8),
+                        rs.getInt(   9)
                 ));
 
             }
@@ -159,60 +164,70 @@ public class Reglement_Controller implements Initializable {
         cnn.close();
 
     }
+
+
+    @FXML
+    public void show_Summount() throws SQLException {
+
+        utility.showAlert(utility.get_Sum_Amount(1)+"");
+
+
+      }
+
+
     // Add Verssement
     @FXML
     public void add_Reglement_To_Fournisseur() throws Exception{
 
-        int max_id = 0;
-        max_id  = utility.getMax_ID("demo.fournisseur_reglement_table","id") ;
+        int Reglement_id ;
+        int  max_id  = utility.getMax_ID("demo.fournisseur_reglement_table","id") ;
+        Reglement_id = max_id +1;   // 1) Reglement id
+        double amount   =  Double.parseDouble(NumberTextField.getText()); // 2) Amount
 
-        if (!(NumberTextField.getText().isEmpty() ) ){
 
-            int ID = max_id + 1;    // id
-            String Name = f_name_txt.getText(); // Name
-            String Date = reglement_datePicker.getValue().toString(); // Date
-            String Mode = payement_Mod_cambo.getValue().toString(); // Mode
-            String Amount_Value = NumberTextField.getText();
-            double Amount = Double.parseDouble(Amount_Value);  // Amount
+        String note = reglement_note_txt.getText();  // 5) Note
+        String fournisseur_Name = f_name_txt.getText(); // 6) Fournisseur Name
+        String mode = payement_Mod_cambo.getValue().toString(); // 7) Mode
+        String date = reglement_datePicker.getValue().toString(); // 8 payement date
+        int fournisseurID = utility.getFournisseur_ID(fournisseur_Name); //9) FournisseurID
 
-            String Old_Sold_Value =  f_old_sold_txt.getText();
-            double Old_Sold = Double.parseDouble(Old_Sold_Value);// Old Sold
-            double New_Sold = Old_Sold - Amount;    // Sold
-            String Note = reglement_note_txt.getText(); // Note
-            PreparedStatement  preparesStatemnt = null;
-            String query = "INSERT INTO fournisseur_reglement_table (id,name,date,mode,amount,oldsold,sold,note) VALUES (?,?,?,?,?,?,?,?)";
-            preparesStatemnt = conn.connect().prepareStatement(query);
-            preparesStatemnt.setInt(1, max_id+1);
-            preparesStatemnt.setString(2, Name);
-            preparesStatemnt.setString(3, Date);
-            preparesStatemnt.setString(4, Mode);
-            preparesStatemnt.setDouble(5, Amount);
-            preparesStatemnt.setDouble(6, Old_Sold);
-            preparesStatemnt.setDouble(7, New_Sold);
-            preparesStatemnt.setString(8, Note);
-            preparesStatemnt.execute();
-            //////////////////////////////
-            int fournisseurId = Integer.parseInt(f_Id_txt.getText());
-            utility.verssementFun(Amount,Old_Sold,fournisseurId);
+        double old_Sold =  utility.get_Sold(fournisseurID); // 3) Old Sold
+        double new_sold = old_Sold - amount; // 4) new sold
 
-            clear();
-            preparesStatemnt.close();
 
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    NumberTextField.requestFocus();
-                }
-            });
+       if (!NumberTextField.getText().isEmpty()){
 
-            utility.showAlert("New User added successfully");
-        }
+           String query =
+                           "INSERT INTO demo.fournisseur_reglement_table"                +
+                           " (id,name,date,mode,amount,oldsold,sold,note,fournisseurID)" +
+                           " VALUES (?,?,?,?,?,?,?,?,?)"                                 ;
 
-        else if ( NumberTextField.getText().isEmpty()   )  {
-            utility.showAlert("Some fields are empty");
+           preparesStatemnt = conn.connect().prepareStatement(query);
+           preparesStatemnt.setInt   (1, Reglement_id);
+           preparesStatemnt.setString(2, fournisseur_Name);
+           preparesStatemnt.setString(3, date);
+           preparesStatemnt.setString(4, mode);
+           preparesStatemnt.setDouble(5, amount);
+           preparesStatemnt.setDouble(6, old_Sold);
+           preparesStatemnt.setDouble(7, new_sold);
+           preparesStatemnt.setString(8, note);
+           preparesStatemnt.setInt   (9, fournisseurID);
+           preparesStatemnt.execute();
+
+           String query_sold = "UPDATE demo.fournisseur_table SET sold =? Where id="+fournisseurID;
+
+           preparesStatemnt = conn.connect().prepareStatement(query_sold);
+           preparesStatemnt.setDouble(1,new_sold);
+           preparesStatemnt.executeUpdate();
+
+            refresh();
+           utility.showAlert("Reglement Add Succsessfully");
+           preparesStatemnt.close();
+           clear();
+           conn.connect().close();
             }
 
-    }
+       }
     @FXML
     public void showOnClick() throws SQLException {
 
@@ -243,7 +258,8 @@ public class Reglement_Controller implements Initializable {
         preparesStatemnt.close();
     }
     @FXML
-    public void clear(){
+    public void clear() throws SQLException {
+
         NumberTextField.clear();
         reglement_note_txt.setText("/");
         reglement_datePicker.setValue(LocalDate.now());
@@ -255,45 +271,8 @@ public class Reglement_Controller implements Initializable {
         show__sold_txt.clear();
         show__note_txt.clear();
 
-        refresh();
     }
-    // Update
-    @FXML
-    public  int update_Reglement() throws SQLException {
 
-        if(! reglement_tableView.getSelectionModel().isEmpty()) {
-            Reglement reglement = reglement_tableView.getSelectionModel().getSelectedItem();
-            int  id = reglement.getId();
-            double amount = Double.parseDouble(NumberTextField.getText());
-            reglement.setAmount(amount);
-            reglement.setNote(reglement_note_txt.getText());
-            reglement.setDate(reglement_datePicker.getValue().toString());
-            reglement.setMode(payement_Mod_cambo.getValue().toString());
-            reglement.setDate(reglement_datePicker.getValue().toString());
-            Connection cnn = conn.connect();
-            try{
-                String query = "UPDATE demo.fournisseur_reglement_table SET amount =?, date =?, mode =?, note =? Where id="+id;
-                preparesStatemnt = cnn.prepareStatement(query);
-                preparesStatemnt.setDouble(1,reglement.getAmount());
-                preparesStatemnt.setString(2,reglement.getDate());
-                preparesStatemnt.setString(3,reglement.getMode());
-                preparesStatemnt.setString(4,reglement.getNote());
-                preparesStatemnt.executeUpdate();
-               clear();
-                utility.showAlert("User has been Updated");
-                cnn.close();
-
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-            cnn.close();
-        }
-
-
-        return 0;
-    }
     // Delete
     @FXML
     private void delet_Reglement() throws SQLException{
@@ -301,19 +280,26 @@ public class Reglement_Controller implements Initializable {
         if(! reglement_tableView.getSelectionModel().isEmpty() ) {
 
             try{
-                String query = "DELETE FROM demo.fournisseur_reglement_table WHERE id =?";
                 Reglement reglement =  reglement_tableView.getSelectionModel().getSelectedItem();
-                int i = reglement.getId();
-                String s = String.valueOf(i);
+                int id_Reglement = reglement.getId();
+                String query = "DELETE FROM demo.fournisseur_reglement_table WHERE id ="+id_Reglement;
+
                 preparesStatemnt = conn.connect().prepareStatement(query);
-                preparesStatemnt.setString(1, s);
                 preparesStatemnt.executeUpdate();
-                preparesStatemnt.close();
+
+
+              /////////////////////////////////////
+
+                double old_Sold =  utility.get_Sold(reglement.getFournisseurID()); // 3) Old Sold
+                String query_sold = "UPDATE demo.fournisseur_table SET sold =? Where id="+reglement.getFournisseurID();
+                double new_sold = old_Sold + reglement.getAmount(); // 4) new sold
+                preparesStatemnt = conn.connect().prepareStatement(query_sold);
+                preparesStatemnt.setDouble(1,new_sold);
+                preparesStatemnt.executeUpdate();
+
+                utility.showAlert("Done!! ");
                 refresh();
-                utility.showAlert("User has been deleted");
-                reglement_note_txt.clear();
-                NumberTextField.clear();
-                payement_Mod_cambo.setValue("Espece");
+                preparesStatemnt.close();
                 conn.connect().close();
             }
 
@@ -339,8 +325,7 @@ public class Reglement_Controller implements Initializable {
                    delet_Reglement() ; break;
                case ENTER:
                    add_Reglement_To_Fournisseur();break;
-               case SHIFT:
-                   update_Reglement();break;
+
                case ESCAPE:
                    closeButtonAction();break;
            }
@@ -362,11 +347,15 @@ public class Reglement_Controller implements Initializable {
         payement_Mod_cambo.getItems().addAll("Espece","Check","Verssement");
         payement_Mod_cambo.setValue("Espece");
 
+        try{
+            f_old_sold_txt.setText(FOURNISSEUR_OLD_SOLD+"");
+
+        } catch (Exception e){}
 
          f_Id_txt.setText(FOURNISSEUR_ID+"");
          f_name_txt.setText(FOURNISSEUR_NAME);
          f_address_txt.setText(FOURNISSEUR_ADDESS);
-         f_old_sold_txt.setText(FOURNISSEUR_OLD_SOLD+"");
+
          f_phone_txt.setText("Tel: "+FOURNISSEUR_PHONE);
          reglement_note_txt.setText("/");
         reglement_datePicker.setValue(LocalDate.now());

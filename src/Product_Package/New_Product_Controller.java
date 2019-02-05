@@ -93,6 +93,8 @@ public class New_Product_Controller implements Initializable {
                 && !alert_TXT.getText().isEmpty() && !expiratiob_datePicker.getValue().toString().isEmpty()
            ){
 
+
+            int fournisseurID = utility.getFournisseur_ID(fournisseur_TXT.getText());
             int ID = max_id + 1;                                                     // id
             String fournisseur = fournisseur_TXT.getText();                         // fournisseur
             String reference = "REF0" + max_id + 5;                                // reference
@@ -106,8 +108,8 @@ public class New_Product_Controller implements Initializable {
             PreparedStatement  preparesStatemnt = null;
 
             String query = "INSERT INTO product_table " +
-                    " (id,ref,des,nbr_pcs_crt,code_bare,date_entre,alert,expiration,fournisseur) " +
-                    "VALUES (?,?,?,?,?,?,?,?,?)";
+                    " (id,ref,des,nbr_pcs_crt,code_bare,date_entre,alert,expiration,fournisseur,fournisseurID) " +
+                    "VALUES (?,?,?,?,?,?,?,?,?,?)";
 
 
         //    DATE_FORMAT(date_entre, '%d-%m-%Y')
@@ -121,6 +123,7 @@ public class New_Product_Controller implements Initializable {
             preparesStatemnt.setInt(   7,  Alert     );
             preparesStatemnt.setString(8,  Expiration);
             preparesStatemnt.setString(9,  fournisseur);
+            preparesStatemnt.setInt(   10, fournisseurID  );
             preparesStatemnt.execute();
             loadData();
 
