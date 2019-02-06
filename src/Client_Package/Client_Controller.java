@@ -1,5 +1,7 @@
 package Client_Package;
 
+import Reglement_Package.Client_Reglement_Controller;
+import Reglement_Package.Reglement_Controller;
 import Utilities_Package.Client;
 import Utilities_Package.Db_Connection;
 import Utilities_Package.Fournisseur;
@@ -258,7 +260,27 @@ public class Client_Controller implements Initializable {
     @FXML
     public void open_Reglement_Form(Event event) throws IOException{
 
-        new Utility().show_Reglement_Window("Client :",event);
+        Client client = client_table.getSelectionModel().getSelectedItem();
+
+        if (!client_table.getSelectionModel().isEmpty()){
+
+            Client_Reglement_Controller.CLIENT_NAME     =   client.getName()   ;
+            Client_Reglement_Controller.CLIENT_ADDESS   =   client.getAddress() ;
+            Client_Reglement_Controller.CLIENT_PHONE    =   client.getTelephone() ;
+            Client_Reglement_Controller.CLIENT_ID       =   client.getId()  ;
+            Client_Reglement_Controller.CLIENT_OLD_SOLD =   client.getSold() ;
+
+
+            new Utility().show_Client_Reglement_Window("Client :",event);
+
+           }
+
+        else
+        {
+            utility.showAlert("Nothing is Selected");
+        }
+
+
     }
     // Logout
     @FXML

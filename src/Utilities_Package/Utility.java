@@ -3,6 +3,7 @@ package Utilities_Package;
 import Client_Package.New_Client_Controller;
 import javafx.application.Platform;
 import javafx.event.Event;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -32,19 +33,16 @@ public class Utility {
     ResultSet resultSet = null;
 
     public Utility(){}
-
      //Custom Constructor --> 1
       public Utility(String view, String title  ){
         view_Window = view;
         view_title = title;
 
     }
-
        // Custom Constructor --> 2
      public Utility (String actualWindow,String title, Event event  ) throws IOException {
         switchScene(actualWindow,title,event);
     }
-
     // Starting new Stage Function
        public void openNewStage(String View, String title) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource(View));
@@ -56,7 +54,6 @@ public class Utility {
         stage.setResizable(false);
         stage.show();
     }
-
          // Switching Scenes
       public void switchScene(String Actual_Window,String title, Event event) throws IOException {
 
@@ -71,7 +68,6 @@ public class Utility {
         App_Stage.show();
 
     }
-
       // go Home
          public void go_Home(Event event)  throws IOException{
        switchScene("/Home_Package/Home_View.fxml","Home Page", event);
@@ -118,7 +114,6 @@ public class Utility {
 
             openNewStage("/Product_Package/Product_Edit_View.fxml","Edit Product Window");
         }
-
         // Add new Client Window
         public void show_New_Client_Window(Event e) throws IOException {
 
@@ -134,6 +129,11 @@ public class Utility {
 
             openNewStage("/Reglement_Package/Reglement_View.fxml","Reglement de " + person);
         }
+        // Show client Reglement Window
+        public void show_Client_Reglement_Window(String person,Event e) throws IOException {
+
+            openNewStage("/Reglement_Package/Client_Reglement_View.fxml","Reglement de " + person);
+        }
         // Update Client
          public void show_update_Client_Window() throws IOException {
 
@@ -141,8 +141,6 @@ public class Utility {
              openNewStage("/Client_Package/New_Client_View.fxml","Modifier Client " );
 
              }
-
-
         // Log in
         public void log_In(String person ,Event event) throws IOException {
 
@@ -173,9 +171,8 @@ public class Utility {
             return  idmax;
 
               }
-
-    // Find Sum
-    public double get_Sum_Amount(int fournisseurID) throws SQLException {
+        // Find Sum For Fournisseur
+        public double get_Sum_Amount(int fournisseurID) throws SQLException {
 
         String query = "SELECT SUM(amount) FROM demo.fournisseur_reglement_table WHERE fournisseurID ="+fournisseurID;
 
@@ -192,8 +189,6 @@ public class Utility {
         return  Sum_amount;
 
     }
-
-
         // Showing Alert Message
         public void showAlert(String s){
 
@@ -205,7 +200,6 @@ public class Utility {
                 note.showConfirm();
 
         }
-
         // String Date Converter
          public LocalDate stringToDateConverter(String stringDate){
 
@@ -215,27 +209,6 @@ public class Utility {
                 ,Integer.parseInt(date_Sperator[0]));
         return myDate;
         }
-
-    // String Date Converter
-    public LocalDate stringToDateConverter_Reversed(String stringDate){
-
-        String[] date_Sperator = stringDate.split("-");
-        LocalDate myDate = LocalDate.of(Integer.parseInt(date_Sperator[0])
-                ,Integer.parseInt(date_Sperator[1])
-                ,Integer.parseInt(date_Sperator[2]));
-        return myDate;
-    }
-
-
-
-        // Date Formatter
-        public String DateToFormatedString(Date L_date){
-              Format formatter;
-              formatter = new SimpleDateFormat("yyyy-MM-dd");
-              String stringDate = formatter.format(L_date);
-              return stringDate;
-        }
-
         public void change_Sytle(TextField textField) {
         String style = "-fx-text-fill: Red ; -fx-font-size: 12px;" +
                 " -fx-background-radius: 20; -fx-alignment : Center;" +
@@ -243,7 +216,6 @@ public class Utility {
         textField.setStyle(style);
 
              }
-
         //Textfield request Focus
         public void setTextFieldFocus(TextField textField){
 
@@ -291,23 +263,38 @@ public class Utility {
         conn.connect().close();
 
     }
-        public double get_Sold(int fournisseurID) throws SQLException {
 
-             double updatedsold = 0.025;
-             String query = "SELECT sold from demo.fournisseur_table  where id ="+fournisseurID;
+    public double get_Sold(int fournisseurID) throws SQLException {
 
-                 Connection cnn = conn.connect();
-                 preparesStatemnt = cnn.prepareStatement(query);
-                 resultSet = preparesStatemnt.executeQuery();
-              if(resultSet.next()){
-               updatedsold = resultSet.getDouble(1);
-           }
-           cnn.close();
+        double updatedsold = 0.025;
+        String query = "SELECT sold from demo.fournisseur_table  where id ="+fournisseurID;
 
-             return updatedsold;
+        Connection cnn = conn.connect();
+        preparesStatemnt = cnn.prepareStatement(query);
+        resultSet = preparesStatemnt.executeQuery();
+        if(resultSet.next()){
+            updatedsold = resultSet.getDouble(1);
+        }
+        cnn.close();
+
+        return updatedsold;
+    }
+    public double get_Client_Sold(int clientID) throws SQLException {
+
+        double updatedsold = 0.025;
+        String query = "SELECT sold from demo.client_table  where id ="+clientID;
+        Connection cnn = conn.connect();
+        preparesStatemnt = cnn.prepareStatement(query);
+        resultSet = preparesStatemnt.executeQuery();
+        if(resultSet.next()){
+            updatedsold = resultSet.getDouble(1);
           }
-          // Get Fournisseur ID
-           public int getFournisseur_ID(String  fournisseurName) throws SQLException {
+        cnn.close();
+
+        return updatedsold;
+         }
+     // Get Fournisseur ID
+     public int getFournisseur_ID(String  fournisseurName) throws SQLException {
               int fournisseurID = 0;
               String query = "SELECT id from demo.fournisseur_table  where name = '"+fournisseurName+"'";
               Connection cnn = conn.connect();
@@ -320,24 +307,19 @@ public class Utility {
                return fournisseurID;
           }
 
-        public void update_sold(int fournisseurID) throws SQLException {
-
-           double total_amount = get_Sum_Amount(fournisseurID);
-           double new_sold = get_Sold(fournisseurID) - total_amount;
-
-            Db_Connection conn = new Db_Connection();
-            ResultSet resultSet = null;
-            PreparedStatement  preparesStatemnt = null;
-
-            String query    = "UPDATE demo.fournisseur_table SET sold =? Where id="+fournisseurID;
-            preparesStatemnt = conn.connect().prepareStatement(query);
-            preparesStatemnt.setDouble(1, new_sold);
-            preparesStatemnt.executeUpdate();
-            conn.connect().close();
-
-           }
-
-
+    // Get Client ID
+    public int getClient_ID(String clientName) throws SQLException {
+        int fournisseurID = 0;
+        String query = "SELECT id from demo.client_table  where name = '"+clientName+"'";
+        Connection cnn = conn.connect();
+        preparesStatemnt = cnn.prepareStatement(query);
+        resultSet = preparesStatemnt.executeQuery();
+        if(resultSet.next()){
+            fournisseurID = resultSet.getInt(1);
+        }
+        cnn.close();
+        return fournisseurID;
+    }
 
 
 

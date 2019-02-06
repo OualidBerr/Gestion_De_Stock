@@ -15,8 +15,23 @@ public class Reglement {
     private DoubleProperty sold;
     private StringProperty note ;
     private IntegerProperty fournisseurID;
+    private IntegerProperty clientID;
 
-    // Constructor
+    public int getClientID() {
+        return clientID.get();
+    }
+
+    public IntegerProperty clientIDProperty() {
+        return clientID;
+    }
+
+    public void setClientID(int clientID) {
+        this.clientID.set(clientID);
+    }
+
+
+
+    // Constructor (1)--> Fournisseur
     public Reglement(int ID, String NAME, String DATE,String MODE, double AMOUNT, double OLD_SOLD, double SOLD,String NOTE,Integer fournisseurID){
 
         this.id       = new SimpleIntegerProperty(ID);
@@ -41,6 +56,22 @@ public class Reglement {
         this.sold     = new SimpleDoubleProperty(SOLD);
 
     }
+
+    // Constructor (1)--> Client
+    public Reglement(int ID,int clientID, String NAME, String DATE,String MODE, double AMOUNT, double OLD_SOLD, double SOLD,String NOTE){
+
+        this.id       = new SimpleIntegerProperty(ID);
+        this.name     = new SimpleStringProperty(NAME);
+        this.date     = new SimpleStringProperty(DATE);
+        this.mode     = new SimpleStringProperty(MODE);
+        this.note     = new SimpleStringProperty(NOTE);
+        this.amount   = new SimpleDoubleProperty(AMOUNT);
+        this.old_sold = new SimpleDoubleProperty(OLD_SOLD);
+        this.sold     = new SimpleDoubleProperty(SOLD);
+        this.clientID       = new SimpleIntegerProperty(clientID);
+
+    }
+
 
     public void setName(String name) {
         this.name.set(name);
