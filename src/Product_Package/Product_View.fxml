@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox onMouseClicked="#loadData" prefHeight="675.0" prefWidth="1336.0" style="-fx-background-color: #FDEDEC;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Product_Package.Product_Controller">
+<VBox onMouseClicked="#loadData" prefHeight="675.0" prefWidth="1336.0" style="-fx-background-color: #D7BDE2;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Product_Package.Product_Controller">
   <children>
     <MenuBar prefHeight="24.0" prefWidth="1219.0" VBox.vgrow="NEVER">
       <menus>
@@ -57,7 +57,7 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handlekeyPressed" prefHeight="650.0" prefWidth="1200.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handlekeyPressed" prefHeight="650.0" prefWidth="1200.0" style="-fx-background-color: #3498DB;" VBox.vgrow="ALWAYS">
       <children>
         <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
           <font>
@@ -102,24 +102,27 @@
                   </Button>
               </items>
             </ToolBar>
-            <VBox layoutX="-1.0" layoutY="68.0" prefHeight="581.0" prefWidth="1202.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0">
+            <VBox layoutX="-1.0" layoutY="69.0" prefHeight="571.0" prefWidth="1316.0" style="-fx-background-color: #D7BDE2;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0">
                <children>
                   <TextField fx:id="search_Textfield" onAction="#fournisseurSearchThread" onMouseClicked="#fournisseurSearchThread" promptText="Search" style="-fx-background-radius: 20; -fx-font-weight: Bold;">
                      <VBox.margin>
-                        <Insets bottom="10.0" left="20.0" right="800.0" />
+                        <Insets bottom="10.0" left="20.0" right="800.0" top="10.0" />
                      </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
                   </TextField>
-                  <TableView fx:id="product_Table" prefHeight="429.0" prefWidth="1180.0" tableMenuButtonVisible="true">
+                  <TableView fx:id="product_Table" prefHeight="429.0" prefWidth="1180.0" style="-fx-font-size: 13;" tableMenuButtonVisible="true">
                     <columns>
                       <TableColumn fx:id="id_column" prefWidth="75.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="N°" />
                       <TableColumn fx:id="ref_column" prefWidth="75.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="Ref" />
                         <TableColumn fx:id="des_column" prefWidth="300.0" style="-fx-background-radius: 20; -fx-font-weight: Bold;" text="Désigniation" />
-                        <TableColumn fx:id="nbr_pcs_crt__column" minWidth="1.6666717529296875" prefWidth="70.0" style="-fx-font-weight: Bold; -fx-alignment: Center;" text="Nbr Pcs/crt" />
-                        <TableColumn fx:id="quantity_column" prefWidth="90.0" style="-fx-font-weight: Bold; -fx-alignment: Center;" text="Quantité" />
-                        <TableColumn fx:id="nbr_pcs_column" prefWidth="50.0" style="-fx-font-weight: Bold; -fx-alignment: Center;" text="Nbr pcs" />
-                        <TableColumn fx:id="code_bare_column" prefWidth="120.0" style="-fx-font-weight: Bold;" text="Code à Bare" />
-                        <TableColumn fx:id="date_entre_column" style="-fx-font-weight: Bold;" text="Date d'entre" />
-                        <TableColumn fx:id="alert_column" prefWidth="50.0" style="-fx-font-weight: Bold;" text="Alert" />
+                        <TableColumn fx:id="nbr_pcs_crt__column" minWidth="1.6666717529296875" prefWidth="82.0" style="-fx-font-weight: Bold; -fx-alignment: Center;" text="Nbr Pcs/crt" />
+                        <TableColumn fx:id="quantity_column" prefWidth="78.0" style="-fx-font-weight: Bold; -fx-alignment: Center;" text="Quantité" />
+                        <TableColumn fx:id="nbr_pcs_column" prefWidth="64.6666259765625" style="-fx-font-weight: Bold; -fx-alignment: Center;" text="Nbr pcs" />
+                        <TableColumn fx:id="code_bare_column" prefWidth="105.3333740234375" style="-fx-font-weight: Bold;" text="Code à Bare" />
+                        <TableColumn fx:id="date_entre_column" prefWidth="90.6666259765625" style="-fx-font-weight: Bold;" text="Date d'entre" />
+                        <TableColumn fx:id="alert_column" prefWidth="39.3333740234375" style="-fx-font-weight: Bold;" text="Alert" />
                         <TableColumn fx:id="expiration_column" style="-fx-font-weight: Bold;" text="Expiration" />
                         <TableColumn fx:id="prix_achat_column" style="-fx-font-weight: Bold;" text="Prix d'achat" />
                         <TableColumn fx:id="prix_vent_column" style="-fx-font-weight: Bold;" text="Prix de vent" />
@@ -131,23 +134,15 @@
                   </TableView>
                   <HBox prefHeight="50.0" prefWidth="1180.0">
                      <children>
-                        <Button fx:id="newProduct_btn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Add_New_Product_Form" prefHeight="50.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Nouveux produit">
+                        <Button fx:id="newProduct_btn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Add_New_Product_Form" prefHeight="40.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Nouveux produit">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <HBox.margin>
-                              <Insets left="180.0" />
+                              <Insets left="250.0" />
                            </HBox.margin>
                         </Button>
-                        <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Edit_Product_Window" prefHeight="50.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Modifié">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="50.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button layoutX="127.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete_Product" prefHeight="50.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Suprime">
+                        <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Edit_Product_Window" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="Modifié">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -155,7 +150,15 @@
                               <Insets left="50.0" />
                            </HBox.margin>
                         </Button>
-                        <Button layoutX="244.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Charge">
+                        <Button layoutX="127.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete_Product" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="Suprime">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="50.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button layoutX="244.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="Charge">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

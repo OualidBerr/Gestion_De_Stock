@@ -1,5 +1,6 @@
 package Utilities_Package;
 
+import Client_Package.New_Client_Controller;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
@@ -133,6 +134,15 @@ public class Utility {
 
             openNewStage("/Reglement_Package/Reglement_View.fxml","Reglement de " + person);
         }
+        // Update Client
+         public void show_update_Client_Window() throws IOException {
+
+
+             openNewStage("/Client_Package/New_Client_View.fxml","Modifier Client " );
+
+             }
+
+
         // Log in
         public void log_In(String person ,Event event) throws IOException {
 
@@ -232,7 +242,7 @@ public class Utility {
                 " -fx-font-weight: Bold;";
         textField.setStyle(style);
 
-    }
+             }
 
         //Textfield request Focus
         public void setTextFieldFocus(TextField textField){
@@ -254,7 +264,6 @@ public class Utility {
             });
 
         }
-
         public void verssementFun(double amount, double old_sold, int id) throws SQLException {
 
            Db_Connection conn = new Db_Connection();
@@ -297,9 +306,8 @@ public class Utility {
 
              return updatedsold;
           }
-
           // Get Fournisseur ID
-          public int getFournisseur_ID(String  fournisseurName) throws SQLException {
+           public int getFournisseur_ID(String  fournisseurName) throws SQLException {
               int fournisseurID = 0;
               String query = "SELECT id from demo.fournisseur_table  where name = '"+fournisseurName+"'";
               Connection cnn = conn.connect();
@@ -311,7 +319,6 @@ public class Utility {
                 cnn.close();
                return fournisseurID;
           }
-
 
         public void update_sold(int fournisseurID) throws SQLException {
 

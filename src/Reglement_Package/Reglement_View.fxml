@@ -96,7 +96,7 @@
             </VBox>
          </children>
       </VBox>
-      <TableView fx:id="reglement_tableView" layoutX="13.0" layoutY="238.0" onKeyPressed="#handlekeyPressed" onMouseClicked="#showOnClick" prefHeight="355.0" prefWidth="1200.0" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="238.0">
+      <TableView fx:id="reglement_tableView" layoutX="13.0" layoutY="238.0" onKeyPressed="#handlekeyPressed" onMouseClicked="#showOnClick" prefHeight="355.0" prefWidth="1200.0" style="-fx-font-size: 14;" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="238.0">
         <columns>
           <TableColumn fx:id="Id_column" prefWidth="100.0" sortType="DESCENDING" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="N°" />
             <TableColumn fx:id="amount_column" prefWidth="200.0" style="-fx-background-radius: 20; -fx-font-weight: Bold; -fx-alignment: Center;" text="Montant de paiment" />
@@ -127,28 +127,28 @@
             </Button>
          </children>
       </VBox>
-      <TextField fx:id="f_Id_txt" alignment="CENTER" editable="false" layoutX="53.0" layoutY="65.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20;" AnchorPane.leftAnchor="25.0">
+      <TextField fx:id="f_Id_txt" alignment="CENTER" editable="false" layoutX="53.0" layoutY="65.0" prefHeight="25.0" prefWidth="200.0" style="-fx-font-weight: Bold;" AnchorPane.leftAnchor="25.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="f_name_txt" alignment="CENTER" editable="false" layoutX="53.0" layoutY="99.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20;" AnchorPane.leftAnchor="25.0">
+      <TextField fx:id="f_name_txt" alignment="CENTER" editable="false" layoutX="53.0" layoutY="99.0" prefHeight="25.0" prefWidth="200.0" style="-fx-font-weight: Bold;" AnchorPane.leftAnchor="25.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></TextField>
-      <TextField fx:id="f_phone_txt" alignment="CENTER" editable="false" layoutX="52.0" layoutY="133.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20;" AnchorPane.leftAnchor="25.0" />
-      <TextField fx:id="f_address_txt" alignment="CENTER" editable="false" layoutX="52.0" layoutY="163.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20;" AnchorPane.leftAnchor="25.0" />
-      <TextField fx:id="f_old_sold_txt" alignment="CENTER" editable="false" layoutX="50.0" layoutY="193.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20;" AnchorPane.leftAnchor="25.0" />
-      <TextField fx:id="show_operation_N_txt" alignment="CENTER" editable="false" layoutX="1094.0" layoutY="48.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="45.0">
+      <TextField fx:id="f_phone_txt" alignment="CENTER" editable="false" layoutX="52.0" layoutY="133.0" prefHeight="25.0" prefWidth="200.0" style="-fx-font-weight: Bold;" AnchorPane.leftAnchor="25.0" />
+      <TextField fx:id="f_address_txt" alignment="CENTER" editable="false" layoutX="52.0" layoutY="163.0" prefHeight="25.0" prefWidth="200.0" style="-fx-font-weight: Bold;" AnchorPane.leftAnchor="25.0" />
+      <TextField fx:id="f_old_sold_txt" alignment="CENTER" editable="false" layoutX="50.0" layoutY="193.0" prefHeight="25.0" prefWidth="200.0" style="-fx-font-weight: Bold;" AnchorPane.leftAnchor="25.0" />
+      <TextField fx:id="show_operation_N_txt" alignment="CENTER" editable="false" layoutX="1094.0" layoutY="48.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20; -fx-font-weight: Bold;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="45.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="show_date_txt" alignment="CENTER" editable="false" layoutX="1095.0" layoutY="81.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="80.0" />
-      <TextField fx:id="show_montant_txt" alignment="CENTER" editable="false" layoutX="1093.0" layoutY="110.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="110.0" />
-      <TextField fx:id="show_encient_sold_txt" alignment="CENTER" editable="false" layoutX="1093.0" layoutY="139.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="140.0" />
-      <TextField fx:id="show__sold_txt" alignment="CENTER" editable="false" layoutX="1091.0" layoutY="168.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="170.0" />
-      <TextField fx:id="show__note_txt" alignment="CENTER" editable="false" layoutX="1075.0" layoutY="200.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="200.0" />
+      <TextField fx:id="show_date_txt" alignment="CENTER" editable="false" layoutX="1095.0" layoutY="81.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20; -fx-font-weight: Bold;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="80.0" />
+      <TextField fx:id="show_montant_txt" alignment="CENTER" editable="false" layoutX="1093.0" layoutY="110.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20; -fx-font-weight: Bold;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="110.0" />
+      <TextField fx:id="show_encient_sold_txt" alignment="CENTER" editable="false" layoutX="1093.0" layoutY="139.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20; -fx-font-weight: Bold;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="140.0" />
+      <TextField fx:id="show__sold_txt" alignment="CENTER" editable="false" layoutX="1091.0" layoutY="168.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20; -fx-font-weight: Bold;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="170.0" />
+      <TextField fx:id="show__note_txt" alignment="CENTER" editable="false" layoutX="1075.0" layoutY="200.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20; -fx-font-weight: Bold;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="200.0" />
       <Label layoutX="973.0" layoutY="55.0" prefHeight="22.0" prefWidth="105.0" text="N° Operation " AnchorPane.rightAnchor="172.0" AnchorPane.topAnchor="55.0">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -179,16 +179,15 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="show_Label" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="14.0" prefHeight="38.0" prefWidth="437.0" style="-fx-background-color: Black; -fx-background-radius: 20;" text="Fournisseur " textFill="#e80f0f">
+      <Label fx:id="show_Label" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="14.0" prefHeight="38.0" prefWidth="437.0" style="-fx-background-color: Black; -fx-background-radius: 20;" text="Fournisseur " textFill="#e80f0f" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="15.0">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="closeButton" layoutX="1101.0" layoutY="607.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="25.0" prefWidth="101.0" style="-fx-background-radius: 20;" text="Exit" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="50.0">
+      <Button fx:id="closeButton" layoutX="1101.0" layoutY="607.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="23.0" prefWidth="101.0" style="-fx-background-radius: 20;" text="Exit" AnchorPane.bottomAnchor="22.0" AnchorPane.rightAnchor="50.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="688.0" layoutY="21.0" mnemonicParsing="false" onAction="#show_Summount" text="Button" />
    </children>
 </AnchorPane>

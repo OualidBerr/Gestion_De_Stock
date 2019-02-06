@@ -86,8 +86,8 @@ public class Product_Controller implements Initializable {
 
     }
 
-    @FXML
-    public void fournisseurSearchThread( ) throws SQLException{
+        @FXML
+        public void fournisseurSearchThread( ) throws SQLException{
 
         ref_column.setCellValueFactory(cellData -> cellData.getValue().refProperty());
         des_column.setCellValueFactory(cellData -> cellData.getValue().designiationProperty());
@@ -240,27 +240,27 @@ public class Product_Controller implements Initializable {
 
     }
 
-    @FXML
-    public void handlekeyPressed(KeyEvent event) throws Exception {
+         @FXML
+         public void handlekeyPressed(KeyEvent event) throws Exception {
 
-        switch (event.getCode()) {
-            case N:
-                open_Add_New_Product_Form(event);break;
-            case F:
-                Open_Fournisseur_Window(event);break;
-            case C:
-                Open_Client_Window(event);break;
-            case S:
-                open_Stock_Window(event);break;
-            case ALT_GRAPH:
-                Open_Caisse_Window(event);break;
-            case H:
-                goBack_To_Home_Window(event);break;
-            case DELETE:
-                delete_Product();break;
-            case M:
-                open_Edit_Product_Window(event);break;
-            case F5:
+             switch (event.getCode()) {
+                  case N:
+                     open_Add_New_Product_Form(event);break;
+                    case F:
+                        Open_Fournisseur_Window(event);break;
+                          case C:
+                             Open_Client_Window(event);break;
+                               case S:
+                                 open_Stock_Window(event);break;
+                                     case ALT_GRAPH:
+                                        Open_Caisse_Window(event);break;
+                                              case H:
+                                                goBack_To_Home_Window(event);break;
+                                                     case DELETE:
+                                                       delete_Product();break;
+                                                       case M:
+                                                           open_Edit_Product_Window(event);break;
+                                                               case F5:
                 loadData();break;
 
 

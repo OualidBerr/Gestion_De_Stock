@@ -158,7 +158,7 @@ public class Fournisseur_Controller implements Initializable
     }
     @FXML
     private void delete_Fournisseur() throws SQLException{
-        ;
+
         if(! Fournisseur_Table.getSelectionModel().isEmpty()    ) {
 
             try{
