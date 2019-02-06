@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onKeyPressed="#handlekeyPressed" prefHeight="536.0" prefWidth="691.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Fournisseur_Package.New_Fournisseur_Controller">
+<AnchorPane onKeyPressed="#handlekeyPressed" prefHeight="536.0" prefWidth="550.0" style="-fx-background-color: #D7BDE2;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Fournisseur_Package.New_Fournisseur_Controller">
    <children>
-      <VBox layoutX="173.0" layoutY="130.0" onKeyPressed="#handlekeyPressed" prefHeight="315.0" prefWidth="420.0" style="-fx-background-color: #ccffcc; -fx-background-radius: 20;" AnchorPane.bottomAnchor="91.0" AnchorPane.leftAnchor="173.0" AnchorPane.rightAnchor="138.0" AnchorPane.topAnchor="130.0">
+      <VBox layoutX="178.0" layoutY="170.0" onKeyPressed="#handlekeyPressed" prefHeight="275.0" prefWidth="419.0" style="-fx-background-color: #0080ff; -fx-background-radius: 20;" AnchorPane.bottomAnchor="91.0" AnchorPane.leftAnchor="178.0" AnchorPane.rightAnchor="138.0" AnchorPane.topAnchor="170.0">
          <children>
-            <GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="217.0" prefWidth="400.0">
+            <GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="229.0" prefWidth="400.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -30,7 +30,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label layoutX="80.0" layoutY="13.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="160.0" text="Nom et Prénom" GridPane.rowIndex="1">
+                  <Label layoutX="80.0" layoutY="13.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="160.0" text="Nom et Prénom" textFill="#fcf6f6" GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -38,7 +38,7 @@
                         <Insets left="30.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label layoutX="10.0" layoutY="43.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="160.0" text="Address" GridPane.rowIndex="2">
+                  <Label layoutX="10.0" layoutY="43.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="160.0" text="Address" textFill="WHITE" GridPane.rowIndex="3">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -46,7 +46,7 @@
                         <Insets left="30.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label layoutX="10.0" layoutY="73.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="160.0" text="Numéro de Télephone" GridPane.rowIndex="3">
+                  <Label layoutX="10.0" layoutY="73.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="160.0" text="Numéro de Télephone" textFill="#fffdfd" GridPane.rowIndex="4">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -54,7 +54,7 @@
                         <Insets left="30.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label layoutX="10.0" layoutY="103.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="160.0" text="N/ Régistre" GridPane.rowIndex="4">
+                  <Label layoutX="10.0" layoutY="103.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="160.0" text="N/ Régistre" textFill="WHITE" GridPane.rowIndex="5">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -62,33 +62,37 @@
                         <Insets left="30.0" />
                      </GridPane.margin>
                   </Label>
-                  <TextField fx:id="nametxt" style="-fx-alignment: Center; -fx-background-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="addresstxt" layoutX="255.0" layoutY="49.0" style="-fx-alignment: Center; -fx-background-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="telephonetxt" layoutX="255.0" layoutY="83.0" style="-fx-alignment: Center; -fx-background-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField layoutX="255.0" layoutY="117.0" style="-fx-alignment: Center; -fx-background-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField fx:id="idetxt" GridPane.columnIndex="1" />
+                  <TextField fx:id="nametxt" style="-fx-alignment: Center; -fx-background-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></TextField>
+                  <TextField fx:id="addresstxt" layoutX="255.0" layoutY="49.0" style="-fx-alignment: Center; -fx-background-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></TextField>
+                  <TextField fx:id="telephonetxt" layoutX="255.0" layoutY="83.0" style="-fx-alignment: Center; -fx-background-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></TextField>
+                  <TextField layoutX="255.0" layoutY="117.0" style="-fx-alignment: Center; -fx-background-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></TextField>
+                  <TextField fx:id="idetxt" style="-fx-alignment: Center; -fx-background-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></TextField>
+                  <Label layoutX="40.0" layoutY="94.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="160.0" text="Fournisseur Numero" textFill="#fcf6f6" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                  </Label>
                </children>
             </GridPane>
-            <HBox prefHeight="51.0" prefWidth="489.0">
-               <children>
-                  <Button fx:id="add_Fournisseur_btn" mnemonicParsing="false" onAction="#add_Fournisseur" prefHeight="37.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Ajouter">
-                     <HBox.margin>
-                        <Insets left="60.0" right="50.0" top="10.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="update_fournisseurbtn" layoutX="101.0" layoutY="10.0" mnemonicParsing="false" onAction="#update_Fournisseur" prefHeight="37.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Modifier">
-                     <HBox.margin>
-                        <Insets top="10.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
+            <HBox prefHeight="51.0" prefWidth="489.0" />
          </children>
          <padding>
             <Insets right="20.0" />
@@ -99,9 +103,19 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="closeButton" layoutX="473.0" layoutY="462.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="37.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="EXIT">
+      <Button fx:id="closeButton" layoutX="582.0" layoutY="492.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="30.0" prefWidth="120.0" style="-fx-background-radius: 20; -fx-background-color: White;" text="EXIT" textFill="#0080ff">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="update_fournisseurbtn" layoutX="314.0" layoutY="457.0" mnemonicParsing="false" onAction="#update_Fournisseur" prefHeight="37.0" prefWidth="120.0" style="-fx-background-radius: 20; -fx-background-color: White;" text="Modifier" textFill="#0080ff">
          <font>
             <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="add_Fournisseur_btn" layoutX="314.0" layoutY="457.0" mnemonicParsing="false" onAction="#add_Fournisseur" prefHeight="37.0" prefWidth="120.0" style="-fx-background-radius: 20; -fx-background-color: White;" text="Ajouter" textFill="#0080ff">
+         <font>
+            <Font name="System Bold" size="14.0" />
          </font>
       </Button>
    </children>

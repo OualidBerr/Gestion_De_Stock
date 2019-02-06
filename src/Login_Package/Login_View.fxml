@@ -56,7 +56,7 @@
                                           <Font name="Arabic Typesetting" size="16.0" />
                                        </font>
                                     </PasswordField>
-                                    <Button fx:id="loginbtn" mnemonicParsing="false" onAction="#LoginBtnFunction" prefHeight="35.0" prefWidth="308.0" style="-fx-background-radius: 20;" text="LOG IN" textFill="#1b1919">
+                                    <Button fx:id="loginbtn" mnemonicParsing="false" onAction="#LoginBtnFunction" prefHeight="40.0" prefWidth="241.0" style="-fx-background-radius: 20; -fx-background-color: #59C854;" text="LOG IN" textFill="#fffdfd">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>

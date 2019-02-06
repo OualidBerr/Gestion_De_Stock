@@ -18,13 +18,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import validation_TextField_Package.NumberTextField;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,6 +30,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class Fournisseur_Controller implements Initializable
@@ -39,6 +38,8 @@ public class Fournisseur_Controller implements Initializable
     @FXML
     private Button new_Fournisseur_btn;
     private Button verssement_btn;
+    @FXML
+    public DatePicker reglement_datePicker;
 
     @FXML
     public  TableView<Fournisseur> Fournisseur_Table;
@@ -49,7 +50,7 @@ public class Fournisseur_Controller implements Initializable
     public  TableColumn<Fournisseur,String> telephone_column;
     public  TableColumn<Fournisseur,Double> sold_column;
     @FXML
-    public TextField filterField;
+    public TextField filterField,verssement_txt;
     public static Fournisseur Fournisseur;
     public ObservableList<Fournisseur> data;
     public ObservableList<Reglement> data_2;
@@ -58,6 +59,64 @@ public class Fournisseur_Controller implements Initializable
     PreparedStatement preparesStatemnt = null;
     ResultSet resultSet = null;
     Utility utility = new Utility();
+
+    @FXML
+    public void reglement_rapid() throws SQLException{
+        Fournisseur fournisseur = Fournisseur_Table.getSelectionModel().getSelectedItem();
+        if (!Fournisseur_Table.getSelectionModel().isEmpty()){
+
+            double amount = Double.parseDouble(verssement_txt.getText());
+            int Reglement_id ;
+            int  max_id  = utility.getMax_ID("demo.fournisseur_reglement_table","id") ;
+            Reglement_id = max_id +1;   // 1) Reglement id
+            String note = "/";  // 5) Note
+            String fournisseur_Name = fournisseur.getFournisseurName(); // 6) Fournisseur Name
+            String mode = "Espece"; // 7) Mode
+            String date = reglement_datePicker.getValue().toString(); // 8 payement date
+            int fournisseurID = fournisseur.getFournisseurId(); //9) FournisseurID
+            double old_Sold =  fournisseur.getFournisseurSold(); // 3) Old Sold
+            double new_sold = old_Sold - amount; // 4) new sold
+
+
+
+
+
+
+            if (!verssement_txt.getText().isEmpty()){
+
+                String query =
+                        "INSERT INTO demo.fournisseur_reglement_table"                +
+                                " (id,name,date,mode,amount,oldsold,sold,note,fournisseurID)" +
+                                " VALUES (?,?,?,?,?,?,?,?,?)"                                 ;
+
+                preparesStatemnt = conn.connect().prepareStatement(query);
+                preparesStatemnt.setInt   (1, Reglement_id);
+                preparesStatemnt.setString(2, fournisseur_Name);
+                preparesStatemnt.setString(3, date);
+                preparesStatemnt.setString(4, mode);
+                preparesStatemnt.setDouble(5, amount);
+                preparesStatemnt.setDouble(6, old_Sold);
+                preparesStatemnt.setDouble(7, new_sold);
+                preparesStatemnt.setString(8, note);
+                preparesStatemnt.setInt   (9, fournisseurID);
+                preparesStatemnt.execute();
+
+                String query_sold = "UPDATE demo.fournisseur_table SET sold =? Where id="+fournisseurID;
+                preparesStatemnt = conn.connect().prepareStatement(query_sold);
+                preparesStatemnt.setDouble(1,new_sold);
+                preparesStatemnt.executeUpdate();
+
+                utility.showAlert("Verssement : " + amount + " DZD"+ " received !");
+                preparesStatemnt.close();
+                loadData();
+                verssement_txt.clear();
+                conn.connect().close();
+            }
+
+           }
+
+
+    }
 
     @FXML
     public void fournisseurSearchThread( ) throws SQLException{
@@ -120,8 +179,6 @@ public class Fournisseur_Controller implements Initializable
             System.out.println("error ! Not Connected to Db****");
         }
 
-
-
         Id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
         name_column.setCellValueFactory(new PropertyValueFactory<>("name"));
         adress_column.setCellValueFactory(new PropertyValueFactory<>("address"));
@@ -131,29 +188,15 @@ public class Fournisseur_Controller implements Initializable
         Fournisseur_Table.setItems(data);
         filterField.clear();
         cnn.close();
-
+        verssement_txt.setVisible(false);
 
     }
     @FXML
-    public void showOnClick()throws SQLException{
+    public void showOnClick() {
 
-        try{
-            Fournisseur fournisseur = Fournisseur_Table.getSelectionModel().getSelectedItem();
-
-            String qyery = ("SELECT * FROM demo.users");
-            preparesStatemnt = conn.connect().prepareStatement(qyery);
-            int i = fournisseur.getFournisseurId();
-            String s = String.valueOf(i);
-
-            loadData();
-
-            preparesStatemnt.close();
-
-        }
-
-        catch(SQLException ex){
-
-        }
+       if ( !Fournisseur_Table.getSelectionModel().isEmpty()  ){
+           verssement_txt.setVisible(true);
+       }
 
     }
     @FXML
@@ -288,6 +331,7 @@ public class Fournisseur_Controller implements Initializable
             case V :
                 open_Reglement_Form(event); break;
             case ENTER:
+                reglement_rapid();
                break;
             case N:
                      open_Add_New_Fournisseur_Form( event);break;
@@ -308,6 +352,9 @@ public class Fournisseur_Controller implements Initializable
     }
     @Override
     public void initialize(URL location, ResourceBundle resources)  {
+        reglement_datePicker.setValue(LocalDate.now());
+
+        verssement_txt.setVisible(false);
         try {
             loadData();
         } catch (SQLException e) {

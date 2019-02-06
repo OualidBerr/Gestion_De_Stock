@@ -13,10 +13,7 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 
@@ -26,11 +23,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class Client_Controller implements Initializable {
     @FXML
-    public TextField filterField;
+    public TextField filterField,verssement_txt;
+    @FXML
+    public DatePicker reglement_datePicker;
 
     @FXML
     public Button delete_btn;
@@ -60,6 +60,62 @@ public class Client_Controller implements Initializable {
     PreparedStatement preparesStatemnt = null;
     ResultSet resultSet = null;
     Utility utility = new Utility();
+
+    @FXML
+    public void reglement_rapid() throws SQLException{
+        Client client = client_table.getSelectionModel().getSelectedItem();
+        if (!client_table.getSelectionModel().isEmpty()){
+
+            double amount = Double.parseDouble(verssement_txt.getText());
+            int Reglement_id ;
+            int  max_id  = utility.getMax_ID("demo.client_reglement_table","id") ;
+            Reglement_id = max_id +1;   // 1) Reglement id
+            String note = "/";  // 5) Note
+            String client_Name = client.getName(); // 6) client Name
+            String mode = "Espece"; // 7) Mode
+            String date = reglement_datePicker.getValue().toString(); // 8 payement date
+            int clientID = client.getId(); //9) clientID
+            double old_Sold =  client.getSold(); // 3) Old Sold
+            double new_sold = old_Sold - amount; // 4) new sold
+
+            if (!verssement_txt.getText().isEmpty()){
+
+                String query =
+                        "INSERT INTO demo.client_reglement_table"                +
+                                " (id,name,date,mode,amount,oldsold,sold,note,clientID)" +
+                                " VALUES (?,?,?,?,?,?,?,?,?)"                                 ;
+
+                preparesStatemnt = conn.connect().prepareStatement(query);
+                preparesStatemnt.setInt   (1, Reglement_id);
+                preparesStatemnt.setString(2, client_Name);
+                preparesStatemnt.setString(3, date);
+                preparesStatemnt.setString(4, mode);
+                preparesStatemnt.setDouble(5, amount);
+                preparesStatemnt.setDouble(6, old_Sold);
+                preparesStatemnt.setDouble(7, new_sold);
+                preparesStatemnt.setString(8, note);
+                preparesStatemnt.setInt   (9, clientID);
+                preparesStatemnt.execute();
+
+                String query_sold = "UPDATE demo.client_table SET sold =? Where id="+clientID;
+                preparesStatemnt = conn.connect().prepareStatement(query_sold);
+                preparesStatemnt.setDouble(1,new_sold);
+                preparesStatemnt.executeUpdate();
+
+                utility.showAlert("Verssement : " + amount + " DZD"+ " received !");
+                preparesStatemnt.close();
+                loadData();
+                verssement_txt.clear();
+                conn.connect().close();
+            }
+
+        }
+
+
+    }
+
+
+
 
     @FXML
     public void fournisseurSearchThread( ) throws SQLException{
@@ -146,7 +202,7 @@ public class Client_Controller implements Initializable {
         period_colomn.setCellValueFactory(new PropertyValueFactory<>("period"));
 
         client_table.setItems(data);
-
+        verssement_txt.setVisible(false);
         cnn.close();
 
 
@@ -287,6 +343,15 @@ public class Client_Controller implements Initializable {
     public void log_Out_Function(Event event) throws IOException {
         new Utility().log_Out(event);
     }
+    @FXML
+    public void showOnClick() {
+
+        if ( !client_table.getSelectionModel().isEmpty()  ){
+            verssement_txt.setVisible(true);
+        }
+
+    }
+
     // Event Handler
     @FXML
     public void handlekeyPressed(KeyEvent event) throws Exception {
@@ -307,13 +372,16 @@ public class Client_Controller implements Initializable {
             case M:
                 Open_update_Client_Window(); break;
             case F5:
-               loadData(); break;
+               loadData();break;
+            case ENTER:
+                reglement_rapid();break;
 
         }
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        reglement_datePicker.setValue(LocalDate.now());
+        verssement_txt.setVisible(false);
 
         try {
             loadData();

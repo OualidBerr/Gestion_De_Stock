@@ -22,6 +22,12 @@ import java.util.ResourceBundle;
 public class Home_Controller implements Initializable {
 
 
+    @FXML
+    public void Test(){
+        utility.showAlert("Hello World");
+    }
+
+
     Utility utility;
     @FXML
     private Button products_btn,client_btn,stock_btn,fournisseur_btn,logout_btn;
