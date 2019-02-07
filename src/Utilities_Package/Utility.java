@@ -141,6 +141,25 @@ public class Utility {
              openNewStage("/Client_Package/New_Client_View.fxml","Modifier Client " );
 
              }
+        // Bon Fournisseur
+      public void show_Bon_Fournisseur_Window(String person)throws IOException{
+          openNewStage("/Bon_Command_Package/Bon_Command_Fournisseur_View.fxml","Bon Command de Fournisseur " + person);
+
+
+          }
+
+
+
+
+
+
+
+
+
+
+
+
+
         // Log in
         public void log_In(String person ,Event event) throws IOException {
 
@@ -306,6 +325,23 @@ public class Utility {
                 cnn.close();
                return fournisseurID;
           }
+
+          // get product ID
+
+    public int getProduct_ID(String  ProductName) throws SQLException {
+        int ProductID = 0;
+        String query = "SELECT id from demo.product_table  where des = '"+ProductName+"'";
+        Connection cnn = conn.connect();
+        preparesStatemnt = cnn.prepareStatement(query);
+        resultSet = preparesStatemnt.executeQuery();
+        if(resultSet.next()){
+            ProductID = resultSet.getInt(1);
+        }
+        cnn.close();
+        return ProductID;
+    }
+
+
 
     // Get Client ID
     public int getClient_ID(String clientName) throws SQLException {

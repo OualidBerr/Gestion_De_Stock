@@ -1,28 +1,19 @@
 package Fournisseur_Package;
 
+import Bon_Command_Package.Bon_Command_Fournisseur_Controller;
 import Reglement_Package.Reglement_Controller;
-import Utilities_Package.Db_Connection;
-import Utilities_Package.Fournisseur;
+import Utilities_Package.*;
 
-import Utilities_Package.Reglement;
-import Utilities_Package.Utility;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
-import validation_TextField_Package.NumberTextField;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,6 +22,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Fournisseur_Controller implements Initializable
@@ -38,6 +30,7 @@ public class Fournisseur_Controller implements Initializable
     @FXML
     private Button new_Fournisseur_btn;
     private Button verssement_btn;
+
     @FXML
     public DatePicker reglement_datePicker;
 
@@ -49,6 +42,7 @@ public class Fournisseur_Controller implements Initializable
     public  TableColumn<Fournisseur,String> adress_column;
     public  TableColumn<Fournisseur,String> telephone_column;
     public  TableColumn<Fournisseur,Double> sold_column;
+
     @FXML
     public TextField filterField,verssement_txt;
     public static Fournisseur Fournisseur;
@@ -117,7 +111,6 @@ public class Fournisseur_Controller implements Initializable
 
 
     }
-
     @FXML
     public void fournisseurSearchThread( ) throws SQLException{
 
@@ -164,7 +157,6 @@ public class Fournisseur_Controller implements Initializable
 
 
     }
-
     public  void loadData() throws SQLException {
         Connection cnn = conn.connect();
         try{
@@ -318,6 +310,65 @@ public class Fournisseur_Controller implements Initializable
         Reglement_Controller.FOURNISSEUR_OLD_SOLD = 0.25;
 
     }
+
+    public void add_One() throws SQLException {
+
+        int  max_id  = utility.getMax_ID("demo.order_table","id") ;
+
+        int Id= max_id + 1;
+
+        String query ="INSERT INTO demo.order_table (id) VALUES ("+Id+") ";
+        preparesStatemnt = conn.connect().prepareStatement(query);
+        preparesStatemnt.execute();
+        preparesStatemnt.close();
+
+        utility.showAlert("One added");
+        System.out.println(query);
+
+
+    }
+
+
+    @FXML
+    public void open_Bon_Fournissur_Form() throws IOException, SQLException {
+
+         ArrayList<String> data = null;
+
+        if(!Fournisseur_Table.getSelectionModel().isEmpty())
+            {
+            Fournisseur fournisseur = Fournisseur_Table.getSelectionModel().getSelectedItem();
+
+                Connection cnn = conn.connect();
+
+                try{
+                    data = new ArrayList<String>();
+                    ResultSet rs = cnn.createStatement().executeQuery("SELECT * FROM demo.product_table where fournisseurID="+fournisseur.getFournisseurId());
+                    while(rs.next()){
+                        data.add(rs.getString(3));
+                    }
+                }
+                catch(SQLException eX){
+                    System.out.println("error ! Not Connected to Db****");
+                }
+
+                cnn.close();
+
+                Bon_Command_Fournisseur_Controller.FOURNISSEUR_ID   = fournisseur.getFournisseurId();
+                Bon_Command_Fournisseur_Controller.FOURNISSEUR_NAME = fournisseur.getFournisseurName();
+                Bon_Command_Fournisseur_Controller.data_2 = data;
+
+                add_One();
+                utility.show_Bon_Fournisseur_Window(fournisseur.getFournisseurName());
+
+            }
+
+
+        else
+            {
+                utility.showAlert("Nothing is Slected");
+            }
+
+    }
         // Logout
     @FXML
     public void log_Out_Function(Event event) throws IOException {
@@ -330,6 +381,8 @@ public class Fournisseur_Controller implements Initializable
         switch (event.getCode()) {
             case V :
                 open_Reglement_Form(event); break;
+            case S:
+                open_Stock_Window(event); break;
             case ENTER:
                 reglement_rapid();
                break;

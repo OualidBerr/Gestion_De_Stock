@@ -18,6 +18,21 @@ public class Product {
     private StringProperty   ref;
     private StringProperty   expiration ;
 
+    public double getValue() {
+        return value.get();
+    }
+
+    public DoubleProperty valueProperty() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value.set(value);
+    }
+
+    private DoubleProperty   value  ;
+
+
 
     // Constructor
     public Product(    Integer ID,        String REF,        String DESIGNATION,  Integer  NBR_PCS_CRT,
@@ -40,8 +55,31 @@ public class Product {
         this.prix_achat     = new SimpleDoubleProperty(PRIX_ACHAT);
         this.prix_ventt     = new SimpleDoubleProperty(PRIX_VENT);
         this.fournisseur    = new SimpleStringProperty(FOURNISSEUR);
+    }
+
+
+
+    // Constructor Stock.
+    public Product(    Integer ID,        String REF,        String DESIGNATION,  Integer  NBR_PCS_CRT,
+                       Integer QUANTITY ,Integer NBR_PCS, Double   PRIX_VENT , double VALUE )
+          {
+        int I = NBR_PCS_CRT*QUANTITY;
+        double V = I*PRIX_VENT;
+
+        this.id             = new SimpleIntegerProperty(ID);
+        this.ref            = new SimpleStringProperty(REF);
+        this.designiation   = new SimpleStringProperty(DESIGNATION);
+        this.Nbr_pcs_crt    = new SimpleIntegerProperty(NBR_PCS_CRT);
+        this.quantite       = new SimpleIntegerProperty(QUANTITY);
+        this.Nbr_pcs        = new SimpleIntegerProperty(I);
+        this.prix_ventt     = new SimpleDoubleProperty(PRIX_VENT);
+        this.value          = new SimpleDoubleProperty(V);
 
     }
+
+
+
+
 
     public int getId() {
         return id.get();

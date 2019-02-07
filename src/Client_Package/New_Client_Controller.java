@@ -124,6 +124,7 @@ public class New_Client_Controller implements Initializable {
                  client.setName(name);
                  client.setAddress(adress);
                  client.setTelephone(telephone);
+                 client.setPeriod(period);
                  client.setMax_sold(sold_max);
                  client.setRegistre(registre);
 
