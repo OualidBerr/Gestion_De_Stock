@@ -379,6 +379,9 @@ public class Reglement_Controller implements Initializable {
 
                     }
                 }
-        );}
+        );
+
+
+    }
 
 }

@@ -142,23 +142,16 @@ public class Utility {
 
              }
         // Bon Fournisseur
-      public void show_Bon_Fournisseur_Window(String person)throws IOException{
+          public void show_Bon_Fournisseur_Window(String person)throws IOException{
           openNewStage("/Bon_Command_Package/Bon_Command_Fournisseur_View.fxml","Bon Command de Fournisseur " + person);
 
 
           }
 
-
-
-
-
-
-
-
-
-
-
-
+          // Bon Global
+          public void show_Bon_Fournisseur_Global_Window(String person)throws IOException{
+              openNewStage("/Bon_Command_Package/Bon_Fournisseur_Global_View.fxml","Bon Command de Fournisseur " + person);
+          }
 
         // Log in
         public void log_In(String person ,Event event) throws IOException {
@@ -255,13 +248,13 @@ public class Utility {
             });
 
         }
-        public void verssementFun(double amount, double old_sold, int id) throws SQLException {
+        public void update_Fournisseur_Sold(double amount, double old_sold, int id) throws SQLException {
 
            Db_Connection conn = new Db_Connection();
            ResultSet resultSet = null;
            PreparedStatement  preparesStatemnt = null;
 
-           double new_Sold = (old_sold - amount);
+           double new_Sold = (old_sold + amount);
            String query    = "UPDATE demo.fournisseur_table SET sold =? Where id="+id;
            preparesStatemnt = conn.connect().prepareStatement(query);
            preparesStatemnt.setDouble(1, new_Sold);
@@ -269,7 +262,47 @@ public class Utility {
            conn.connect().close();
 
        }
-        public void retreive_reglement(double amount, double old_sold, int fournisseurID) throws SQLException {
+
+
+       // get product Id
+       public int get_Product_Id(String productName) throws SQLException {
+
+          int productID = 0;
+          String query = "SELECT id from demo.product_table  where des = '"+productName+"'";
+          Connection cnn = conn.connect();
+          preparesStatemnt = cnn.prepareStatement(query);
+          resultSet = preparesStatemnt.executeQuery();
+          if(resultSet.next()){
+              productID = resultSet.getInt(1);
+          }
+          cnn.close();
+          return productID;
+
+          }
+
+
+         // get old Quantity
+      public int get_Product_quantity(int productID) throws SQLException {
+
+        int product_old_quantity = 0;
+        String query = "SELECT quan from demo.product_table  where id = '"+productID+"'";
+        Connection cnn = conn.connect();
+        preparesStatemnt = cnn.prepareStatement(query);
+        resultSet = preparesStatemnt.executeQuery();
+        if(resultSet.next()){
+            product_old_quantity = resultSet.getInt(1);
+        }
+        cnn.close();
+        return product_old_quantity;
+
+
+          }
+
+
+
+
+
+    public void retreive_reglement(double amount, double old_sold, int fournisseurID) throws SQLException {
 
         Db_Connection conn = new Db_Connection();
         ResultSet resultSet = null;
@@ -340,8 +373,6 @@ public class Utility {
         cnn.close();
         return ProductID;
     }
-
-
 
     // Get Client ID
     public int getClient_ID(String clientName) throws SQLException {

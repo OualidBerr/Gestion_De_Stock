@@ -229,13 +229,13 @@ public class Client_Reglement_Controller implements Initializable {
         preparesStatemnt = conn.connect().prepareStatement(qyery);
 
         int i = reglement.getId();
-        String value_amount = reglement.getAmount()+"";
+        String value_amount = reglement.getAmount()+""; String value_amout_formatted = String.format("$%,.2f", value_amount);
         String note = reglement.getNote();
         String ddate = reglement.getDate();
         String mode = reglement.getMode();
 
         reglement_datePicker.setValue(utility.stringToDateConverter(ddate));
-        NumberTextField.setText(value_amount);
+        NumberTextField.setText(value_amout_formatted);
         reglement_note_txt.setText(note);
         payement_Mod_cambo.setValue(mode);
 

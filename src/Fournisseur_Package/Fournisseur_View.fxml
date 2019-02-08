@@ -135,7 +135,7 @@
                         </DatePicker>
                      </children>
                   </HBox>
-                  <TableView fx:id="Fournisseur_Table" onMouseClicked="#showOnClick" prefHeight="429.0" prefWidth="1180.0" style="-fx-font-size: 14;">
+                  <TableView fx:id="Fournisseur_Table" onMouseClicked="#showOnClick" prefHeight="429.0" prefWidth="1180.0" style="-fx-font-size: 14;" tableMenuButtonVisible="true">
                     <columns>
                       <TableColumn fx:id="Id_column" prefWidth="75.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="N°" />
                       <TableColumn fx:id="name_column" prefWidth="300.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="Nom et Prénom" />
@@ -154,7 +154,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <HBox.margin>
-                              <Insets left="180.0" />
+                              <Insets left="70.0" />
                            </HBox.margin>
                         </Button>
                         <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#show_Edit_Window" prefHeight="40.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Modifié" textFill="#0080ff">
@@ -182,6 +182,14 @@
                            </HBox.margin>
                         </Button>
                         <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Reglement_Form" prefHeight="40.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Verssement" textFill="#0080ff">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="50.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button layoutX="820.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Bon_Fournisseur_Global" prefHeight="40.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Bons Global" textFill="#0080ff">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

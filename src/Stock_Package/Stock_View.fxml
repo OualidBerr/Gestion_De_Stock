@@ -27,7 +27,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </TextField>
-            <TableView fx:id="stock_table" prefHeight="424.0" prefWidth="1035.0" style="-fx-font-size: 14; -fx-font-weight: Bold;">
+            <TableView fx:id="stock_table" prefHeight="424.0" prefWidth="1035.0" style="-fx-font-size: 14; -fx-font-weight: Bold;" tableMenuButtonVisible="true">
               <columns>
                 <TableColumn fx:id="id_column" prefWidth="75.0" style="-fx-background-radius: 20; -fx-alignment: Center;" text="N°" />
                 <TableColumn fx:id="ref_column" prefWidth="75.0" style="-fx-alignment: Center; -fx-background-radius: 20;" text="Ref" />

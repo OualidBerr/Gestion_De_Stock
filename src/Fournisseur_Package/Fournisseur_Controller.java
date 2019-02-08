@@ -1,6 +1,7 @@
 package Fournisseur_Package;
 
 import Bon_Command_Package.Bon_Command_Fournisseur_Controller;
+import Bon_Command_Package.Bon_Fournisseur_Global_Controller;
 import Reglement_Package.Reglement_Controller;
 import Utilities_Package.*;
 
@@ -9,11 +10,14 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -162,7 +166,7 @@ public class Fournisseur_Controller implements Initializable
         try{
 
             data = FXCollections.observableArrayList();
-            ResultSet rs = cnn.createStatement().executeQuery("SELECT * FROM demo.fournisseur_table");
+            ResultSet rs = cnn.createStatement().executeQuery("SELECT id,name,address,telephone,ROUND(sold, 2) FROM demo.fournisseur_table");
             while(rs.next()){
                 data.add(new Fournisseur(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDouble(5)));
             }
@@ -344,7 +348,7 @@ public class Fournisseur_Controller implements Initializable
                     data = new ArrayList<String>();
                     ResultSet rs = cnn.createStatement().executeQuery("SELECT * FROM demo.product_table where fournisseurID="+fournisseur.getFournisseurId());
                     while(rs.next()){
-                        data.add(rs.getString(3));
+                        data.add(rs.getString(3) );
                     }
                 }
                 catch(SQLException eX){
@@ -369,6 +373,27 @@ public class Fournisseur_Controller implements Initializable
             }
 
     }
+    @FXML
+    public void open_Bon_Fournisseur_Global() throws IOException, SQLException{
+
+        if(!Fournisseur_Table.getSelectionModel().isEmpty())
+        {
+            Fournisseur fournisseur = Fournisseur_Table.getSelectionModel().getSelectedItem();
+
+            Bon_Fournisseur_Global_Controller.FOURNISSEUR_ID = fournisseur.getFournisseurId();
+            utility.show_Bon_Fournisseur_Global_Window(fournisseur.getFournisseurName());
+
+        }
+
+        else
+        {
+            utility.showAlert("No Fournisseur is selected");
+        }
+
+
+    }
+
+
         // Logout
     @FXML
     public void log_Out_Function(Event event) throws IOException {
@@ -405,6 +430,9 @@ public class Fournisseur_Controller implements Initializable
     }
     @Override
     public void initialize(URL location, ResourceBundle resources)  {
+
+
+
         reglement_datePicker.setValue(LocalDate.now());
 
         verssement_txt.setVisible(false);

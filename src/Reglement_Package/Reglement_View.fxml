@@ -96,7 +96,7 @@
             </VBox>
          </children>
       </VBox>
-      <TableView fx:id="reglement_tableView" layoutX="13.0" layoutY="238.0" onKeyPressed="#handlekeyPressed" onMouseClicked="#showOnClick" prefHeight="355.0" prefWidth="1200.0" style="-fx-font-size: 14;" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="238.0">
+      <TableView fx:id="reglement_tableView" layoutX="13.0" layoutY="238.0" onKeyPressed="#handlekeyPressed" onMouseClicked="#showOnClick" prefHeight="355.0" prefWidth="1200.0" style="-fx-font-size: 14;" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="238.0">
         <columns>
           <TableColumn fx:id="Id_column" prefWidth="100.0" sortType="DESCENDING" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="N°" />
             <TableColumn fx:id="amount_column" prefWidth="200.0" style="-fx-background-radius: 20; -fx-font-weight: Bold; -fx-alignment: Center;" text="Montant de paiment" />

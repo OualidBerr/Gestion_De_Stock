@@ -144,7 +144,7 @@
                         </DatePicker>
                      </children>
                   </HBox>
-                  <TableView fx:id="client_table" onMouseClicked="#showOnClick" prefHeight="420.0" prefWidth="1024.0">
+                  <TableView fx:id="client_table" onMouseClicked="#showOnClick" prefHeight="420.0" prefWidth="1024.0" tableMenuButtonVisible="true">
                     <columns>
                       <TableColumn fx:id="id_colomn" prefWidth="75.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold; -fx-font-size: 14;" text="N°" />
                       <TableColumn fx:id="name_colomn" prefWidth="200.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold; -fx-font-size: 14;" text="Nom et Prénom" />
