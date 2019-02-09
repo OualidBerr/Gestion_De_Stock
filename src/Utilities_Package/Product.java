@@ -77,6 +77,19 @@ public class Product {
 
     }
 
+   // Constructor Bon Client
+    public Product(double Prix,int NBR_PCS_CRT,int QUAN,int NBR_PCS,String DES){
+
+        int I = NBR_PCS_CRT*QUAN;
+
+        this.designiation   = new SimpleStringProperty(DES);
+        this.Nbr_pcs_crt    = new SimpleIntegerProperty(NBR_PCS_CRT);
+        this.quantite       = new SimpleIntegerProperty(QUAN);
+        this.Nbr_pcs        = new SimpleIntegerProperty(I);
+        this.prix_ventt     = new SimpleDoubleProperty(Prix);
+
+
+    }
 
 
 

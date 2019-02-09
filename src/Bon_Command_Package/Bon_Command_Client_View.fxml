@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane onKeyPressed="#handlekeyPressed" prefHeight="700.0" prefWidth="1435.0" style="-fx-background-color: #D7BDE2;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bon_Command_Package.Bon_Command_Client_Controller">
+   <children>
+      <TextField fx:id="product_txt" layoutX="28.0" layoutY="128.0" prefHeight="35.0" prefWidth="409.0" promptText="Produit">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="quant_txt" layoutX="537.0" layoutY="127.0" prefHeight="35.0" prefWidth="100.0" promptText="Quantite" style="-fx-alignment: Center;" AnchorPane.leftAnchor="537.0" AnchorPane.topAnchor="127.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <Label fx:id="show_lb" alignment="CENTER" contentDisplay="CENTER" layoutX="1091.0" layoutY="667.0" prefHeight="37.0" prefWidth="275.0" style="-fx-background-color: Black; -fx-background-radius: 20;" text="Total amount" textFill="#f1c40f">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TableView fx:id="bon_command_client_table" layoutX="20.0" layoutY="238.0" prefHeight="421.0" prefWidth="1333.0" style="-fx-font-weight: Bold; -fx-font-size: 14;" tableMenuButtonVisible="true" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+         <columns>
+            <TableColumn fx:id="id_column" prefWidth="67.0" style="-fx-alignment: Center;" text="N" />
+            <TableColumn fx:id="ref_column" prefWidth="80.33332824707031" style="-fx-alignment: Center;" text="Ref" />
+            <TableColumn fx:id="des_column" prefWidth="364.9999694824219" text="Designiation" />
+            <TableColumn fx:id="nbr_pcs_crt_column" prefWidth="119.00003051757812" style="-fx-alignment: Center;" text="Nbr_Pcs_crt" />
+            <TableColumn fx:id="quantity_column" prefWidth="93.0" style="-fx-alignment: Center;" text="Quantite" />
+            <TableColumn fx:id="nbr_pcs_column" prefWidth="108.0" style="-fx-alignment: Center;" text="Nbr_pc" />
+            <TableColumn fx:id="prix_vent_column" prefWidth="134.0" style="-fx-alignment: Center;" text="Prix Unitaire" />
+            <TableColumn fx:id="date_column" prefWidth="163.33331298828125" style="-fx-alignment: Center;" text="date" />
+            <TableColumn fx:id="value_column" minWidth="0.0" prefWidth="151.6666259765625" text="Value" />
+         </columns>
+      </TableView>
+      <TableView fx:id="show_table" layoutX="715.0" layoutY="122.0" prefHeight="75.0" prefWidth="700.0" style="-fx-font-weight: Bold; -fx-font-size: 14;" tableMenuButtonVisible="true" AnchorPane.rightAnchor="20.0">
+        <columns>
+          <TableColumn fx:id="des_show_column" prefWidth="318.6666259765625" text="Desegniation" />
+          <TableColumn fx:id="nbr_pcs_crt_show_column" prefWidth="102.666748046875" style="-fx-alignment: Center;" text="Nbr_pcs_crt" />
+            <TableColumn fx:id="quant_show_column" prefWidth="79.6666259765625" style="-fx-alignment: Center;" text="Quantite" />
+            <TableColumn fx:id="nbr_pcs_show_column" prefWidth="100.0" style="-fx-alignment: Center;" text="Nbr_pcs" />
+            <TableColumn fx:id="prix_show_column" prefWidth="97.666748046875" style="-fx-alignment: Center;" text="Prix Unitaire" />
+        </columns>
+      </TableView>
+      <Label fx:id="name_lb" alignment="TOP_LEFT" layoutX="69.0" layoutY="7.0" prefHeight="50.0" prefWidth="501.0" text="Client Name" textFill="#0c25e1">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="address_lb" alignment="TOP_LEFT" layoutX="167.0" layoutY="39.0" prefHeight="26.0" prefWidth="501.0" text="Address :" textFill="#0c25e1">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="phone_lb" alignment="TOP_LEFT" layoutX="163.0" layoutY="58.0" prefHeight="26.0" prefWidth="291.0" text="Telephone :" textFill="#0c25e1">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Button layoutX="207.0" layoutY="182.0" mnemonicParsing="false" onAction="#add_Client_Bon" prefHeight="30.0" prefWidth="100.0" text="Add " textFill="#0c25e1">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="502.0" layoutY="666.0" mnemonicParsing="false" onAction="#save_bon" prefHeight="30.0" prefWidth="100.0" text="Save" textFill="#0c25e1">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Label alignment="TOP_LEFT" layoutX="81.0" layoutY="80.0" prefHeight="26.0" prefWidth="316.0" text="N Registre  : 1268743698" textFill="#0c25e1">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="show_details_btn" layoutX="463.0" layoutY="128.0" mnemonicParsing="false" onAction="#show_product_details" prefHeight="39.0" prefWidth="57.0" text="&gt;&gt;" textFill="#da0d0d">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="649.0" layoutY="665.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Impression" textFill="#0c25e1">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <DatePicker fx:id="datePicker" layoutX="1121.0" layoutY="19.0" AnchorPane.rightAnchor="100.0" />
+      <Label fx:id="title_lb" alignment="CENTER" layoutX="722.0" layoutY="72.0" prefHeight="50.0" prefWidth="206.0" textFill="#0c25e1">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="address_lb1" alignment="TOP_LEFT" layoutX="82.0" layoutY="39.0" prefHeight="26.0" prefWidth="62.0" text="Address :" textFill="#0c25e1">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="address_lb11" alignment="TOP_LEFT" layoutX="78.0" layoutY="58.0" prefHeight="26.0" prefWidth="86.0" text="Telephone :" textFill="#0c25e1">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="closeButton" layoutX="798.0" layoutY="666.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="30.0" prefWidth="100.0" text="Close" textFill="#0c25e1">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

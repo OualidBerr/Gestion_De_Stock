@@ -10,22 +10,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onKeyPressed="#handlekeyPressed" prefHeight="680.0" prefWidth="1201.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bon_Command_Package.Bon_Command_Fournisseur_Controller">
+<AnchorPane onKeyPressed="#handlekeyPressed" prefHeight="680.0" prefWidth="1201.0" style="-fx-background-color: #D7BDE2;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bon_Command_Package.Bon_Command_Fournisseur_Controller">
    <children>
       <TextField fx:id="fournisseurID_TXT" editable="false" layoutX="193.0" layoutY="7.0" prefHeight="25.0" prefWidth="50.0" />
       <TextField fx:id="fournisseur_Name_TXT" editable="false" layoutX="39.0" layoutY="7.0" />
-      <TableView fx:id="bon_command_fournisseur_table" layoutX="15.0" layoutY="303.0" prefHeight="336.0" prefWidth="1176.0" style="-fx-font-weight: Bold;" tableMenuButtonVisible="true">
+      <TableView fx:id="bon_command_fournisseur_table" layoutX="15.0" layoutY="303.0" prefHeight="336.0" prefWidth="1176.0" style="-fx-font-weight: Bold; -fx-font-size: 14;" tableMenuButtonVisible="true">
         <columns>
-          <TableColumn fx:id="id_column" prefWidth="67.0" text="N" />
-          <TableColumn fx:id="ref_column" prefWidth="67.0" text="Ref" />
+          <TableColumn fx:id="id_column" prefWidth="67.0" style="-fx-alignment: Center;" text="N" />
+          <TableColumn fx:id="ref_column" prefWidth="67.0" style="-fx-alignment: Center;" text="Ref" />
             <TableColumn fx:id="des_column" prefWidth="196.0" text="Designiation" />
-            <TableColumn fx:id="nbr_pcs_crt__column" prefWidth="94.0" text="Nbr_Pcs_crt" />
-            <TableColumn fx:id="quantity_column" prefWidth="136.0" text="Quantite" />
-            <TableColumn fx:id="nbr_pcs_column" prefWidth="88.0" text="Nbr_pc" />
-            <TableColumn fx:id="prix_vent_column" prefWidth="113.0" text="Prix vent" />
-            <TableColumn fx:id="prix_achat_column" prefWidth="113.0" text="Prix achat" />
+            <TableColumn fx:id="nbr_pcs_crt__column" prefWidth="94.0" style="-fx-alignment: Center;" text="Nbr_Pcs_crt" />
+            <TableColumn fx:id="quantity_column" prefWidth="136.0" style="-fx-alignment: Center;" text="Quantite" />
+            <TableColumn fx:id="nbr_pcs_column" prefWidth="88.0" style="-fx-alignment: Center;" text="Nbr_pc" />
+            <TableColumn fx:id="prix_vent_column" prefWidth="113.0" style="-fx-alignment: Center;" text="Prix vent" />
+            <TableColumn fx:id="prix_achat_column" prefWidth="113.0" style="-fx-alignment: Center;" text="Prix achat" />
             <TableColumn fx:id="value_column" minWidth="0.0" prefWidth="120.0" text="Value" />
-            <TableColumn fx:id="date_column" prefWidth="143.0" text="date" />
+            <TableColumn fx:id="date_column" prefWidth="143.0" style="-fx-alignment: Center;" text="date" />
         </columns>
       </TableView>
       <TextField fx:id="des_TXT" alignment="CENTER" layoutX="575.0" layoutY="55.0" prefHeight="25.0" prefWidth="225.0" promptText="Desgnation">
@@ -44,28 +44,28 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></TextField>
-      <Button layoutX="610.0" layoutY="212.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#add_Bon" prefHeight="46.0" prefWidth="150.0" text="Add  ">
+      <Button layoutX="610.0" layoutY="212.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#add_Bon" prefHeight="46.0" prefWidth="150.0" text="Add  " textFill="#3f51b5">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>
       <ListView fx:id="list" layoutX="42.0" layoutY="50.0" prefHeight="227.0" prefWidth="391.0" style="-fx-font-weight: Bold;" />
-      <Button fx:id="get_Itembtn" layoutX="453.0" layoutY="86.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="&gt;&gt;">
+      <Button fx:id="get_Itembtn" layoutX="453.0" layoutY="86.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="&gt;&gt;" textFill="#3f51b5">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <DatePicker fx:id="datePicker" layoutX="969.0" layoutY="18.0" style="-fx-font-weight: Bold;" />
-      <Button fx:id="savebtn" layoutX="1040.0" layoutY="213.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#save_bon" prefHeight="44.0" prefWidth="128.0" text="save">
+      <DatePicker fx:id="datePicker" layoutX="984.0" layoutY="18.0" style="-fx-font-weight: Bold;" />
+      <Button fx:id="savebtn" layoutX="1040.0" layoutY="213.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#save_bon" prefHeight="44.0" prefWidth="128.0" text="save" textFill="#3f51b5">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="closeButton" layoutX="827.0" layoutY="215.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="39.0" prefWidth="145.0" text="Close" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="215.0">
+      <Button fx:id="closeButton" layoutX="827.0" layoutY="215.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="39.0" prefWidth="145.0" text="Close" textFill="#3f51b5" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="215.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Label fx:id="show_lb" alignment="CENTER" contentDisplay="CENTER" layoutX="913.0" layoutY="642.0" prefHeight="37.0" prefWidth="275.0" style="-fx-background-color: Black;" text="Total amount" textFill="#da0d0d">
+      <Label fx:id="show_lb" alignment="CENTER" contentDisplay="CENTER" layoutX="913.0" layoutY="642.0" prefHeight="37.0" prefWidth="275.0" style="-fx-background-color: Black; -fx-background-radius: 20;" text="Total amount" textFill="#f1c40f">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

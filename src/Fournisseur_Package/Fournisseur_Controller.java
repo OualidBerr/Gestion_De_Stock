@@ -329,7 +329,6 @@ public class Fournisseur_Controller implements Initializable
         utility.showAlert("One added");
         System.out.println(query);
 
-
     }
 
 

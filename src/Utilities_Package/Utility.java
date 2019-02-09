@@ -1,9 +1,7 @@
 package Utilities_Package;
 
-import Client_Package.New_Client_Controller;
 import javafx.application.Platform;
 import javafx.event.Event;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -20,10 +18,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Utility {
 
@@ -94,8 +89,19 @@ public class Utility {
         }
         // Go Bon Command Window
         public void go_Bon_Command(Event event)  throws IOException{
-            switchScene("/Bon_Command_Package/Bon_Command_View.fxml","Bon Command Page", event);
+            switchScene("/Bon_Command_Package/Bon_Command_Client_View.fxml","Bon Command Page", event);
         }
+
+        // Go Contoire
+      public void go_Contoir(Event event) throws IOException{
+
+          switchScene("/Contoire_Package/Contoire_View.fxml","Contoire Page", event);
+
+
+             }
+
+
+
        // ShowAndWait a New Window
         // Add new Product Window
         public void show_New_Product_Window(Event e) throws IOException {
@@ -134,6 +140,9 @@ public class Utility {
 
             openNewStage("/Reglement_Package/Client_Reglement_View.fxml","Reglement de " + person);
         }
+
+
+
         // Update Client
          public void show_update_Client_Window() throws IOException {
 
@@ -148,10 +157,22 @@ public class Utility {
 
           }
 
-          // Bon Global
+
+
+
+
+          // Bon Fournisseur Global
           public void show_Bon_Fournisseur_Global_Window(String person)throws IOException{
               openNewStage("/Bon_Command_Package/Bon_Fournisseur_Global_View.fxml","Bon Command de Fournisseur " + person);
           }
+
+
+    // Bon Client Global
+    public void show_Bon_Client_Global_Window(String person)throws IOException{
+        openNewStage("/Bon_Command_Package/Bon_Client_Global_View.fxml","Bon Command de Client " + person);
+    }
+
+
 
         // Log in
         public void log_In(String person ,Event event) throws IOException {
@@ -263,6 +284,47 @@ public class Utility {
 
        }
 
+       // Update CLIENT Sold
+
+    public void update_Client_Sold(double amount, double old_sold, int id) throws SQLException {
+
+        Db_Connection conn = new Db_Connection();
+        ResultSet resultSet = null;
+        PreparedStatement  preparesStatemnt = null;
+
+        double new_Sold = (old_sold + amount);
+        String query    = "UPDATE demo.client_table SET sold =? Where id="+id;
+        preparesStatemnt = conn.connect().prepareStatement(query);
+        preparesStatemnt.setDouble(1, new_Sold);
+        preparesStatemnt.executeUpdate();
+        conn.connect().close();
+
+    }
+
+
+
+
+        // update stock
+          public void update_stock(int productID,int new_quant) throws SQLException {
+
+              Db_Connection conn = new Db_Connection();
+              ResultSet resultSet = null;
+              PreparedStatement  preparesStatemnt = null;
+              String query    = "UPDATE demo.product_table SET quan =? Where id="+productID;
+              preparesStatemnt = conn.connect().prepareStatement(query);
+              preparesStatemnt.setInt(1, new_quant);
+              preparesStatemnt.executeUpdate();
+              conn.connect().close();
+
+
+          }
+
+
+
+
+
+
+
 
        // get product Id
        public int get_Product_Id(String productName) throws SQLException {
@@ -298,23 +360,6 @@ public class Utility {
 
           }
 
-
-
-
-
-    public void retreive_reglement(double amount, double old_sold, int fournisseurID) throws SQLException {
-
-        Db_Connection conn = new Db_Connection();
-        ResultSet resultSet = null;
-        PreparedStatement  preparesStatemnt = null;
-        double new_Sold = (old_sold + amount );
-        String query    = "UPDATE demo.fournisseur_table SET sold =? Where id="+fournisseurID;
-        preparesStatemnt = conn.connect().prepareStatement(query);
-        preparesStatemnt.setDouble(1, new_Sold);
-        preparesStatemnt.executeUpdate();
-        conn.connect().close();
-
-    }
 
     public double get_Sold(int fournisseurID) throws SQLException {
 

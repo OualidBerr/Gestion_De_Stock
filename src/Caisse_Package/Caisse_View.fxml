@@ -23,7 +23,7 @@
                   <Insets bottom="20.0" left="50.0" right="800.0" />
                </VBox.margin>
             </TextField>
-            <TableView prefHeight="342.0" prefWidth="1354.0">
+            <TableView prefHeight="342.0" prefWidth="1354.0" tableMenuButtonVisible="true">
               <columns>
                 <TableColumn prefWidth="100.0" text="N" />
                 <TableColumn prefWidth="220.0" text="Client/Fournisseur" />
@@ -81,37 +81,37 @@
       </MenuBar>
       <ToolBar layoutX="-7.0" layoutY="34.0" prefHeight="54.0" prefWidth="1347.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
          <items>
-            <Button fx:id="goHome_btn" layoutX="125.0" layoutY="10.0" mnemonicParsing="false" onAction="#goBack_To_Home_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Home">
+            <Button fx:id="goHome_btn" layoutX="125.0" layoutY="10.0" mnemonicParsing="false" onAction="#goBack_To_Home_Window" prefHeight="50.0" prefWidth="120.0" text="Home">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="Home_btn" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Contoire">
+            <Button fx:id="Home_btn" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Contoire">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="products_btn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Product_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Produits">
+            <Button fx:id="products_btn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Product_Window" prefHeight="50.0" prefWidth="120.0" text="Produits">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="stock_btn" layoutX="125.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Stock_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Stock">
+            <Button fx:id="stock_btn" layoutX="125.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Stock_Window" prefHeight="50.0" prefWidth="120.0" text="Stock">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="fournisseur_btn" layoutX="240.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Fournisseur_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Fournisseurs">
+            <Button fx:id="fournisseur_btn" layoutX="240.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Fournisseur_Window" prefHeight="50.0" prefWidth="120.0" text="Fournisseurs">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="client_btn" layoutX="355.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Client_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Clients">
+            <Button fx:id="client_btn" layoutX="355.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Client_Window" prefHeight="50.0" prefWidth="120.0" text="Clients">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="logout_btn" layoutX="470.0" layoutY="10.0" mnemonicParsing="false" onAction="#log_Out_Function" prefHeight="50.0" prefWidth="120.0" style="-fx-background-radius: 20;" text="Deconnexion">
+            <Button fx:id="logout_btn" layoutX="470.0" layoutY="10.0" mnemonicParsing="false" onAction="#log_Out_Function" prefHeight="50.0" prefWidth="120.0" text="Deconnexion">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

@@ -1,5 +1,6 @@
 package Client_Package;
 
+import Bon_Command_Package.*;
 import Reglement_Package.Client_Reglement_Controller;
 import Reglement_Package.Reglement_Controller;
 import Utilities_Package.Client;
@@ -12,10 +13,14 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -54,6 +59,10 @@ public class Client_Controller implements Initializable {
     public TableColumn<Client,String> registre_colomn;
     @FXML
     public TableColumn<Client,Double> sold_colomn;
+    @FXML
+    public Button bon_command_btn = new Button();
+    @FXML
+    public Button bon_command_Global_btn = new Button();
 
     public ObservableList<Client> data;
     Db_Connection conn = new Db_Connection();
@@ -113,9 +122,6 @@ public class Client_Controller implements Initializable {
 
 
     }
-
-
-
 
     @FXML
     public void fournisseurSearchThread( ) throws SQLException{
@@ -338,6 +344,86 @@ public class Client_Controller implements Initializable {
 
 
     }
+
+    public void add_One() throws SQLException {
+
+        int  max_id  = utility.getMax_ID("demo.order_table","id") ;
+
+        int Id= max_id + 1;
+
+        String query ="INSERT INTO demo.order_table (id) VALUES ("+Id+") ";
+        preparesStatemnt = conn.connect().prepareStatement(query);
+        preparesStatemnt.execute();
+        preparesStatemnt.close();
+
+       // utility.showAlert("One added");
+    //    System.out.println(query);
+
+    }
+
+
+
+    @FXML
+    public void open_Bon_Command_Form(Event event) throws IOException, SQLException {
+
+        Client client = client_table.getSelectionModel().getSelectedItem();
+
+        if (!client_table.getSelectionModel().isEmpty()){
+
+           Bon_Command_Client_Controller.NAME     =   client.getName()   ;
+           Bon_Command_Client_Controller.ADDRESS  =   client.getAddress() ;
+           Bon_Command_Client_Controller.PHONE    =   client.getTelephone() ;
+            Bon_Command_Client_Controller.ID       =   client.getId()  ;
+            Bon_Command_Client_Controller.SOLD     =   client.getSold() ;
+
+          //  new Utility().go_Bon_Command(event);
+            Parent parent = FXMLLoader.load(getClass().getResource("/Bon_Command_Package/Bon_Command_Client_View.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Bon Command");
+            stage.setFullScreen(false);
+            stage.setResizable(false);
+            stage.show();
+            add_One();
+
+        }
+
+        else
+        {
+            utility.showAlert("Nothing is Selected");
+        }
+
+
+    }
+
+
+    @FXML
+    public void open_Bon_Client_Global() throws IOException {
+
+        if(!client_table.getSelectionModel().isEmpty())
+        {
+            Client client = client_table.getSelectionModel().getSelectedItem();
+            Bon_Client_Global_Controller.CLIENT_ID = client.getId();
+           utility.show_Bon_Client_Global_Window(client.getName());
+
+           }
+
+        else
+        {
+            utility.showAlert("No client is selected");
+        }
+
+
+    }
+
+
+
+
+
+
+
+
     // Logout
     @FXML
     public void log_Out_Function(Event event) throws IOException {
@@ -351,7 +437,6 @@ public class Client_Controller implements Initializable {
         }
 
     }
-
     // Event Handler
     @FXML
     public void handlekeyPressed(KeyEvent event) throws Exception {

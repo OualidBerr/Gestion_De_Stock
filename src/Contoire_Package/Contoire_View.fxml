@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox onKeyPressed="#handlekeyPressed" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #4FC3F7;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Home_Package.Home_Controller">
+<VBox onKeyPressed="#handlekeyPressed" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #4FC3F7;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Contoire_Package.Contoire_Controller">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -67,12 +67,12 @@
         </Label>
             <ToolBar prefHeight="54.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3F51B5;" text="Home" textFill="WHITE">
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#goBack_To_Home_Window" prefHeight="50.0" prefWidth="120.0" text="Home" textFill="#3f51b5">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                <Button mnemonicParsing="false" onAction="#Open_Contoire_Window"  prefHeight="50.0" prefWidth="120.0" text="Contoire" textFill="#3f51b5">
+                <Button mnemonicParsing="false" onMouseEntered="#Test" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3F51B5;" text="Contoire" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Button>
@@ -101,7 +101,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button layoutX="585.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Bon_Command_Window" prefHeight="50.0" prefWidth="130.0" text="Bon Command" textFill="#3f51b5">
+                  <Button layoutX="585.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Bon_Command_Window" prefHeight="50.0" prefWidth="120.0" text="Bon Command" textFill="#3f51b5">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

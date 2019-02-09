@@ -1,27 +1,27 @@
-package Home_Package;
+package Contoire_Package;
 
 import Utilities_Package.Utility;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Home_Controller implements Initializable {
+public class Contoire_Controller implements Initializable {
 
 
+    @FXML
+    public void Test(){
+        utility.showAlert("Hello World");
+    }
+
+
+    Utility utility;
     @FXML
     private Button products_btn,client_btn,stock_btn,fournisseur_btn,logout_btn;
 
@@ -35,6 +35,14 @@ public class Home_Controller implements Initializable {
         new Utility().go_Pruduct(event);
 
     }
+
+    @FXML
+    public void goBack_To_Home_Window(Event event) throws IOException {
+
+        new Utility().go_Home(event);
+    }
+
+
 
     // Stock
     @FXML
@@ -71,15 +79,6 @@ public class Home_Controller implements Initializable {
     public void Open_Bon_Command_Window(Event event) throws IOException {
         new Utility().go_Bon_Command(event);
     }
-
-    // Go Contoire
-    @FXML
-    public void Open_Contoire_Window(Event event)throws IOException  {
-        new Utility().go_Contoir(event);
-    }
-
-
-
     // Logout
     @FXML
     public void log_Out_Function(Event event) throws IOException {

@@ -57,55 +57,26 @@ public class Bon_Fournisseur_Global_Controller implements Initializable {
     public TableColumn<Bon_Fournisseur_Global,String> date_column;
     @FXML
     public Button closeButton;
+
     @FXML
-    public ToggleButton toggleButton;
-
-
-
-
-    public static String getString_value() {
-        return string_value.get();
-    }
-
-    public static StringProperty string_valueProperty() {
-        return string_value;
-    }
-
-    public static void setString_value(String string_value) {
-        Bon_Fournisseur_Global_Controller.string_value.set(string_value);
-    }
-
-
-    private static StringProperty string_value = new SimpleStringProperty("Show Details");
-
-
+    public ToggleButton toggleButton = new ToggleButton();
 
     @FXML
     private  void handel_toggle_Button_event(){
 
         if(toggleButton.isSelected())
               {
+                  toggleButton.setText("Hide Details");
                   bon_command_fournisseur_table.setVisible(true);
-                  setString_value("Hide Details");
+
              }
         else
              {
                  bon_command_fournisseur_table.setVisible(false);
-            setString_value("Show Details");
+                 toggleButton.setText("Show Details");
               }
 
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
     public static int FOURNISSEUR_ID;
@@ -246,10 +217,6 @@ public class Bon_Fournisseur_Global_Controller implements Initializable {
                     }
                 }
         );
-
-
-
-
 
 
 

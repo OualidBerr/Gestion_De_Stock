@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="700.0" prefWidth="1301.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bon_Command_Package.Bon_Client_Global_Controller">
+   <children>
+      <TableView fx:id="Bon_Client_Global_table" layoutX="95.0" layoutY="89.0" prefHeight="200.0" prefWidth="475.0">
+        <columns>
+          <TableColumn fx:id="id_column" prefWidth="75.0" text="N" />
+          <TableColumn fx:id="n_bon_column" prefWidth="120.33332824707031" text="Bon_Num" />
+            <TableColumn fx:id="valeur_column" prefWidth="138.0" text="Value" />
+            <TableColumn fx:id="date_column" prefWidth="111.66668701171875" text="Date" />
+        </columns>
+      </TableView>
+      <TableView fx:id="bon_command_client_table" layoutX="31.0" layoutY="336.0" prefHeight="319.0" prefWidth="1227.0">
+         <columns>
+            <TableColumn fx:id="Id_column" prefWidth="86.33333015441895" text="N" />
+            <TableColumn fx:id="ref_column" prefWidth="103.00001525878906" text="Ref" />
+            <TableColumn fx:id="des_column" prefWidth="255.99998474121094" text="Designiation" />
+            <TableColumn fx:id="nbr_pcs_crt__column" prefWidth="108.0" text="Nbr_pcs_crt" />
+            <TableColumn fx:id="quantity_column" prefWidth="100.0" text="Quantity" />
+            <TableColumn fx:id="nbr_pcs_column" prefWidth="113.0" text="Nbr_pcs" />
+            <TableColumn fx:id="prix_vent_column" prefWidth="104.0" text="Prix" />
+            <TableColumn fx:id="valu_column" prefWidth="159.0" text="Value" />
+            <TableColumn fx:id="dat_column" prefWidth="132.0" text="Date" />
+         </columns>
+      </TableView>
+      <ToggleButton fx:id="toggleButton" layoutX="633.0" layoutY="233.0" mnemonicParsing="false" onAction="#handel_toggle_Button_event" prefHeight="32.0" prefWidth="89.0" text="ToggleButton" />
+      <Label fx:id="show_total" alignment="CENTER" contentDisplay="CENTER" layoutX="988.0" layoutY="660.0" prefHeight="33.0" prefWidth="249.0" style="-fx-background-color: Black; -fx-background-radius: 20;" text="Total amount" textFill="#f1c40f">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

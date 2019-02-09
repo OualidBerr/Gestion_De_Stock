@@ -76,8 +76,6 @@ import java.util.ResourceBundle;
         public static int FOURNISSEUR_ID;
 
         public ObservableList<Bon_Command_Fournisseur> data;
-
-
         Db_Connection conn = new Db_Connection();
         PreparedStatement preparesStatemnt = null;
         ResultSet resultSet = null;
@@ -243,15 +241,15 @@ import java.util.ResourceBundle;
                     double old_sold = utility.get_Sold(fournisseurID);
                     utility.update_Fournisseur_Sold(amount, old_sold, fournisseurID);
 
-                        }
+                }
 
                 catch (SQLException eX) {
                     System.out.println("error ! Not Connected to Db****");
-                        }
+                }
 
 
 
-            // Update product
+                // Update product
 
 
                 preparesStatemnt.close();
@@ -264,7 +262,6 @@ import java.util.ResourceBundle;
             {
 
             }
-
 
         }
 
@@ -294,7 +291,6 @@ import java.util.ResourceBundle;
                     while (rs.next()){
                         ref =           rs.getString(1) ;
                         nbr_pcs_crt =   rs.getInt(2) ;
-
                     }
                 }
                 catch(SQLException eX){
@@ -302,8 +298,6 @@ import java.util.ResourceBundle;
                 }
 
                 int  Id  = utility.getMax_ID("demo.bon_command_fournisseur_table","id") ;
-
-
                 String des = des_TXT.getText();
                 int quan = Integer.parseInt(quant_TXT.getText() )  ;
                 int nbr_pcs = quan*nbr_pcs_crt ;
@@ -322,10 +316,9 @@ import java.util.ResourceBundle;
                 preparesStatemnt.setInt   (1, Id+1);
                 preparesStatemnt.setString(2, ref);
                 preparesStatemnt.setString(3, des);
-
-                preparesStatemnt.setInt(4, nbr_pcs_crt);
-                preparesStatemnt.setInt(5, quan);
-                preparesStatemnt.setInt(6, nbr_pcs);
+                preparesStatemnt.setInt   (4, nbr_pcs_crt);
+                preparesStatemnt.setInt   (5, quan);
+                preparesStatemnt.setInt   (6, nbr_pcs);
                 preparesStatemnt.setDouble(7, prix_vent);
                 preparesStatemnt.setDouble(8, prix_achat);
                 preparesStatemnt.setDouble(9, value);
@@ -333,7 +326,6 @@ import java.util.ResourceBundle;
                 preparesStatemnt.setInt   (11, bonID);
                 preparesStatemnt.setString(12, date);
                 preparesStatemnt.execute();
-
                 preparesStatemnt.close();
                 refresh(bonID);
 
@@ -368,12 +360,6 @@ import java.util.ResourceBundle;
                     e.printStackTrace();
                 }
 
-
-
-
-
-
-
                 double sum_amount=0.25;
 
                 String Query =" SELECT sum(value)  FROM demo.bon_command_fournisseur_table where fournisseurID = "+fournisseurId+" " + " and bonID="+bonID   ;
@@ -383,12 +369,6 @@ import java.util.ResourceBundle;
                     sum_amount = rs.getDouble(1);
 
                 }
-
-
-
-
-
-
 
 
                 utility.showAlert("Added successfully");
@@ -415,10 +395,7 @@ import java.util.ResourceBundle;
                     utility.showAlert("Some fields are empty");
                 }
 
-
-
         conn.connect().close();
-
       }
 
         @FXML
@@ -437,11 +414,8 @@ import java.util.ResourceBundle;
                 case ENTER:
                     add_Bon(); break;
 
-
             }
         }
-
-
 
      @Override
      public void initialize(URL location, ResourceBundle resources) {
@@ -474,8 +448,6 @@ import java.util.ResourceBundle;
         fournisseurID_TXT.setText(FOURNISSEUR_ID+"");
         fournisseur_Name_TXT.setText(FOURNISSEUR_NAME);
         TextFields.bindAutoCompletion(des_TXT, data_2);
-
-
 
     }
 }

@@ -10,6 +10,7 @@ public class Bon_Fournisseur_Global {
     private DoubleProperty valeur ;
     private  IntegerProperty bonID;
 
+
     public int getBonID() {
         return bonID.get();
     }
