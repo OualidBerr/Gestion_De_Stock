@@ -1,7 +1,9 @@
 package Utilities_Package;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -9,7 +11,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
@@ -38,6 +42,25 @@ public class Utility {
      public Utility (String actualWindow,String title, Event event  ) throws IOException {
         switchScene(actualWindow,title,event);
     }
+
+    // Testing and Playing around with deferent stages
+    @FXML
+    public void enhanced_open_newStage_Function(String View,String Title,ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(View));
+        Scene scene = new Scene(root);
+        Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
+        // create a new stage:
+        Stage stage = new Stage();
+        // make it modal:
+        stage.initModality(Modality.APPLICATION_MODAL);
+        // make its owner the existing window:
+        stage.initOwner(existingWindow);
+        stage.setScene(scene);
+        stage.setFullScreen(true);
+        stage.setTitle(Title);
+        stage.show();
+    }
+
     // Starting new Stage Function
        public void openNewStage(String View, String title) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource(View));
@@ -50,7 +73,7 @@ public class Utility {
         stage.show();
     }
          // Switching Scenes
-      public void switchScene(String Actual_Window,String title, Event event) throws IOException {
+      public void switchScene_Home(String Actual_Window,String title, Event event) throws IOException {
 
         Parent Home_page_Parent = FXMLLoader.load(getClass().getResource(Actual_Window));
         Scene  Home_page_Scene  = new Scene(Home_page_Parent);
@@ -63,9 +86,34 @@ public class Utility {
         App_Stage.show();
 
     }
+
+    // Switching Scenes
+    public void switchScene(String Actual_Window,String title, Event event) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource(Actual_Window));
+        Scene scene = new Scene(root);
+        Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
+        // create a new stage:
+        Stage stage = new Stage();
+        // make it modal:
+        stage.initModality(Modality.APPLICATION_MODAL);
+        // make its owner the existing window:
+        stage.initOwner(existingWindow);
+        stage.setScene(scene);
+        stage.setFullScreen(true);
+        stage.setTitle(title);
+        stage.setResizable(true);
+
+        stage.show();
+
+    }
+
+
+
+
       // go Home
          public void go_Home(Event event)  throws IOException{
-       switchScene("/Home_Package/Home_View.fxml","Home Page", event);
+             switchScene_Home("/Home_Package/Home_View.fxml","Home Page", event);
      }
       // go Pruduct
       public void go_Pruduct(Event event)  throws IOException{
@@ -167,22 +215,20 @@ public class Utility {
           }
 
 
-    // Bon Client Global
-    public void show_Bon_Client_Global_Window(String person)throws IOException{
+            // Bon Client Global
+          public void show_Bon_Client_Global_Window(String person)throws IOException{
         openNewStage("/Bon_Command_Package/Bon_Client_Global_View.fxml","Bon Command de Client " + person);
     }
-
-
 
         // Log in
         public void log_In(String person ,Event event) throws IOException {
 
-            switchScene("/Home_Package/Home_View.fxml","Home Page*" + person, event);
+            switchScene_Home("/Home_Package/Home_View.fxml","Home Page*" + person, event);
         }
         // Login out
         public void log_Out(Event event) throws IOException {
 
-            switchScene("/Login_Package/Login_View.fxml","Login Page", event);
+            switchScene_Home("/Login_Package/Login_View.fxml","Login Page", event);
 
 
 
@@ -376,6 +422,7 @@ public class Utility {
 
         return updatedsold;
     }
+
     public double get_Client_Sold(int clientID) throws SQLException {
 
         double updatedsold = 0.025;
@@ -385,11 +432,11 @@ public class Utility {
         resultSet = preparesStatemnt.executeQuery();
         if(resultSet.next()){
             updatedsold = resultSet.getDouble(1);
-          }
+                 }
         cnn.close();
-
         return updatedsold;
-         }
+           }
+
      // Get Fournisseur ID
      public int getFournisseur_ID(String  fournisseurName) throws SQLException {
               int fournisseurID = 0;
@@ -403,9 +450,7 @@ public class Utility {
                 cnn.close();
                return fournisseurID;
           }
-
-          // get product ID
-
+    // get product ID
     public int getProduct_ID(String  ProductName) throws SQLException {
         int ProductID = 0;
         String query = "SELECT id from demo.product_table  where des = '"+ProductName+"'";
@@ -418,7 +463,6 @@ public class Utility {
         cnn.close();
         return ProductID;
     }
-
     // Get Client ID
     public int getClient_ID(String clientName) throws SQLException {
         int fournisseurID = 0;

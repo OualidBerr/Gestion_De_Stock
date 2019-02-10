@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 
@@ -41,7 +42,14 @@ public class Bon_Fournisseur_Global_Controller implements Initializable {
     public Button show_details;
     @FXML
     public Label show_total;
-
+    @FXML
+    public Label fournisseur_lb;
+    @FXML
+    public Label address_lb;
+    @FXML
+    public Label phone_lb;
+    @FXML
+    public Label registre_lb;
 
 ////////////////////////////////////////////////////////
 
@@ -61,25 +69,14 @@ public class Bon_Fournisseur_Global_Controller implements Initializable {
     @FXML
     public ToggleButton toggleButton = new ToggleButton();
 
-    @FXML
-    private  void handel_toggle_Button_event(){
-
-        if(toggleButton.isSelected())
-              {
-                  toggleButton.setText("Hide Details");
-                  bon_command_fournisseur_table.setVisible(true);
-
-             }
-        else
-             {
-                 bon_command_fournisseur_table.setVisible(false);
-                 toggleButton.setText("Show Details");
-              }
-
-    }
-
 
     public static int FOURNISSEUR_ID;
+    public static String FOURNISSEUR_NAME;
+    public static String FOURNISSEUR_ADDRESS;
+    public static String FOURNISSEUR_PHONE;
+
+
+
     public ObservableList<Bon_Fournisseur_Global> data;
     public ObservableList<Bon_Command_Fournisseur> data_2;
     Db_Connection conn = new Db_Connection();
@@ -186,6 +183,27 @@ public class Bon_Fournisseur_Global_Controller implements Initializable {
 
        }
 
+
+    @FXML
+    private  void handel_toggle_Button_event(){
+
+        if(toggleButton.isSelected())
+        {
+            toggleButton.setText("Hide Details");
+            bon_command_fournisseur_table.setVisible(true);
+            show_total.setVisible(true);
+
+        }
+        else
+        {
+            bon_command_fournisseur_table.setVisible(false);
+            toggleButton.setText("Show Details");
+            show_total.setVisible(false);
+        }
+
+    }
+
+
     @FXML
     private void closeButtonAction(){
         // get a handle to the stage
@@ -194,9 +212,50 @@ public class Bon_Fournisseur_Global_Controller implements Initializable {
         stage.close();
     }
 
+
+    @FXML
+    public void handlekeyPressed(KeyEvent event) throws Exception {
+
+        switch (event.getCode()) {
+            case ESCAPE:
+                closeButtonAction(); break;
+            case SHIFT:
+
+                if(!Bon_Fourniseur_Global_table.getSelectionModel().isEmpty())
+                {
+                    toggleButton.setText("Hide Details");
+                    bon_command_fournisseur_table.setVisible(true);
+                    show_total.setVisible(true);
+
+                }
+                else
+                {
+                    toggleButton.setText("Show Details");
+                    bon_command_fournisseur_table.setVisible(false);
+                    show_total.setVisible(false);
+                }
+
+
+
+
+            break;
+
+        }
+    }
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        fournisseur_lb.setText(FOURNISSEUR_NAME);
+        address_lb.setText(FOURNISSEUR_ADDRESS);
+         phone_lb.setText(FOURNISSEUR_PHONE);
+         registre_lb.setText("RC/N°: 123658745");
+
+        toggleButton.setText("Details");
         bon_command_fournisseur_table.setVisible(false);
+        show_total.setVisible(false);
 
         try {
             loadData();

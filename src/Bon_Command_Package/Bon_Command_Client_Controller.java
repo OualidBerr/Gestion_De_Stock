@@ -3,12 +3,15 @@ package Bon_Command_Package;
 import Utilities_Package.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.net.URL;
@@ -71,6 +74,8 @@ public class Bon_Command_Client_Controller implements Initializable {
     public static int ID;
     public static double SOLD;
 
+
+
     public ObservableList<Bon_Command_Client> data;
 
     public ObservableList<Product> show_data_List;
@@ -81,10 +86,6 @@ public class Bon_Command_Client_Controller implements Initializable {
     PreparedStatement preparesStatemnt = null;
     ResultSet resultSet = null;
     Utility utility = new Utility();
-
-
-
-
 
     // refresh
     public void refresh(int bonID) throws SQLException {
@@ -133,10 +134,6 @@ public class Bon_Command_Client_Controller implements Initializable {
 
 
     }
-
-
-
-
     // Load List
     public void loadData() throws SQLException {
         Connection cnn = conn.connect();
@@ -179,33 +176,26 @@ public class Bon_Command_Client_Controller implements Initializable {
         cnn.close();
 
       }
-
-
-
     @FXML
     public void save_bon() throws SQLException {
 
         int Id = utility.getMax_ID("demo.bon_table", "id");
         int Bon_Order_Id = utility.getMax_ID(" demo.order_table", "id");
         String BON_NUM = "Bon_" + Bon_Order_Id;
-
         String date = "";
         int clientID = 0;
-        double amount = 0.25;
-        double sum_amount = 0.25;
-
+        double amount = 0;
+        double sum_amount = 0;
 
         Connection cnn = conn.connect();
         try {
 
             ResultSet rs = cnn.createStatement().executeQuery("SELECT  max(clientID),max(date),sum(value) FROM demo.bon_command_client_table Where bonID= " + Bon_Order_Id);
-
             if (rs.next()) {
                 clientID = rs.getInt(1);
                 date = rs.getString(2);
                 amount = rs.getDouble(3);
             }
-
 
             String query =
                     "INSERT INTO demo.bon_table" +
@@ -218,44 +208,15 @@ public class Bon_Command_Client_Controller implements Initializable {
             preparesStatemnt.setString(4, date);
             preparesStatemnt.setInt(5, clientID);
             preparesStatemnt.setInt(6, Bon_Order_Id);
-
             preparesStatemnt.execute();
-
-
-
-            // Update Fournisseur Sold
-
-           try {
-
-               rs = cnn.createStatement().executeQuery("SELECT sum(value) FROM demo.bon_command_client_table Where clientID="+clientID);
-                if (rs.next()) {
-                   amount = rs.getDouble(1);
-
-               }
-
-                double old_sold = utility.get_Client_Sold(clientID);
-                utility.update_Client_Sold(amount, old_sold, clientID);
-
-           }
-
-          catch (SQLException eX) {
-               System.out.println("error ! Not Connected to Db****");
-           }
-
-
-
-
             preparesStatemnt.close();
-        //    bon_command_fournisseur_table.setItems(null);
             utility.showAlert("Added successfully");
-            closeButtonAction();
-        }
+             }
 
         catch (Exception e)
-        {
+            {
 
-        }
-
+            }
 
     }
 
@@ -314,18 +275,38 @@ public class Bon_Command_Client_Controller implements Initializable {
           preparesStatemnt.close();
           total_sum_calculator( bonID ,clientID);
            clear();
-           ///// UP DATE STOCK
+
+        // Update Client Sold
+
+        double amount = 0;
+        try {
+
+            ResultSet    rs = cnn.createStatement().executeQuery("SELECT sum(value) FROM demo.bon_command_client_table Where clientID="+clientID);
+            if (rs.next()) {
+                amount = rs.getDouble(1);
+
+            }
+
+            double old_sold = utility.get_Client_Sold(clientID);
+            utility.update_Client_Sold(amount, old_sold, clientID);
+            utility.showAlert("Update Client Sold function worked !!!");
+
+             }
+
+        catch (SQLException eX) {
+            System.out.println("error ! Not Connected to Db****");
+             }
+
+           ///// UP DATE STOCK //////
              int Old_quant = 0;
              int new_quant = 0;
-            ResultSet rs = cnn.createStatement().executeQuery("SELECT  quan FROM demo.product_table Where id= " + productID);
+             ResultSet rs = cnn.createStatement().executeQuery("SELECT  quan FROM demo.product_table Where id= " + productID);
              if (rs.next()) { Old_quant = rs.getInt(1);}
              new_quant = (Old_quant - quantite);
-            utility.update_stock(productID,new_quant);
-
-         utility.showAlert("Stock updated SUCCESSFULLY!");
-
-        utility.setTextFieldFocus(product_txt);
-         conn.connect().close();
+             utility.update_stock(productID,new_quant);
+             utility.showAlert("Stock updated SUCCESSFULLY!");
+             utility.setTextFieldFocus(product_txt);
+             conn.connect().close();
 
 
       }
@@ -436,11 +417,18 @@ public class Bon_Command_Client_Controller implements Initializable {
             case ALT_GRAPH:
                 show_table.setVisible(false);
                 break;
+            case CONTROL:
+               utility.setTextFieldFocus(product_txt);
+                break;
 
             case ENTER:
                 if (!product_txt.getText().isEmpty() && !quant_txt.getText().isEmpty()  )
                 {
                     add_Client_Bon();
+                }
+                else if (!product_txt.getText().isEmpty() && quant_txt.getText().isEmpty())
+                {
+                    utility.setTextFieldFocus(quant_txt);
                 }
 
                 break;
@@ -451,16 +439,23 @@ public class Bon_Command_Client_Controller implements Initializable {
         }
     }
     @FXML
-    public void closeButtonAction(){
+    public void closeButtonAction() throws SQLException {
         utility.showAlert("CLOSE BUTTON HAS BEEN CLICKED");
         // get a handle to the stage
         Stage stage = (Stage) closeButton.getScene().getWindow();
         // do what you have to do
+        save_bon();
         stage.close();
+
+
     }
+
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
 
         datePicker.setValue(LocalDate.now());
         title_lb.setText("Stock Actual");

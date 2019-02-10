@@ -166,7 +166,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <HBox.margin>
-                              <Insets left="50.0" />
+                              <Insets left="20.0" right="70.0" />
                            </HBox.margin>
                         </Button>
                         <Button fx:id="edit_btn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Open_update_Client_Window" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="Modifié" textFill="#3f51b5">
@@ -174,7 +174,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <HBox.margin>
-                              <Insets left="100.0" />
+                              <Insets right="70.0" />
                            </HBox.margin>
                         </Button>
                         <Button fx:id="delete_btn" layoutX="127.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete_Client" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="Suprime" textFill="#3f51b5">
@@ -182,7 +182,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <HBox.margin>
-                              <Insets left="100.0" />
+                              <Insets right="70.0" />
                            </HBox.margin>
                         </Button>
                         <Button fx:id="verssement_btn" layoutX="244.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Reglement_Form" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="Reglement" textFill="#3f51b5">
@@ -190,7 +190,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <HBox.margin>
-                              <Insets left="100.0" right="50.0" />
+                              <Insets right="70.0" />
                            </HBox.margin>
                         </Button>
                         <Button fx:id="bon_command_btn" layoutX="260.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Bon_Command_Form" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="Bon Command" textFill="#3f51b5">
@@ -198,7 +198,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <HBox.margin>
-                              <Insets right="50.0" />
+                              <Insets right="70.0" />
                            </HBox.margin>
                         </Button>
                         <Button fx:id="bon_command_Global_btn" layoutX="1120.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Bon_Client_Global" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="Bon Glob" textFill="#3f51b5">
@@ -207,6 +207,9 @@
                            </font>
                         </Button>
                      </children>
+                     <VBox.margin>
+                        <Insets left="50.0" />
+                     </VBox.margin>
                   </HBox>
                </children>
             </VBox>

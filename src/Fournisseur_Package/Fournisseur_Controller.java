@@ -380,6 +380,10 @@ public class Fournisseur_Controller implements Initializable
             Fournisseur fournisseur = Fournisseur_Table.getSelectionModel().getSelectedItem();
 
             Bon_Fournisseur_Global_Controller.FOURNISSEUR_ID = fournisseur.getFournisseurId();
+            Bon_Fournisseur_Global_Controller.FOURNISSEUR_NAME = fournisseur.getFournisseurName();
+            Bon_Fournisseur_Global_Controller.FOURNISSEUR_ADDRESS = fournisseur.getFournisseurAdress();
+            Bon_Fournisseur_Global_Controller.FOURNISSEUR_PHONE = fournisseur.getFournisseurTelephone();
+
             utility.show_Bon_Fournisseur_Global_Window(fournisseur.getFournisseurName());
 
         }
@@ -391,7 +395,6 @@ public class Fournisseur_Controller implements Initializable
 
 
     }
-
 
         // Logout
     @FXML

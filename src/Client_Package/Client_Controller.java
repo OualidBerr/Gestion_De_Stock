@@ -405,6 +405,11 @@ public class Client_Controller implements Initializable {
         {
             Client client = client_table.getSelectionModel().getSelectedItem();
             Bon_Client_Global_Controller.CLIENT_ID = client.getId();
+            Bon_Client_Global_Controller.CLIENT_NAME= client.getName();
+            Bon_Client_Global_Controller.CLIENT_ADDRESS = client.getAddress();
+            Bon_Client_Global_Controller.CLIENT_PHONE = client.getTelephone();
+            Bon_Client_Global_Controller.CLIENT_REGISTRE = client.getRegistre();
+
            utility.show_Bon_Client_Global_Window(client.getName());
 
            }

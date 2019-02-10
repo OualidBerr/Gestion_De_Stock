@@ -303,7 +303,7 @@ import java.util.ResourceBundle;
                 int nbr_pcs = quan*nbr_pcs_crt ;
                 double prix_vent = Double.parseDouble(prix_vent_TXT.getText() );
                 double prix_achat = Double.parseDouble(prix_achat_TXT.getText() );
-                double value= prix_vent*nbr_pcs;
+                double value= prix_achat*nbr_pcs;
                 int fournisseurId = FOURNISSEUR_ID;
                 int  max_id_bon  = utility.getMax_ID("demo.order_table","id") ;
                 int bonID = max_id_bon  ;
@@ -334,7 +334,7 @@ import java.util.ResourceBundle;
               int product_Old_Quantity = utility.get_Product_quantity(productID);
               int new_product_quantity= product_Old_Quantity +  quan  ;
               int new_Nbr_Pcs = new_product_quantity*nbr_pcs_crt;
-              double new_value = new_Nbr_Pcs*prix_vent;
+              double new_value = new_Nbr_Pcs*prix_achat;
 
 
                 try{

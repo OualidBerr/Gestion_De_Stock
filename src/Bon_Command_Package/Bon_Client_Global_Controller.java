@@ -6,11 +6,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -49,11 +48,26 @@ public class Bon_Client_Global_Controller implements Initializable {
     public TableColumn<Bon_Fournisseur_Global,String> date_column;
     @FXML
     public Label show_total;
+    @FXML
+    public Label client_name_lb;
+    @FXML
+    public Label address_lb;
+    @FXML
+    public Label phone_lb;
+    @FXML
+    public Label registre_lb;
+    @FXML
+    public Button closeButton;
 
+    public static int    CLIENT_ID;
+    public static String CLIENT_NAME;
+    public static String CLIENT_ADDRESS;
+    public static String CLIENT_PHONE;
+    public static String CLIENT_REGISTRE;
 
     @FXML
     public ToggleButton toggleButton = new ToggleButton();
-    public static int CLIENT_ID;
+
     public ObservableList<Bon_Fournisseur_Global> data;
     public ObservableList<Bon_Command_Client> data_2;
 
@@ -69,11 +83,13 @@ public class Bon_Client_Global_Controller implements Initializable {
         {
             toggleButton.setText("Hide Details");
             bon_command_client_table.setVisible(true);
+            show_total.setVisible(true);
 
         }
         else
         {
             bon_command_client_table.setVisible(false);
+            show_total.setVisible(false);
             toggleButton.setText("Show Details");
         }
 
@@ -111,7 +127,6 @@ public class Bon_Client_Global_Controller implements Initializable {
         cnn.close();
 
     }
-
     @FXML
     // refresh
     public void refresh() throws SQLException {
@@ -169,18 +184,50 @@ public class Bon_Client_Global_Controller implements Initializable {
         cnn.close();
 
     }
+    @FXML
+    private void closeButtonAction(){
+        // get a handle to the stage
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        // do what you have to do
+        stage.close();
+    }
+    @FXML
+    public void handlekeyPressed(KeyEvent event) throws Exception {
+
+        switch (event.getCode()) {
+            case ESCAPE:
+                closeButtonAction(); break;
+            case SHIFT:
+                if(!Bon_Client_Global_table.getSelectionModel().isEmpty())
+                {
+                    toggleButton.setText("Hide Details");
+                    bon_command_client_table.setVisible(true);
+                    show_total.setVisible(true);
+                }
+                break;
+            case ALT_GRAPH:
+                    toggleButton.setText("Show Details");
+                    bon_command_client_table.setVisible(false);
+                    show_total.setVisible(false);
+                break;
 
 
 
 
 
-
-
-
+        }
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        toggleButton.setText("Details");
+        client_name_lb.setText(CLIENT_NAME);
+        address_lb.setText(CLIENT_ADDRESS);
+        phone_lb.setText("Telephone : "+CLIENT_PHONE);
+        registre_lb.setText("RC/N°:"+CLIENT_REGISTRE);
+
         bon_command_client_table.setVisible(false);
+        show_total.setVisible(false);
         try {
             loadData();
         } catch (SQLException e) { e.printStackTrace(); }

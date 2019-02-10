@@ -98,7 +98,7 @@ public class New_Product_Controller implements Initializable {
             int ID = max_id + 1;                                                     // id
             String fournisseur = fournisseur_TXT.getText();                         // fournisseur
             String reference = "REF0" + max_id + 5;                                // reference
-            String des = des_TXT.getText();                                        // Designation
+            String des ="#"+des_TXT.getText();                                        // Designation
             String code_bare = code_bare_TXT.getText();                           // code bare
             int Alert = Integer.parseInt(alert_TXT.getText());                    // Alert
             String Expiration = expiratiob_datePicker.getValue().toString();                        // Expiration
