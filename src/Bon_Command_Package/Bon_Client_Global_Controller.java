@@ -73,7 +73,7 @@ public class Bon_Client_Global_Controller implements Initializable {
 
     Db_Connection conn = new Db_Connection();
     PreparedStatement preparesStatemnt = null;
-    ResultSet resultSet = null;
+    ResultSet rs = null;
     Utility utility = new Utility();
 
     @FXML
@@ -99,7 +99,7 @@ public class Bon_Client_Global_Controller implements Initializable {
         try{
 
             data = FXCollections.observableArrayList();
-            ResultSet rs = cnn.createStatement().executeQuery("SELECT * FROM demo.bon_table where clientID="+CLIENT_ID);
+             rs = cnn.createStatement().executeQuery("SELECT * FROM demo.bon_table where clientID="+CLIENT_ID);
             while(rs.next()){
 
                 data.add(new Bon_Fournisseur_Global(
@@ -117,16 +117,22 @@ public class Bon_Client_Global_Controller implements Initializable {
             System.out.println("error ! Not Connected to Db****");
         }
 
-        id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
-        n_bon_column.setCellValueFactory(new PropertyValueFactory<>("n_bon"));
-        valeur_column.setCellValueFactory(new PropertyValueFactory<>("valeur"));
-        date_column.setCellValueFactory(new PropertyValueFactory<>("date"));
 
-        Bon_Client_Global_table.setItems(data);
+        finally {
 
-        cnn.close();
+            id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
+            n_bon_column.setCellValueFactory(new PropertyValueFactory<>("n_bon"));
+            valeur_column.setCellValueFactory(new PropertyValueFactory<>("valeur"));
+            date_column.setCellValueFactory(new PropertyValueFactory<>("date"));
+            Bon_Client_Global_table.setItems(data);
+
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (rs != null) {rs.close();}
+        }
 
     }
+
     @FXML
     // refresh
     public void refresh() throws SQLException {
@@ -161,27 +167,46 @@ public class Bon_Client_Global_Controller implements Initializable {
             System.out.println("error ! Not Connected to Db****");
         }
 
-        Id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
-        ref_column.setCellValueFactory(new PropertyValueFactory<>("ref"));
-        des_column.setCellValueFactory(new PropertyValueFactory<>("des"));
-        nbr_pcs_crt__column.setCellValueFactory(new PropertyValueFactory<>("nbr_pcs_crt"));
-        nbr_pcs_column.setCellValueFactory(new PropertyValueFactory<>("nbr_pcs"));
-        quantity_column.setCellValueFactory(new PropertyValueFactory<>("quantite"));
-        prix_vent_column.setCellValueFactory(new PropertyValueFactory<>("prix_vent"));
-        valu_column.setCellValueFactory(new PropertyValueFactory<>("value"));
-        dat_column.setCellValueFactory(new PropertyValueFactory<>("date"));
+        finally {
+
+            Id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
+            ref_column.setCellValueFactory(new PropertyValueFactory<>("ref"));
+            des_column.setCellValueFactory(new PropertyValueFactory<>("des"));
+            nbr_pcs_crt__column.setCellValueFactory(new PropertyValueFactory<>("nbr_pcs_crt"));
+            nbr_pcs_column.setCellValueFactory(new PropertyValueFactory<>("nbr_pcs"));
+            quantity_column.setCellValueFactory(new PropertyValueFactory<>("quantite"));
+            prix_vent_column.setCellValueFactory(new PropertyValueFactory<>("prix_vent"));
+            valu_column.setCellValueFactory(new PropertyValueFactory<>("value"));
+            dat_column.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (rs != null) {rs.close();}
+        }
 
         ////////////////////////////////
 
-        double sum_amount=0.25;
-        String Query =" SELECT sum(value)  FROM demo.bon_command_client_table where clientID = "+CLIENT_ID+" " + " and bonID="+bon_client_global.getBonID()   ;
-        ResultSet   rs = cnn.createStatement().executeQuery(Query);
-        if (rs.next()){
-            sum_amount = rs.getDouble(1);
+
+        try{
+            double sum_amount=0.25;
+            String Query =" SELECT sum(value)  FROM demo.bon_command_client_table where clientID = "+CLIENT_ID+" " + " and bonID="+bon_client_global.getBonID()   ;
+            ResultSet   rs = cnn.createStatement().executeQuery(Query);
+            if (rs.next()){
+                sum_amount = rs.getDouble(1);
+            }
+            show_total.setText(sum_amount+"");
+            bon_command_client_table.setItems(data_2);
+
+           }
+
+        catch (Exception ex){ex.printStackTrace();}
+
+        finally {
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (rs != null) {rs.close();}
         }
-        show_total.setText(sum_amount+"");
-        bon_command_client_table.setItems(data_2);
-        cnn.close();
+
 
     }
     @FXML
@@ -210,9 +235,6 @@ public class Bon_Client_Global_Controller implements Initializable {
                     bon_command_client_table.setVisible(false);
                     show_total.setVisible(false);
                 break;
-
-
-
 
 
         }

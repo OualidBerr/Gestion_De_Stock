@@ -10,11 +10,11 @@
 
 <AnchorPane onKeyPressed="#handlekeyPressed" prefHeight="650.0" prefWidth="1200.0" style="-fx-background-color: #D7BDE2;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bon_Command_Package.Bon_Fournisseur_Global_Controller">
    <children>
-      <TableView fx:id="Bon_Fourniseur_Global_table" layoutX="462.0" layoutY="53.0" onKeyPressed="#handlekeyPressed" onMouseClicked="#refresh" prefHeight="187.0" prefWidth="628.0" style="-fx-font-weight: Bold; -fx-alignment: Center; -fx-font-size: 14;">
+      <TableView fx:id="Bon_Fourniseur_Global_table" layoutX="462.0" layoutY="53.0" onKeyPressed="#handlekeyPressed" prefHeight="187.0" prefWidth="628.0" style="-fx-font-weight: Bold; -fx-alignment: Center; -fx-font-size: 14;" tableMenuButtonVisible="true">
         <columns>
           <TableColumn fx:id="id_column" prefWidth="75.0" style="-fx-alignment: Center;" text="N°" />
           <TableColumn fx:id="n_bon_column" prefWidth="147.3333282470703" style="-fx-alignment: Center;" text="BON Num" />
-            <TableColumn fx:id="valeur_column" minWidth="0.0" prefWidth="195.66668701171875" style="-fx-alignment: Center;" text="Valeur" />
+            <TableColumn fx:id="valeur_column" minWidth="0.0" prefWidth="195.66668701171875" style="-fx-alignment: Center;" text="Total" />
             <TableColumn fx:id="date_column" prefWidth="195.6666259765625" style="-fx-alignment: Center;" text="Date" />
         </columns>
       </TableView>
@@ -23,12 +23,12 @@
             <TableColumn fx:id="Id_column" prefWidth="67.0" style="-fx-alignment: Center;" text="N°" />
             <TableColumn fx:id="ref_column" prefWidth="67.0" style="-fx-alignment: Center;" text="Ref" />
             <TableColumn fx:id="des_column" prefWidth="218.66665649414062" text="Designiation" />
-            <TableColumn fx:id="nbr_pcs_crt__column" prefWidth="94.66668701171875" style="-fx-alignment: Center;" text="Nbr_Pcs_crt" />
             <TableColumn fx:id="quantity_column" prefWidth="113.33331298828125" style="-fx-alignment: Center;" text="Quantite" />
+            <TableColumn fx:id="nbr_pcs_crt__column" prefWidth="94.66668701171875" style="-fx-alignment: Center;" text="Nbr_Pcs_crt" />
             <TableColumn fx:id="nbr_pcs_column" prefWidth="88.0" style="-fx-alignment: Center;" text="Nbr_pc" />
-            <TableColumn fx:id="prix_vent_column" prefWidth="113.0" style="-fx-alignment: Center;" text="Prix vent" />
             <TableColumn fx:id="prix_achat_column" prefWidth="113.0" style="-fx-alignment: Center;" text="Prix achat" />
             <TableColumn fx:id="valu_column" minWidth="0.0" prefWidth="128.0" style="-fx-alignment: Center;" text="Value" />
+            <TableColumn fx:id="prix_vent_column" prefWidth="113.0" style="-fx-alignment: Center;" text="Prix vent" />
             <TableColumn fx:id="dat_column" prefWidth="135.0" style="-fx-alignment: Center;" text="date" />
          </columns>
       </TableView>

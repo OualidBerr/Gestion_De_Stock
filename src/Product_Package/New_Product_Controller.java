@@ -50,7 +50,7 @@ public class New_Product_Controller implements Initializable {
 
     Db_Connection conn = new Db_Connection();
     PreparedStatement preparesStatemnt = null;
-    ResultSet resultSet = null;
+    ResultSet rs = null;
     Utility utility = new Utility();
     public ArrayList data_2;
 
@@ -60,17 +60,24 @@ public class New_Product_Controller implements Initializable {
 
         try{
             data_2 = new ArrayList();
-            ResultSet rs = cnn.createStatement().executeQuery("SELECT * FROM demo.fournisseur_table");
+             rs = cnn.createStatement().executeQuery("SELECT * FROM demo.person_table where ABS(personType)=2");
             while(rs.next()){
-                data_2.add(rs.getString(2));
+                data_2.add(rs.getString("name"));
             }
         }
         catch(SQLException eX){
             System.out.println("error ! Not Connected to Db****");
         }
 
-        cnn.close();
+        finally {
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (rs != null) {rs.close();}
+         }
+
+
     }
+
     // Open New Fournisseur Form
     @FXML
     public void open_Add_New_Fournisseur_Form(Event event) throws IOException, SQLException {
@@ -94,46 +101,47 @@ public class New_Product_Controller implements Initializable {
            ){
 
 
-            int fournisseurID = utility.getFournisseur_ID(fournisseur_TXT.getText());
-            int ID = max_id + 1;                                                     // id
-            String fournisseur = fournisseur_TXT.getText();                         // fournisseur
-            String reference = "REF0" + max_id + 5;                                // reference
-            String des ="#"+des_TXT.getText();                                        // Designation
-            String code_bare = code_bare_TXT.getText();                           // code bare
-            int Alert = Integer.parseInt(alert_TXT.getText());                    // Alert
-            String Expiration = expiratiob_datePicker.getValue().toString();                        // Expiration
-            String date_entre = new_Product_datePicker.getValue().toString();    // Date d entre
-            int Nbr_pcs_crt =  Integer.parseInt(nbr_pc_crt_TXT.getText()) ;        // Nombre de pieces
+            try{
 
+                int fournisseurID = utility.getFournisseur_ID(fournisseur_TXT.getText());
+                int ID = max_id + 1;                                                     // id
+                                     // fournisseur
+                String reference = "REF0" + max_id + 5;                                // reference
+                String des ="#"+des_TXT.getText();                                        // Designation
+                String code_bare = code_bare_TXT.getText();                           // code bare
+                int Alert = Integer.parseInt(alert_TXT.getText());                    // Alert
+                String Expiration = expiratiob_datePicker.getValue().toString();                        // Expiration
+                String date_entre = new_Product_datePicker.getValue().toString();    // Date d entre
+                int Nbr_pcs_crt =  Integer.parseInt(nbr_pc_crt_TXT.getText()) ;        // Nombre de pieces
 
+                String query = "INSERT INTO product_table " +
+                        " (id,ref,des,nbr_pcs_crt,code_bare,date_entre,alert,expiration,personID) " +
+                        "VALUES (?,?,?,?,?,?,?,?,?)";
 
+                preparesStatemnt = conn.connect().prepareStatement(query);
+                preparesStatemnt.setInt(   1,  ID       );
+                preparesStatemnt.setString(2,  reference);
+                preparesStatemnt.setString(3,  des      );
+                preparesStatemnt.setInt(   4,  Nbr_pcs_crt  );
+                preparesStatemnt.setString(5,  code_bare );
+                preparesStatemnt.setString(6,  date_entre);
+                preparesStatemnt.setInt(   7,  Alert     );
+                preparesStatemnt.setString(8,  Expiration);
+                preparesStatemnt.setInt(   9, fournisseurID  );
+                preparesStatemnt.execute();
 
-            PreparedStatement  preparesStatemnt = null;
+               }
 
-            String query = "INSERT INTO product_table " +
-                    " (id,ref,des,nbr_pcs_crt,code_bare,date_entre,alert,expiration,fournisseur,fournisseurID) " +
-                    "VALUES (?,?,?,?,?,?,?,?,?,?)";
+            catch (Exception ex){ex.printStackTrace();}
 
-
-        //    DATE_FORMAT(date_entre, '%d-%m-%Y')
-            preparesStatemnt = conn.connect().prepareStatement(query);
-            preparesStatemnt.setInt(   1,  ID       );
-            preparesStatemnt.setString(2,  reference);
-            preparesStatemnt.setString(3,  des      );
-            preparesStatemnt.setInt(   4,  Nbr_pcs_crt  );
-            preparesStatemnt.setString(5,  code_bare );
-            preparesStatemnt.setString(6,  date_entre);
-            preparesStatemnt.setInt(   7,  Alert     );
-            preparesStatemnt.setString(8,  Expiration);
-            preparesStatemnt.setString(9,  fournisseur);
-            preparesStatemnt.setInt(   10, fournisseurID  );
-
-            preparesStatemnt.execute();
-            loadData();
-
-            preparesStatemnt.close();
-            clear();
-            utility.showAlert("New User added successfully");
+            finally {
+                loadData();
+                clear();
+                utility.showAlert("New User added successfully");
+                if (conn.connect()   != null) {conn.connect().close();}
+                if (preparesStatemnt != null) {preparesStatemnt.close();}
+                if (preparesStatemnt != null) {preparesStatemnt.close();}
+                   }
         }
 
     }

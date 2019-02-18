@@ -74,15 +74,18 @@
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></TextField>
-                  <TextField layoutX="255.0" layoutY="117.0" style="-fx-alignment: Center; -fx-background-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <TextField fx:id="registretxt" layoutX="255.0" layoutY="117.0" style="-fx-alignment: Center; -fx-background-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></TextField>
-                  <TextField fx:id="idetxt" style="-fx-alignment: Center; -fx-background-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="idetxt" editable="false" style="-fx-alignment: Center; -fx-background-radius: 20;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font name="System Bold" size="14.0" />
-                     </font></TextField>
-                  <Label layoutX="40.0" layoutY="94.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="160.0" text="Fournisseur Numero" textFill="#fcf6f6" GridPane.rowIndex="1">
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="50.0" right="50.0" />
+                     </GridPane.margin></TextField>
+                  <Label fx:id="id_lb" layoutX="40.0" layoutY="94.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="160.0" text="Fournisseur Numero" textFill="#fcf6f6" GridPane.rowIndex="1">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -98,22 +101,22 @@
             <Insets right="20.0" />
          </padding>
       </VBox>
-      <Label layoutX="118.0" layoutY="34.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="77.0" prefWidth="385.0" style="-fx-alignment: Center; -fx-background-color: #0080ff; -fx-background-radius: 20;" text="Ajouter Nouveau Fournisseur" textFill="#fcf9f9">
+      <Label fx:id="title_lb" layoutX="118.0" layoutY="34.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="77.0" prefWidth="385.0" style="-fx-alignment: Center; -fx-background-color: #0080ff; -fx-background-radius: 20;" text="Ajouter Nouveau Fournisseur" textFill="#fcf9f9">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="closeButton" layoutX="582.0" layoutY="492.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="30.0" prefWidth="120.0" style="-fx-background-radius: 20; -fx-background-color: White;" text="EXIT" textFill="#0080ff">
+      <Button fx:id="closeButton" layoutX="582.0" layoutY="492.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="30.0" prefWidth="120.0" style="-fx-background-radius: 20; -fx-background-color: White;" text="EXIT" textFill="#0080ff" AnchorPane.topAnchor="490.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="update_fournisseurbtn" layoutX="314.0" layoutY="457.0" mnemonicParsing="false" onAction="#update_Fournisseur" prefHeight="37.0" prefWidth="120.0" style="-fx-background-radius: 20; -fx-background-color: White;" text="Modifier" textFill="#0080ff">
+      <Button fx:id="update_fournisseurbtn" layoutX="314.0" layoutY="457.0" mnemonicParsing="false" onAction="#update_Fournisseur" prefHeight="37.0" prefWidth="120.0" style="-fx-background-radius: 20; -fx-background-color: White;" text="Modifier" textFill="#0080ff" AnchorPane.topAnchor="475.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="add_Fournisseur_btn" layoutX="314.0" layoutY="457.0" mnemonicParsing="false" onAction="#add_Fournisseur" prefHeight="37.0" prefWidth="120.0" style="-fx-background-radius: 20; -fx-background-color: White;" text="Ajouter" textFill="#0080ff">
+      <Button fx:id="add_Fournisseur_btn" layoutX="314.0" layoutY="457.0" mnemonicParsing="false" onAction="#add_Fournisseur" prefHeight="37.0" prefWidth="120.0" style="-fx-background-radius: 20; -fx-background-color: White;" text="Ajouter" textFill="#0080ff" AnchorPane.topAnchor="475.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

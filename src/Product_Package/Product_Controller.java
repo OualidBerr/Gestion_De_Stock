@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,11 +41,14 @@ public class Product_Controller implements Initializable {
     public TableColumn<Product,Double>  prix_achat_column;
     public TableColumn<Product,Double>  prix_vent_column;
     public TableColumn<Product,String>  fournisseur_column;
+    public TableColumn<Product,Double>  value_column;
     @FXML
     public TextField search_Textfield;
+    @FXML
+    public Button closeButton;
 
-//***********************************
-   // Declaration of variables
+    //***********************************
+    // Declaration of variables
     public ObservableList<Product> data;
     Db_Connection conn = new Db_Connection();
     PreparedStatement preparesStatemnt = null;
@@ -56,13 +60,30 @@ public class Product_Controller implements Initializable {
         try{
 
             data = FXCollections.observableArrayList();
-            ResultSet rs = cnn.createStatement().executeQuery("SELECT  id,ref,des,nbr_pcs_crt,quan,nbr_pcs,code_bare,DATE_FORMAT(date_entre, '%d-%m-%Y') date_entre,alert,DATE_FORMAT(expiration, '%d-%m-%Y') expiration,prix_achat,prix_vent,fournisseur FROM demo.product_table");
+            ResultSet rs = cnn.createStatement().executeQuery("SELECT  id,ref,des,nbr_pcs_crt,quan,nbr_pcs,code_bare,DATE_FORMAT(date_entre, '%d-%m-%Y') date_entre,alert,DATE_FORMAT(expiration, '%d-%m-%Y') expiration,prix_achat,prix_vent,personID,value FROM demo.product_table");
             while(rs.next()){
-                data.add(new Product(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getInt(5),rs.getInt(6),rs.getString(7),rs.getString(8),rs.getInt(9),rs.getString(10), rs.getDouble(11),rs.getDouble(12),rs.getString(13)));
-              }
+                data.add(new Product(
+                        rs.getInt("id"),
+                        rs.getString("ref"),
+                        rs.getString("des"),
+                        rs.getInt("nbr_pcs_crt"),
+                        rs.getInt("quan"),
+                        rs.getInt("nbr_pcs"),
+                        rs.getString("code_bare"),
+                        rs.getString("date_entre"),
+                        rs.getInt("alert"),
+                        rs.getString("expiration"),
+                        rs.getDouble("prix_achat"),
+                        rs.getDouble("prix_vent"),
+                       utility.get_Person_Name(rs.getInt("personID")),
+                        rs.getDouble("value")
+
+
+                ));
+            }
         }
         catch(SQLException eX){
-            System.out.println("error ! Not Connected to Db****");
+           eX.printStackTrace();
         }
 
         id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -78,6 +99,7 @@ public class Product_Controller implements Initializable {
         prix_achat_column.setCellValueFactory(new PropertyValueFactory<>("prix_achat"));
         prix_vent_column.setCellValueFactory(new PropertyValueFactory<>("prix_ventt"));
         fournisseur_column.setCellValueFactory(new PropertyValueFactory<>("fournisseur"));
+        value_column.setCellValueFactory(new PropertyValueFactory<>("value"));
 
         product_Table.setItems(data);
 
@@ -86,8 +108,8 @@ public class Product_Controller implements Initializable {
 
     }
 
-        @FXML
-        public void fournisseurSearchThread( ) throws SQLException{
+    @FXML
+    public void fournisseurSearchThread( ) throws SQLException{
 
         ref_column.setCellValueFactory(cellData -> cellData.getValue().refProperty());
         des_column.setCellValueFactory(cellData -> cellData.getValue().designiationProperty());
@@ -161,14 +183,13 @@ public class Product_Controller implements Initializable {
 
     }
 
-    @FXML
-    private Button goHome_btn,newProduct_btn,stock_btn;
+
 
     // Go Home Page
     @FXML
     public void goBack_To_Home_Window(Event event) throws IOException {
 
-        new Utility( ).go_Home(event);
+        closeButtonAction();
     }
     // Go New Product
     @FXML
@@ -199,68 +220,72 @@ public class Product_Controller implements Initializable {
         new Utility().go_Caisse(event);
     }
     // Log out
-   @FXML
+    @FXML
     public void log_Out_Function(Event event) throws IOException {
-     new Utility().log_Out(event);
-     }
+        new Utility().log_Out(event);
+    }
 
     @FXML
     public void open_Edit_Product_Window(Event event)throws IOException {
 
-         if(!product_Table.getSelectionModel().isEmpty() ) {
+        if(!product_Table.getSelectionModel().isEmpty() ) {
 
-        Product product = product_Table.getSelectionModel().getSelectedItem();
+            Product product = product_Table.getSelectionModel().getSelectedItem();
 
-           Product_Edit_Controller.ID              = product.getId()  ;
-           Product_Edit_Controller.DESIGNIATON     = product.getDesigniation();
-           Product_Edit_Controller.REF             = product.getRef();
-           Product_Edit_Controller.CODE_BARE       = product.getCode_bare();
-           Product_Edit_Controller.EXPIRATION      = product.getExpiration();
-           Product_Edit_Controller.NBR_PCS         = product.getNbr_pcs();
-           Product_Edit_Controller.NBR_PCS_CRT     = product.getNbr_pcs_crt();
-           Product_Edit_Controller.QUANT           = product.getQuantite();
-           Product_Edit_Controller.ALERT           = product.getAlert();
-           Product_Edit_Controller.FOURNISSEUR     = product.getFournisseur();
-           Product_Edit_Controller.Prix_ACHAT      = product.getPrix_achat();
-           Product_Edit_Controller.Prix_VENT       = product.getPrix_ventt();
-           Product_Edit_Controller.DATE            = product.getDate_entre();
+            Product_Edit_Controller.ID              = product.getId()  ;
+            Product_Edit_Controller.DESIGNIATON     = product.getDesigniation();
+            Product_Edit_Controller.REF             = product.getRef();
+            Product_Edit_Controller.CODE_BARE       = product.getCode_bare();
+            Product_Edit_Controller.EXPIRATION      = product.getExpiration();
+            Product_Edit_Controller.NBR_PCS         = product.getNbr_pcs();
+            Product_Edit_Controller.NBR_PCS_CRT     = product.getNbr_pcs_crt();
+            Product_Edit_Controller.QUANT           = product.getQuantite();
+            Product_Edit_Controller.ALERT           = product.getAlert();
+            Product_Edit_Controller.FOURNISSEUR     = product.getFournisseur();
+            Product_Edit_Controller.Prix_ACHAT      = product.getPrix_achat();
+            Product_Edit_Controller.Prix_VENT       = product.getPrix_ventt();
+            Product_Edit_Controller.DATE            = product.getDate_entre();
 
+            new Utility().show_Edit_Product_Window();
+              }
 
-
-        new Utility().show_Edit_Product_Window();
-    }
-
-    else {
-
-
-     utility.showAlert("Nothing is Selected");
-         }
-
-
+        else {
+            utility.showAlert("Nothing is Selected");
+             }
 
     }
 
-         @FXML
-         public void handlekeyPressed(KeyEvent event) throws Exception {
 
-             switch (event.getCode()) {
-                  case N:
-                     open_Add_New_Product_Form(event);break;
-                    case F:
-                        Open_Fournisseur_Window(event);break;
-                          case C:
-                             Open_Client_Window(event);break;
-                               case S:
-                                 open_Stock_Window(event);break;
-                                     case ALT_GRAPH:
-                                        Open_Caisse_Window(event);break;
-                                              case H:
-                                                goBack_To_Home_Window(event);break;
-                                                     case DELETE:
-                                                       delete_Product();break;
-                                                       case M:
-                                                           open_Edit_Product_Window(event);break;
-                                                               case F5:
+    @FXML
+    private void closeButtonAction(){
+        // get a handle to the stage
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        // do what you have to do
+
+        stage.close();
+    }
+
+    @FXML
+    public void handlekeyPressed(KeyEvent event) throws Exception {
+
+        switch (event.getCode()) {
+            case N:
+                open_Add_New_Product_Form(event);break;
+            case F:
+                Open_Fournisseur_Window(event);break;
+            case C:
+                Open_Client_Window(event);break;
+            case S:
+                open_Stock_Window(event);break;
+            case ALT_GRAPH:
+                Open_Caisse_Window(event);break;
+            case H:
+                closeButtonAction();break;
+            case DELETE:
+                delete_Product();break;
+            case M:
+                open_Edit_Product_Window(event);break;
+            case F5:
                 loadData();break;
 
 

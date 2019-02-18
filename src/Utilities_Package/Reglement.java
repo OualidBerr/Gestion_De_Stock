@@ -7,98 +7,45 @@ import javafx.beans.property.*;
 public class Reglement {
 
     private IntegerProperty id ;
-    private StringProperty name ;
-    private StringProperty date ;
-    private  StringProperty mode;
     private  DoubleProperty amount ;
-    private DoubleProperty old_sold;
+    private DoubleProperty oldsold;
     private DoubleProperty sold;
+    private  StringProperty mode;
+    private StringProperty date ;
     private StringProperty note ;
-    private IntegerProperty fournisseurID;
-    private IntegerProperty clientID;
+    private IntegerProperty personID;
 
-    public int getClientID() {
-        return clientID.get();
+    public double getOldsold() {
+        return oldsold.get();
     }
 
-    public IntegerProperty clientIDProperty() {
-        return clientID;
+    public DoubleProperty oldsoldProperty() {
+        return oldsold;
     }
 
-    public void setClientID(int clientID) {
-        this.clientID.set(clientID);
+    public void setOldsold(double oldsold) {
+        this.oldsold.set(oldsold);
     }
 
 
 
-    // Constructor (1)--> Fournisseur
-    public Reglement(int ID, String NAME, String DATE,String MODE, double AMOUNT, double OLD_SOLD, double SOLD,String NOTE,Integer fournisseurID){
+    // Constractor
+    public Reglement(int ID,double AMOUNT,double OLDSOLD,double SOLD,
+                     String MODE,String DATE,String NOTE,int PERSONID){
 
-        this.id       = new SimpleIntegerProperty(ID);
-        this.name     = new SimpleStringProperty(NAME);
-        this.date     = new SimpleStringProperty(DATE);
-        this.mode     = new SimpleStringProperty(MODE);
-        this.note     = new SimpleStringProperty(NOTE);
-        this.amount   = new SimpleDoubleProperty(AMOUNT);
-        this.old_sold = new SimpleDoubleProperty(OLD_SOLD);
-        this.sold     = new SimpleDoubleProperty(SOLD);
-        this.fournisseurID       = new SimpleIntegerProperty(fournisseurID);
-
-    }
-    public Reglement(int ID, String DATE, String MODE, double AMOUNT, double OLD_SOLD, double SOLD,String NOTE){
-
-        this.id       = new SimpleIntegerProperty(ID);
-        this.date     = new SimpleStringProperty(DATE);
-        this.mode     = new SimpleStringProperty(MODE);
-        this.note     = new SimpleStringProperty(NOTE);
-        this.amount   = new SimpleDoubleProperty(AMOUNT);
-        this.old_sold = new SimpleDoubleProperty(OLD_SOLD);
-        this.sold     = new SimpleDoubleProperty(SOLD);
-
-    }
-
-    // Constructor (1)--> Client
-    public Reglement(int ID,int clientID, String NAME, String DATE,String MODE, double AMOUNT, double OLD_SOLD, double SOLD,String NOTE){
-
-        this.id       = new SimpleIntegerProperty(ID);
-        this.name     = new SimpleStringProperty(NAME);
-        this.date     = new SimpleStringProperty(DATE);
-        this.mode     = new SimpleStringProperty(MODE);
-        this.note     = new SimpleStringProperty(NOTE);
-        this.amount   = new SimpleDoubleProperty(AMOUNT);
-        this.old_sold = new SimpleDoubleProperty(OLD_SOLD);
-        this.sold     = new SimpleDoubleProperty(SOLD);
-        this.clientID       = new SimpleIntegerProperty(clientID);
+               this.id        = new SimpleIntegerProperty(ID)          ;
+               this.amount    = new SimpleDoubleProperty(AMOUNT)       ;
+               this.sold      = new SimpleDoubleProperty(SOLD)         ;
+               this.oldsold   = new SimpleDoubleProperty(OLDSOLD)      ;
+               this.mode      = new SimpleStringProperty(MODE)         ;
+               this.date      = new SimpleStringProperty(DATE)         ;
+               this.note      = new SimpleStringProperty(NOTE)         ;
+               this.personID  = new SimpleIntegerProperty(PERSONID)    ;
 
     }
 
 
-    public void setName(String name) {
-        this.name.set(name);
-    }
 
-    public String getName() {
-        return name.get();
-    }
-
-    public StringProperty nameProperty() {
-        return name;
-    }
-
-    public void setNote(String note) {
-        this.note.set(note);
-    }
-
-    public String getNote() {
-        return note.get();
-    }
-
-    public StringProperty noteProperty() {
-        return note;
-    }
-
-
-    // Getters
     public int getId() {
         return id.get();
     }
@@ -107,20 +54,8 @@ public class Reglement {
         return id;
     }
 
-    public String getDate() {
-        return date.get();
-    }
-
-    public StringProperty dateProperty() {
-        return date;
-    }
-
-    public String getMode() {
-        return mode.get();
-    }
-
-    public StringProperty modeProperty() {
-        return mode;
+    public void setId(int id) {
+        this.id.set(id);
     }
 
     public double getAmount() {
@@ -131,13 +66,10 @@ public class Reglement {
         return amount;
     }
 
-    public double getOld_sold() {
-        return old_sold.get();
+    public void setAmount(double amount) {
+        this.amount.set(amount);
     }
 
-    public DoubleProperty old_soldProperty() {
-        return old_sold;
-    }
 
     public double getSold() {
         return sold.get();
@@ -147,44 +79,57 @@ public class Reglement {
         return sold;
     }
 
-    // Setters
-    public void setId(int id) {
-        this.id.set(id);
+    public void setSold(double sold) {
+        this.sold.set(sold);
     }
 
-    public void setDate(String date) {
-        this.date.set(date);
+    public String getMode() {
+        return mode.get();
+    }
+
+    public StringProperty modeProperty() {
+        return mode;
     }
 
     public void setMode(String mode) {
         this.mode.set(mode);
     }
 
-    public void setAmount(double amount) {
-        this.amount.set(amount);
+    public String getDate() {
+        return date.get();
     }
 
-    public void setOld_sold(double old_sold) {
-        this.old_sold.set(old_sold);
+    public StringProperty dateProperty() {
+        return date;
     }
 
-    public void setSold(double sold) {
-        this.sold.set(sold);
+    public void setDate(String date) {
+        this.date.set(date);
     }
 
-    public void setFournisseurID(int fournisseurID) {
-        this.fournisseurID.set(fournisseurID);
+    public String getNote() {
+        return note.get();
     }
 
-    public int getFournisseurID() {
-        return fournisseurID.get();
+    public StringProperty noteProperty() {
+        return note;
     }
 
-    public IntegerProperty fournisseurIDProperty() {
-        return fournisseurID;
+    public void setNote(String note) {
+        this.note.set(note);
     }
 
+    public int getPersonID() {
+        return personID.get();
+    }
 
+    public IntegerProperty personIDProperty() {
+        return personID;
+    }
+
+    public void setPersonID(int personID) {
+        this.personID.set(personID);
+    }
 
 
 

@@ -1,11 +1,14 @@
 package Client_Package;
 
-import Bon_Command_Package.*;
-import Reglement_Package.Client_Reglement_Controller;
+
+
+
+
 import Reglement_Package.Reglement_Controller;
-import Utilities_Package.Client;
 import Utilities_Package.Db_Connection;
-import Utilities_Package.Fournisseur;
+
+import Utilities_Package.Person;
+import Utilities_Package.PersonType;
 import Utilities_Package.Utility;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,10 +16,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
@@ -42,45 +42,57 @@ public class Client_Controller implements Initializable {
     @FXML
     public Button edit_btn;
     @FXML
-    public TableView<Client> client_table;
+    public TableView<Person> client_table;
     @FXML
-    public TableColumn<Client,Integer> id_colomn;
+    public TableColumn<Person,Integer> id_colomn;
     @FXML
-    public TableColumn<Client,String> name_colomn;
+    public TableColumn<Person,String> name_colomn;
     @FXML
-    public TableColumn<Client,String> address_colomn;
+    public TableColumn<Person,String> address_colomn;
     @FXML
-    public TableColumn<Client,String> phone_colomn;
+    public TableColumn<Person,String> phone_colomn;
     @FXML
-    public TableColumn<Client,String> period_colomn;
+    public TableColumn<Person,String> period_colomn;
     @FXML
-    public TableColumn<Client,Double> soldmax_colomn;
+    public TableColumn<Person,Double> soldmax_colomn;
     @FXML
-    public TableColumn<Client,String> registre_colomn;
+    public TableColumn<Person,String> registre_colomn;
     @FXML
-    public TableColumn<Client,Double> sold_colomn;
+    public TableColumn<Person,Double> sold_colomn;
     @FXML
     public Button bon_command_btn = new Button();
     @FXML
     public Button bon_command_Global_btn = new Button();
+    @FXML
+    public Button closeButton;
 
-    public ObservableList<Client> data;
+
+    public ObservableList<Person> data;
     Db_Connection conn = new Db_Connection();
     PreparedStatement preparesStatemnt = null;
     ResultSet resultSet = null;
     Utility utility = new Utility();
 
+
+
+    @FXML
+    public void open_Bon_Commend_Client(Event event) throws IOException {
+        new Utility().go_Bon_Command(event);
+
+    }
+
+
     @FXML
     public void reglement_rapid() throws SQLException{
-        Client client = client_table.getSelectionModel().getSelectedItem();
+        Person client = client_table.getSelectionModel().getSelectedItem();
         if (!client_table.getSelectionModel().isEmpty()){
 
             double amount = Double.parseDouble(verssement_txt.getText());
             int Reglement_id ;
-            int  max_id  = utility.getMax_ID("demo.client_reglement_table","id") ;
+            int  max_id  = utility.getMax_ID("demo.person_reglement_table","id") ;
             Reglement_id = max_id +1;   // 1) Reglement id
             String note = "/";  // 5) Note
-            String client_Name = client.getName(); // 6) client Name
+
             String mode = "Espece"; // 7) Mode
             String date = reglement_datePicker.getValue().toString(); // 8 payement date
             int clientID = client.getId(); //9) clientID
@@ -89,33 +101,31 @@ public class Client_Controller implements Initializable {
 
             if (!verssement_txt.getText().isEmpty()){
 
-                String query =
-                        "INSERT INTO demo.client_reglement_table"                +
-                                " (id,name,date,mode,amount,oldsold,sold,note,clientID)" +
-                                " VALUES (?,?,?,?,?,?,?,?,?)"                                 ;
+                String query = "INSERT INTO demo.person_reglement_table " +
+                        "(id,amount,old_sold,sold,mode,date,note,personID) VALUES (?,?,?,?,?,?,?,?)";
 
                 preparesStatemnt = conn.connect().prepareStatement(query);
                 preparesStatemnt.setInt   (1, Reglement_id);
-                preparesStatemnt.setString(2, client_Name);
-                preparesStatemnt.setString(3, date);
-                preparesStatemnt.setString(4, mode);
-                preparesStatemnt.setDouble(5, amount);
-                preparesStatemnt.setDouble(6, old_Sold);
-                preparesStatemnt.setDouble(7, new_sold);
-                preparesStatemnt.setString(8, note);
-                preparesStatemnt.setInt   (9, clientID);
+                preparesStatemnt.setDouble(2, amount);
+                preparesStatemnt.setDouble(3, old_Sold);
+                preparesStatemnt.setDouble(4,new_sold);
+                preparesStatemnt.setString(5, mode);
+                preparesStatemnt.setString(6, date);
+                preparesStatemnt.setString(7, note);
+                preparesStatemnt.setInt   (8, clientID);
                 preparesStatemnt.execute();
+                preparesStatemnt.close();
+                conn.connect().close();
 
-                String query_sold = "UPDATE demo.client_table SET sold =? Where id="+clientID;
+                String query_sold = "UPDATE demo.person_table SET sold =? Where id="+clientID;
                 preparesStatemnt = conn.connect().prepareStatement(query_sold);
                 preparesStatemnt.setDouble(1,new_sold);
                 preparesStatemnt.executeUpdate();
 
                 utility.showAlert("Verssement : " + amount + " DZD"+ " received !");
-                preparesStatemnt.close();
                 loadData();
                 verssement_txt.clear();
-                conn.connect().close();
+
             }
 
         }
@@ -132,7 +142,7 @@ public class Client_Controller implements Initializable {
         registre_colomn.setCellValueFactory(cellData -> cellData.getValue().telephoneProperty());
 
         // 1. Wrap the ObservableList in a FilteredList (initially display all data).
-        FilteredList<Client> filteredData = new FilteredList<>(data, p -> true);
+        FilteredList<Person> filteredData = new FilteredList<>(data, p -> true);
 
         // 2. Set the filter Predicate whenever the filter changes.
         filterField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -163,7 +173,7 @@ public class Client_Controller implements Initializable {
         });
 
         // 3. Wrap the FilteredList in a SortedList.
-        SortedList<Client> sortedData = new SortedList<>(filteredData);
+        SortedList<Person> sortedData = new SortedList<>(filteredData);
 
         // 4. Bind the SortedList comparator to the TableView comparator.
         sortedData.comparatorProperty().bind(client_table.comparatorProperty());
@@ -181,16 +191,16 @@ public class Client_Controller implements Initializable {
         try{
 
             data = FXCollections.observableArrayList();
-            ResultSet rs = cnn.createStatement().executeQuery("SELECT * FROM demo.client_table");
+            ResultSet rs = cnn.createStatement().executeQuery("SELECT * FROM demo.person_table where PersonType="+ PersonType.Active_Client);
             while(rs.next()){
-                data.add(new Client(   rs.getInt(   1),
+                data.add(new Person(   rs.getInt(   1),
                                        rs.getString(2),
                                        rs.getString(3),
                                        rs.getString(4),
-                                       rs.getInt   (5),
+                                       rs.getDouble   (5),
                                        rs.getDouble(6),
-                                       rs.getString(7),
-                                       rs.getDouble(8)));
+                                       rs.getInt(7),
+                                       rs.getString(8)));
             }
         }
         catch(SQLException eX){
@@ -212,7 +222,6 @@ public class Client_Controller implements Initializable {
         cnn.close();
 
 
-
     }
 
     @FXML
@@ -221,9 +230,9 @@ public class Client_Controller implements Initializable {
         if(! client_table.getSelectionModel().isEmpty()    ) {
 
             try{
-                Client client = client_table.getSelectionModel().getSelectedItem();
-                int   fournisseurID = client.getId();
-                String query = "DELETE FROM demo.client_table WHERE id ="+fournisseurID;
+                Person client = client_table.getSelectionModel().getSelectedItem();
+                int   clientId = client.getId();
+                String query = "DELETE FROM demo.person_table WHERE id ="+clientId;
 
                 preparesStatemnt = conn.connect().prepareStatement(query);
                 preparesStatemnt.executeUpdate();
@@ -252,7 +261,7 @@ public class Client_Controller implements Initializable {
 
         if (!client_table.getSelectionModel().isEmpty()){
 
-            Client client = client_table.getSelectionModel().getSelectedItem();
+            Person client = client_table.getSelectionModel().getSelectedItem();
 
              New_Client_Controller.ID         = client.getId();
              New_Client_Controller.NAME       = client.getName();
@@ -276,36 +285,16 @@ public class Client_Controller implements Initializable {
     @FXML
     public void goBack_To_Home_Window(Event event) throws IOException {
 
-        new Utility().go_Home(event);
+        closeButtonAction();
     }
-    @FXML
-    public void open_Stock_Window(Event event) throws IOException {
 
-        new Utility().go_Stock(event);
 
-    }
-    @FXML
-    public void open_Product_Window(Event event) throws IOException {
-
-        new Utility().go_Pruduct(event);
-
-    }
-    @FXML
-    public void open_Founisseur_Window(Event event) throws IOException {
-
-        new Utility().go_Fournisseur(event);
-
-    }
-    // Caisse
-    @FXML
-    public void Open_Caisse_Window(Event event) throws IOException {
-        new Utility().go_Caisse(event);
-    }
     // Open New Client Form
     @FXML
     public void open_Add_New_Client_Form(Event event) throws IOException{
-        New_Client_Controller.edit_button_Visibility =false;
-        New_Client_Controller.add_button_Visibility =true;
+
+        New_Client_Controller.edit_button_Visibility = false;
+        New_Client_Controller.add_button_Visibility  = true;
 
         New_Client_Controller.ID         = 0;
         New_Client_Controller.NAME       = null;
@@ -318,25 +307,25 @@ public class Client_Controller implements Initializable {
 
         new Utility().show_New_Client_Window(event);
     }
-    // Reglement Form
+
+
     @FXML
-    public void open_Reglement_Form(Event event) throws IOException{
+    public void open_Reglement_Form(Event event) throws IOException, SQLException {
 
-        Client client = client_table.getSelectionModel().getSelectedItem();
+        if(! client_table.getSelectionModel().isEmpty() ) {
+            Person client =  client_table.getSelectionModel().getSelectedItem();
 
-        if (!client_table.getSelectionModel().isEmpty()){
-
-            Client_Reglement_Controller.CLIENT_NAME     =   client.getName()   ;
-            Client_Reglement_Controller.CLIENT_ADDESS   =   client.getAddress() ;
-            Client_Reglement_Controller.CLIENT_PHONE    =   client.getTelephone() ;
-            Client_Reglement_Controller.CLIENT_ID       =   client.getId()  ;
-            Client_Reglement_Controller.CLIENT_OLD_SOLD =   client.getSold() ;
+            Reglement_Controller.FOURNISSEUR_NAME     =   client.getName()   ;
+            Reglement_Controller.FOURNISSEUR_ADDESS   =   client.getAddress()   ;
+            Reglement_Controller.FOURNISSEUR_PHONE    =   client.getTelephone() ;
+            Reglement_Controller.FOURNISSEUR_ID       =   client.getId()  ;
+            Reglement_Controller.FOURNISSEUR_OLD_SOLD =   client.getSold()  ;
 
 
-            new Utility().show_Client_Reglement_Window("Client :",event);
+            String Titel = "Client : "+client.getName()+"    Address : "+client.getAddress()+"  Numero de Telephone : "+client.getTelephone() ;
 
-           }
-
+            new Utility().show_Reglement_Window(Titel,event);
+        }
         else
         {
             utility.showAlert("Nothing is Selected");
@@ -344,88 +333,6 @@ public class Client_Controller implements Initializable {
 
 
     }
-
-    public void add_One() throws SQLException {
-
-        int  max_id  = utility.getMax_ID("demo.order_table","id") ;
-
-        int Id= max_id + 1;
-
-        String query ="INSERT INTO demo.order_table (id) VALUES ("+Id+") ";
-        preparesStatemnt = conn.connect().prepareStatement(query);
-        preparesStatemnt.execute();
-        preparesStatemnt.close();
-
-       // utility.showAlert("One added");
-    //    System.out.println(query);
-
-    }
-
-
-
-    @FXML
-    public void open_Bon_Command_Form(Event event) throws IOException, SQLException {
-
-        Client client = client_table.getSelectionModel().getSelectedItem();
-
-        if (!client_table.getSelectionModel().isEmpty()){
-
-           Bon_Command_Client_Controller.NAME     =   client.getName()   ;
-           Bon_Command_Client_Controller.ADDRESS  =   client.getAddress() ;
-           Bon_Command_Client_Controller.PHONE    =   client.getTelephone() ;
-            Bon_Command_Client_Controller.ID       =   client.getId()  ;
-            Bon_Command_Client_Controller.SOLD     =   client.getSold() ;
-
-          //  new Utility().go_Bon_Command(event);
-            Parent parent = FXMLLoader.load(getClass().getResource("/Bon_Command_Package/Bon_Command_Client_View.fxml"));
-            Scene scene = new Scene(parent);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle("Bon Command");
-            stage.setFullScreen(false);
-            stage.setResizable(false);
-            stage.show();
-            add_One();
-
-        }
-
-        else
-        {
-            utility.showAlert("Nothing is Selected");
-        }
-
-
-    }
-
-
-    @FXML
-    public void open_Bon_Client_Global() throws IOException {
-
-        if(!client_table.getSelectionModel().isEmpty())
-        {
-            Client client = client_table.getSelectionModel().getSelectedItem();
-            Bon_Client_Global_Controller.CLIENT_ID = client.getId();
-            Bon_Client_Global_Controller.CLIENT_NAME= client.getName();
-            Bon_Client_Global_Controller.CLIENT_ADDRESS = client.getAddress();
-            Bon_Client_Global_Controller.CLIENT_PHONE = client.getTelephone();
-            Bon_Client_Global_Controller.CLIENT_REGISTRE = client.getRegistre();
-
-           utility.show_Bon_Client_Global_Window(client.getName());
-
-           }
-
-        else
-        {
-            utility.showAlert("No client is selected");
-        }
-
-
-    }
-
-
-
-
-
 
 
 
@@ -442,19 +349,23 @@ public class Client_Controller implements Initializable {
         }
 
     }
+    @FXML
+    private void closeButtonAction(){
+        // get a handle to the stage
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        // do what you have to do
+
+        stage.close();
+    }
     // Event Handler
     @FXML
     public void handlekeyPressed(KeyEvent event) throws Exception {
 
         switch (event.getCode()) {
-            case F:
-                open_Founisseur_Window(event); break;
-            case C:
-                Open_Caisse_Window(event);break;
-            case H:
-                goBack_To_Home_Window(event);break;
-            case P:
-                open_Product_Window(event);break;
+
+            case ESCAPE:
+               closeButtonAction();break;
+
             case N:
                 open_Add_New_Client_Form(event);break;
             case DELETE:

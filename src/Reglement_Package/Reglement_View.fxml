@@ -96,11 +96,11 @@
             </VBox>
          </children>
       </VBox>
-      <TableView fx:id="reglement_tableView" layoutX="13.0" layoutY="238.0" onKeyPressed="#handlekeyPressed" onMouseClicked="#showOnClick" prefHeight="355.0" prefWidth="1200.0" style="-fx-font-size: 14;" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="238.0">
+      <TableView fx:id="reglement_tableView" layoutX="13.0" layoutY="238.0" prefHeight="355.0" prefWidth="1200.0" style="-fx-font-size: 14;" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="238.0">
         <columns>
           <TableColumn fx:id="Id_column" prefWidth="100.0" sortType="DESCENDING" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="N°" />
             <TableColumn fx:id="amount_column" prefWidth="200.0" style="-fx-background-radius: 20; -fx-font-weight: Bold; -fx-alignment: Center;" text="Montant de paiment" />
-            <TableColumn fx:id="old_sold_column" prefWidth="200.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="Ancient Sold" />
+            <TableColumn fx:id="old_soldcolumn" prefWidth="200.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="Ancient Sold" />
             <TableColumn fx:id="sold_column" prefWidth="200.0" style="-fx-background-radius: 20; -fx-font-weight: Bold; -fx-alignment: Center;" text="Sold" />
             <TableColumn fx:id="mode_column" prefWidth="150.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="Mode" />
           <TableColumn fx:id="date_column" prefWidth="160.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="La date" />
@@ -109,7 +109,7 @@
       </TableView>
       <VBox layoutX="754.0" layoutY="75.0" prefHeight="133.0" prefWidth="174.0" style="-fx-background-color: #0080ff; -fx-background-radius: 20;" AnchorPane.leftAnchor="754.0" AnchorPane.topAnchor="75.0">
          <children>
-            <Button fx:id="reglement_add_btn" mnemonicParsing="false" onAction="#add_Reglement_To_Fournisseur" prefHeight="48.0" prefWidth="154.0" style="-fx-background-radius: 20;" text="Ajouter   Enter" textFill="#3f51b5">
+            <Button fx:id="reglement_add_btn" mnemonicParsing="false" onAction="#add_reglement" prefHeight="48.0" prefWidth="154.0" style="-fx-background-radius: 20;" text="Ajouter   Enter" textFill="#3f51b5">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
@@ -117,7 +117,15 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="reglement_delete_btn" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" onAction="#delet_Reglement" prefHeight="50.0" prefWidth="154.0" style="-fx-background-radius: 20;" text="Delete" textFill="#3f51b5">
+            <Button layoutX="20.0" layoutY="78.0" mnemonicParsing="false" onAction="#edit_reglment" prefHeight="50.0" prefWidth="154.0" style="-fx-background-radius: 20;" text="EDIT" textFill="#3f51b5">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="reglement_delete_btn" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" onAction="#delet_reglement" prefHeight="50.0" prefWidth="154.0" style="-fx-background-radius: 20;" text="Delete" textFill="#3f51b5">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>

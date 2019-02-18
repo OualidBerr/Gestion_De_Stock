@@ -3,6 +3,7 @@
 
 package Login_Package;
 import Utilities_Package.Db_Connection;
+import Utilities_Package.Product;
 import Utilities_Package.Utility;
 
 import javafx.application.Platform;
@@ -41,14 +42,14 @@ private PasswordField txtpassword;
 
     public void Login(Event event) throws SQLException {
 
-    String username = txtusername.getText();
-    String password = txtpassword.getText();
-    String role_User = admcambo.getValue().toString();
+        String username = txtusername.getText();
+        String password = txtpassword.getText();
+        String role_User = admcambo.getValue().toString();
 
-    String dbuser = db_usernametxt.getText();
-    String dbpas = db_passwordtxt.getText();
-    String DB = db_txt.getText();
-    String server = Server_txt.getText();
+        String dbuser = db_usernametxt.getText();
+        String dbpas = db_passwordtxt.getText();
+        String DB = db_txt.getText();
+        String server = Server_txt.getText();
 
         Db_Connection.USERNAME = dbuser;
         Db_Connection.PASSWORD = dbpas;
@@ -56,39 +57,40 @@ private PasswordField txtpassword;
         Db_Connection.Server = server;
 
 
-    String query = "SELECT * FROM demo.users Where username = '"+username+"' &&  password = '"+password+"' && role = '"+role_User+"' ";
+        String query = "SELECT * FROM demo.users Where username = '" + username + "' &&  password = '" + password + "' && role = '" + role_User + "' ";
         Connection cnn = conn.connect();
 
-    try    {
+        try {
 
 
-             preparesStatemnt = cnn.prepareStatement(query);
+            preparesStatemnt = cnn.prepareStatement(query);
             resultSet = preparesStatemnt.executeQuery(query);
-             if (!resultSet.next()){
-              System.out.println("Enter Valid username and password");
-                 utility.showAlert("Please Enter Valid Username and Password");
-             }
-             else
-                 {
-                     if (role_User.equals("Admin")){
-                         new Utility().log_In("Admin",event);
+            if (!resultSet.next()) {
+                System.out.println("Enter Valid username and password");
+                utility.showAlert("Please Enter Valid Username and Password");
+            } else {
+                if (role_User.equals("Admin")) {
+                    new Utility().log_In("Admin", event);
+                    utility.show_TrayNotification("Welcome");
 
-                       }
-                     else if (role_User.equals("User")){
-                         new Utility().log_In("User",event);
+                } else if (role_User.equals("User")) {
+                    new Utility().log_In("User", event);
 
-                      }
+                }
 
-                 }
+            }
 
-                 }
-     catch (Exception e)
-             {
-                 e.printStackTrace();
-             }
+        }
+        catch (Exception e) { e.printStackTrace(); }
+        finally {
+            if (cnn != null) cnn.close();
 
-          cnn.close();
-}
+              }
+
+    }
+
+
+
     @FXML
     public void LoginBtnFunction(Event event) throws IOException {
 
@@ -112,6 +114,8 @@ private PasswordField txtpassword;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+
 
         admcambo.getItems().addAll("User","Admin");
         admcambo.setValue("Admin");

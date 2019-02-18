@@ -77,37 +77,7 @@
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Button>
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Contoire" textFill="#3f51b5">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="stock_btn" minHeight="-Infinity" mnemonicParsing="false" onAction="#open_Product_Window" prefHeight="50.0" prefWidth="120.0" text="Produits" textFill="#3f51b5">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="stock_btn1" layoutX="131.0" layoutY="15.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#open_Stock_Window" prefHeight="50.0" prefWidth="120.0" text="Stock" textFill="#3f51b5">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
                   <Button layoutX="10.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3F51B5;" text="Client" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="278.0" layoutY="15.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#open_Founisseur_Window" prefHeight="50.0" prefWidth="120.0" text="Fournissurs" textFill="#3f51b5">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#Open_Caisse_Window" prefHeight="50.0" prefWidth="120.0" text="Caisse" textFill="#3f51b5">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="logout_btn" mnemonicParsing="false" onAction="#log_Out_Function" prefHeight="50.0" prefWidth="120.0" text="Deconnexion" textFill="#3f51b5">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -159,56 +129,64 @@
                         <Insets bottom="30.0" left="35.0" right="35.0" />
                      </VBox.margin>
                   </TableView>
-                  <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="1180.0">
+                  <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="1385.0">
                      <children>
-                        <Button fx:id="new_Client_btn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Add_New_Client_Form" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="Nouveux Client" textFill="#3f51b5">
+                        <Button fx:id="new_Client_btn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Add_New_Client_Form" prefHeight="40.0" prefWidth="150.0" text="Nouveux Client" textFill="#3f51b5">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <HBox.margin>
-                              <Insets left="20.0" right="70.0" />
+                              <Insets left="20.0" right="20.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="edit_btn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Open_update_Client_Window" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="Modifié" textFill="#3f51b5">
+                        <Button fx:id="edit_btn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Open_update_Client_Window" prefHeight="40.0" prefWidth="150.0" text="Modifié" textFill="#3f51b5">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <HBox.margin>
-                              <Insets right="70.0" />
+                              <Insets right="20.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="delete_btn" layoutX="127.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete_Client" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="Suprime" textFill="#3f51b5">
+                        <Button fx:id="delete_btn" layoutX="127.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete_Client" prefHeight="40.0" prefWidth="150.0" text="Suprime" textFill="#3f51b5">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <HBox.margin>
-                              <Insets right="70.0" />
+                              <Insets right="20.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="verssement_btn" layoutX="244.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Reglement_Form" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="Reglement" textFill="#3f51b5">
+                        <Button fx:id="verssement_btn" layoutX="244.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Reglement_Form" prefHeight="40.0" prefWidth="150.0" text="Reglement" textFill="#3f51b5">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <HBox.margin>
-                              <Insets right="70.0" />
+                              <Insets right="20.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="bon_command_btn" layoutX="260.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Bon_Command_Form" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="Bon Command" textFill="#3f51b5">
+                        <Button fx:id="bon_command_btn" layoutX="260.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Bon_Commend_Client" prefHeight="40.0" prefWidth="150.0" text="Bon Command" textFill="#3f51b5">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <HBox.margin>
-                              <Insets right="70.0" />
+                              <Insets right="20.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="bon_command_Global_btn" layoutX="1120.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Bon_Client_Global" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="Bon Glob" textFill="#3f51b5">
+                        <Button fx:id="bon_command_Global_btn" layoutX="1120.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Bon Glob" textFill="#3f51b5">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="150.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="closeButton" layoutX="1130.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="40.0" prefWidth="150.0" text="Exit" textFill="#3f51b5">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
                      </children>
                      <VBox.margin>
-                        <Insets left="50.0" />
+                        <Insets left="20.0" />
                      </VBox.margin>
                   </HBox>
                </children>

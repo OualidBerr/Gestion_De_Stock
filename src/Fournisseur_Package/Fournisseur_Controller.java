@@ -18,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,6 +28,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class Fournisseur_Controller implements Initializable
@@ -34,87 +36,92 @@ public class Fournisseur_Controller implements Initializable
     @FXML
     private Button new_Fournisseur_btn;
     private Button verssement_btn;
+    @FXML
+    private Button closeButton;
 
     @FXML
     public DatePicker reglement_datePicker;
 
     @FXML
-    public  TableView<Fournisseur> Fournisseur_Table;
+    public  TableView<Person> Fournisseur_Table;
     @FXML
-    public  TableColumn<Fournisseur,Integer> Id_column;
-    public  TableColumn<Fournisseur,String> name_column;
-    public  TableColumn<Fournisseur,String> adress_column;
-    public  TableColumn<Fournisseur,String> telephone_column;
-    public  TableColumn<Fournisseur,Double> sold_column;
+    public  TableColumn<Person,Integer> Id_column;
+    public  TableColumn<Person,String> name_column;
+    public  TableColumn<Person,String> adress_column;
+    public  TableColumn<Person,String> telephone_column;
+    public  TableColumn<Person,Double> sold_column;
+    public  TableColumn<Person,Double> registre_column;
 
     @FXML
     public TextField filterField,verssement_txt;
     public static Fournisseur Fournisseur;
-    public ObservableList<Fournisseur> data;
-    public ObservableList<Reglement> data_2;
+    public ObservableList<Person> data;
+    public ObservableList<Person> data_2;
 
     Db_Connection conn = new Db_Connection();
     PreparedStatement preparesStatemnt = null;
     ResultSet resultSet = null;
     Utility utility = new Utility();
+    public final int   Fournisseur_Active = PersonType.Active_Fournisseur;
+    public final int   Fournisseur_UnActive = PersonType.Deactivated_Fournisseur;
 
     @FXML
     public void reglement_rapid() throws SQLException{
-        Fournisseur fournisseur = Fournisseur_Table.getSelectionModel().getSelectedItem();
+        Person fournisseur = Fournisseur_Table.getSelectionModel().getSelectedItem();
         if (!Fournisseur_Table.getSelectionModel().isEmpty()){
 
             double amount = Double.parseDouble(verssement_txt.getText());
             int Reglement_id ;
-            int  max_id  = utility.getMax_ID("demo.fournisseur_reglement_table","id") ;
+            int  max_id  = utility.getMax_ID("demo.person_reglement_table","id") ;
             Reglement_id = max_id +1;   // 1) Reglement id
             String note = "/";  // 5) Note
-            String fournisseur_Name = fournisseur.getFournisseurName(); // 6) Fournisseur Name
             String mode = "Espece"; // 7) Mode
             String date = reglement_datePicker.getValue().toString(); // 8 payement date
-            int fournisseurID = fournisseur.getFournisseurId(); //9) FournisseurID
-            double old_Sold =  fournisseur.getFournisseurSold(); // 3) Old Sold
+            int fournisseurID = fournisseur.getId(); //9) FournisseurID
+            double old_Sold =  fournisseur.getSold(); // 3) Old Sold
             double new_sold = old_Sold - amount; // 4) new sold
 
+            try{
 
+                if (!verssement_txt.getText().isEmpty()){
 
+                    String query = "INSERT INTO demo.person_reglement_table " +
+                            "(id,amount,old_sold,sold,mode,date,note,personID) VALUES (?,?,?,?,?,?,?,?)";
 
+                    preparesStatemnt = conn.connect().prepareStatement(query);
+                    preparesStatemnt.setInt   (1, Reglement_id);
+                    preparesStatemnt.setDouble(2, amount);
+                    preparesStatemnt.setDouble(3, old_Sold);
+                    preparesStatemnt.setDouble(4,new_sold);
+                    preparesStatemnt.setString(5, mode);
+                    preparesStatemnt.setString(6, date);
+                    preparesStatemnt.setString(7, note);
+                    preparesStatemnt.setInt   (8, fournisseurID);
+                    preparesStatemnt.execute();
+                    preparesStatemnt.close();
+                    conn.connect().close();
 
+                    String query_sold = "UPDATE demo.person_table SET sold =? Where id="+fournisseurID;
+                    preparesStatemnt = conn.connect().prepareStatement(query_sold);
+                    preparesStatemnt.setDouble(1,new_sold);
+                    preparesStatemnt.executeUpdate();
 
-            if (!verssement_txt.getText().isEmpty()){
+                    utility.show_TrayNotification("Verssement : " + amount + " DZD"+ " received !");
+                    loadData();
+                    verssement_txt.clear();
 
-                String query =
-                        "INSERT INTO demo.fournisseur_reglement_table"                +
-                                " (id,name,date,mode,amount,oldsold,sold,note,fournisseurID)" +
-                                " VALUES (?,?,?,?,?,?,?,?,?)"                                 ;
+                }
 
-                preparesStatemnt = conn.connect().prepareStatement(query);
-                preparesStatemnt.setInt   (1, Reglement_id);
-                preparesStatemnt.setString(2, fournisseur_Name);
-                preparesStatemnt.setString(3, date);
-                preparesStatemnt.setString(4, mode);
-                preparesStatemnt.setDouble(5, amount);
-                preparesStatemnt.setDouble(6, old_Sold);
-                preparesStatemnt.setDouble(7, new_sold);
-                preparesStatemnt.setString(8, note);
-                preparesStatemnt.setInt   (9, fournisseurID);
-                preparesStatemnt.execute();
+                }
+            catch (Exception ex){ex.printStackTrace();}
 
-                String query_sold = "UPDATE demo.fournisseur_table SET sold =? Where id="+fournisseurID;
-                preparesStatemnt = conn.connect().prepareStatement(query_sold);
-                preparesStatemnt.setDouble(1,new_sold);
-                preparesStatemnt.executeUpdate();
-
-                utility.showAlert("Verssement : " + amount + " DZD"+ " received !");
-                preparesStatemnt.close();
-                loadData();
-                verssement_txt.clear();
-                conn.connect().close();
-            }
-
+            finally {
+                if (conn.connect()   != null) {conn.connect().close();}
+                if (preparesStatemnt != null) {preparesStatemnt.close();}
+                    }
            }
-
-
     }
+
     @FXML
     public void fournisseurSearchThread( ) throws SQLException{
 
@@ -122,7 +129,7 @@ public class Fournisseur_Controller implements Initializable
         adress_column.setCellValueFactory(cellData -> cellData.getValue().addressProperty());
         telephone_column.setCellValueFactory(cellData -> cellData.getValue().telephoneProperty());
         // 1. Wrap the ObservableList in a FilteredList (initially display all data).
-        FilteredList<Fournisseur> filteredData = new FilteredList<>(data, p -> true);
+        FilteredList<Person> filteredData = new FilteredList<>(data, p -> true);
 
         // 2. Set the filter Predicate whenever the filter changes.
         filterField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -135,13 +142,13 @@ public class Fournisseur_Controller implements Initializable
                 // Compare first name and last name of every person with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (fournisseur.getFournisseurName().toLowerCase().contains(lowerCaseFilter)) {
+                if (fournisseur.getName().toLowerCase().contains(lowerCaseFilter)) {
                     return true; // Filter matches name
-                } else if (fournisseur.getFournisseurAdress().toLowerCase().contains(lowerCaseFilter)) {
+                } else if (fournisseur.getAddress().toLowerCase().contains(lowerCaseFilter)) {
                     return true; // Filter matches adress.
 
                 }
-                else if (fournisseur.getFournisseurTelephone().toLowerCase().contains(lowerCaseFilter)) {
+                else if (fournisseur.getTelephone().toLowerCase().contains(lowerCaseFilter)) {
                     return true; // Filter matches name.
 
                 }
@@ -151,7 +158,7 @@ public class Fournisseur_Controller implements Initializable
         });
 
         // 3. Wrap the FilteredList in a SortedList.
-        SortedList<Fournisseur> sortedData = new SortedList<>(filteredData);
+        SortedList<Person> sortedData = new SortedList<>(filteredData);
 
         // 4. Bind the SortedList comparator to the TableView comparator.
         sortedData.comparatorProperty().bind(Fournisseur_Table.comparatorProperty());
@@ -161,32 +168,92 @@ public class Fournisseur_Controller implements Initializable
 
 
     }
+
     public  void loadData() throws SQLException {
         Connection cnn = conn.connect();
+        ResultSet rs = null;
+
         try{
 
             data = FXCollections.observableArrayList();
-            ResultSet rs = cnn.createStatement().executeQuery("SELECT id,name,address,telephone,ROUND(sold, 2) FROM demo.fournisseur_table");
+             rs = cnn.createStatement().executeQuery("SELECT id,name,address,telephone,registre,sold FROM demo.person_table where PersonType="+PersonType.Active_Fournisseur);
+             while(rs.next()){
+                data.add(new Person(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getDouble(6)));
+               }
+            }
+        catch(SQLException eX){
+            System.out.println("error ! Not Connected to Db****");
+          }
+
+        finally {
+
+            Id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
+            name_column.setCellValueFactory(new PropertyValueFactory<>("name"));
+            adress_column.setCellValueFactory(new PropertyValueFactory<>("address"));
+            telephone_column.setCellValueFactory(new PropertyValueFactory<>("telephone"));
+            sold_column.setCellValueFactory(new PropertyValueFactory<>("sold"));
+            registre_column.setCellValueFactory(new PropertyValueFactory<>("registre"));
+
+            Fournisseur_Table.setItems(data);
+
+            filterField.clear();
+            verssement_txt.setVisible(false);
+
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (rs != null) {rs.close();}
+
+            }
+
+
+
+
+    }
+
+    @FXML
+    public void Load_Unactive_Fournisseur() throws SQLException {
+
+        Connection cnn = conn.connect();
+        ResultSet rs = null;
+
+        try{
+
+            data = FXCollections.observableArrayList();
+            rs = cnn.createStatement().executeQuery("SELECT id,name,address,telephone,registre,sold FROM demo.person_table where PersonType="+PersonType.Deactivated_Fournisseur);
             while(rs.next()){
-                data.add(new Fournisseur(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDouble(5)));
+                data.add(new Person(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getDouble(6)));
             }
         }
         catch(SQLException eX){
             System.out.println("error ! Not Connected to Db****");
         }
 
-        Id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
-        name_column.setCellValueFactory(new PropertyValueFactory<>("name"));
-        adress_column.setCellValueFactory(new PropertyValueFactory<>("address"));
-        telephone_column.setCellValueFactory(new PropertyValueFactory<>("telephone"));
-        sold_column.setCellValueFactory(new PropertyValueFactory<>("sold"));
-        Fournisseur_Table.setItems(null);
-        Fournisseur_Table.setItems(data);
-        filterField.clear();
-        cnn.close();
-        verssement_txt.setVisible(false);
+        finally {
+
+            Id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
+            name_column.setCellValueFactory(new PropertyValueFactory<>("name"));
+            adress_column.setCellValueFactory(new PropertyValueFactory<>("address"));
+            telephone_column.setCellValueFactory(new PropertyValueFactory<>("telephone"));
+            sold_column.setCellValueFactory(new PropertyValueFactory<>("sold"));
+            registre_column.setCellValueFactory(new PropertyValueFactory<>("registre"));
+
+            Fournisseur_Table.setItems(null);
+            Fournisseur_Table.setItems(data);
+            filterField.clear();
+            verssement_txt.setVisible(false);
+
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (rs != null) {rs.close();}
+
+        }
+
+
 
     }
+
+
+
     @FXML
     public void showOnClick() {
 
@@ -200,43 +267,73 @@ public class Fournisseur_Controller implements Initializable
 
         if(! Fournisseur_Table.getSelectionModel().isEmpty()    ) {
 
-            try{
-                Fournisseur fournisseur = Fournisseur_Table.getSelectionModel().getSelectedItem();
-                int   fournisseurID = fournisseur.getFournisseurId();
-                String query = "DELETE FROM demo.fournisseur_table WHERE id ="+fournisseurID;
 
+            try {
+                Person fournisseur = Fournisseur_Table.getSelectionModel().getSelectedItem();
+                int fournisseurID = fournisseur.getId();
+
+                String query = "UPDATE demo.person_table SET PersonType=? Where id=" + fournisseurID;
                 preparesStatemnt = conn.connect().prepareStatement(query);
-                preparesStatemnt.executeUpdate();
-                preparesStatemnt.close();
-                loadData();
-                utility.showAlert("User has been deleted");
-                conn.connect().close();
+                preparesStatemnt.setInt(1, Fournisseur_UnActive);
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmation Dialog");
+                alert.setHeaderText("Look, a Confirmation Dialog");
+                alert.setContentText("Are you ok with this?");
+
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK){
+                    // ... user chose OK
+                    preparesStatemnt.executeUpdate();
+                    preparesStatemnt.close();
+                    conn.connect().close();
+                    loadData();
+                    utility.show_TrayNotification("Fournisseur deleted successfully!");
+
+                   }
+
+                else {
+                    // ... user chose CANCEL or closed the dialog
+                    utility.show_TrayNotification("was not deleted");
+
+                   }
+
+
+
+
+                   }
+
+            catch (Exception e) { e.printStackTrace(); }
+
+            finally {
+
+                if (conn.connect()   != null) {conn.connect().close();}
+                if (preparesStatemnt != null) {preparesStatemnt.close();}
             }
 
-            catch(SQLException e){
-                e.printStackTrace();
-            }
+
 
         }
 
-        else {
 
-            utility.showAlert("Nothing is selected");
         }
 
-
-    }
     @FXML
     public void show_Edit_Window(Event e)throws IOException{
 
+
           if(! Fournisseur_Table.getSelectionModel().isEmpty() ) {
-              Fournisseur fournisseur =  Fournisseur_Table.getSelectionModel().getSelectedItem();
+              Person fournisseur =  Fournisseur_Table.getSelectionModel().getSelectedItem();
 
-              New_Fournisseur_Controller.NAME =    fournisseur.getFournisseurName()        ;
-              New_Fournisseur_Controller.ADDRESS = fournisseur.getFournisseurAdress()    ;
-              New_Fournisseur_Controller.PHONE =   fournisseur.getFournisseurTelephone()   ;
-              New_Fournisseur_Controller.ID =   fournisseur.getFournisseurId()   ;
+              New_Fournisseur_Controller.NAME =    fournisseur.getName()       ;
+              New_Fournisseur_Controller.ADDRESS = fournisseur.getAddress()   ;
+              New_Fournisseur_Controller.PHONE =   fournisseur.getTelephone();  ;
+              New_Fournisseur_Controller.ID =   fournisseur.getId()  ;
+              New_Fournisseur_Controller.REGISTRE = fournisseur.getRegistre();
+              New_Fournisseur_Controller.TITLE_LB = "Modifier Fournisseur Information";
 
+              New_Fournisseur_Controller.add_button_Visibility = false;
+              New_Fournisseur_Controller.edit_button_Visibility = true;
 
               utility.show_New_Fournisseur_Window(e);
 
@@ -260,29 +357,11 @@ public class Fournisseur_Controller implements Initializable
         new Utility().go_Home(event);
     }
     @FXML
-    public void open_Stock_Window(Event event) throws IOException {
-
-        new Utility().go_Stock(event);
-    }
-    @FXML
-    public void open_Product_Window(Event event) throws IOException {
-
-        new Utility().go_Pruduct(event);
-    }
-    @FXML
-    public void open_Client_Window(Event event) throws IOException {
-
-        new Utility().go_Client(event);
-    }
-    // Caisse
-    @FXML
-    public void Open_Caisse_Window(Event event) throws IOException {
-        new Utility().go_Caisse(event);
-    }
-    // Open New Fournisseur Form
-    @FXML
     public void open_Add_New_Fournisseur_Form(Event event) throws IOException{
 
+        New_Fournisseur_Controller.add_button_Visibility = true;
+        New_Fournisseur_Controller.edit_button_Visibility = false;
+        New_Fournisseur_Controller.TITLE_LB = "Ajouter Nouveau Fournisseur";
         new Utility().show_New_Fournisseur_Window(event);
     }
     // Reglement Form
@@ -290,16 +369,16 @@ public class Fournisseur_Controller implements Initializable
     public void open_Reglement_Form(Event event) throws IOException, SQLException {
 
         if(! Fournisseur_Table.getSelectionModel().isEmpty() ) {
-            Fournisseur fournisseur =  Fournisseur_Table.getSelectionModel().getSelectedItem();
+            Person fournisseur =  Fournisseur_Table.getSelectionModel().getSelectedItem();
 
-            Reglement_Controller.FOURNISSEUR_NAME     =   fournisseur.getFournisseurName()   ;
-            Reglement_Controller.FOURNISSEUR_ADDESS   =   fournisseur.getFournisseurAdress()   ;
-            Reglement_Controller.FOURNISSEUR_PHONE    =   fournisseur.getFournisseurTelephone() ;
-            Reglement_Controller.FOURNISSEUR_ID       =   fournisseur.getFournisseurId()  ;
-            Reglement_Controller.FOURNISSEUR_OLD_SOLD =   fournisseur.getFournisseurSold()  ;
+            Reglement_Controller.FOURNISSEUR_NAME     =   fournisseur.getName()   ;
+            Reglement_Controller.FOURNISSEUR_ADDESS   =   fournisseur.getAddress()   ;
+            Reglement_Controller.FOURNISSEUR_PHONE    =   fournisseur.getTelephone() ;
+            Reglement_Controller.FOURNISSEUR_ID       =   fournisseur.getId()  ;
+            Reglement_Controller.FOURNISSEUR_OLD_SOLD =   fournisseur.getSold()  ;
 
 
-            String Titel = "Fournisseur : " +fournisseur.getFournisseurName()+ "    Address : " +fournisseur.getFournisseurAdress()+ "  Numero de Telephone : "+fournisseur.getFournisseurTelephone() ;
+            String Titel = "Fournisseur : "+fournisseur.getName()+"    Address : "+fournisseur.getAddress()+"  Numero de Telephone : "+fournisseur.getTelephone() ;
 
             new Utility().show_Reglement_Window(Titel,event);
         }
@@ -315,37 +394,21 @@ public class Fournisseur_Controller implements Initializable
 
     }
 
-    public void add_One() throws SQLException {
-
-        int  max_id  = utility.getMax_ID("demo.order_table","id") ;
-
-        int Id= max_id + 1;
-
-        String query ="INSERT INTO demo.order_table (id) VALUES ("+Id+") ";
-        preparesStatemnt = conn.connect().prepareStatement(query);
-        preparesStatemnt.execute();
-        preparesStatemnt.close();
-
-        utility.showAlert("One added");
-        System.out.println(query);
-
-    }
-
-
     @FXML
     public void open_Bon_Fournissur_Form() throws IOException, SQLException {
+
 
          ArrayList<String> data = null;
 
         if(!Fournisseur_Table.getSelectionModel().isEmpty())
             {
-            Fournisseur fournisseur = Fournisseur_Table.getSelectionModel().getSelectedItem();
+            Person fournisseur = Fournisseur_Table.getSelectionModel().getSelectedItem();
 
                 Connection cnn = conn.connect();
 
                 try{
-                    data = new ArrayList<String>();
-                    ResultSet rs = cnn.createStatement().executeQuery("SELECT * FROM demo.product_table where fournisseurID="+fournisseur.getFournisseurId());
+                    data = new ArrayList<>();
+                    ResultSet rs = cnn.createStatement().executeQuery("SELECT * FROM demo.product_table where personID="+fournisseur.getId());
                     while(rs.next()){
                         data.add(rs.getString(3) );
                     }
@@ -356,12 +419,39 @@ public class Fournisseur_Controller implements Initializable
 
                 cnn.close();
 
-                Bon_Command_Fournisseur_Controller.FOURNISSEUR_ID   = fournisseur.getFournisseurId();
-                Bon_Command_Fournisseur_Controller.FOURNISSEUR_NAME = fournisseur.getFournisseurName();
+                Bon_Command_Fournisseur_Controller.FOURNISSEUR_ID   = fournisseur.getId();
+                Bon_Command_Fournisseur_Controller.FOURNISSEUR_NAME = fournisseur.getName();
+                Bon_Command_Fournisseur_Controller.BON_ID = utility.getMax_ID("demo.bon_table","id")+1;
                 Bon_Command_Fournisseur_Controller.data_2 = data;
 
-                add_One();
-                utility.show_Bon_Fournisseur_Window(fournisseur.getFournisseurName());
+                // OPEN NEW BON
+                int id_bon = utility.getMax_ID("demo.bon_table","id")+1;
+                double total =0.0;
+                String date = LocalDate.now().toString();
+                int fournisseurId = fournisseur.getId();
+                String query = "INSERT INTO demo.bon_table (id,total,date,personID) Values (?,?,?,?)";
+
+                try {
+                    preparesStatemnt = conn.connect().prepareStatement(query);
+                    preparesStatemnt.setInt   (1, id_bon);
+                    preparesStatemnt.setDouble(2, total);
+                    preparesStatemnt.setString(3, date);
+                    preparesStatemnt.setInt   (4, fournisseurId);
+                    preparesStatemnt.execute();
+                    preparesStatemnt.close();
+                    conn.connect().close();
+                   }
+                catch (Exception e){ e.printStackTrace(); }
+                finally {
+                    if (conn.connect()   != null) {conn.connect().close();}
+                    if (preparesStatemnt != null) {preparesStatemnt.close();}
+
+                }
+
+
+
+
+                utility.show_Bon_Fournisseur_Window(fournisseur.getName());
 
             }
 
@@ -377,14 +467,14 @@ public class Fournisseur_Controller implements Initializable
 
         if(!Fournisseur_Table.getSelectionModel().isEmpty())
         {
-            Fournisseur fournisseur = Fournisseur_Table.getSelectionModel().getSelectedItem();
+            Person fournisseur = Fournisseur_Table.getSelectionModel().getSelectedItem();
 
-            Bon_Fournisseur_Global_Controller.FOURNISSEUR_ID = fournisseur.getFournisseurId();
-            Bon_Fournisseur_Global_Controller.FOURNISSEUR_NAME = fournisseur.getFournisseurName();
-            Bon_Fournisseur_Global_Controller.FOURNISSEUR_ADDRESS = fournisseur.getFournisseurAdress();
-            Bon_Fournisseur_Global_Controller.FOURNISSEUR_PHONE = fournisseur.getFournisseurTelephone();
+            Bon_Fournisseur_Global_Controller.FOURNISSEUR_ID = fournisseur.getId();
+            Bon_Fournisseur_Global_Controller.FOURNISSEUR_NAME = fournisseur.getName();
+            Bon_Fournisseur_Global_Controller.FOURNISSEUR_ADDRESS = fournisseur.getAddress();
+            Bon_Fournisseur_Global_Controller.FOURNISSEUR_PHONE = fournisseur.getTelephone();
 
-            utility.show_Bon_Fournisseur_Global_Window(fournisseur.getFournisseurName());
+            utility.show_Bon_Fournisseur_Global_Window(fournisseur.getName());
 
         }
 
@@ -395,12 +485,23 @@ public class Fournisseur_Controller implements Initializable
 
 
     }
-
         // Logout
     @FXML
     public void log_Out_Function(Event event) throws IOException {
         new Utility().log_Out(event);
     }
+
+
+    public void delet_empty_bon() throws SQLException{
+
+        String query = "Delete from demo.bon_table where total=0";
+        preparesStatemnt = conn.connect().prepareStatement(query);
+        preparesStatemnt.executeUpdate();
+        preparesStatemnt.close();
+        conn.connect().close();
+    }
+
+
     // Event Handler
     @FXML
     public void handlekeyPressed(KeyEvent event) throws Exception {
@@ -408,8 +509,7 @@ public class Fournisseur_Controller implements Initializable
         switch (event.getCode()) {
             case V :
                 open_Reglement_Form(event); break;
-            case S:
-                open_Stock_Window(event); break;
+
             case ENTER:
                 reglement_rapid();
                break;
@@ -420,9 +520,7 @@ public class Fournisseur_Controller implements Initializable
             case DELETE:
                     delete_Fournisseur();break;
             case H:
-                    goBack_To_Home_Window(event);break;
-            case P:
-                    open_Product_Window(event);break;
+                closeButtonAction();   break;
             case F5:
                 loadData();break;
             case M:
@@ -430,10 +528,25 @@ public class Fournisseur_Controller implements Initializable
 
         }
     }
+
+    @FXML
+    private void closeButtonAction(){
+        // get a handle to the stage
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        // do what you have to do
+
+        stage.close();
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources)  {
 
-
+        try {
+            delet_empty_bon();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         reglement_datePicker.setValue(LocalDate.now());
 

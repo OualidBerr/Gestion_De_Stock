@@ -57,7 +57,7 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handlekeyPressed" prefHeight="650.0" prefWidth="1200.0" style="-fx-background-color: #3498DB;" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handlekeyPressed" prefHeight="650.0" prefWidth="1400.0" style="-fx-background-color: #3498DB;" VBox.vgrow="ALWAYS">
       <children>
         <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
           <font>
@@ -70,37 +70,7 @@
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Button>
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Contoire" textFill="#3f51b5">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
                   <Button fx:id="goHome_btn1" layoutX="10.0" layoutY="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3F51B5;" text="Produits" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="stock_btn" minHeight="-Infinity" mnemonicParsing="false" onAction="#open_Stock_Window" prefHeight="50.0" prefWidth="120.0" text="Stock" textFill="#3f51b5">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="fournisseur_btn" mnemonicParsing="false" onAction="#Open_Fournisseur_Window" prefHeight="50.0" prefWidth="120.0" text="Fournisseurs" textFill="#3f51b5">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="client_btn" mnemonicParsing="false" onAction="#Open_Client_Window" prefHeight="50.0" prefWidth="120.0" text="Clients" textFill="#3f51b5">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#Open_Caisse_Window" prefHeight="50.0" prefWidth="120.0" text="Caisse" textFill="#3f51b5">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="logout_btn" mnemonicParsing="false" onAction="#log_Out_Function" prefHeight="50.0" prefWidth="120.0" text="Deconnexion" textFill="#3f51b5">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -117,11 +87,11 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </TextField>
-                  <TableView fx:id="product_Table" prefHeight="429.0" prefWidth="1180.0" style="-fx-font-size: 13;" tableMenuButtonVisible="true">
+                  <TableView fx:id="product_Table" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="1345.0" style="-fx-font-size: 12;" tableMenuButtonVisible="true">
                     <columns>
                       <TableColumn fx:id="id_column" prefWidth="75.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="N°" />
                       <TableColumn fx:id="ref_column" prefWidth="75.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="Ref" />
-                        <TableColumn fx:id="des_column" prefWidth="300.0" style="-fx-background-radius: 20; -fx-font-weight: Bold;" text="Désigniation" />
+                        <TableColumn fx:id="des_column" prefWidth="250.0" style="-fx-background-radius: 20; -fx-font-weight: Bold;" text="Désigniation" />
                         <TableColumn fx:id="nbr_pcs_crt__column" minWidth="1.6666717529296875" prefWidth="82.0" style="-fx-font-weight: Bold; -fx-alignment: Center;" text="Nbr Pcs/crt" />
                         <TableColumn fx:id="quantity_column" prefWidth="78.0" style="-fx-font-weight: Bold; -fx-alignment: Center;" text="Quantité" />
                         <TableColumn fx:id="nbr_pcs_column" prefWidth="64.6666259765625" style="-fx-font-weight: Bold; -fx-alignment: Center;" text="Nbr pcs" />
@@ -131,15 +101,16 @@
                         <TableColumn fx:id="expiration_column" style="-fx-font-weight: Bold;" text="Expiration" />
                         <TableColumn fx:id="prix_achat_column" style="-fx-font-weight: Bold;" text="Prix d'achat" />
                         <TableColumn fx:id="prix_vent_column" style="-fx-font-weight: Bold;" text="Prix de vent" />
-                        <TableColumn fx:id="fournisseur_column" prefWidth="200.0" style="-fx-font-weight: Bold;" text="Fournisseur" />
+                        <TableColumn fx:id="value_column" prefWidth="119.0" style="-fx-font-weight: Bold;" text="Value" />
+                        <TableColumn fx:id="fournisseur_column" prefWidth="151.0" style="-fx-font-weight: Bold;" text="Fournisseur" />
                     </columns>
                      <VBox.margin>
-                        <Insets bottom="30.0" />
+                        <Insets bottom="30.0" left="5.0" right="50.0" />
                      </VBox.margin>
                   </TableView>
                   <HBox prefHeight="50.0" prefWidth="1180.0">
                      <children>
-                        <Button fx:id="newProduct_btn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Add_New_Product_Form" prefHeight="40.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Nouveux produit" textFill="#3f51b5">
+                        <Button fx:id="newProduct_btn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Add_New_Product_Form" prefHeight="40.0" prefWidth="160.0" text="Nouveux produit" textFill="#3f51b5">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -147,7 +118,7 @@
                               <Insets left="250.0" />
                            </HBox.margin>
                         </Button>
-                        <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Edit_Product_Window" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="Modifié" textFill="#3f51b5">
+                        <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Edit_Product_Window" prefHeight="40.0" prefWidth="150.0" text="Modifié" textFill="#3f51b5">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -155,7 +126,7 @@
                               <Insets left="50.0" />
                            </HBox.margin>
                         </Button>
-                        <Button layoutX="127.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete_Product" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="Suprime" textFill="#3f51b5">
+                        <Button layoutX="127.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete_Product" prefHeight="40.0" prefWidth="150.0" text="Suprime" textFill="#3f51b5">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -163,13 +134,18 @@
                               <Insets left="50.0" />
                            </HBox.margin>
                         </Button>
-                        <Button layoutX="244.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="Charge" textFill="#3f51b5">
+                        <Button layoutX="244.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Charge" textFill="#3f51b5">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <HBox.margin>
                               <Insets left="50.0" right="50.0" />
                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="closeButton" layoutX="670.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="40.0" prefWidth="150.0" text="EXIT" textFill="#3f51b5">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
                         </Button>
                      </children>
                   </HBox>

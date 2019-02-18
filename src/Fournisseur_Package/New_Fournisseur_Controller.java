@@ -1,8 +1,6 @@
 package Fournisseur_Package;
 
-import Utilities_Package.Db_Connection;
-import Utilities_Package.Fournisseur;
-import Utilities_Package.Utility;
+import Utilities_Package.*;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -24,6 +23,10 @@ import java.util.ResourceBundle;
 
 public class New_Fournisseur_Controller implements Initializable {
 
+
+
+    @FXML
+    public Label id_lb,title_lb;
     @FXML
     public TextField nametxt;
     @FXML
@@ -34,117 +37,142 @@ public class New_Fournisseur_Controller implements Initializable {
     private TextField    idetxt;
 
     @FXML
+    private TextField    registretxt;
+
+
+    @FXML
     private Button    add_Fournisseur_btn,closeButton;
     @FXML
     private Button   update_fournisseurbtn;
 
     public static String NAME    ;
+    public static String TITLE_LB    ;
+
     public static String ADDRESS ;
     public static String PHONE   ;
+    public static String REGISTRE   ;
     public static int ID;
     public static Fournisseur Fournisseur;
 
+    public static boolean add_button_Visibility;
+    public static boolean edit_button_Visibility;
+
+
+    public final int   Fournisseur_Type = PersonType.Active_Fournisseur;
+
+
+
 
     public ObservableList<Fournisseur> data;
-
     Db_Connection conn = new Db_Connection();
-    ResultSet resultSet = null;
-
+    PreparedStatement  preparesStatemnt = null;
     Utility utility = new Utility();
-
-
 
     // Add
     @FXML
     public void add_Fournisseur() throws Exception{
 
         int max_id = 0;
-        max_id  = utility.getMax_ID("fournisseur_table","id") ;
+        max_id  = utility.getMax_ID("person_table","id") ;
 
-        if (!nametxt.getText().isEmpty() && !addresstxt.getText().isEmpty() && !telephonetxt.getText().isEmpty()){
+        try{
+            if (!nametxt.getText().isEmpty() && !addresstxt.getText().isEmpty() && !telephonetxt.getText().isEmpty()){
 
 
-            String Name = nametxt.getText();
-            String Address = addresstxt.getText();
-            String Telephon = telephonetxt.getText();
-            double Sold = 0.25;
+                String Name = nametxt.getText();
+                String Address = addresstxt.getText();
+                String Telephon = telephonetxt.getText();
+                String Registre = registretxt.getText();
 
-            PreparedStatement  preparesStatemnt = null;
-            String query = "INSERT INTO demo.fournisseur_table (id,name,address,telephone,sold) VALUES (?,?,?,?,?)";
+                double Sold = 0.25;
 
-            preparesStatemnt = conn.connect().prepareStatement(query);
-            preparesStatemnt.setInt(1, max_id+1);
-            preparesStatemnt.setString(2, Name);
-            preparesStatemnt.setString(3, Address);
-            preparesStatemnt.setString(4, Telephon);
-            preparesStatemnt.setDouble(5, Sold);
-            preparesStatemnt.execute();
-            preparesStatemnt.close();
+                String query = "INSERT INTO demo.person_table (id,name,address,telephone,sold,registre,PersonType) VALUES (?,?,?,?,?,?,?)";
 
-            nametxt.clear();
-            addresstxt.clear();
-            telephonetxt.clear();
-            idetxt.clear();
+                preparesStatemnt = conn.connect().prepareStatement(query);
+                preparesStatemnt.setInt(1, max_id+1);
+                preparesStatemnt.setString(2, Name);
+                preparesStatemnt.setString(3, Address);
+                preparesStatemnt.setString(4, Telephon);
+                preparesStatemnt.setDouble(5, Sold);
+                preparesStatemnt.setString(6, Registre);
+                preparesStatemnt.setInt(7, Fournisseur_Type);
 
-            utility.showAlert("New User added successfully");
-        }
+                preparesStatemnt.execute();
 
-        else if  (nametxt.getText().isEmpty() && addresstxt.getText().isEmpty() && telephonetxt.getText().isEmpty()){
-            utility.showAlert("Some fields are empty");
+                nametxt.clear();
+                addresstxt.clear();
+                telephonetxt.clear();
+                idetxt.clear();
+                registretxt.clear();
+
+                utility.showAlert("New User added successfully");
             }
 
+            else if  (nametxt.getText().isEmpty() && addresstxt.getText().isEmpty() && telephonetxt.getText().isEmpty()){
+                utility.showAlert("Some fields are empty");
+                  }
+           }
+
+        catch (Exception ex){ex.printStackTrace();}
+
+        finally {
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+               }
 
     }
+
     // Update
     @FXML
     public void update_Fournisseur() throws SQLException{
 
         if (!idetxt.getText().isEmpty() && !nametxt.getText().isEmpty() && !addresstxt.getText().isEmpty() && !telephonetxt.getText().isEmpty()) {
 
-
-            String id        = idetxt.getText();
+            String id_string       = idetxt.getText(); int fournisseurID = Integer.parseInt(id_string);
             String name      = nametxt.getText();
             String telephone = telephonetxt.getText();
             String adress    = addresstxt.getText();
+            String registre    = registretxt.getText();
 
-            Fournisseur fournisseur = new Fournisseur(0,"","","");
+            Person fournisseur = new Person(0,"","","","",0.01);
 
-            fournisseur.setFournisseurName(name);
-            fournisseur.setFournisseurAdress(adress);
-            fournisseur.setFournisseurTelephone(telephone);
+            fournisseur.setName(name);
+            fournisseur.setAddress(adress);
+            fournisseur.setTelephone(telephone);
+            fournisseur.setRegistre(registre);
 
             try{
-                PreparedStatement  preparesStatemnt = null;
-
-                String query  = "UPDATE demo.fournisseur_table SET name =?, address =?, telephone =? Where id="+id;
+                String query  = "UPDATE demo.person_table SET name =?, address =?, telephone =?,registre=? Where id="+fournisseurID+ " and PersonType="+Fournisseur_Type;
                 preparesStatemnt = conn.connect().prepareStatement(query);
-                preparesStatemnt.setString(1, fournisseur.getFournisseurName());
-                preparesStatemnt.setString(2, fournisseur.getFournisseurAdress());
-                preparesStatemnt.setString(3, fournisseur.getFournisseurTelephone());
-                utility.showAlert("User has been Updated");
+                preparesStatemnt.setString(1, fournisseur.getName());
+                preparesStatemnt.setString(2, fournisseur.getAddress());
+                preparesStatemnt.setString(3, fournisseur.getTelephone());
+                preparesStatemnt.setString(4, fournisseur.getRegistre());
                 preparesStatemnt.executeUpdate();
 
+                }
+            catch (Exception e){
+                e.printStackTrace();
+                }
+
+            finally {
                 idetxt.clear();
                 nametxt.clear();
                 telephonetxt.clear();
                 addresstxt.clear();
                 idetxt.clear();
+                if (conn.connect()   != null) {conn.connect().close();}
+                if (preparesStatemnt != null) {preparesStatemnt.close();}
+                    }
 
-                conn.connect().close();
-            }
-            catch (Exception e){
-                e.printStackTrace();
-            }
-        }
+              }
 
         else{
-
             utility.showAlert("Fields are not filled");
-          }
-
+            }
+        utility.showAlert("Fournisseur has been Updated");
 
     }
-
     @FXML
     private void closeButtonAction(){
         // get a handle to the stage
@@ -152,26 +180,25 @@ public class New_Fournisseur_Controller implements Initializable {
         // do what you have to do
         stage.close();
     }
-
     // Event Handler
     @FXML
     public void handlekeyPressed(KeyEvent event) throws Exception {
 
         switch (event.getCode()) {
-            case ENTER:
-                add_Fournisseur();  break;
-            case SHIFT:
-                update_Fournisseur();break;
             case ESCAPE:
                 closeButtonAction();break;
-
-
         }
     }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        add_Fournisseur_btn.setVisible(add_button_Visibility);
+        update_fournisseurbtn.setVisible(edit_button_Visibility);
+        idetxt.setVisible(edit_button_Visibility);
+        id_lb.setVisible(edit_button_Visibility);
+        title_lb.setText(TITLE_LB);
+        idetxt.setVisible(edit_button_Visibility);
+        id_lb.setVisible(edit_button_Visibility);
         nametxt.setText(NAME);
         addresstxt.setText(ADDRESS);
         telephonetxt.setText(PHONE);

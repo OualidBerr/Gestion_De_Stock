@@ -6,7 +6,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -15,7 +15,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
 
-import java.awt.event.ActionListener;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -71,80 +70,88 @@ import java.util.ResourceBundle;
         public TableColumn<Product, Double> value_column;
         public TableColumn<Product, Integer> date_column;
 
-
         public static String FOURNISSEUR_NAME;
         public static int FOURNISSEUR_ID;
+        public  static int BON_ID;
 
         public ObservableList<Bon_Command_Fournisseur> data;
         Db_Connection conn = new Db_Connection();
         PreparedStatement preparesStatemnt = null;
-        ResultSet resultSet = null;
+        ResultSet rs = null;
         Utility utility = new Utility();
         public static ArrayList data_2;
+        Connection cnn = conn.connect();
 
         String N_value;
+
+        public Bon_Command_Fournisseur_Controller() throws SQLException {
+        }
 
         // refresh
         public void refresh(int bonID) throws SQLException {
 
-            Connection cnn = conn.connect();
+
             try {
 
                 data = FXCollections.observableArrayList();
+                 rs = cnn.createStatement().executeQuery("SELECT * FROM demo.bon_detail_table WHERE bonID="+bonID );
 
-
-                ResultSet rs = cnn.createStatement().executeQuery("SELECT  id,ref,des,nbr_pcs_crt,quant,nbr_pcs,prix_vent,prix_achat,value,fournisseurID,bonID,date FROM demo.bon_command_fournisseur_table WHERE bonID=" + bonID);
                 while (rs.next()) {
 
                     data.add(new Bon_Command_Fournisseur(
-                            rs.getInt(1),
-                            rs.getString(2),
-                            rs.getString(3),
-                            rs.getInt(4),
-                            rs.getInt(5),
-                            rs.getInt(6),
-                            rs.getDouble(7),
-                            rs.getDouble(8),
-                            rs.getDouble(9),
-                            rs.getInt(10),
-                            rs.getInt(11),
-                            rs.getString(12)
+
+                            rs.getInt("id"),      // id
+                            utility.get_Product_detail_S(rs.getInt("productID"),"ref").toString(),   // ref
+                            utility.get_Product_detail_S(rs.getInt("productID"),"des").toString(),   //des
+                            (int) utility.get_Product_detail_S(rs.getInt("productID"),"nbr_pcs_crt"),// nbr_pcs/carton
+                            rs.getInt("quant"),   // quantity
+                            rs.getInt("quant")*((int) utility.get_Product_detail_S(rs.getInt("productID"),"nbr_pcs_crt")), // nbr pcs total
+                            rs.getDouble("prix_vent"),   // pris achat
+                            rs.getDouble("prix_achat"),    // pris vent
+                            rs.getDouble("value"),        //value
+                            LocalDate.now().toString()              // date
+
                     ));
 
 
                 }
             } catch (SQLException eX) {
+                eX.printStackTrace();
                 System.out.println("error ! Not Connected to Db****");
             }
 
-            id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
-            ref_column.setCellValueFactory(new PropertyValueFactory<>("ref"));
-            des_column.setCellValueFactory(new PropertyValueFactory<>("des"));
-            nbr_pcs_crt__column.setCellValueFactory(new PropertyValueFactory<>("nbr_pcs_crt"));
-            nbr_pcs_column.setCellValueFactory(new PropertyValueFactory<>("nbr_pcs"));
-            quantity_column.setCellValueFactory(new PropertyValueFactory<>("quantite"));
-            prix_vent_column.setCellValueFactory(new PropertyValueFactory<>("prix_vent"));
-            prix_achat_column.setCellValueFactory(new PropertyValueFactory<>("prix_achat"));
-            value_column.setCellValueFactory(new PropertyValueFactory<>("value"));
-            date_column.setCellValueFactory(new PropertyValueFactory<>("date"));
+            finally {
 
-            bon_command_fournisseur_table.setItems(data);
+                id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
+                ref_column.setCellValueFactory(new PropertyValueFactory<>("ref"));
+                des_column.setCellValueFactory(new PropertyValueFactory<>("des"));
+                nbr_pcs_crt__column.setCellValueFactory(new PropertyValueFactory<>("nbr_pcs_crt"));
+                nbr_pcs_column.setCellValueFactory(new PropertyValueFactory<>("nbr_pcs"));
+                quantity_column.setCellValueFactory(new PropertyValueFactory<>("quantite"));
+                prix_vent_column.setCellValueFactory(new PropertyValueFactory<>("prix_vent"));
+                prix_achat_column.setCellValueFactory(new PropertyValueFactory<>("prix_achat"));
+                value_column.setCellValueFactory(new PropertyValueFactory<>("value"));
+                date_column.setCellValueFactory(new PropertyValueFactory<>("date"));
+                bon_command_fournisseur_table.setItems(data);
 
-            cnn.close();
+                if (conn.connect()   != null) {conn.connect().close();}
+                if (preparesStatemnt != null) {preparesStatemnt.close();}
+                if (rs != null) {rs.close();}
+            }
 
+
+        rs.close();conn.connect(); preparesStatemnt.close();
 
         }
 
-
         // Load List
         public void loadData() throws SQLException {
-            Connection cnn = conn.connect();
+
             try {
 
                 data = FXCollections.observableArrayList();
 
-
-                ResultSet rs = cnn.createStatement().executeQuery("SELECT  id,ref,des,nbr_pcs_crt,quant,nbr_pcs,prix_vent,prix_achat,value,fournisseurID,bonID,date FROM demo.bon_command_fournisseur_table");
+                ResultSet rs = cnn.createStatement().executeQuery("SELECT  id,ref,des,nbr_pcs_crt,quant,nbr_pcs,prix_vent,prix_achat,value,fournisseurID,bonID,date FROM demo.bon_detail_table");
                 while (rs.next()) {
 
                     data.add(new Bon_Command_Fournisseur(
@@ -168,20 +175,27 @@ import java.util.ResourceBundle;
                 System.out.println("error ! Not Connected to Db****");
             }
 
-            id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
-            ref_column.setCellValueFactory(new PropertyValueFactory<>("ref"));
-            des_column.setCellValueFactory(new PropertyValueFactory<>("des"));
-            nbr_pcs_crt__column.setCellValueFactory(new PropertyValueFactory<>("nbr_pcs_crt"));
-            nbr_pcs_column.setCellValueFactory(new PropertyValueFactory<>("nbr_pcs"));
-            quantity_column.setCellValueFactory(new PropertyValueFactory<>("quantite"));
-            prix_vent_column.setCellValueFactory(new PropertyValueFactory<>("prix_vent"));
-            prix_achat_column.setCellValueFactory(new PropertyValueFactory<>("prix_achat"));
-            value_column.setCellValueFactory(new PropertyValueFactory<>("value"));
-            date_column.setCellValueFactory(new PropertyValueFactory<>("date"));
 
-            bon_command_fournisseur_table.setItems(data);
+            finally {
+                id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
+                ref_column.setCellValueFactory(new PropertyValueFactory<>("ref"));
+                des_column.setCellValueFactory(new PropertyValueFactory<>("des"));
+                nbr_pcs_crt__column.setCellValueFactory(new PropertyValueFactory<>("nbr_pcs_crt"));
+                nbr_pcs_column.setCellValueFactory(new PropertyValueFactory<>("nbr_pcs"));
+                quantity_column.setCellValueFactory(new PropertyValueFactory<>("quantite"));
+                prix_vent_column.setCellValueFactory(new PropertyValueFactory<>("prix_vent"));
+                prix_achat_column.setCellValueFactory(new PropertyValueFactory<>("prix_achat"));
+                value_column.setCellValueFactory(new PropertyValueFactory<>("value"));
+                date_column.setCellValueFactory(new PropertyValueFactory<>("date"));
 
-            cnn.close();
+                bon_command_fournisseur_table.setItems(data);
+
+                if (conn.connect()   != null) {conn.connect().close();}
+                if (preparesStatemnt != null) {preparesStatemnt.close();}
+                if (rs != null) {rs.close();}
+            }
+
+
 
         }
 
@@ -189,89 +203,140 @@ import java.util.ResourceBundle;
         @FXML
         public void save_bon() throws SQLException {
 
-            int Id = utility.getMax_ID("demo.bon_table", "id");
-            int Bon_Order_Id = utility.getMax_ID(" demo.order_table", "id");
-            String BON_NUM = "Bon_" + Bon_Order_Id;
-
-            String date = "";
-            int fournisseurID = 0;
-            double amount = 0.25;
-            double sum_amount = 0.25;
-
-
-            Connection cnn = conn.connect();
-            try {
-
-                ResultSet rs = cnn.createStatement().executeQuery("SELECT  max(fournisseurID),max(date),sum(value) FROM demo.bon_command_fournisseur_table Where bonID= " + Bon_Order_Id);
-
-                if (rs.next()) {
-                    fournisseurID = rs.getInt(1);
-                    date = rs.getString(2);
-                    amount = rs.getDouble(3);
-
-                }
-
-
-                String query =
-                        "INSERT INTO demo.bon_table" +
-                                " (id,bon_num,amount,date,fournisseurID,bonID)" +
-                                " VALUES (?,?,?,?,?,?)";
-                preparesStatemnt = conn.connect().prepareStatement(query);
-                preparesStatemnt.setInt(1, Id + 1);
-                preparesStatemnt.setString(2, BON_NUM);
-                preparesStatemnt.setDouble(3, amount);
-                preparesStatemnt.setString(4, date);
-                preparesStatemnt.setInt(5, fournisseurID);
-                preparesStatemnt.setInt(6, Bon_Order_Id);
-
-                preparesStatemnt.execute();
-
-
-
+               double total = get_Bon_Total(BON_ID,FOURNISSEUR_ID);
                 // Update Fournisseur Sold
+                double old_sold = utility.get_Sold(FOURNISSEUR_ID);
+                utility.update_Fournisseur_Sold(total, old_sold, FOURNISSEUR_ID);
+                utility.show_TrayNotification("saved successfully");
 
-                try {
-
-                    rs = cnn.createStatement().executeQuery("SELECT sum(value) FROM demo.bon_command_fournisseur_table Where fournisseurID="+fournisseurID);
-                    if (rs.next()) {
-                        amount = rs.getDouble(1);
-
-                    }
-
-                    double old_sold = utility.get_Sold(fournisseurID);
-                    utility.update_Fournisseur_Sold(amount, old_sold, fournisseurID);
-
-                }
-
-                catch (SQLException eX) {
-                    System.out.println("error ! Not Connected to Db****");
-                }
-
-
-
-                // Update product
-
-
-                preparesStatemnt.close();
-                bon_command_fournisseur_table.setItems(null);
-                utility.showAlert("Added successfully");
-                closeButtonAction();
-            }
-
-            catch (Exception e)
-            {
-
-            }
+                //  closeButtonAction();
 
         }
+        @FXML
+        public void add_New_Bon() throws SQLException {
+
+            // Insert bon_detail
+            if (!des_TXT.getText().isEmpty()&& !prix_achat_TXT.getText().isEmpty()&&
+                    !prix_vent_TXT.getText().isEmpty()&& !quant_TXT.getText().isEmpty() )
+                {
+                    String des = des_TXT.getText();
+                    int id_order = utility.getMax_ID("demo.bon_detail_table","id")+1;
+                    int quant = Integer.parseInt(quant_TXT.getText());
+                    double prix_vent = Double.parseDouble(prix_vent_TXT.getText());
+                    double prix_achat = Double.parseDouble(prix_achat_TXT.getText());
+                    int productID = utility.getProduct_ID(des);
+                    int product_Nbr_pcs_crt = utility.get_Product_Nbr_pcs_crt(productID);
+                    double value = product_Nbr_pcs_crt*prix_achat*quant;
+                    String query_2 = "INSERT INTO demo.bon_detail_table (id,quant,prix_vent,prix_achat,value,bonID,productID) Values (?,?,?,?,?,?,?)";
+
+                    try {
+                        preparesStatemnt = conn.connect().prepareStatement(query_2);
+                        preparesStatemnt.setInt   (1, id_order);
+                        preparesStatemnt.setInt(2, quant);
+                        preparesStatemnt.setDouble(3, prix_vent);
+                        preparesStatemnt.setDouble(4, prix_achat);
+                        preparesStatemnt.setDouble(5, value);
+                        preparesStatemnt.setInt   (6, BON_ID);
+                        preparesStatemnt.setInt   (7, productID);
+                        preparesStatemnt.execute();
+
+                        utility.total_sum_calculator(BON_ID,productID,show_lb);
+                        preparesStatemnt.close();
+                        conn.connect().close();
+
+                    }
+                    catch (Exception e){ e.printStackTrace(); }
+                    finally {
+
+                        if (conn.connect()   != null) {conn.connect().close();}
+                        if (preparesStatemnt != null) {preparesStatemnt.close();}
+                        if (rs != null) {rs.close();}
+                      }
+
+                    //Update Total
+                    double total=0.25;
+                    try{
+                         total=0.25;
+                        try{
+                            String Query =" SELECT sum(value)  FROM demo.bon_detail_table where bonID="+BON_ID   ;
+                            ResultSet   rs = conn.connect().createStatement().executeQuery(Query);
+                            if (rs.next()){
+                                total = rs.getDouble(1);
+                            }
+                         }
+
+                        catch (Exception ex){ex.printStackTrace();}
+                        String Query  = "UPDATE demo.bon_table SET total =? Where id="+BON_ID;
+                        preparesStatemnt = conn.connect().prepareStatement(Query);
+                        preparesStatemnt.setDouble   (1,  total);
+                        preparesStatemnt.executeUpdate();
+                        preparesStatemnt.close();
+                        conn.connect().close();
+                        }
+                    catch (Exception e){
+                        e.printStackTrace();
+                        }
+                    finally {
+                        if (conn.connect()   != null) {conn.connect().close();}
+                        if (preparesStatemnt != null) {preparesStatemnt.close();}
+                        if (rs != null) {rs.close();}
+                          }
+
+
+                    // Update product
+
+                    int product_Old_Quantity = utility.get_Product_quantity(productID);
+                    int new_product_quantity= product_Old_Quantity +  quant  ;
+                    int new_Nbr_Pcs = new_product_quantity*utility.get_Product_Nbr_pcs_crt(productID);
+                    double new_value = new_Nbr_Pcs*prix_vent;
+
+                    try{
+
+
+                        String Query  = "UPDATE demo.product_table SET quan =?,nbr_pcs=?,prix_achat =?,prix_vent =?,date_entre=?,value=? Where id="+productID;
+
+                        preparesStatemnt = conn.connect().prepareStatement(Query);
+
+                        preparesStatemnt.setInt      (1,  new_product_quantity);
+                        preparesStatemnt.setInt      (2,  new_Nbr_Pcs);
+                        preparesStatemnt.setDouble   (3,  prix_achat);
+                        preparesStatemnt.setDouble   (4,  prix_vent);
+                        preparesStatemnt.setString   (5, LocalDate.now().toString());
+                        preparesStatemnt.setDouble   (6,  new_value);
+                        preparesStatemnt.executeUpdate();
+                        refresh( BON_ID);
+
+                        preparesStatemnt.close();
+                        conn.connect().close();
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    finally {
+                        if (conn.connect()   != null) {conn.connect().close();}
+                        if (preparesStatemnt != null) {preparesStatemnt.close();}
+                        if (rs != null) {rs.close();}
+                    }
+
+
+                    des_TXT.clear();
+                      quant_TXT.clear();
+                      prix_achat_TXT.clear();
+                      prix_vent_TXT.clear();
+                    Platform.runLater(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            list.requestFocus();
+                            list.scrollTo(1);
+                            list.getSelectionModel().select(1);
+                        }
+                    });
 
 
 
-
-
-
-
-
+                 }
+        }
 
 
 
@@ -296,6 +361,11 @@ import java.util.ResourceBundle;
                 catch(SQLException eX){
                     System.out.println("error ! Not Connected to Db****");
                 }
+                finally {
+                    if (conn.connect()   != null) {conn.connect().close();}
+                    if (preparesStatemnt != null) {preparesStatemnt.close();}
+                    if (rs != null) {rs.close();}
+                }
 
                 int  Id  = utility.getMax_ID("demo.bon_command_fournisseur_table","id") ;
                 String des = des_TXT.getText();
@@ -312,22 +382,37 @@ import java.util.ResourceBundle;
                         "INSERT INTO demo.bon_command_fournisseur_table"                +
                                 " (id,ref,des,nbr_pcs_crt,quant,nbr_pcs,prix_vent,prix_achat,value,fournisseurID,bonID,date)" +
                                 " VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-                preparesStatemnt = conn.connect().prepareStatement(query);
-                preparesStatemnt.setInt   (1, Id+1);
-                preparesStatemnt.setString(2, ref);
-                preparesStatemnt.setString(3, des);
-                preparesStatemnt.setInt   (4, nbr_pcs_crt);
-                preparesStatemnt.setInt   (5, quan);
-                preparesStatemnt.setInt   (6, nbr_pcs);
-                preparesStatemnt.setDouble(7, prix_vent);
-                preparesStatemnt.setDouble(8, prix_achat);
-                preparesStatemnt.setDouble(9, value);
-                preparesStatemnt.setInt   (10, fournisseurId);
-                preparesStatemnt.setInt   (11, bonID);
-                preparesStatemnt.setString(12, date);
-                preparesStatemnt.execute();
-                preparesStatemnt.close();
-                refresh(bonID);
+
+
+                try{
+                    preparesStatemnt = conn.connect().prepareStatement(query);
+                    preparesStatemnt.setInt   (1, Id+1);
+                    preparesStatemnt.setString(2, ref);
+                    preparesStatemnt.setString(3, des);
+                    preparesStatemnt.setInt   (4, nbr_pcs_crt);
+                    preparesStatemnt.setInt   (5, quan);
+                    preparesStatemnt.setInt   (6, nbr_pcs);
+                    preparesStatemnt.setDouble(7, prix_vent);
+                    preparesStatemnt.setDouble(8, prix_achat);
+                    preparesStatemnt.setDouble(9, value);
+                    preparesStatemnt.setInt   (10, fournisseurId);
+                    preparesStatemnt.setInt   (11, bonID);
+                    preparesStatemnt.setString(12, date);
+                    preparesStatemnt.execute();
+                    preparesStatemnt.close();
+
+
+                   }
+
+                catch (Exception ex){ex.printStackTrace();}
+
+                finally {
+                    if (conn.connect()   != null) {conn.connect().close();}
+                    if (preparesStatemnt != null) {preparesStatemnt.close();}
+                    if (rs != null) {rs.close();}
+                }
+
+
 
                 // Update product
 
@@ -338,7 +423,7 @@ import java.util.ResourceBundle;
 
 
                 try{
-                    PreparedStatement preparesStatemnt = null;
+
 
                     String Query  = "UPDATE demo.product_table SET quan =?,nbr_pcs=?,prix_achat =?,prix_vent =?,date_entre=?,value=? Where id="+productID;
 
@@ -351,7 +436,6 @@ import java.util.ResourceBundle;
                     preparesStatemnt.setString   (5, date);
                     preparesStatemnt.setDouble   (6,  new_value);
 
-                    utility.showAlert("User has been Updated");
                     preparesStatemnt.executeUpdate();
                     preparesStatemnt.close();
                     conn.connect().close();
@@ -359,19 +443,32 @@ import java.util.ResourceBundle;
                 catch (Exception e){
                     e.printStackTrace();
                 }
+                finally {
+                    if (conn.connect()   != null) {conn.connect().close();}
+                    if (preparesStatemnt != null) {preparesStatemnt.close();}
+                    if (rs != null) {rs.close();}
+                }
 
                 double sum_amount=0.25;
+                try{
 
-                String Query =" SELECT sum(value)  FROM demo.bon_command_fournisseur_table where fournisseurID = "+fournisseurId+" " + " and bonID="+bonID   ;
-                ResultSet   rs = cnn.createStatement().executeQuery(Query);
-                if (rs.next()){
+                    String Query =" SELECT sum(value)  FROM demo.bon_command_fournisseur_table where fournisseurID = "+fournisseurId+" " + " and bonID="+bonID   ;
+                    ResultSet   rs = cnn.createStatement().executeQuery(Query);
+                    if (rs.next()){
+                        sum_amount = rs.getDouble(1);
+                    }
 
-                    sum_amount = rs.getDouble(1);
+                   }
 
+                catch (Exception ex){ex.printStackTrace();}
+
+                finally {
+                    if (conn.connect()   != null) {conn.connect().close();}
+                    if (preparesStatemnt != null) {preparesStatemnt.close();}
+                    if (rs != null) {rs.close();}
                 }
 
 
-                utility.showAlert("Added successfully");
 
                 des_TXT.clear();
                 quant_TXT.clear();
@@ -398,30 +495,63 @@ import java.util.ResourceBundle;
         conn.connect().close();
       }
 
+
+
+
         @FXML
-        public void closeButtonAction(){
+        public void closeButtonAction() throws SQLException {
             utility.showAlert("CLOSE BUTTON HAS BEEN CLICKED");
             // get a handle to the stage
             Stage stage = (Stage) closeButton.getScene().getWindow();
             // do what you have to do
+
             stage.close();
         }
-
         @FXML
         public void handlekeyPressed(KeyEvent event) throws Exception {
 
             switch (event.getCode()) {
                 case ENTER:
-                    add_Bon(); break;
+
+                    if (!des_TXT.getText().isEmpty()&&!quant_TXT.getText().isEmpty() && prix_achat_TXT.getText().isEmpty() && prix_vent_TXT.getText().isEmpty()){
+                        utility.setTextFieldFocus(prix_achat_TXT);
+                    }
+                    else if (!des_TXT.getText().isEmpty()&&!quant_TXT.getText().isEmpty() && !prix_achat_TXT.getText().isEmpty() && prix_vent_TXT.getText().isEmpty())
+                    {
+                        utility.setTextFieldFocus(prix_vent_TXT);
+                    }
+                    else if (!des_TXT.getText().isEmpty()&&quant_TXT.getText().isEmpty() && prix_achat_TXT.getText().isEmpty() && prix_vent_TXT.getText().isEmpty())
+                    {
+                        utility.setTextFieldFocus(quant_TXT);
+                    }
+
+                    else if (!des_TXT.getText().isEmpty()&&!quant_TXT.getText().isEmpty() && !prix_achat_TXT.getText().isEmpty() && !prix_vent_TXT.getText().isEmpty())
+                    {
+                        add_New_Bon();
+                    }
+
+                     break;
+                case ESCAPE:
+                    closeButtonAction(); break;
+
 
             }
         }
 
+
+        public double get_Bon_Total(int bonID,int personID) throws SQLException {
+            double total = 0.25;
+            rs = conn.connect().createStatement().executeQuery("SELECT * FROM demo.bon_table where id="+bonID+" and personID="+personID);
+            if (rs.next()){
+                total= rs.getDouble(2);
+            }
+
+            return total;
+        }
      @Override
      public void initialize(URL location, ResourceBundle resources) {
 
-
-        datePicker.setValue(LocalDate.now());
+         datePicker.setValue(LocalDate.now());
         list.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -440,14 +570,26 @@ import java.util.ResourceBundle;
 
         list.getItems().addAll(data_2);
 
-      //  try {
-           // loadData();
-     //   } catch (SQLException e) {
-      //      e.printStackTrace();
-      //  }
         fournisseurID_TXT.setText(FOURNISSEUR_ID+"");
         fournisseur_Name_TXT.setText(FOURNISSEUR_NAME);
         TextFields.bindAutoCompletion(des_TXT, data_2);
+
+         Platform.runLater(new Runnable() {
+
+             @Override
+             public void run() {
+                 list.requestFocus();
+                 list.scrollTo(1);
+                 list.getSelectionModel().select(1);
+             }
+         });
+
+
+
+
+
+
+
 
     }
 }

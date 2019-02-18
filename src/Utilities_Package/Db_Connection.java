@@ -16,6 +16,7 @@ public class Db_Connection {
     public  static String   URL    = "jdbc:mysql://"+Server+":3306/"+DB_Chema;
 
     public Connection connect() throws SQLException {
+        // ""
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

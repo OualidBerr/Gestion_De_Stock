@@ -74,8 +74,6 @@ public class Bon_Command_Client_Controller implements Initializable {
     public static int ID;
     public static double SOLD;
 
-
-
     public ObservableList<Bon_Command_Client> data;
 
     public ObservableList<Product> show_data_List;
@@ -84,7 +82,7 @@ public class Bon_Command_Client_Controller implements Initializable {
 
     Db_Connection conn = new Db_Connection();
     PreparedStatement preparesStatemnt = null;
-    ResultSet resultSet = null;
+    ResultSet rs = null;
     Utility utility = new Utility();
 
     // refresh
@@ -94,9 +92,7 @@ public class Bon_Command_Client_Controller implements Initializable {
         try {
 
             data = FXCollections.observableArrayList();
-
-
-            ResultSet rs = cnn.createStatement().executeQuery("SELECT  id,ref,des,nbr_pcs_crt,quant,nbr_pcs,prix,value,clientID,bonID,date FROM demo.bon_command_client_table WHERE bonID=" + bonID);
+             rs = cnn.createStatement().executeQuery("SELECT  id,ref,des,nbr_pcs_crt,quant,nbr_pcs,prix,value,clientID,bonID,date FROM demo.bon_command_client_table WHERE bonID=" + bonID);
             while (rs.next()) {
 
                 data.add(new Bon_Command_Client(
@@ -117,23 +113,29 @@ public class Bon_Command_Client_Controller implements Initializable {
             }
         } catch (SQLException eX) {
             System.out.println("error ! Not Connected to Db****");
+                    }
+
+        finally {
+
+            id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
+            ref_column.setCellValueFactory(new PropertyValueFactory<>("ref"));
+            des_column.setCellValueFactory(new PropertyValueFactory<>("des"));
+            nbr_pcs_crt_column.setCellValueFactory(new PropertyValueFactory<>("nbr_pcs_crt"));
+            nbr_pcs_column.setCellValueFactory(new PropertyValueFactory<>("nbr_pcs"));
+            quantity_column.setCellValueFactory(new PropertyValueFactory<>("quantite"));
+            prix_vent_column.setCellValueFactory(new PropertyValueFactory<>("prix_vent"));
+            value_column.setCellValueFactory(new PropertyValueFactory<>("value"));
+            date_column.setCellValueFactory(new PropertyValueFactory<>("date"));
+            bon_command_client_table.setItems(data);
+
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (rs != null) {rs.close();}
         }
 
-        id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
-        ref_column.setCellValueFactory(new PropertyValueFactory<>("ref"));
-        des_column.setCellValueFactory(new PropertyValueFactory<>("des"));
-        nbr_pcs_crt_column.setCellValueFactory(new PropertyValueFactory<>("nbr_pcs_crt"));
-        nbr_pcs_column.setCellValueFactory(new PropertyValueFactory<>("nbr_pcs"));
-        quantity_column.setCellValueFactory(new PropertyValueFactory<>("quantite"));
-        prix_vent_column.setCellValueFactory(new PropertyValueFactory<>("prix_vent"));
-        value_column.setCellValueFactory(new PropertyValueFactory<>("value"));
-        date_column.setCellValueFactory(new PropertyValueFactory<>("date"));
-        bon_command_client_table.setItems(data);
-
-        cnn.close();
-
-
     }
+
+
     // Load List
     public void loadData() throws SQLException {
         Connection cnn = conn.connect();
@@ -161,21 +163,27 @@ public class Bon_Command_Client_Controller implements Initializable {
             System.out.println("error ! Not Connected to Db!!!");
             eX.printStackTrace();
         }
-        id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
-        ref_column.setCellValueFactory(new PropertyValueFactory<>("ref"));
-        des_column.setCellValueFactory(new PropertyValueFactory<>("des"));
-        nbr_pcs_crt_column.setCellValueFactory(new PropertyValueFactory<>("nbr_pcs_crt"));
-        nbr_pcs_column.setCellValueFactory(new PropertyValueFactory<>("nbr_pcs"));
-        quantity_column.setCellValueFactory(new PropertyValueFactory<>("quantite"));
-        prix_vent_column.setCellValueFactory(new PropertyValueFactory<>("prix_vent"));
-        value_column.setCellValueFactory(new PropertyValueFactory<>("value"));
-        date_column.setCellValueFactory(new PropertyValueFactory<>("date"));
 
-        bon_command_client_table.setItems(data);
+        finally {
+            id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
+            ref_column.setCellValueFactory(new PropertyValueFactory<>("ref"));
+            des_column.setCellValueFactory(new PropertyValueFactory<>("des"));
+            nbr_pcs_crt_column.setCellValueFactory(new PropertyValueFactory<>("nbr_pcs_crt"));
+            nbr_pcs_column.setCellValueFactory(new PropertyValueFactory<>("nbr_pcs"));
+            quantity_column.setCellValueFactory(new PropertyValueFactory<>("quantite"));
+            prix_vent_column.setCellValueFactory(new PropertyValueFactory<>("prix_vent"));
+            value_column.setCellValueFactory(new PropertyValueFactory<>("value"));
+            date_column.setCellValueFactory(new PropertyValueFactory<>("date"));
+            bon_command_client_table.setItems(data);
 
-        cnn.close();
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (rs != null) {rs.close();}
+        }
 
       }
+
+
     @FXML
     public void save_bon() throws SQLException {
 
@@ -213,10 +221,15 @@ public class Bon_Command_Client_Controller implements Initializable {
             utility.showAlert("Added successfully");
              }
 
-        catch (Exception e)
-            {
+        catch (Exception e){ e.printStackTrace();}
 
-            }
+        finally {
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (rs != null) {rs.close();}
+        }
+
+
 
     }
 
@@ -248,36 +261,82 @@ public class Bon_Command_Client_Controller implements Initializable {
           catch(SQLException eX){
               System.out.println("error ! Not Connected to Db****");
           }
+          finally {
+              if (conn.connect()   != null) {conn.connect().close();}
+              if (preparesStatemnt != null) {preparesStatemnt.close();}
+              if (rs != null) {rs.close();}
+          }
 
-          nbr_pcs = nbr_pcs_crt*quantite;
-          value = nbr_pcs*prix;
+        try{
 
-          ////////////// INSERT FUNCTION /////////////
+            nbr_pcs = nbr_pcs_crt*quantite;
+            value = nbr_pcs*prix;
+            ////////////// INSERT FUNCTION /////////////
+            String query =
+                    "INSERT INTO demo.bon_command_client_table"                +
+                            " (id,ref,des,nbr_pcs_crt,quant,nbr_pcs,prix,value,clientID,bonID,date)" +
+                            " VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            preparesStatemnt = conn.connect().prepareStatement(query);
+            preparesStatemnt.setInt   (1, Id);
+            preparesStatemnt.setString(2, product_Ref);
+            preparesStatemnt.setString(3, des);
+            preparesStatemnt.setInt   (4, nbr_pcs_crt);
+            preparesStatemnt.setInt   (5, quantite);
+            preparesStatemnt.setInt   (6, nbr_pcs);
+            preparesStatemnt.setDouble(7, prix);
+            preparesStatemnt.setDouble(8, value);
+            preparesStatemnt.setInt   (9, clientID);
+            preparesStatemnt.setInt   (10, bonID);
+            preparesStatemnt.setString(11, date);
+            preparesStatemnt.execute();
+            refresh( bonID);
+            preparesStatemnt.close();
 
-          String query =
-                  "INSERT INTO demo.bon_command_client_table"                +
-                          " (id,ref,des,nbr_pcs_crt,quant,nbr_pcs,prix,value,clientID,bonID,date)" +
-                          " VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-          preparesStatemnt = conn.connect().prepareStatement(query);
-          preparesStatemnt.setInt   (1, Id);
-          preparesStatemnt.setString(2, product_Ref);
-          preparesStatemnt.setString(3, des);
-          preparesStatemnt.setInt   (4, nbr_pcs_crt);
-          preparesStatemnt.setInt   (5, quantite);
-          preparesStatemnt.setInt   (6, nbr_pcs);
-          preparesStatemnt.setDouble(7, prix);
-          preparesStatemnt.setDouble(8, value);
-          preparesStatemnt.setInt   (9, clientID);
-          preparesStatemnt.setInt   (10, bonID);
-          preparesStatemnt.setString(11, date);
-          preparesStatemnt.execute();
-          refresh( bonID);
-          preparesStatemnt.close();
-          total_sum_calculator( bonID ,clientID);
-           clear();
 
+
+          }
+        catch (Exception ex){ex.printStackTrace();}
+        finally {
+            clear();
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (rs != null) {rs.close();}
+        }
+        try{
+
+            nbr_pcs = nbr_pcs_crt*quantite;
+            value = nbr_pcs*prix;
+            ////////////// INSERT FUNCTION /////////////
+            String query =
+                    "INSERT INTO demo.bon_command_client_table"                +
+                            " (id,ref,des,nbr_pcs_crt,quant,nbr_pcs,prix,value,clientID,bonID,date)" +
+                            " VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            preparesStatemnt = conn.connect().prepareStatement(query);
+            preparesStatemnt.setInt   (1, Id);
+            preparesStatemnt.setString(2, product_Ref);
+            preparesStatemnt.setString(3, des);
+            preparesStatemnt.setInt   (4, nbr_pcs_crt);
+            preparesStatemnt.setInt   (5, quantite);
+            preparesStatemnt.setInt   (6, nbr_pcs);
+            preparesStatemnt.setDouble(7, prix);
+            preparesStatemnt.setDouble(8, value);
+            preparesStatemnt.setInt   (9, clientID);
+            preparesStatemnt.setInt   (10, bonID);
+            preparesStatemnt.setString(11, date);
+            preparesStatemnt.execute();
+            refresh( bonID);
+            preparesStatemnt.close();
+
+
+        }
+        catch (Exception ex){ex.printStackTrace();}
+        finally {
+            clear();
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (rs != null) {rs.close();}
+        }
         // Update Client Sold
-
         double amount = 0;
         try {
 
@@ -289,42 +348,64 @@ public class Bon_Command_Client_Controller implements Initializable {
 
             double old_sold = utility.get_Client_Sold(clientID);
             utility.update_Client_Sold(amount, old_sold, clientID);
-            utility.showAlert("Update Client Sold function worked !!!");
+
 
              }
-
         catch (SQLException eX) {
             System.out.println("error ! Not Connected to Db****");
              }
-
+        finally {
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (rs != null) {rs.close();}
+        }
+        try{
            ///// UP DATE STOCK //////
-             int Old_quant = 0;
-             int new_quant = 0;
-             ResultSet rs = cnn.createStatement().executeQuery("SELECT  quan FROM demo.product_table Where id= " + productID);
-             if (rs.next()) { Old_quant = rs.getInt(1);}
-             new_quant = (Old_quant - quantite);
-             utility.update_stock(productID,new_quant);
-             utility.showAlert("Stock updated SUCCESSFULLY!");
-             utility.setTextFieldFocus(product_txt);
-             conn.connect().close();
+            int Old_quant = 0;
+            int new_quant = 0;
+            ResultSet rs = cnn.createStatement().executeQuery("SELECT  quan FROM demo.product_table Where id= " + productID);
+            if (rs.next()) { Old_quant = rs.getInt(1);}
+            new_quant = (Old_quant - quantite);
+            utility.update_stock(productID,new_quant);
 
+            utility.setTextFieldFocus(product_txt);
+            conn.connect().close();
+
+            }
+        catch (Exception ex){ex.printStackTrace();}
+        finally {
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (rs != null) {rs.close();}
+          }
 
       }
 
-     public void total_sum_calculator(int bonId,int clientID) throws SQLException {
+     public double total_sum_calculator(int bonId,int personID, Label label) throws SQLException {
 
          double sum_amount=0.25;
+         try{
 
-         String Query =" SELECT sum(value)  FROM demo.bon_command_client_table where clientID = "+clientID+" " + " and bonID="+bonId   ;
-         ResultSet   rs = conn.connect().createStatement().executeQuery(Query);
-         if (rs.next()){
+             String Query =" SELECT sum(value)  FROM demo.bon_detail_table where personID = "+personID+" " + " and bonID="+bonId   ;
+             ResultSet   rs = conn.connect().createStatement().executeQuery(Query);
+             if (rs.next()){
+                 sum_amount = rs.getDouble("value");
+             }
+             label.setText("TOTAL : "+String.format("%,.2f", sum_amount)+" DZD");
 
-             sum_amount = rs.getDouble(1);
 
+              }
+
+         catch (Exception ex){ex.printStackTrace();}
+
+         finally {
+
+             if (conn.connect()   != null) {conn.connect().close();}
+             if (preparesStatemnt != null) {preparesStatemnt.close();}
+             if (rs != null) {rs.close();}
          }
 
-
-      show_lb.setText(sum_amount+"");
+         return sum_amount;
 
         }
       @FXML
@@ -369,15 +450,19 @@ public class Bon_Command_Client_Controller implements Initializable {
             System.out.println("error ! Not Connected to Db****");
         }
 
-        des_show_column.setCellValueFactory(new PropertyValueFactory<>("designiation"));
-        nbr_pcs_crt_show_column.setCellValueFactory(new PropertyValueFactory<>("Nbr_pcs_crt"));
-        nbr_pcs_show_column.setCellValueFactory(new PropertyValueFactory<>("Nbr_pcs"));
-        quant_show_column.setCellValueFactory(new PropertyValueFactory<>("quantite"));
-        prix_show_column.setCellValueFactory(new PropertyValueFactory<>("prix_ventt"));
+        finally {
 
-        show_table.setItems(show_data_List);
+            des_show_column.setCellValueFactory(new PropertyValueFactory<>("designiation"));
+            nbr_pcs_crt_show_column.setCellValueFactory(new PropertyValueFactory<>("Nbr_pcs_crt"));
+            nbr_pcs_show_column.setCellValueFactory(new PropertyValueFactory<>("Nbr_pcs"));
+            quant_show_column.setCellValueFactory(new PropertyValueFactory<>("quantite"));
+            prix_show_column.setCellValueFactory(new PropertyValueFactory<>("prix_ventt"));
+            show_table.setItems(show_data_List);
 
-        cnn.close();
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (rs != null) {rs.close();}
+        }
 
 
 
@@ -405,6 +490,13 @@ public class Bon_Command_Client_Controller implements Initializable {
                System.out.println("error ! Not Connected to Db!!!");
                eX.printStackTrace();
            }
+
+           finally {
+               if (conn.connect()   != null) {conn.connect().close();}
+               if (preparesStatemnt != null) {preparesStatemnt.close();}
+               if (rs != null) {rs.close();}
+           }
+
 
        }
     @FXML
@@ -435,7 +527,6 @@ public class Bon_Command_Client_Controller implements Initializable {
             case ESCAPE:
                closeButtonAction();
                 break;
-
         }
     }
     @FXML

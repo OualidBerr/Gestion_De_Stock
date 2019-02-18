@@ -14,13 +14,12 @@ public class Main extends Application implements EventHandler<KeyEvent> {
     public void start(Stage primaryStage) throws Exception{
 
         Parent root = FXMLLoader.load(getClass().getResource("Login_View.fxml"));
+
         primaryStage.setTitle("Login Form");
         primaryStage.setScene(new Scene(root, 800, 500));
         primaryStage.getScene().setOnKeyPressed(this);
         primaryStage.setResizable(false);
         primaryStage.show();
-
-
 
     }
 

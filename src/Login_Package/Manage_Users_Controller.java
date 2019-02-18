@@ -58,7 +58,7 @@ public class Manage_Users_Controller implements Initializable {
     Db_Connection conn = new Db_Connection();
 
     PreparedStatement  preparesStatemnt = null;
-    ResultSet resultSet = null;
+
 
     Utility utility = new Utility();
 
@@ -79,35 +79,50 @@ public class Manage_Users_Controller implements Initializable {
         int max_id = 0;
         max_id  = utility.getMax_ID("users","id") ;
 
-        if (!usernametxt.getText().isEmpty() && !passtxt.getText().isEmpty() && !nametxt.getText().isEmpty()){
+
+      try{
+
+          if (!usernametxt.getText().isEmpty() && !passtxt.getText().isEmpty() && !nametxt.getText().isEmpty()){
+
+              String userName = usernametxt.getText();
+              String Name = nametxt.getText();
+              String passWord = passtxt.getText();
+              String role = camboBox.getValue().toString();
+              String date = date_txt.getValue().toString();
+
+              String query = "INSERT INTO demo.users (id,name,username,password,role,date) VALUES (?,?,?,?,?,?)";
+
+              preparesStatemnt = conn.connect().prepareStatement(query);
+              preparesStatemnt.setInt(1, max_id+1);
+              preparesStatemnt.setString(2, Name);
+              preparesStatemnt.setString(3, userName);
+              preparesStatemnt.setString(4, passWord);
+              preparesStatemnt.setString(5, role);
+              preparesStatemnt.setString(6, date);
+              preparesStatemnt.execute();
 
 
-            String userName = usernametxt.getText();
-            String Name = nametxt.getText();
-            String passWord = passtxt.getText();
-            String role = camboBox.getValue().toString();
-            String date = date_txt.getValue().toString();
+              loadData();
+              utility.showAlert("New User added successfully");
+          }
 
-            String query = "INSERT INTO demo.users (id,name,username,password,role,date) VALUES (?,?,?,?,?,?)";
+          else{
+              utility.showAlert("Data Can not be Dulicated");
+          }
 
-            preparesStatemnt = conn.connect().prepareStatement(query);
-            preparesStatemnt.setInt(1, max_id+1);
-            preparesStatemnt.setString(2, Name);
-            preparesStatemnt.setString(3, userName);
-            preparesStatemnt.setString(4, passWord);
-            preparesStatemnt.setString(5, role);
-            preparesStatemnt.setString(6, date);
-            preparesStatemnt.execute();
-            preparesStatemnt.close();
+           }
+      catch (Exception ex){ex.printStackTrace();}
 
-            loadData();
-            utility.showAlert("New User added successfully");
-        }
+      finally {
+          if (conn.connect()   != null) {conn.connect().close();}
+          if (preparesStatemnt != null) {preparesStatemnt.close();}
+      }
 
-        else{
-            utility.showAlert("Data Can not be Dulicated");
-        }
     }
+
+
+
+
     // Update
     @FXML
     public  int update_User() throws SQLException {
@@ -132,19 +147,27 @@ public class Manage_Users_Controller implements Initializable {
                 preparesStatemnt.executeUpdate();
                 loadData();
                 utility.showAlert("User has been Updated");
-                cnn.close();
+
 
             }
             catch (Exception e)
             {
                 e.printStackTrace();
             }
-          cnn.close();
-        }
 
+
+            finally {
+                if (conn.connect()   != null) {conn.connect().close();}
+                if (preparesStatemnt != null) {preparesStatemnt.close();}
+            }
+
+        }
 
         return 0;
     }
+
+
+
     // Delete
     @FXML
     private void deletUser() throws SQLException{
@@ -174,10 +197,12 @@ public class Manage_Users_Controller implements Initializable {
     }
     public void loadData() throws SQLException{
         Connection cnn = conn.connect();
+        ResultSet rs = null;
+
         try{
 
             data = FXCollections.observableArrayList();
-            ResultSet rs = cnn.createStatement().executeQuery("SELECT id,name,username,password,role,DATE_FORMAT(date, '%d-%m-%Y')date FROM demo.users");
+             rs = cnn.createStatement().executeQuery("SELECT id,name,username,password,role,DATE_FORMAT(date, '%d-%m-%Y')date FROM demo.users");
             while(rs.next()){
 
                     data.add(new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)));
@@ -186,6 +211,12 @@ public class Manage_Users_Controller implements Initializable {
         catch(SQLException eX){
             System.out.println("error ! Not Connected to Db****");
         }
+
+        finally {
+            if (conn.connect() != null) {conn.connect().close();}
+            if (rs != null) {rs.close();}
+
+              }
 
         Idcolumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         namecolumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -197,7 +228,7 @@ public class Manage_Users_Controller implements Initializable {
         usertableView.setItems(null);
         usertableView.setItems(data);
         clear();
-        cnn.close();
+
 
     }
     @FXML
@@ -210,21 +241,22 @@ public class Manage_Users_Controller implements Initializable {
             preparesStatemnt = conn.connect().prepareStatement(qyery);
             int i = user.getid();
             String s = String.valueOf(i);
-
             usernametxt.setText(user.getUsername());
             nametxt.setText(user.getNname());
             passtxt.setText(user.getPassword());
             camboBox.setValue(user.getRole());
 
-            preparesStatemnt.close();
         }
 
         catch(SQLException ex){
 
         }
+        finally {
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+             }
 
     }
-
     @FXML
     private void closeButtonAction(){
         // get a handle to the stage
@@ -245,8 +277,6 @@ public class Manage_Users_Controller implements Initializable {
 
         }
     }
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

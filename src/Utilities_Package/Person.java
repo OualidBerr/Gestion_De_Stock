@@ -2,7 +2,10 @@ package Utilities_Package;
 
 import javafx.beans.property.*;
 
-public class Client {
+public class Person {
+
+
+
 
     private IntegerProperty id ;
     private StringProperty name ;
@@ -13,10 +16,27 @@ public class Client {
     private StringProperty registre ;
     private DoubleProperty sold  ;
 
-    // Constructor
-    public Client (  Integer id,       String Name,     String Address,
-                     String Telephone, Integer PERIOD,  Double SOLD_MAX,
-                     String REGISTRE,  Double SOLD  ){
+    public int getType() {
+        return type.get();
+    }
+
+    public IntegerProperty typeProperty() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type.set(type);
+    }
+
+    private IntegerProperty type;
+
+
+
+
+    //Client Constructor
+    public Person (  Integer id,       String Name,     String Address,
+                     String Telephone, Double SOLD,  Double SOLD_MAX,
+                     Integer Period,  String REGISTRE){
 
         this.id        = new SimpleIntegerProperty(id);
         this.name      = new SimpleStringProperty(Name);
@@ -24,10 +44,27 @@ public class Client {
         this.telephone = new SimpleStringProperty(Telephone);
         this.sold      = new SimpleDoubleProperty(SOLD);
         this.max_sold  = new SimpleDoubleProperty(SOLD_MAX);
-        this.period    = new SimpleIntegerProperty(PERIOD);
+        this.period    = new SimpleIntegerProperty(Period);
         this.registre  = new SimpleStringProperty(REGISTRE);
+        this.type        = new SimpleIntegerProperty(PersonType.Active_Client);
 
     }
+
+    // Fournisseur Constructor
+    public Person (  Integer id,       String Name,     String Address,
+                     String Telephone, String REGISTRE,  Double SOLD  ){
+
+        this.id        = new SimpleIntegerProperty(id);
+        this.name      = new SimpleStringProperty(Name);
+        this.address   = new SimpleStringProperty(Address);
+        this.telephone = new SimpleStringProperty(Telephone);
+        this.sold      = new SimpleDoubleProperty(SOLD);
+        this.registre  = new SimpleStringProperty(REGISTRE);
+        this.type        = new SimpleIntegerProperty(PersonType.Active_Fournisseur);
+    }
+
+
+
 
     public String getRegistre() {
         return registre.get();

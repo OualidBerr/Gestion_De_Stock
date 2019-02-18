@@ -1,8 +1,9 @@
 package Client_Package;
 
-import Utilities_Package.Client;
+
 import Utilities_Package.Db_Connection;
 import Utilities_Package.Fournisseur;
+import Utilities_Package.Person;
 import Utilities_Package.Utility;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,7 +17,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-
 public class New_Client_Controller implements Initializable {
 
       public static int ID;
@@ -75,7 +75,7 @@ public class New_Client_Controller implements Initializable {
             String Sold_max_String = sold_maxtxt.getText();  double Sold_max = Double.parseDouble(Sold_max_String);
             String Registre    = registretxt.getText();
             PreparedStatement preparesStatemnt = null;
-            String query = "INSERT INTO demo.client_table (id,name,address,phone,period,soldmax,registre) VALUES (?,?,?,?,?,?,?)";
+            String query = "INSERT INTO demo.client_table (id,name,address,telephone,period,soldmax,registre,PersonType) VALUES (?,?,?,?,?,?,?,0)";
 
             preparesStatemnt = conn.connect().prepareStatement(query);
             preparesStatemnt.setInt(   1, max_id+1);
@@ -119,7 +119,7 @@ public class New_Client_Controller implements Initializable {
             double sold_max    = Double.parseDouble(sold_maxtxt.getText());
             String registre    = registretxt.getText();
 
-            Client client = new Client(0,"","","",0,.25,"",0.25);
+            Person client = new Person(0,"","","",0.25,.25,0,"");
                  client.setId(id);
                  client.setName(name);
                  client.setAddress(adress);
@@ -131,7 +131,7 @@ public class New_Client_Controller implements Initializable {
             try{
                 PreparedStatement  preparesStatemnt = null;
 
-                String query  = "UPDATE demo.client_table SET name =?, address =?, phone =?,period=?,soldmax=?,registre=? Where id="+id;
+                String query  = "UPDATE demo.person_table SET name =?, address =?, telephone =?,period=?,soldmax=?,registre=? Where id="+id;
                 preparesStatemnt = conn.connect().prepareStatement(query);
                 preparesStatemnt.setString(1, client.getName());
                 preparesStatemnt.setString(2, client.getAddress());

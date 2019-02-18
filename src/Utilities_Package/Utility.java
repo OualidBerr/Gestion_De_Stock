@@ -1,5 +1,8 @@
 package Utilities_Package;
 
+
+
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -10,19 +13,26 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 
+import javax.management.Notification;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+
+import static org.controlsfx.control.Notifications.*;
 
 public class Utility {
 
@@ -148,8 +158,6 @@ public class Utility {
 
              }
 
-
-
        // ShowAndWait a New Window
         // Add new Product Window
         public void show_New_Product_Window(Event e) throws IOException {
@@ -189,8 +197,6 @@ public class Utility {
             openNewStage("/Reglement_Package/Client_Reglement_View.fxml","Reglement de " + person);
         }
 
-
-
         // Update Client
          public void show_update_Client_Window() throws IOException {
 
@@ -205,16 +211,10 @@ public class Utility {
 
           }
 
-
-
-
-
           // Bon Fournisseur Global
           public void show_Bon_Fournisseur_Global_Window(String person)throws IOException{
               openNewStage("/Bon_Command_Package/Bon_Fournisseur_Global_View.fxml","Bon Command de Fournisseur " + person);
           }
-
-
             // Bon Client Global
           public void show_Bon_Client_Global_Window(String person)throws IOException{
         openNewStage("/Bon_Command_Package/Bon_Client_Global_View.fxml","Bon Command de Client " + person);
@@ -237,41 +237,40 @@ public class Utility {
         public int getMax_ID(String tableName,String colName) throws SQLException {
 
            // String query = "select max(id) from " + tableName;
-            String query = "SELECT max("+colName+") from "+tableName;
-
+            String query = "SELECT max("+colName+") FROM "+tableName;
             int idmax= 0;
             Connection cnn = conn.connect();
-            preparesStatemnt = cnn.prepareStatement(query);
-            resultSet = preparesStatemnt.executeQuery();
-            if(resultSet.next()){
-                idmax = resultSet.getInt(1);
+
+            try{
+
+                preparesStatemnt = cnn.prepareStatement(query);
+                resultSet = preparesStatemnt.executeQuery();
+                if(resultSet.next()){
+                    idmax = resultSet.getInt(1);
                 }
-            cnn.close();
+
+                cnn.close();
+                resultSet.close();
+                preparesStatemnt.close();
+
+              }
+
+            catch (Exception ex){ex.printStackTrace();}
+
+            finally {
+                if (conn.connect()   != null) {conn.connect().close();}
+                if (preparesStatemnt != null) {preparesStatemnt.close();}
+                if (resultSet != null) {resultSet.close();}
+               }
+
             return  idmax;
 
               }
-        // Find Sum For Fournisseur
-        public double get_Sum_Amount(int fournisseurID) throws SQLException {
 
-        String query = "SELECT SUM(amount) FROM demo.fournisseur_reglement_table WHERE fournisseurID ="+fournisseurID;
-
-        double Sum_amount = 0.25;
-        Connection cnn = conn.connect();
-        preparesStatemnt = cnn.prepareStatement(query);
-        resultSet = preparesStatemnt.executeQuery();
-
-        if(resultSet.next()){
-            Sum_amount = resultSet.getDouble(1);
-        }
-
-        cnn.close();
-        return  Sum_amount;
-
-    }
         // Showing Alert Message
         public void showAlert(String s){
 
-                Notifications note = Notifications.create()
+                Notifications note = create()
                         .text(s)
                         .hideAfter(Duration.seconds(3))
                         .position(Pos.BOTTOM_RIGHT)
@@ -318,15 +317,25 @@ public class Utility {
         public void update_Fournisseur_Sold(double amount, double old_sold, int id) throws SQLException {
 
            Db_Connection conn = new Db_Connection();
-           ResultSet resultSet = null;
-           PreparedStatement  preparesStatemnt = null;
 
-           double new_Sold = (old_sold + amount);
-           String query    = "UPDATE demo.fournisseur_table SET sold =? Where id="+id;
-           preparesStatemnt = conn.connect().prepareStatement(query);
-           preparesStatemnt.setDouble(1, new_Sold);
-           preparesStatemnt.executeUpdate();
-           conn.connect().close();
+            try{
+
+                double new_Sold = (old_sold + amount);
+                String query    = "UPDATE demo.person_table SET sold =? Where id="+id+ " and PersonType="+PersonType.Active_Fournisseur;
+                preparesStatemnt = conn.connect().prepareStatement(query);
+                preparesStatemnt.setDouble(1, new_Sold);
+                preparesStatemnt.executeUpdate();
+                conn.connect().close();
+            }
+
+            catch (Exception ex){ex.printStackTrace();}
+
+            finally {
+                if (conn.connect()   != null) {conn.connect().close();}
+                if (preparesStatemnt != null) {preparesStatemnt.close();}
+
+            }
+
 
        }
 
@@ -335,27 +344,35 @@ public class Utility {
     public void update_Client_Sold(double amount, double old_sold, int id) throws SQLException {
 
         Db_Connection conn = new Db_Connection();
-        ResultSet resultSet = null;
-        PreparedStatement  preparesStatemnt = null;
 
-        double new_Sold = (old_sold + amount);
-        String query    = "UPDATE demo.client_table SET sold =? Where id="+id;
-        preparesStatemnt = conn.connect().prepareStatement(query);
-        preparesStatemnt.setDouble(1, new_Sold);
-        preparesStatemnt.executeUpdate();
-        conn.connect().close();
+
+        try{
+
+            double new_Sold = (old_sold + amount);
+            String query    = "UPDATE demo.person_table SET sold =? Where id="+id + " and PersonType="+PersonType.Active_Client;
+
+            preparesStatemnt = conn.connect().prepareStatement(query);
+            preparesStatemnt.setDouble(1, new_Sold);
+            preparesStatemnt.executeUpdate();
+            conn.connect().close();
+        }
+
+        catch (Exception ex){ex.printStackTrace();}
+
+        finally {
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+
+        }
+
 
     }
-
-
-
 
         // update stock
           public void update_stock(int productID,int new_quant) throws SQLException {
 
               Db_Connection conn = new Db_Connection();
-              ResultSet resultSet = null;
-              PreparedStatement  preparesStatemnt = null;
+
               String query    = "UPDATE demo.product_table SET quan =? Where id="+productID;
               preparesStatemnt = conn.connect().prepareStatement(query);
               preparesStatemnt.setInt(1, new_quant);
@@ -365,123 +382,373 @@ public class Utility {
 
           }
 
-
-
-
-
-
-
-
-       // get product Id
-       public int get_Product_Id(String productName) throws SQLException {
-
-          int productID = 0;
-          String query = "SELECT id from demo.product_table  where des = '"+productName+"'";
-          Connection cnn = conn.connect();
-          preparesStatemnt = cnn.prepareStatement(query);
-          resultSet = preparesStatemnt.executeQuery();
-          if(resultSet.next()){
-              productID = resultSet.getInt(1);
-          }
-          cnn.close();
-          return productID;
-
-          }
-
-
          // get old Quantity
       public int get_Product_quantity(int productID) throws SQLException {
 
         int product_old_quantity = 0;
         String query = "SELECT quan from demo.product_table  where id = '"+productID+"'";
+
         Connection cnn = conn.connect();
-        preparesStatemnt = cnn.prepareStatement(query);
-        resultSet = preparesStatemnt.executeQuery();
-        if(resultSet.next()){
-            product_old_quantity = resultSet.getInt(1);
-        }
-        cnn.close();
+          try{
+
+              preparesStatemnt = cnn.prepareStatement(query);
+              resultSet = preparesStatemnt.executeQuery();
+              if(resultSet.next()){
+                  product_old_quantity = resultSet.getInt(1);
+              }
+              cnn.close();
+              preparesStatemnt.close();
+              resultSet.close();
+          }
+
+          catch (Exception ex){ex.printStackTrace();}
+
+          finally {
+              if (conn.connect()   != null) {conn.connect().close();}
+              if (preparesStatemnt != null) {preparesStatemnt.close();}
+              if (resultSet != null) {resultSet.close();}
+          }
+
         return product_old_quantity;
 
 
           }
 
+          // get sum bon
+
+
+
+
+
+          // get product detail -- Strings
+          public Object get_Product_detail_S(int productID ,String colum) throws SQLException {
+
+              Object value = new Object();
+              String query = "SELECT * from demo.product_table  where id ="+productID;
+              Connection cnn = conn.connect();
+              try{
+                  preparesStatemnt = cnn.prepareStatement(query);
+                  resultSet = preparesStatemnt.executeQuery();
+                  if(resultSet.next()){
+                      value = resultSet.getObject(colum);
+                  }
+
+                  cnn.close();
+                  preparesStatemnt.close();
+                  resultSet.close();
+              }
+
+              catch (Exception ex){ex.printStackTrace();}
+
+              finally {
+                  if (conn.connect()   != null) {conn.connect().close();}
+                  if (preparesStatemnt != null) {preparesStatemnt.close();}
+                  if (resultSet != null) {resultSet.close();}
+              }
+
+              return value;
+          }
+         // get product detail -- Int
+          public int get_Product_detail_Int(int productID ,String colum) throws SQLException {
+
+        int value =0;
+        String query = "SELECT * from demo.product_table  where id ="+productID;
+        Connection cnn = conn.connect();
+        try{
+            preparesStatemnt = cnn.prepareStatement(query);
+            resultSet = preparesStatemnt.executeQuery();
+            if(resultSet.next()){
+
+                value = resultSet.getInt(colum);
+
+            }
+
+            cnn.close();
+            preparesStatemnt.close();
+            resultSet.close();
+        }
+
+        catch (Exception ex){ex.printStackTrace();}
+
+        finally {
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (resultSet != null) {resultSet.close();}
+        }
+
+        return value;
+    }
+
+
+
+
+    // get Product Nbr_pcs_crt
+          public int get_Product_Nbr_pcs_crt(int productID) throws SQLException {
+
+              int product_Nbr_pcs_crt = 0;
+              String query = "SELECT nbr_pcs_crt from demo.product_table  where id = '"+productID+"'";
+
+              Connection cnn = conn.connect();
+              try{
+
+                  preparesStatemnt = cnn.prepareStatement(query);
+                  resultSet = preparesStatemnt.executeQuery();
+                  if(resultSet.next()){
+                      product_Nbr_pcs_crt = resultSet.getInt(1);
+                  }
+                  cnn.close();
+                  preparesStatemnt.close();
+                  resultSet.close();
+              }
+
+              catch (Exception ex){ex.printStackTrace();}
+
+              finally {
+                  if (conn.connect()   != null) {conn.connect().close();}
+                  if (preparesStatemnt != null) {preparesStatemnt.close();}
+                  if (resultSet != null) {resultSet.close();}
+              }
+
+              return product_Nbr_pcs_crt;
+          }
+
+
+
+
 
     public double get_Sold(int fournisseurID) throws SQLException {
 
         double updatedsold = 0.025;
-        String query = "SELECT sold from demo.fournisseur_table  where id ="+fournisseurID;
+        String query = "SELECT sold from demo.person_table  where id ="+fournisseurID;
 
         Connection cnn = conn.connect();
-        preparesStatemnt = cnn.prepareStatement(query);
-        resultSet = preparesStatemnt.executeQuery();
-        if(resultSet.next()){
-            updatedsold = resultSet.getDouble(1);
-        }
-        cnn.close();
+
+        try{
+            preparesStatemnt = cnn.prepareStatement(query);
+            resultSet = preparesStatemnt.executeQuery();
+            if(resultSet.next()){
+                updatedsold = resultSet.getDouble(1);
+            }
+            cnn.close();
+            preparesStatemnt.close();
+            resultSet.close();
+           }
+
+        catch (Exception ex){ex.printStackTrace();}
+
+        finally {
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (resultSet != null) {resultSet.close();}
+             }
 
         return updatedsold;
     }
-
     public double get_Client_Sold(int clientID) throws SQLException {
 
         double updatedsold = 0.025;
-        String query = "SELECT sold from demo.client_table  where id ="+clientID;
+        String query = "SELECT sold from demo.person_table  where id ="+clientID +" and PersonType="+PersonType.Active_Client;
         Connection cnn = conn.connect();
-        preparesStatemnt = cnn.prepareStatement(query);
-        resultSet = preparesStatemnt.executeQuery();
-        if(resultSet.next()){
-            updatedsold = resultSet.getDouble(1);
-                 }
-        cnn.close();
-        return updatedsold;
+        try{
+
+            preparesStatemnt = cnn.prepareStatement(query);
+            resultSet = preparesStatemnt.executeQuery();
+            if(resultSet.next()){
+                updatedsold = resultSet.getDouble(1);
+            }
+
+            cnn.close();
+            resultSet.close();
+            preparesStatemnt.close();
+
+        }
+
+        catch (Exception ex){ex.printStackTrace();}
+
+        finally {
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (resultSet != null) {resultSet.close();}
            }
 
+        return updatedsold;
+           }
      // Get Fournisseur ID
      public int getFournisseur_ID(String  fournisseurName) throws SQLException {
+
               int fournisseurID = 0;
-              String query = "SELECT id from demo.fournisseur_table  where name = '"+fournisseurName+"'";
+              String query = "SELECT id from demo.person_table  where name ='"+fournisseurName+"' and PersonType="+PersonType.Active_Fournisseur;
               Connection cnn = conn.connect();
-              preparesStatemnt = cnn.prepareStatement(query);
-              resultSet = preparesStatemnt.executeQuery();
-              if(resultSet.next()){
-                  fournisseurID = resultSet.getInt(1);
-                   }
-                cnn.close();
+
+         try{
+             preparesStatemnt = cnn.prepareStatement(query);
+             resultSet = preparesStatemnt.executeQuery();
+             if(resultSet.next()){
+                 fournisseurID = resultSet.getInt(1);
+             }
+             cnn.close();
+             preparesStatemnt.close();
+             resultSet.close();
+             }
+
+         catch (Exception ex){ex.printStackTrace();}
+         finally {
+             if (conn.connect()   != null) {conn.connect().close();}
+             if (preparesStatemnt != null) {preparesStatemnt.close();}
+             if (resultSet != null) {resultSet.close();}
+         }
+
                return fournisseurID;
+
+
           }
+
+          // get Person Name
+    public String get_Person_Name(int PersonID) throws SQLException {
+        String personName ="";
+
+        String query = "SELECT name from demo.person_table  where id ="+PersonID;
+        Connection cnn = conn.connect();
+
+        try{
+            preparesStatemnt = cnn.prepareStatement(query);
+            resultSet = preparesStatemnt.executeQuery();
+
+            if(resultSet.next()){
+                personName = resultSet.getString(1);
+            }
+            cnn.close();
+            preparesStatemnt.close();
+            resultSet.close();
+        }
+
+        catch (Exception ex){ex.printStackTrace();}
+
+        finally {
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (resultSet != null) {resultSet.close();}
+        }
+
+
+        return personName;
+    }
+
+
+
+
+
+
+
     // get product ID
     public int getProduct_ID(String  ProductName) throws SQLException {
         int ProductID = 0;
+
         String query = "SELECT id from demo.product_table  where des = '"+ProductName+"'";
         Connection cnn = conn.connect();
-        preparesStatemnt = cnn.prepareStatement(query);
-        resultSet = preparesStatemnt.executeQuery();
-        if(resultSet.next()){
-            ProductID = resultSet.getInt(1);
-        }
-        cnn.close();
+
+        try{
+
+            preparesStatemnt = cnn.prepareStatement(query);
+            resultSet = preparesStatemnt.executeQuery();
+            if(resultSet.next()){
+                ProductID = resultSet.getInt(1);
+            }
+            cnn.close();
+            resultSet.close();
+            preparesStatemnt.close();
+
+             }
+
+        catch (Exception ex){ex.printStackTrace();}
+        finally {
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (resultSet != null) {resultSet.close();}
+                }
+
         return ProductID;
     }
     // Get Client ID
     public int getClient_ID(String clientName) throws SQLException {
         int fournisseurID = 0;
-        String query = "SELECT id from demo.client_table  where name = '"+clientName+"'";
+        String query = "SELECT id from demo.person_table  where name = '"+clientName+"' and PersonType="+PersonType.Active_Client;
         Connection cnn = conn.connect();
-        preparesStatemnt = cnn.prepareStatement(query);
-        resultSet = preparesStatemnt.executeQuery();
-        if(resultSet.next()){
-            fournisseurID = resultSet.getInt(1);
+
+        try{
+            preparesStatemnt = cnn.prepareStatement(query);
+            resultSet = preparesStatemnt.executeQuery();
+            if(resultSet.next()){
+                fournisseurID = resultSet.getInt(1);
+            }
+            cnn.close();
+            resultSet.close();
+            preparesStatemnt.close();
+            }
+
+        catch (Exception ex){ex.printStackTrace();}
+
+        finally {
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (resultSet != null) {resultSet.close();}
         }
-        cnn.close();
+
         return fournisseurID;
     }
 
 
 
+    public double total_sum_calculator(int bonId,int personID, Label label) throws SQLException {
+        ResultSet   rs = null;
+        double sum_amount=0.25;
+        try{
+
+            String Query =" SELECT sum(value)  FROM demo.bon_detail_table where bonID="+bonId   ;
+               rs = conn.connect().createStatement().executeQuery(Query);
+            if (rs.next()){
+                sum_amount = rs.getDouble(1);
+            }
+            label.setText("TOTAL : "+String.format("%,.2f", sum_amount)+" DZD");
+        }
+
+        catch (Exception ex){ex.printStackTrace();}
+
+        finally {
+
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (rs != null) {rs.close();}
+        }
+
+        return sum_amount;
 
 
 
+
+
+
+
+
+
+
+
+    }
+
+    public void show_TrayNotification(String message){
+
+        String title = "Congratulations sir";
+        NotificationType notification = NotificationType.SUCCESS;
+        TrayNotification tray = new TrayNotification();
+        tray.setTitle(title);
+        tray.setMessage(message);
+        tray.setAnimationType(AnimationType.POPUP);
+        tray.setNotificationType(notification);
+        tray.showAndDismiss( Duration.millis( 2500 ) );
+
+       // tray.showAndWait();
+
+    }
 
 
 

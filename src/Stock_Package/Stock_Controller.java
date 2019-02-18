@@ -15,7 +15,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldListCell;
+
 import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
@@ -45,7 +45,7 @@ public class Stock_Controller  implements Initializable {
      public ObservableList<Product> data;
     Db_Connection conn = new Db_Connection();
     PreparedStatement preparesStatemnt = null;
-    ResultSet resultSet = null;
+    ResultSet rs = null;
     Utility utility = new Utility();
 
     @FXML
@@ -89,7 +89,7 @@ public class Stock_Controller  implements Initializable {
         try{
 
             data = FXCollections.observableArrayList();
-            ResultSet rs = cnn.createStatement().executeQuery("SELECT  id,ref,des,nbr_pcs_crt,quan,nbr_pcs,prix_vent,value FROM demo.product_table");
+             rs = cnn.createStatement().executeQuery("SELECT  id,ref,des,nbr_pcs_crt,quan,nbr_pcs,prix_vent,value FROM demo.product_table");
             while(rs.next()){
                 data.add(new Product(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getInt(5),rs.getInt(6),rs.getDouble(7),rs.getDouble(8)));
             }
@@ -97,19 +97,23 @@ public class Stock_Controller  implements Initializable {
         catch(SQLException eX){
             System.out.println("error ! Not Connected to Db****");
             }
+        finally {
 
-        id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
-        ref_column.setCellValueFactory(new PropertyValueFactory<>("ref"));
-        des_column.setCellValueFactory(new PropertyValueFactory<>("designiation"));
-        nbr_pcs_crt__column.setCellValueFactory(new PropertyValueFactory<>("Nbr_pcs_crt"));
-        nbr_pcs_column.setCellValueFactory(new PropertyValueFactory<>("Nbr_pcs"));
-        quantity_column.setCellValueFactory(new PropertyValueFactory<>("quantite"));
-        prix_vent_column.setCellValueFactory(new PropertyValueFactory<>("prix_ventt"));
-        value_column.setCellValueFactory(new PropertyValueFactory<>("value"));
+            id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
+            ref_column.setCellValueFactory(new PropertyValueFactory<>("ref"));
+            des_column.setCellValueFactory(new PropertyValueFactory<>("designiation"));
+            nbr_pcs_crt__column.setCellValueFactory(new PropertyValueFactory<>("Nbr_pcs_crt"));
+            nbr_pcs_column.setCellValueFactory(new PropertyValueFactory<>("Nbr_pcs"));
+            quantity_column.setCellValueFactory(new PropertyValueFactory<>("quantite"));
+            prix_vent_column.setCellValueFactory(new PropertyValueFactory<>("prix_ventt"));
+            value_column.setCellValueFactory(new PropertyValueFactory<>("value"));
+            stock_table.setItems(data);
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (rs != null) {rs.close();}
+         }
 
-        stock_table.setItems(data);
 
-        cnn.close();
 
           }
     @FXML

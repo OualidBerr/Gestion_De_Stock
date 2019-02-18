@@ -27,10 +27,14 @@ public class Home_Controller implements Initializable {
 
 
     @FXML
-    private Button products_btn,client_btn,stock_btn,fournisseur_btn,logout_btn;
+    private Button products_btn,client_btn,stock_btn,fournisseur_btn,logout_btn,test_btn;
 
     @FXML
     private MenuItem manage_Users;
+
+
+
+
 
    // product
     @FXML

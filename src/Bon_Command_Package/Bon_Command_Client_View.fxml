@@ -39,11 +39,11 @@
             <TableColumn fx:id="value_column" minWidth="0.0" prefWidth="151.6666259765625" text="Value" />
          </columns>
       </TableView>
-      <TableView fx:id="show_table" layoutX="715.0" layoutY="122.0" prefHeight="75.0" prefWidth="700.0" style="-fx-font-weight: Bold; -fx-font-size: 14;" tableMenuButtonVisible="true" AnchorPane.rightAnchor="20.0">
+      <TableView fx:id="show_table" layoutX="715.0" layoutY="122.0" opacity="0.5" prefHeight="75.0" prefWidth="700.0" style="-fx-font-weight: Bold; -fx-font-size: 14;" tableMenuButtonVisible="true" AnchorPane.rightAnchor="20.0">
         <columns>
           <TableColumn fx:id="des_show_column" prefWidth="318.6666259765625" text="Desegniation" />
-          <TableColumn fx:id="nbr_pcs_crt_show_column" prefWidth="102.666748046875" style="-fx-alignment: Center;" text="Nbr_pcs_crt" />
             <TableColumn fx:id="quant_show_column" prefWidth="79.6666259765625" style="-fx-alignment: Center;" text="Quantite" />
+          <TableColumn fx:id="nbr_pcs_crt_show_column" prefWidth="102.666748046875" style="-fx-alignment: Center;" text="Nbr_pcs_crt" />
             <TableColumn fx:id="nbr_pcs_show_column" prefWidth="100.0" style="-fx-alignment: Center;" text="Nbr_pcs" />
             <TableColumn fx:id="prix_show_column" prefWidth="97.666748046875" style="-fx-alignment: Center;" text="Prix Unitaire" />
         </columns>
@@ -64,11 +64,6 @@
          </font>
       </Label>
       <Button layoutX="207.0" layoutY="182.0" mnemonicParsing="false" onAction="#add_Client_Bon" prefHeight="30.0" prefWidth="100.0" text="Add " textFill="#0c25e1">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-      <Button layoutX="502.0" layoutY="666.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Save" textFill="#0c25e1">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
