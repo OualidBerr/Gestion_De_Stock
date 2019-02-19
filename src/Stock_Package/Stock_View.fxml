@@ -60,18 +60,21 @@
                         <Insets left="50.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="charge_btn" layoutX="244.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#go_To_Charge_Stock_Window" prefHeight="40.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Charge" textFill="#3f51b5">
+                  <Button fx:id="goHome_btn11111" layoutX="820.0" layoutY="10.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Stock" textFill="#3f51b5">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="closeButton" layoutX="244.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="40.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Exit" textFill="#3f51b5">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                      <HBox.margin>
                         <Insets left="50.0" right="50.0" />
                      </HBox.margin>
-                  </Button>
-                  <Button fx:id="goHome_btn11111" layoutX="820.0" layoutY="10.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" style="-fx-background-radius: 20;" text="Stock" textFill="#3f51b5">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
                   </Button>
                </children>
             </HBox>
@@ -123,32 +126,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="produit_btn" layoutX="10.0" layoutY="13.0" mnemonicParsing="false" onAction="#go_Back_To_Product_Window" prefHeight="50.0" prefWidth="120.0" text="Produits" textFill="#3f51b5">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
             <Button layoutX="506.0" layoutY="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3F51B5;" text="Stock" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="produit_btn1" layoutX="131.0" layoutY="13.0" mnemonicParsing="false" onAction="#Open_Fournisseur_Window" prefHeight="50.0" prefWidth="120.0" text="Founisseurs" textFill="#3f51b5">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="produit_btn11" layoutX="252.0" layoutY="13.0" mnemonicParsing="false" onAction="#Open_Client_Window" prefHeight="50.0" prefWidth="120.0" text="Clients" textFill="#3f51b5">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-            <Button layoutX="373.0" layoutY="13.0" mnemonicParsing="false" onAction="#Open_Caisse_Window" prefHeight="50.0" prefWidth="120.0" text="Caisse" textFill="#3f51b5">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="logout_btn" mnemonicParsing="false" onAction="#log_Out_Function" prefHeight="50.0" prefWidth="120.0" text="Deconnexion" textFill="#3f51b5">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

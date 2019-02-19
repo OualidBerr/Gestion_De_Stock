@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -41,6 +42,8 @@ public class Stock_Controller  implements Initializable {
     public TableColumn<Product,Double> value_column;
     @FXML
     public TextField search_Textfield;
+    @FXML
+    public Button closeButton;
 
      public ObservableList<Product> data;
     Db_Connection conn = new Db_Connection();
@@ -123,7 +126,7 @@ public class Stock_Controller  implements Initializable {
     @FXML
     public void goBack_To_Home_Window(Event event) throws IOException {
 
-        new Utility().go_Home(event);
+        closeButtonAction();
 
     }
     // Go Product
@@ -148,21 +151,19 @@ public class Stock_Controller  implements Initializable {
     public void Open_Caisse_Window(Event event) throws IOException {
         new Utility().go_Caisse(event);
     }
-    @FXML
-   public void go_To_Charge_Stock_Window(Event event) throws IOException{
-        new Utility().openNewStage("/Stock_Package/Charge_View.fxml","Charge Stock");
-
-    }
     // Show Add new Product Window
     @FXML
     public void open_Add_New_Product_Form(Event event) throws IOException{
 
         new Utility().show_New_Product_Window(event);
     }
-    // Log out
     @FXML
-    public void log_Out_Function(Event event) throws IOException {
-        new Utility().log_Out(event);
+    private void closeButtonAction(){
+        // get a handle to the stage
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        // do what you have to do
+
+        stage.close();
     }
     @FXML
     public void handlekeyPressed(KeyEvent event) throws Exception {

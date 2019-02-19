@@ -99,21 +99,22 @@ public class Bon_Client_Global_Controller implements Initializable {
         try{
 
             data = FXCollections.observableArrayList();
-             rs = cnn.createStatement().executeQuery("SELECT * FROM demo.bon_table where clientID="+CLIENT_ID);
+             rs = cnn.createStatement().executeQuery("SELECT * FROM demo.bon_table where personID="+CLIENT_ID);
             while(rs.next()){
 
                 data.add(new Bon_Fournisseur_Global(
 
-                        rs.getInt(   1),
-                        rs.getString(2),
-                        rs.getDouble(3),
-                        rs.getString(4),
-                        rs.getInt(   6)
+                        rs.getInt(   "id"),
+                        "Bon_"+rs.getString("id"),
+                        rs.getDouble("total"),
+                        rs.getString("date"),
+                        rs.getInt(   "personID")
                 ));
 
             }
         }
         catch(SQLException eX){
+            eX.printStackTrace();
             System.out.println("error ! Not Connected to Db****");
         }
 
@@ -138,17 +139,16 @@ public class Bon_Client_Global_Controller implements Initializable {
     public void refresh() throws SQLException {
 
         Bon_Fournisseur_Global bon_client_global = Bon_Client_Global_table.getSelectionModel().getSelectedItem();
-
+        int BON_ID = bon_client_global.getId();
         Connection cnn = conn.connect();
         try {
 
             data_2 = FXCollections.observableArrayList();
 
-            ResultSet rs = cnn.createStatement().executeQuery("SELECT id,ref,des,nbr_pcs_crt,quant,nbr_pcs,prix," +
-                    "value,clientID,bonID,date " + " FROM demo.bon_command_client_table Where" +
-                    " bonID="+bon_client_global.getBonID() +" and clientID="+CLIENT_ID  );
+            ResultSet rs = cnn.createStatement().executeQuery("SELECT d.id,p.ref,p.des,d.quant ,p.nbr_pcs_crt,d.quant*p.nbr_pcs_crt,p.prix_vent,d.value,b.date FROM demo.bon_detail_table d, demo.bon_table b, demo.product_table p where d.bonID = b.id and d.productID=p.id and d.bonID="+BON_ID);
             while (rs.next()) {
                 data_2.add(new Bon_Command_Client(
+
                         rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
@@ -157,13 +157,12 @@ public class Bon_Client_Global_Controller implements Initializable {
                         rs.getInt(6),
                         rs.getDouble(7),
                         rs.getDouble(8),
-                        rs.getInt(9),
-                        rs.getInt(10),
-                        rs.getString(11)
+                        rs.getString(9)
                 ));
 
             }
         } catch (SQLException eX) {
+            eX.printStackTrace();
             System.out.println("error ! Not Connected to Db****");
         }
 
@@ -189,12 +188,12 @@ public class Bon_Client_Global_Controller implements Initializable {
 
         try{
             double sum_amount=0.25;
-            String Query =" SELECT sum(value)  FROM demo.bon_command_client_table where clientID = "+CLIENT_ID+" " + " and bonID="+bon_client_global.getBonID()   ;
+            String Query =" SELECT sum(value) FROM demo.bon_detail_table where bonID="+BON_ID ;
             ResultSet   rs = cnn.createStatement().executeQuery(Query);
             if (rs.next()){
                 sum_amount = rs.getDouble(1);
             }
-            show_total.setText(sum_amount+"");
+            show_total.setText("TOTAL : "+String.format("%,.2f", sum_amount)+" DZD");
             bon_command_client_table.setItems(data_2);
 
            }

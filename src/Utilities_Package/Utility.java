@@ -1,12 +1,7 @@
 package Utilities_Package;
 
-
-
-
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -23,8 +18,6 @@ import org.controlsfx.control.Notifications;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
-
-import javax.management.Notification;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -52,25 +45,6 @@ public class Utility {
      public Utility (String actualWindow,String title, Event event  ) throws IOException {
         switchScene(actualWindow,title,event);
     }
-
-    // Testing and Playing around with deferent stages
-    @FXML
-    public void enhanced_open_newStage_Function(String View,String Title,ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(View));
-        Scene scene = new Scene(root);
-        Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
-        // create a new stage:
-        Stage stage = new Stage();
-        // make it modal:
-        stage.initModality(Modality.APPLICATION_MODAL);
-        // make its owner the existing window:
-        stage.initOwner(existingWindow);
-        stage.setScene(scene);
-        stage.setFullScreen(true);
-        stage.setTitle(Title);
-        stage.show();
-    }
-
     // Starting new Stage Function
        public void openNewStage(String View, String title) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource(View));
@@ -96,7 +70,6 @@ public class Utility {
         App_Stage.show();
 
     }
-
     // Switching Scenes
     public void switchScene(String Actual_Window,String title, Event event) throws IOException {
 
@@ -117,10 +90,6 @@ public class Utility {
         stage.show();
 
     }
-
-
-
-
       // go Home
          public void go_Home(Event event)  throws IOException{
              switchScene_Home("/Home_Package/Home_View.fxml","Home Page", event);
@@ -149,7 +118,6 @@ public class Utility {
         public void go_Bon_Command(Event event)  throws IOException{
             switchScene("/Bon_Command_Package/Bon_Command_Client_View.fxml","Bon Command Page", event);
         }
-
         // Go Contoire
       public void go_Contoir(Event event) throws IOException{
 
@@ -157,7 +125,6 @@ public class Utility {
 
 
              }
-
        // ShowAndWait a New Window
         // Add new Product Window
         public void show_New_Product_Window(Event e) throws IOException {
@@ -191,12 +158,6 @@ public class Utility {
 
             openNewStage("/Reglement_Package/Reglement_View.fxml","Reglement de " + person);
         }
-        // Show client Reglement Window
-        public void show_Client_Reglement_Window(String person,Event e) throws IOException {
-
-            openNewStage("/Reglement_Package/Client_Reglement_View.fxml","Reglement de " + person);
-        }
-
         // Update Client
          public void show_update_Client_Window() throws IOException {
 
@@ -217,8 +178,8 @@ public class Utility {
           }
             // Bon Client Global
           public void show_Bon_Client_Global_Window(String person)throws IOException{
-        openNewStage("/Bon_Command_Package/Bon_Client_Global_View.fxml","Bon Command de Client " + person);
-    }
+            openNewStage("/Bon_Command_Package/Bon_Client_Global_View.fxml","Bon Command de Client " + person);
+         }
 
         // Log in
         public void log_In(String person ,Event event) throws IOException {
@@ -266,7 +227,6 @@ public class Utility {
             return  idmax;
 
               }
-
         // Showing Alert Message
         public void showAlert(String s){
 
@@ -336,12 +296,9 @@ public class Utility {
 
             }
 
-
        }
-
        // Update CLIENT Sold
-
-    public void update_Client_Sold(double amount, double old_sold, int id) throws SQLException {
+        public void update_Client_Sold(double amount, double old_sold, int id) throws SQLException {
 
         Db_Connection conn = new Db_Connection();
 
@@ -367,7 +324,6 @@ public class Utility {
 
 
     }
-
         // update stock
           public void update_stock(int productID,int new_quant) throws SQLException {
 
@@ -381,9 +337,8 @@ public class Utility {
 
 
           }
-
          // get old Quantity
-      public int get_Product_quantity(int productID) throws SQLException {
+       public int get_Product_quantity(int productID) throws SQLException {
 
         int product_old_quantity = 0;
         String query = "SELECT quan from demo.product_table  where id = '"+productID+"'";
@@ -413,13 +368,6 @@ public class Utility {
 
 
           }
-
-          // get sum bon
-
-
-
-
-
           // get product detail -- Strings
           public Object get_Product_detail_S(int productID ,String colum) throws SQLException {
 
@@ -448,41 +396,7 @@ public class Utility {
 
               return value;
           }
-         // get product detail -- Int
-          public int get_Product_detail_Int(int productID ,String colum) throws SQLException {
-
-        int value =0;
-        String query = "SELECT * from demo.product_table  where id ="+productID;
-        Connection cnn = conn.connect();
-        try{
-            preparesStatemnt = cnn.prepareStatement(query);
-            resultSet = preparesStatemnt.executeQuery();
-            if(resultSet.next()){
-
-                value = resultSet.getInt(colum);
-
-            }
-
-            cnn.close();
-            preparesStatemnt.close();
-            resultSet.close();
-        }
-
-        catch (Exception ex){ex.printStackTrace();}
-
-        finally {
-            if (conn.connect()   != null) {conn.connect().close();}
-            if (preparesStatemnt != null) {preparesStatemnt.close();}
-            if (resultSet != null) {resultSet.close();}
-        }
-
-        return value;
-    }
-
-
-
-
-    // get Product Nbr_pcs_crt
+        // get Product Nbr_pcs_crt
           public int get_Product_Nbr_pcs_crt(int productID) throws SQLException {
 
               int product_Nbr_pcs_crt = 0;
@@ -511,12 +425,7 @@ public class Utility {
 
               return product_Nbr_pcs_crt;
           }
-
-
-
-
-
-    public double get_Sold(int fournisseurID) throws SQLException {
+       public double get_Sold(int fournisseurID) throws SQLException {
 
         double updatedsold = 0.025;
         String query = "SELECT sold from demo.person_table  where id ="+fournisseurID;
@@ -602,7 +511,6 @@ public class Utility {
 
 
           }
-
           // get Person Name
     public String get_Person_Name(int PersonID) throws SQLException {
         String personName ="";
@@ -633,8 +541,6 @@ public class Utility {
 
         return personName;
     }
-
-
     // get Product price
      public double get_Product_price(int productID) throws SQLException {
 
@@ -660,9 +566,6 @@ public class Utility {
             }
         return price;
      }
-
-
-
     // get product ID
     public int getProduct_ID(String  ProductName) throws SQLException {
         int ProductID = 0;
@@ -692,36 +595,6 @@ public class Utility {
 
         return ProductID;
     }
-    // Get Client ID
-    public int getClient_ID(String clientName) throws SQLException {
-        int fournisseurID = 0;
-        String query = "SELECT id from demo.person_table  where name = '"+clientName+"' and PersonType="+PersonType.Active_Client;
-        Connection cnn = conn.connect();
-
-        try{
-            preparesStatemnt = cnn.prepareStatement(query);
-            resultSet = preparesStatemnt.executeQuery();
-            if(resultSet.next()){
-                fournisseurID = resultSet.getInt(1);
-            }
-            cnn.close();
-            resultSet.close();
-            preparesStatemnt.close();
-            }
-
-        catch (Exception ex){ex.printStackTrace();}
-
-        finally {
-            if (conn.connect()   != null) {conn.connect().close();}
-            if (preparesStatemnt != null) {preparesStatemnt.close();}
-            if (resultSet != null) {resultSet.close();}
-        }
-
-        return fournisseurID;
-    }
-
-
-
     public double total_sum_calculator(int bonId,int personID, Label label) throws SQLException {
         ResultSet   rs = null;
         double sum_amount=0.25;
@@ -757,7 +630,6 @@ public class Utility {
 
 
     }
-
     public void show_TrayNotification(String message){
 
         String title = "Congratulations sir";

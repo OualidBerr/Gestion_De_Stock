@@ -205,8 +205,6 @@ public class Bon_Fournisseur_Global_Controller implements Initializable {
         }
 
        }
-
-
     @FXML
     private  void handel_toggle_Button_event() throws SQLException {
 
@@ -226,8 +224,6 @@ public class Bon_Fournisseur_Global_Controller implements Initializable {
         }
 
     }
-
-
     @FXML
     private void closeButtonAction(){
         // get a handle to the stage
@@ -235,8 +231,6 @@ public class Bon_Fournisseur_Global_Controller implements Initializable {
         // do what you have to do
         stage.close();
     }
-
-
     @FXML
     public void handlekeyPressed(KeyEvent event) throws Exception {
 
@@ -266,8 +260,6 @@ public class Bon_Fournisseur_Global_Controller implements Initializable {
 
         }
     }
-
-
     public void delet_empty_bon() throws SQLException{
 
         String query = "Delete from demo.bon_table where total=0";
@@ -276,9 +268,6 @@ public class Bon_Fournisseur_Global_Controller implements Initializable {
         preparesStatemnt.close();
         conn.connect().close();
     }
-
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources)  {
         try {
@@ -318,6 +307,5 @@ public class Bon_Fournisseur_Global_Controller implements Initializable {
 
 
     }
-
 
 }

@@ -307,7 +307,7 @@ public class Reglement_Controller implements Initializable {
                 preparesStatemnt.close();
                 utility.setTextFieldFocus(NumberTextField);
                 clear();
-                utility.showAlert(amount +" DZD Added successfully!");
+                utility.show_TrayNotification("Verssement : " + amount + " DZD"+ " received !");
             }
             catch (Exception e){e.printStackTrace();}
             finally{

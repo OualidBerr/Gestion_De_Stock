@@ -4,6 +4,7 @@ package Client_Package;
 
 
 
+import Bon_Command_Package.Bon_Client_Global_Controller;
 import Bon_Command_Package.Bon_Command_Client_Controller;
 import Bon_Command_Package.Bon_Command_Fournisseur_Controller;
 import Reglement_Package.Reglement_Controller;
@@ -112,20 +113,39 @@ public class Client_Controller implements Initializable {
             finally {
                 if (conn.connect()   != null) {conn.connect().close();}
                 if (preparesStatemnt != null) {preparesStatemnt.close();}
-
             }
 
-
         }
-
-
-
         return 0;
     }
 
 
     @FXML
+    public void open_Bon_Command_Global() throws IOException {
+
+        if (!client_table.getSelectionModel().isEmpty()){
+
+            Person client = client_table.getSelectionModel().getSelectedItem();
+
+            Bon_Client_Global_Controller.CLIENT_ID        = client.getId();
+            Bon_Client_Global_Controller.CLIENT_NAME      = client.getName();
+            Bon_Client_Global_Controller.CLIENT_REGISTRE  =  client.getRegistre();
+            Bon_Client_Global_Controller.CLIENT_PHONE     = client.getTelephone();
+            Bon_Client_Global_Controller.CLIENT_ADDRESS   = client.getAddress();
+
+            utility.show_Bon_Client_Global_Window("oualid");
+
+        }
+
+
+
+
+    }
+
+
+    @FXML
     public void open_Bon_Commend_Client(Event event) throws SQLException, IOException {
+
         open_new_empty_Bon();
         new Utility().go_Bon_Command(event);
     }
@@ -163,13 +183,11 @@ public class Client_Controller implements Initializable {
                 preparesStatemnt.execute();
                 preparesStatemnt.close();
                 conn.connect().close();
-
                 String query_sold = "UPDATE demo.person_table SET sold =? Where id="+clientID;
                 preparesStatemnt = conn.connect().prepareStatement(query_sold);
                 preparesStatemnt.setDouble(1,new_sold);
                 preparesStatemnt.executeUpdate();
-
-                utility.showAlert("Verssement : " + amount + " DZD"+ " received !");
+                utility.show_TrayNotification("Verssement : " + amount + " DZD"+ " received !");
                 loadData();
                 verssement_txt.clear();
 
@@ -373,11 +391,6 @@ public class Client_Controller implements Initializable {
 
 
     }
-    // Logout
-    @FXML
-    public void log_Out_Function(Event event) throws IOException {
-        new Utility().log_Out(event);
-    }
     @FXML
     public void showOnClick() {
 
@@ -399,9 +412,6 @@ public class Client_Controller implements Initializable {
     public void handlekeyPressed(KeyEvent event) throws Exception {
 
         switch (event.getCode()) {
-
-            case ESCAPE:
-               closeButtonAction();break;
 
             case N:
                 open_Add_New_Client_Form(event);break;

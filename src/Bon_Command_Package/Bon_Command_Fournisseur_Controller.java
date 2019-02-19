@@ -319,7 +319,7 @@ import java.util.ResourceBundle;
                     }
 
 
-                    des_TXT.clear();
+                      des_TXT.clear();
                       quant_TXT.clear();
                       prix_achat_TXT.clear();
                       prix_vent_TXT.clear();
