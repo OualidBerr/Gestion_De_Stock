@@ -14,6 +14,8 @@ public class Bon_Command_Fournisseur {
     private DoubleProperty  prix_achat ;
     private DoubleProperty  value;
     private IntegerProperty fournisseurID ;
+    private StringProperty  date;
+    private IntegerProperty bonID ;
 
     public String getDate() {
         return date.get();
@@ -27,7 +29,7 @@ public class Bon_Command_Fournisseur {
         this.date.set(date);
     }
 
-    private StringProperty  date;
+
 
     public Bon_Command_Fournisseur(int ID,String REF,String DES,int NBR_PCS_CRT,int QUN,int NBR_PCS,
                    double prix_vent,double prix_achat,double value,String DATE)
@@ -81,7 +83,7 @@ public class Bon_Command_Fournisseur {
     public void setBonID(int bonID) {
         this.bonID.set(bonID);
     }
-    private IntegerProperty bonID ;
+
 
 
 

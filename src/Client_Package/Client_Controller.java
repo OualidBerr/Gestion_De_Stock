@@ -4,6 +4,8 @@ package Client_Package;
 
 
 
+import Bon_Command_Package.Bon_Command_Client_Controller;
+import Bon_Command_Package.Bon_Command_Fournisseur_Controller;
 import Reglement_Package.Reglement_Controller;
 import Utilities_Package.Db_Connection;
 
@@ -72,16 +74,61 @@ public class Client_Controller implements Initializable {
     PreparedStatement preparesStatemnt = null;
     ResultSet resultSet = null;
     Utility utility = new Utility();
+    // OPEN NEW BON
+
+    public int open_new_empty_Bon() throws SQLException {
+
+
+        if (!client_table.getSelectionModel().isEmpty())
+        {
+            Person client = client_table.getSelectionModel().getSelectedItem();
+
+            int id_bon = utility.getMax_ID("demo.bon_table","id")+1;
+            double total =0.0;
+            String date = LocalDate.now().toString();
+            int clientID = client.getId();
+            String query = "INSERT INTO demo.bon_table (id,total,date,personID) Values (?,?,?,?)";
+
+
+            Bon_Command_Client_Controller.ID       = client.getId();
+            Bon_Command_Client_Controller.NAME     = client.getName();
+            Bon_Command_Client_Controller.ADDRESS  = client.getAddress();
+            Bon_Command_Client_Controller.PHONE    = client.getTelephone();
+            Bon_Command_Client_Controller.BON_ID   = utility.getMax_ID("demo.bon_table","id")+1;
+            Bon_Command_Client_Controller.SOLD     = client.getSold();
+
+            try {
+                preparesStatemnt = conn.connect().prepareStatement(query);
+                preparesStatemnt.setInt   (1, id_bon);
+                preparesStatemnt.setDouble(2, total);
+                preparesStatemnt.setString(3, date);
+                preparesStatemnt.setInt   (4, clientID);
+                preparesStatemnt.execute();
+                preparesStatemnt.close();
+                conn.connect().close();
+                utility.show_TrayNotification("New Bon inserted successfully");
+            }
+            catch (Exception e){ e.printStackTrace(); }
+            finally {
+                if (conn.connect()   != null) {conn.connect().close();}
+                if (preparesStatemnt != null) {preparesStatemnt.close();}
+
+            }
+
+
+        }
 
 
 
-    @FXML
-    public void open_Bon_Commend_Client(Event event) throws IOException {
-        new Utility().go_Bon_Command(event);
-
+        return 0;
     }
 
 
+    @FXML
+    public void open_Bon_Commend_Client(Event event) throws SQLException, IOException {
+        open_new_empty_Bon();
+        new Utility().go_Bon_Command(event);
+    }
     @FXML
     public void reglement_rapid() throws SQLException{
         Person client = client_table.getSelectionModel().getSelectedItem();
@@ -132,7 +179,6 @@ public class Client_Controller implements Initializable {
 
 
     }
-
     @FXML
     public void fournisseurSearchThread( ) throws SQLException{
 
@@ -183,7 +229,6 @@ public class Client_Controller implements Initializable {
 
 
     }
-
     @FXML
     public void loadData()throws SQLException {
 
@@ -223,7 +268,6 @@ public class Client_Controller implements Initializable {
 
 
     }
-
     @FXML
     public void delete_Client()throws SQLException{
 
@@ -287,8 +331,6 @@ public class Client_Controller implements Initializable {
 
         closeButtonAction();
     }
-
-
     // Open New Client Form
     @FXML
     public void open_Add_New_Client_Form(Event event) throws IOException{
@@ -307,8 +349,6 @@ public class Client_Controller implements Initializable {
 
         new Utility().show_New_Client_Window(event);
     }
-
-
     @FXML
     public void open_Reglement_Form(Event event) throws IOException, SQLException {
 
@@ -333,9 +373,6 @@ public class Client_Controller implements Initializable {
 
 
     }
-
-
-
     // Logout
     @FXML
     public void log_Out_Function(Event event) throws IOException {

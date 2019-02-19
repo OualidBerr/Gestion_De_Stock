@@ -121,7 +121,6 @@ public class Fournisseur_Controller implements Initializable
                     }
            }
     }
-
     @FXML
     public void fournisseurSearchThread( ) throws SQLException{
 
@@ -168,7 +167,6 @@ public class Fournisseur_Controller implements Initializable
 
 
     }
-
     public  void loadData() throws SQLException {
         Connection cnn = conn.connect();
         ResultSet rs = null;
@@ -209,7 +207,6 @@ public class Fournisseur_Controller implements Initializable
 
 
     }
-
     @FXML
     public void Load_Unactive_Fournisseur() throws SQLException {
 
@@ -251,9 +248,6 @@ public class Fournisseur_Controller implements Initializable
 
 
     }
-
-
-
     @FXML
     public void showOnClick() {
 
@@ -317,10 +311,8 @@ public class Fournisseur_Controller implements Initializable
 
 
         }
-
     @FXML
     public void show_Edit_Window(Event e)throws IOException{
-
 
           if(! Fournisseur_Table.getSelectionModel().isEmpty() ) {
               Person fournisseur =  Fournisseur_Table.getSelectionModel().getSelectedItem();
@@ -393,7 +385,6 @@ public class Fournisseur_Controller implements Initializable
         Reglement_Controller.FOURNISSEUR_OLD_SOLD = 0.25;
 
     }
-
     @FXML
     public void open_Bon_Fournissur_Form() throws IOException, SQLException {
 
@@ -490,8 +481,6 @@ public class Fournisseur_Controller implements Initializable
     public void log_Out_Function(Event event) throws IOException {
         new Utility().log_Out(event);
     }
-
-
     public void delet_empty_bon() throws SQLException{
 
         String query = "Delete from demo.bon_table where total=0";
@@ -500,8 +489,6 @@ public class Fournisseur_Controller implements Initializable
         preparesStatemnt.close();
         conn.connect().close();
     }
-
-
     // Event Handler
     @FXML
     public void handlekeyPressed(KeyEvent event) throws Exception {
@@ -528,7 +515,6 @@ public class Fournisseur_Controller implements Initializable
 
         }
     }
-
     @FXML
     private void closeButtonAction(){
         // get a handle to the stage
@@ -537,8 +523,6 @@ public class Fournisseur_Controller implements Initializable
 
         stage.close();
     }
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources)  {
 

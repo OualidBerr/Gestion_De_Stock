@@ -17,6 +17,24 @@ public class Bon_Command_Client {
     private StringProperty  date ;
 
 
+    public Bon_Command_Client(int ID,String REF,String DES,int QUN,int NBR_PCS_CRT ,int NBR_PCS,
+                                   double prix_vent,double value,String DATE)
+      {
+        this.id                  = new SimpleIntegerProperty(ID);
+        this.ref                 = new SimpleStringProperty(REF);
+        this.des                 = new SimpleStringProperty(DES);
+        this.nbr_pcs_crt         = new SimpleIntegerProperty(NBR_PCS_CRT);
+        this.quantite            = new SimpleIntegerProperty(QUN);
+        this.nbr_pcs             = new SimpleIntegerProperty(NBR_PCS);
+        this.prix_vent           = new SimpleDoubleProperty(prix_vent);
+        this.value               = new SimpleDoubleProperty(value);
+        this.date                = new SimpleStringProperty(DATE);
+
+      }
+
+
+
+
     // Constructor
     public Bon_Command_Client(int ID, String REF, String DES, int NBR_PCS_CRT,
                               int QUANTIT, int NBR_PCS, double PRIX_vent, double VALUE,
@@ -167,14 +185,6 @@ public class Bon_Command_Client {
     public void setDate(String date) {
         this.date.set(date);
     }
-
-
-
-
-
-
-
-
 
 
 

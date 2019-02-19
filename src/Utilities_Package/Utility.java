@@ -321,7 +321,7 @@ public class Utility {
             try{
 
                 double new_Sold = (old_sold + amount);
-                String query    = "UPDATE demo.person_table SET sold =? Where id="+id+ " and PersonType="+PersonType.Active_Fournisseur;
+                String query    = "UPDATE demo.person_table SET sold =? Where id="+id;
                 preparesStatemnt = conn.connect().prepareStatement(query);
                 preparesStatemnt.setDouble(1, new_Sold);
                 preparesStatemnt.executeUpdate();
@@ -635,8 +635,31 @@ public class Utility {
     }
 
 
+    // get Product price
+     public double get_Product_price(int productID) throws SQLException {
 
+         double price = 0.0;
+         String query = "SELECT prix_vent from demo.product_table  where id ="+productID;
+         try{
 
+             preparesStatemnt = conn.connect().prepareStatement(query);
+             resultSet = preparesStatemnt.executeQuery();
+             if(resultSet.next()){
+                 price = resultSet.getDouble(1);
+             }
+             conn.connect().close();
+             resultSet.close();
+             preparesStatemnt.close();
+             }
+
+          catch (Exception ex){ex.printStackTrace();}
+          finally {
+             if (conn.connect()   != null) {conn.connect().close();}
+             if (preparesStatemnt != null) {preparesStatemnt.close();}
+             if (resultSet != null) {resultSet.close();}
+            }
+        return price;
+     }
 
 
 

@@ -31,12 +31,12 @@
             <TableColumn fx:id="id_column" prefWidth="67.0" style="-fx-alignment: Center;" text="N" />
             <TableColumn fx:id="ref_column" prefWidth="80.33332824707031" style="-fx-alignment: Center;" text="Ref" />
             <TableColumn fx:id="des_column" prefWidth="364.9999694824219" text="Designiation" />
-            <TableColumn fx:id="nbr_pcs_crt_column" prefWidth="119.00003051757812" style="-fx-alignment: Center;" text="Nbr_Pcs_crt" />
             <TableColumn fx:id="quantity_column" prefWidth="93.0" style="-fx-alignment: Center;" text="Quantite" />
+            <TableColumn fx:id="nbr_pcs_crt_column" prefWidth="119.00003051757812" style="-fx-alignment: Center;" text="Nbr_Pcs_crt" />
             <TableColumn fx:id="nbr_pcs_column" prefWidth="108.0" style="-fx-alignment: Center;" text="Nbr_pc" />
             <TableColumn fx:id="prix_vent_column" prefWidth="134.0" style="-fx-alignment: Center;" text="Prix Unitaire" />
-            <TableColumn fx:id="date_column" prefWidth="163.33331298828125" style="-fx-alignment: Center;" text="date" />
             <TableColumn fx:id="value_column" minWidth="0.0" prefWidth="151.6666259765625" text="Value" />
+            <TableColumn fx:id="date_column" prefWidth="163.33331298828125" style="-fx-alignment: Center;" text="date" />
          </columns>
       </TableView>
       <TableView fx:id="show_table" layoutX="715.0" layoutY="122.0" opacity="0.5" prefHeight="75.0" prefWidth="700.0" style="-fx-font-weight: Bold; -fx-font-size: 14;" tableMenuButtonVisible="true" AnchorPane.rightAnchor="20.0">
@@ -63,7 +63,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button layoutX="207.0" layoutY="182.0" mnemonicParsing="false" onAction="#add_Client_Bon" prefHeight="30.0" prefWidth="100.0" text="Add " textFill="#0c25e1">
+      <Button layoutX="207.0" layoutY="182.0" mnemonicParsing="false" onAction="#add_New_Client_Bon" prefHeight="30.0" prefWidth="100.0" text="Add " textFill="#0c25e1">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -78,7 +78,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="649.0" layoutY="665.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Impression" textFill="#0c25e1">
+      <Button layoutX="389.0" layoutY="664.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Impression" textFill="#0c25e1">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -100,6 +100,11 @@
          </font>
       </Label>
       <Button fx:id="closeButton" layoutX="798.0" layoutY="666.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="30.0" prefWidth="100.0" text="Close" textFill="#0c25e1">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="565.0" layoutY="182.0" mnemonicParsing="false" onAction="#save_bon" prefHeight="30.0" prefWidth="100.0" text="Save" textFill="#0c25e1">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
