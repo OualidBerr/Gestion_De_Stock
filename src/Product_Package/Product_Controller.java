@@ -21,6 +21,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class Product_Controller implements Initializable {
@@ -166,13 +167,31 @@ public class Product_Controller implements Initializable {
                 Product product =  product_Table.getSelectionModel().getSelectedItem();
                 int i = product.getId();
                 String s = String.valueOf(i);
-                preparesStatemnt = conn.connect().prepareStatement(query);
-                preparesStatemnt.setString(1, s);
-                preparesStatemnt.executeUpdate();
-                preparesStatemnt.close();
-                loadData();
-                utility.showAlert("Product has been deleted");
-                conn.connect().close();
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmation Dialog");
+                alert.setHeaderText("Look, a Confirmation Dialog");
+                alert.setContentText("Are you ok with this?");
+
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK){
+                    // ... user chose OK
+                    preparesStatemnt = conn.connect().prepareStatement(query);
+                    preparesStatemnt.setString(1, s);
+                    preparesStatemnt.executeUpdate();
+                    preparesStatemnt.close();
+                    loadData();
+                    utility.showAlert("Product has been deleted");
+                    conn.connect().close();
+                }
+
+                else {
+                    // ... user chose CANCEL or closed the dialog
+
+                }
+
+
+
             }
 
             catch(SQLException e){

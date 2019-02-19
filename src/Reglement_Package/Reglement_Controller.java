@@ -17,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class Reglement_Controller implements Initializable {
@@ -151,56 +152,86 @@ public class Reglement_Controller implements Initializable {
     @FXML
     public void delet_reglement() throws SQLException {
 
-        Reglement reglement = reglement_tableView.getSelectionModel().getSelectedItem();
-        int fournisseurID = reglement.getPersonID();
-        double deleted_amount = reglement.getAmount();
-        double old_sold = Double.parseDouble(f_old_sold_txt.getText());
-        double sold = deleted_amount + old_sold;
 
-        // Update Sold
-        try
-        {
-            String query  = "UPDATE demo.person_table SET sold ="+sold+" Where id="+fournisseurID;
-            preparesStatemnt = conn.connect().prepareStatement(query);
-            preparesStatemnt.executeUpdate();
-            preparesStatemnt.close();
-            conn.connect().close();
-            f_old_sold_txt.setText(sold+"");
-        }
-        catch (Exception ex)
-        {
-            ex.getStackTrace();
-        }
-        finally{
-            conn.connect().close();
-            rs.close();
-            preparesStatemnt.close();
-        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText("Look, a Confirmation Dialog");
+        alert.setContentText("Are you ok with this?");
 
-        // Now delete
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            // ... user chose OK
+            Reglement reglement = reglement_tableView.getSelectionModel().getSelectedItem();
+            int fournisseurID = reglement.getPersonID();
+            double deleted_amount = reglement.getAmount();
+            double old_sold = Double.parseDouble(f_old_sold_txt.getText());
+            double sold = deleted_amount + old_sold;
 
-        if(! reglement_tableView.getSelectionModel().isEmpty() ) {
-
-            try {
-
-                int reglement_id = reglement.getId();
-                String query = "DELETE FROM  demo.person_reglement_table WHERE id =" + reglement_id;
+            // Update Sold
+            try
+            {
+                String query  = "UPDATE demo.person_table SET sold ="+sold+" Where id="+fournisseurID;
                 preparesStatemnt = conn.connect().prepareStatement(query);
                 preparesStatemnt.executeUpdate();
                 preparesStatemnt.close();
                 conn.connect().close();
-                }
+                f_old_sold_txt.setText(sold+"");
+            }
+            catch (Exception ex)
+            {
+                ex.getStackTrace();
+            }
+            finally{
+                conn.connect().close();
+                rs.close();
+                preparesStatemnt.close();
+            }
 
-            catch (SQLException e) { e.printStackTrace(); }
-            finally {
-                loadTable(fournisseurID);
-                if (conn.connect() != null) {
+            // Now delete
+
+            if(! reglement_tableView.getSelectionModel().isEmpty() ) {
+
+                try {
+
+                    int reglement_id = reglement.getId();
+                    String query = "DELETE FROM  demo.person_reglement_table WHERE id =" + reglement_id;
+                    preparesStatemnt = conn.connect().prepareStatement(query);
+                    preparesStatemnt.executeUpdate();
+                    preparesStatemnt.close();
                     conn.connect().close();
                 }
+
+                catch (SQLException e) { e.printStackTrace(); }
+                finally {
+                    loadTable(fournisseurID);
+                    if (conn.connect() != null) {
+                        conn.connect().close();
+                    }
+                }
+                utility.showAlert(deleted_amount+" DZD deleted Successfully !");
+
             }
-       utility.showAlert(deleted_amount+" DZD deleted Successfully !");
+
+
+
+           }
+
+        else {
+            // ... user chose CANCEL or closed the dialog
+
 
         }
+
+
+
+
+
+
+
+
+
+
+
 
     }
     public void clear(){
@@ -367,7 +398,7 @@ public class Reglement_Controller implements Initializable {
 
         NumberTextField.setText(amount+"");
         payement_Mod_cambo.setValue(mode);
-        reglement_datePicker.setValue(utility.stringToDateConverter(date));
+      //  reglement_datePicker.setValue(utility.stringToDateConverter(date));
         reglement_note_txt.setText(note);
 
         show_operation_N_txt.setText(id+"");
@@ -410,6 +441,7 @@ public class Reglement_Controller implements Initializable {
         reglement_tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
                     if (newSelection != null) {
                         showOnClick();
+
                     }
                 }
         );
@@ -419,9 +451,9 @@ public class Reglement_Controller implements Initializable {
         reglement_datePicker.setValue(LocalDate.now());
         payement_Mod_cambo.getItems().addAll("Espece","Verssement","Check");
 
-
        f_Id_txt.setText(FOURNISSEUR_ID +"");
        f_name_txt.setText(FOURNISSEUR_NAME);
+       show_Label.setText(FOURNISSEUR_NAME);
        f_old_sold_txt.setText(FOURNISSEUR_OLD_SOLD+"");
        f_address_txt.setText(FOURNISSEUR_ADDESS);
        f_phone_txt.setText(FOURNISSEUR_PHONE);

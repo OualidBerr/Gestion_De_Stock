@@ -10,7 +10,7 @@
 
 <AnchorPane onKeyPressed="#handlekeyPressed" prefHeight="700.0" prefWidth="1301.0" style="-fx-background-color: #D7BDE2;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bon_Command_Package.Bon_Client_Global_Controller">
    <children>
-      <TableView fx:id="Bon_Client_Global_table" layoutX="651.0" layoutY="50.0" onKeyPressed="#handlekeyPressed" prefHeight="200.0" prefWidth="475.0" style="-fx-font-weight: Bold; -fx-font-size: 14;">
+      <TableView fx:id="Bon_Client_Global_table" layoutX="651.0" layoutY="50.0" onKeyPressed="#handlekeyPressed" prefHeight="200.0" prefWidth="475.0" style="-fx-font-weight: Bold; -fx-font-size: 14;" tableMenuButtonVisible="true">
         <columns>
           <TableColumn fx:id="id_column" prefWidth="75.0" style="-fx-alignment: Center;" text="N°" />
           <TableColumn fx:id="n_bon_column" prefWidth="120.33332824707031" style="-fx-alignment: Center;" text="Bon_Num" />
@@ -18,7 +18,7 @@
             <TableColumn fx:id="date_column" prefWidth="111.66668701171875" style="-fx-alignment: Center;" text="Date" />
         </columns>
       </TableView>
-      <TableView fx:id="bon_command_client_table" layoutX="35.0" layoutY="282.0" onKeyPressed="#handlekeyPressed" prefHeight="319.0" prefWidth="1227.0" style="-fx-font-weight: Bold; -fx-font-size: 14;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+      <TableView fx:id="bon_command_client_table" layoutX="35.0" layoutY="282.0" onKeyPressed="#handlekeyPressed" prefHeight="319.0" prefWidth="1227.0" style="-fx-font-weight: Bold; -fx-font-size: 14;" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
          <columns>
             <TableColumn fx:id="Id_column" prefWidth="86.33333015441895" style="-fx-font-weight: Bold; -fx-alignment: Center;" text="N°" />
             <TableColumn fx:id="ref_column" prefWidth="103.00001525878906" style="-fx-alignment: Center;" text="Ref" />
@@ -31,7 +31,7 @@
             <TableColumn fx:id="dat_column" prefWidth="182.6666259765625" style="-fx-alignment: Center;" text="Date" />
          </columns>
       </TableView>
-      <ToggleButton fx:id="toggleButton" layoutX="489.0" layoutY="626.0" mnemonicParsing="false" onAction="#handel_toggle_Button_event" prefHeight="40.0" prefWidth="134.0">
+      <ToggleButton fx:id="toggleButton" layoutX="1144.0" layoutY="70.0" mnemonicParsing="false" onAction="#handel_toggle_Button_event" prefHeight="40.0" prefWidth="134.0" style="-fx-background-color: #3F51B5;" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></ToggleButton>
@@ -40,30 +40,35 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="client_name_lb" alignment="TOP_CENTER" layoutX="42.0" layoutY="29.0" prefHeight="41.0" prefWidth="380.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;" text="Client" textFill="WHITE">
+      <Label fx:id="client_name_lb" alignment="TOP_CENTER" layoutX="42.0" layoutY="29.0" prefHeight="50.0" prefWidth="500.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;" text="Client" textFill="WHITE">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Label fx:id="address_lb" alignment="CENTER" layoutX="43.0" layoutY="88.0" prefHeight="30.0" prefWidth="380.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;" text="Address" textFill="#fffefe">
+      <Label fx:id="address_lb" alignment="CENTER" layoutX="68.0" layoutY="88.0" prefHeight="30.0" prefWidth="450.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;" text="Address" textFill="#fffefe">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="phone_lb" alignment="CENTER" layoutX="44.0" layoutY="125.0" prefHeight="30.0" prefWidth="380.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;" text="Telephone" textFill="WHITE">
+      <Label fx:id="phone_lb" alignment="CENTER" layoutX="86.0" layoutY="125.0" prefHeight="30.0" prefWidth="400.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;" text="Telephone" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="registre_lb" alignment="CENTER" layoutX="44.0" layoutY="163.0" prefHeight="30.0" prefWidth="380.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;" text="Registre" textFill="WHITE">
+      <Label fx:id="registre_lb" alignment="CENTER" layoutX="108.0" layoutY="163.0" prefHeight="30.0" prefWidth="350.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;" text="Registre" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="closeButton" layoutX="1146.0" layoutY="657.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="35.0" prefWidth="130.0" text="EXIT">
+      <Button fx:id="closeButton" layoutX="1146.0" layoutY="657.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: #3F51B5;" text="EXIT" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
+      <Label fx:id="show_total1" alignment="CENTER" contentDisplay="CENTER" layoutX="129.0" layoutY="200.0" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: Black; -fx-background-radius: 20;" text="SOLD" textFill="#f1c40f">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

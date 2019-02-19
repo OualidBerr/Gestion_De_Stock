@@ -188,8 +188,7 @@ public class Bon_Command_Client_Controller implements Initializable {
         double old_sold = utility.get_Sold(ID);
         utility.update_Fournisseur_Sold(total, old_sold, ID);
         utility.show_TrayNotification("saved successfully");
-
-        //  closeButtonAction();
+         closeButtonAction();
     }
     @FXML
     public void add_New_Client_Bon() throws SQLException {
@@ -437,6 +436,9 @@ public class Bon_Command_Client_Controller implements Initializable {
 
         return total;
     }
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

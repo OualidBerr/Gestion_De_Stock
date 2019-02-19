@@ -208,9 +208,7 @@ import java.util.ResourceBundle;
                 double old_sold = utility.get_Sold(FOURNISSEUR_ID);
                 utility.update_Fournisseur_Sold(total, old_sold, FOURNISSEUR_ID);
                 utility.show_TrayNotification("saved successfully");
-
-                //  closeButtonAction();
-
+                  closeButtonAction();
         }
         @FXML
         public void add_New_Bon() throws SQLException {

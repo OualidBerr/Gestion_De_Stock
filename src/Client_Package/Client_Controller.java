@@ -32,6 +32,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class Client_Controller implements Initializable {
@@ -77,8 +78,30 @@ public class Client_Controller implements Initializable {
     Utility utility = new Utility();
     // OPEN NEW BON
 
-    public int open_new_empty_Bon() throws SQLException {
 
+    @FXML
+    public void open_Bon_Command_Global() throws IOException {
+
+        if (!client_table.getSelectionModel().isEmpty()){
+
+            Person client = client_table.getSelectionModel().getSelectedItem();
+
+            Bon_Client_Global_Controller.CLIENT_ID        = client.getId();
+            Bon_Client_Global_Controller.CLIENT_NAME      = client.getName();
+            Bon_Client_Global_Controller.CLIENT_REGISTRE  =  client.getRegistre();
+            Bon_Client_Global_Controller.CLIENT_PHONE     = client.getTelephone();
+            Bon_Client_Global_Controller.CLIENT_ADDRESS   = client.getAddress();
+
+            utility.show_Bon_Client_Global_Window("oualid");
+
+        }
+
+
+
+
+    }
+    @FXML
+    public void open_Bon_Commend_Client(Event event) throws SQLException, IOException {
 
         if (!client_table.getSelectionModel().isEmpty())
         {
@@ -107,7 +130,8 @@ public class Client_Controller implements Initializable {
                 preparesStatemnt.execute();
                 preparesStatemnt.close();
                 conn.connect().close();
-                utility.show_TrayNotification("New Bon inserted successfully");
+                new Utility().go_Bon_Command(event);
+
             }
             catch (Exception e){ e.printStackTrace(); }
             finally {
@@ -116,38 +140,11 @@ public class Client_Controller implements Initializable {
             }
 
         }
-        return 0;
-    }
-
-
-    @FXML
-    public void open_Bon_Command_Global() throws IOException {
-
-        if (!client_table.getSelectionModel().isEmpty()){
-
-            Person client = client_table.getSelectionModel().getSelectedItem();
-
-            Bon_Client_Global_Controller.CLIENT_ID        = client.getId();
-            Bon_Client_Global_Controller.CLIENT_NAME      = client.getName();
-            Bon_Client_Global_Controller.CLIENT_REGISTRE  =  client.getRegistre();
-            Bon_Client_Global_Controller.CLIENT_PHONE     = client.getTelephone();
-            Bon_Client_Global_Controller.CLIENT_ADDRESS   = client.getAddress();
-
-            utility.show_Bon_Client_Global_Window("oualid");
-
+        else if (client_table.getSelectionModel().isEmpty()){
+            utility.show_TrayNotification("No Client is Selected from the table");
         }
 
 
-
-
-    }
-
-
-    @FXML
-    public void open_Bon_Commend_Client(Event event) throws SQLException, IOException {
-
-        open_new_empty_Bon();
-        new Utility().go_Bon_Command(event);
     }
     @FXML
     public void reglement_rapid() throws SQLException{
@@ -296,12 +293,30 @@ public class Client_Controller implements Initializable {
                 int   clientId = client.getId();
                 String query = "DELETE FROM demo.person_table WHERE id ="+clientId;
 
-                preparesStatemnt = conn.connect().prepareStatement(query);
-                preparesStatemnt.executeUpdate();
-                preparesStatemnt.close();
-                loadData();
-                utility.showAlert("Client has been deleted");
-                conn.connect().close();
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmation Dialog");
+                alert.setHeaderText("Look, a Confirmation Dialog");
+                alert.setContentText("Are you ok with this?");
+
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK){
+                    // ... user chose OK
+                    preparesStatemnt = conn.connect().prepareStatement(query);
+                    preparesStatemnt.executeUpdate();
+                    preparesStatemnt.close();
+                    loadData();
+                    utility.showAlert("Client has been deleted");
+                    conn.connect().close();
+                }
+
+                else {
+                    // ... user chose CANCEL or closed the dialog
+
+
+                }
+
+
             }
 
             catch(SQLException e){
@@ -426,8 +441,26 @@ public class Client_Controller implements Initializable {
 
         }
     }
+
+    public void delet_empty_bon() throws SQLException{
+
+        String query = "Delete from demo.bon_table where total=0";
+        preparesStatemnt = conn.connect().prepareStatement(query);
+        preparesStatemnt.executeUpdate();
+        preparesStatemnt.close();
+        conn.connect().close();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        final Tooltip tooltip = new Tooltip();
+        tooltip.setText("Search Box");
+        tooltip.setStyle("-fx-background-color: brown");
+
+        filterField.setTooltip(tooltip);
+
+
         reglement_datePicker.setValue(LocalDate.now());
         verssement_txt.setVisible(false);
 

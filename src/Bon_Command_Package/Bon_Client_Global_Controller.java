@@ -95,6 +95,7 @@ public class Bon_Client_Global_Controller implements Initializable {
 
     }
     public  void loadData() throws SQLException {
+        delet_empty_bon();
         Connection cnn = conn.connect();
         try{
 
@@ -195,7 +196,6 @@ public class Bon_Client_Global_Controller implements Initializable {
             }
             show_total.setText("TOTAL : "+String.format("%,.2f", sum_amount)+" DZD");
             bon_command_client_table.setItems(data_2);
-
            }
 
         catch (Exception ex){ex.printStackTrace();}
@@ -205,7 +205,6 @@ public class Bon_Client_Global_Controller implements Initializable {
             if (preparesStatemnt != null) {preparesStatemnt.close();}
             if (rs != null) {rs.close();}
         }
-
 
     }
     @FXML
@@ -238,6 +237,17 @@ public class Bon_Client_Global_Controller implements Initializable {
 
         }
     }
+
+
+    public void delet_empty_bon() throws SQLException{
+
+        String query = "Delete from demo.bon_table where total=0";
+        preparesStatemnt = conn.connect().prepareStatement(query);
+        preparesStatemnt.executeUpdate();
+        preparesStatemnt.close();
+        conn.connect().close();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

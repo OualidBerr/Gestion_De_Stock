@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onKeyPressed="#handlekeyPressed" prefHeight="650.0" prefWidth="1200.0" style="-fx-background-color: #D7BDE2;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bon_Command_Package.Bon_Fournisseur_Global_Controller">
+<AnchorPane onKeyPressed="#handlekeyPressed" prefHeight="650.0" prefWidth="1278.0" style="-fx-background-color: #D7BDE2;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bon_Command_Package.Bon_Fournisseur_Global_Controller">
    <children>
-      <TableView fx:id="Bon_Fourniseur_Global_table" layoutX="462.0" layoutY="53.0" onKeyPressed="#handlekeyPressed" prefHeight="187.0" prefWidth="628.0" style="-fx-font-weight: Bold; -fx-alignment: Center; -fx-font-size: 14;" tableMenuButtonVisible="true">
+      <TableView fx:id="Bon_Fourniseur_Global_table" layoutX="462.0" layoutY="53.0" onKeyPressed="#handlekeyPressed" prefHeight="187.0" prefWidth="628.0" style="-fx-font-weight: Bold; -fx-alignment: Center; -fx-font-size: 14;" tableMenuButtonVisible="true" AnchorPane.rightAnchor="180.0">
         <columns>
           <TableColumn fx:id="id_column" prefWidth="75.0" style="-fx-alignment: Center;" text="N°" />
           <TableColumn fx:id="n_bon_column" prefWidth="147.3333282470703" style="-fx-alignment: Center;" text="BON Num" />
@@ -32,39 +32,49 @@
             <TableColumn fx:id="dat_column" prefWidth="135.0" style="-fx-alignment: Center;" text="date" />
          </columns>
       </TableView>
-      <ToggleButton fx:id="toggleButton" layoutX="326.0" layoutY="592.0" mnemonicParsing="false" onAction="#handel_toggle_Button_event" prefHeight="35.0" prefWidth="130.0" textFill="#3f51b5">
+      <ToggleButton fx:id="toggleButton" layoutX="1118.0" layoutY="61.0" mnemonicParsing="false" onAction="#handel_toggle_Button_event" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: #3f51b5;" textFill="WHITE" AnchorPane.rightAnchor="20.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></ToggleButton>
-      <Label fx:id="show_total" alignment="CENTER" contentDisplay="CENTER" layoutX="917.0" layoutY="557.0" prefHeight="33.0" prefWidth="249.0" style="-fx-background-color: Black; -fx-background-radius: 20;" text="Total amount" textFill="#f1c40f">
+      <Label fx:id="show_total" alignment="CENTER" contentDisplay="CENTER" layoutX="917.0" layoutY="557.0" prefHeight="33.0" prefWidth="249.0" style="-fx-background-color: Black; -fx-background-radius: 20;" text="Total amount" textFill="#f1c40f" AnchorPane.rightAnchor="120.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="closeButton" layoutX="1037.0" layoutY="609.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="35.0" prefWidth="130.0" text="EXIT">
+      <Button fx:id="closeButton" layoutX="1098.0" layoutY="595.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: #3f51b5;" text="EXIT" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Label fx:id="fournisseur_lb" alignment="TOP_CENTER" layoutX="32.0" layoutY="19.0" prefHeight="41.0" prefWidth="380.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;" text="Fournisseur" textFill="WHITE">
+      <Label fx:id="fournisseur_lb" alignment="TOP_CENTER" layoutX="32.0" layoutY="19.0" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;" text="Fournisseur" textFill="WHITE">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Label fx:id="address_lb" alignment="CENTER" layoutX="33.0" layoutY="78.0" prefHeight="30.0" prefWidth="380.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;" text="Address" textFill="#fffefe">
+      <Label fx:id="address_lb" alignment="CENTER" layoutX="54.0" layoutY="78.0" prefHeight="30.0" prefWidth="350.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;" text="Address" textFill="#fffefe">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="phone_lb" alignment="CENTER" layoutX="34.0" layoutY="115.0" prefHeight="30.0" prefWidth="380.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;" text="Telephone" textFill="WHITE">
+      <Label fx:id="phone_lb" alignment="CENTER" layoutX="72.0" layoutY="115.0" prefHeight="30.0" prefWidth="300.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;" text="Telephone" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="registre_lb" alignment="CENTER" layoutX="34.0" layoutY="153.0" prefHeight="30.0" prefWidth="380.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;" text="Registre" textFill="WHITE">
+      <Label fx:id="registre_lb" alignment="CENTER" layoutX="93.0" layoutY="153.0" prefHeight="30.0" prefWidth="250.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;" text="Registre" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
+      <Label fx:id="show_total1" alignment="CENTER" contentDisplay="CENTER" layoutX="66.0" layoutY="191.0" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: Black; -fx-background-radius: 20;" text="Sold" textFill="#f1c40f">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="closeButton1" layoutX="1129.0" layoutY="112.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: #3f51b5;" text="Print" textFill="WHITE" AnchorPane.rightAnchor="20.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

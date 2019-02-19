@@ -477,10 +477,7 @@ public class Fournisseur_Controller implements Initializable
 
     }
         // Logout
-    @FXML
-    public void log_Out_Function(Event event) throws IOException {
-        new Utility().log_Out(event);
-    }
+
     public void delet_empty_bon() throws SQLException{
 
         String query = "Delete from demo.bon_table where total=0";

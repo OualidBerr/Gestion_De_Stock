@@ -107,9 +107,9 @@
             <TableColumn fx:id="note_column" prefWidth="250.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="Remarque" />
         </columns>
       </TableView>
-      <VBox layoutX="754.0" layoutY="75.0" prefHeight="133.0" prefWidth="174.0" style="-fx-background-color: #0080ff; -fx-background-radius: 20;" AnchorPane.leftAnchor="754.0" AnchorPane.topAnchor="75.0">
+      <VBox layoutX="754.0" layoutY="75.0" prefHeight="153.0" prefWidth="174.0" style="-fx-background-color: #0080ff; -fx-background-radius: 20;" AnchorPane.leftAnchor="754.0" AnchorPane.topAnchor="75.0">
          <children>
-            <Button fx:id="reglement_add_btn" mnemonicParsing="false" onAction="#add_reglement" prefHeight="48.0" prefWidth="154.0" style="-fx-background-radius: 20;" text="Ajouter   Enter" textFill="#3f51b5">
+            <Button fx:id="reglement_add_btn" mnemonicParsing="false" onAction="#add_reglement" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #1f8c2d;" text="Ajouter   Enter" textFill="WHITE">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
@@ -117,7 +117,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button layoutX="20.0" layoutY="78.0" mnemonicParsing="false" onAction="#edit_reglment" prefHeight="50.0" prefWidth="154.0" style="-fx-background-radius: 20;" text="EDIT" textFill="#3f51b5">
+            <Button layoutX="20.0" layoutY="78.0" mnemonicParsing="false" onAction="#edit_reglment" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #3F51B5;" text="EDIT" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -125,7 +125,7 @@
                   <Insets bottom="5.0" left="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="reglement_delete_btn" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" onAction="#delet_reglement" prefHeight="50.0" prefWidth="154.0" style="-fx-background-radius: 20;" text="Delete" textFill="#3f51b5">
+            <Button fx:id="reglement_delete_btn" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" onAction="#delet_reglement" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #3F51B5;" text="Delete" textFill="WHITE">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
@@ -147,16 +147,16 @@
       <TextField fx:id="f_phone_txt" alignment="CENTER" editable="false" layoutX="52.0" layoutY="133.0" prefHeight="25.0" prefWidth="200.0" style="-fx-font-weight: Bold;" AnchorPane.leftAnchor="25.0" />
       <TextField fx:id="f_address_txt" alignment="CENTER" editable="false" layoutX="52.0" layoutY="163.0" prefHeight="25.0" prefWidth="200.0" style="-fx-font-weight: Bold;" AnchorPane.leftAnchor="25.0" />
       <TextField fx:id="f_old_sold_txt" alignment="CENTER" editable="false" layoutX="50.0" layoutY="193.0" prefHeight="25.0" prefWidth="200.0" style="-fx-font-weight: Bold;" AnchorPane.leftAnchor="25.0" />
-      <TextField fx:id="show_operation_N_txt" alignment="CENTER" editable="false" layoutX="1094.0" layoutY="48.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20; -fx-font-weight: Bold;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="45.0">
+      <TextField fx:id="show_operation_N_txt" alignment="CENTER" editable="false" layoutX="1094.0" layoutY="48.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 20; -fx-font-weight: Bold; -fx-background-color: #EAEDED; -fx-text-fill: #3F51B5;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="45.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="show_date_txt" alignment="CENTER" editable="false" layoutX="1095.0" layoutY="81.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20; -fx-font-weight: Bold;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="80.0" />
-      <TextField fx:id="show_montant_txt" alignment="CENTER" editable="false" layoutX="1093.0" layoutY="110.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20; -fx-font-weight: Bold;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="110.0" />
-      <TextField fx:id="show_encient_sold_txt" alignment="CENTER" editable="false" layoutX="1093.0" layoutY="139.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20; -fx-font-weight: Bold;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="140.0" />
-      <TextField fx:id="show__sold_txt" alignment="CENTER" editable="false" layoutX="1091.0" layoutY="168.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20; -fx-font-weight: Bold;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="170.0" />
-      <TextField fx:id="show__note_txt" alignment="CENTER" editable="false" layoutX="1075.0" layoutY="200.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20; -fx-font-weight: Bold;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="200.0" />
+      <TextField fx:id="show_date_txt" alignment="CENTER" editable="false" layoutX="1095.0" layoutY="81.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20; -fx-font-weight: Bold; -fx-text-fill: #3F51B5;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="80.0" />
+      <TextField fx:id="show_montant_txt" alignment="CENTER" editable="false" layoutX="1093.0" layoutY="110.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20; -fx-font-weight: Bold; -fx-text-fill: #3F51B5;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="110.0" />
+      <TextField fx:id="show_encient_sold_txt" alignment="CENTER" editable="false" layoutX="1093.0" layoutY="139.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20; -fx-font-weight: Bold; -fx-text-fill: #3F51B5;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="140.0" />
+      <TextField fx:id="show__sold_txt" alignment="CENTER" editable="false" layoutX="1091.0" layoutY="168.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20; -fx-font-weight: Bold; -fx-text-fill: #3F51B5;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="170.0" />
+      <TextField fx:id="show__note_txt" alignment="CENTER" editable="false" layoutX="1075.0" layoutY="200.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20; -fx-font-weight: Bold; -fx-text-fill: #3F51B5;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="200.0" />
       <Label layoutX="973.0" layoutY="55.0" prefHeight="22.0" prefWidth="105.0" text="N° Operation " AnchorPane.rightAnchor="172.0" AnchorPane.topAnchor="55.0">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -187,12 +187,12 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="show_Label" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="14.0" prefHeight="38.0" prefWidth="437.0" style="-fx-background-color: Black; -fx-background-radius: 20;" text="Fournisseur " textFill="#e80f0f" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="15.0">
+      <Label fx:id="show_Label" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="14.0" prefHeight="38.0" prefWidth="437.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;" text="Fournisseur " textFill="#f2f2f2" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="15.0">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="Lucida Bright Demibold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="closeButton" layoutX="1101.0" layoutY="607.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="36.0" prefWidth="131.0" text="Exit" textFill="#3f51b5" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="50.0">
+      <Button fx:id="closeButton" layoutX="1101.0" layoutY="607.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="36.0" prefWidth="131.0" style="-fx-background-color: #3F51B5;" text="Exit" textFill="WHITE" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="50.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

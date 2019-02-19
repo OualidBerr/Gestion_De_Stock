@@ -67,46 +67,46 @@
         </Label>
             <ToolBar prefHeight="54.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3F51B5;" text="Home" textFill="WHITE">
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #1f8c2d;" text="Home" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                <Button mnemonicParsing="false" onAction="#Open_Contoire_Window" prefHeight="50.0" prefWidth="120.0" text="Contoire" textFill="#3f51b5">
+                <Button mnemonicParsing="false" onAction="#Open_Contoire_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Contoire" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Button>
-                  <Button fx:id="products_btn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Product_Window" prefHeight="50.0" prefWidth="120.0" text="Produits" textFill="#3f51b5">
+                  <Button fx:id="products_btn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Product_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Produits" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="stock_btn" layoutX="125.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Stock_Window" prefHeight="50.0" prefWidth="120.0" text="Stock" textFill="#3f51b5">
+                  <Button fx:id="stock_btn" layoutX="125.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Stock_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Stock" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="fournisseur_btn" layoutX="240.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Fournisseur_Window" prefHeight="50.0" prefWidth="120.0" text="Fournisseurs" textFill="#3f51b5">
+                  <Button fx:id="fournisseur_btn" layoutX="240.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Fournisseur_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Fournisseurs" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="client_btn" layoutX="355.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Client_Window" prefHeight="50.0" prefWidth="120.0" text="Clients" textFill="#3f51b5">
+                  <Button fx:id="client_btn" layoutX="355.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Client_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Clients" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="caisse_btn1" layoutX="585.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Caisse_Window" prefHeight="50.0" prefWidth="120.0" text="Caisse" textFill="#3f51b5">
+                  <Button fx:id="caisse_btn1" layoutX="585.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Caisse_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Caisse" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button layoutX="585.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Bon_Command_Window" prefHeight="50.0" prefWidth="130.0" text="Bon Command" textFill="#3f51b5">
+                  <Button layoutX="585.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Bon_Command_Window" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #3f51b5;" text="Bon Command" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="logout_btn" layoutX="470.0" layoutY="10.0" mnemonicParsing="false" onAction="#log_Out_Function" prefHeight="50.0" prefWidth="120.0" text="Deconnexion" textFill="#3f51b5">
+                  <Button fx:id="logout_btn" layoutX="470.0" layoutY="10.0" mnemonicParsing="false" onAction="#log_Out_Function" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Deconnexion" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

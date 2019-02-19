@@ -67,16 +67,46 @@
         </Label>
             <ToolBar onKeyPressed="#handlekeyPressed" onMouseClicked="#loadData" prefHeight="69.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
-                <Button fx:id="goHome_btn" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="50.0" prefWidth="120.0" text="Home" textFill="#3f51b5">
+                <Button fx:id="goHome_btn" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #1f8c2d;" text="Home" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Button>
-                  <Button fx:id="goHome_btn1" layoutX="10.0" layoutY="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3F51B5;" text="Fournisseur" textFill="WHITE">
+                  <Button fx:id="goHome_btn1" layoutX="10.0" layoutY="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #bb7b0d;" text="Fournisseur" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#Load_Unactive_Fournisseur" prefHeight="48.0" prefWidth="148.0" text="Un_Active_Fournisseurs" />
+                  <Button fx:id="new_Fournisseur_btn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Add_New_Fournisseur_Form" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="New Fourni" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#show_Edit_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Modifié" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete_Fournisseur" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Suprime" textFill="#fcf8f8">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Bon_Fournissur_Form" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Bon Fournisseur" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Bon_Fournisseur_Global" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Bons Global" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Reglement_Form" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Verssement" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#Load_Unactive_Fournisseur" prefHeight="48.0" prefWidth="95.0" text="Un_Active" />
               </items>
             </ToolBar>
             <VBox layoutX="-1.0" layoutY="69.0" onMouseClicked="#loadData" prefHeight="571.0" prefWidth="1388.0" style="-fx-background-color: #D7BDE2;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0">
@@ -119,63 +149,14 @@
                         <Insets bottom="30.0" left="50.0" right="100.0" />
                      </VBox.margin>
                   </TableView>
-                  <HBox onMouseClicked="#loadData" prefHeight="50.0" prefWidth="1180.0">
-                     <children>
-                        <Button fx:id="new_Fournisseur_btn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Add_New_Fournisseur_Form" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #3f51b5;" text="Nouveux Fournisseur" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="15.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#show_Edit_Window" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #3f51b5;" text="Modifié" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="25.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button layoutX="127.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete_Fournisseur" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #3f51b5;" text="Suprime" textFill="#fcf8f8">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="25.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button layoutX="244.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Bon_Fournissur_Form" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #3f51b5;" text="Bon Fournisseur" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="25.0" right="50.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Reglement_Form" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #3f51b5;" text="Verssement" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets right="25.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button layoutX="820.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Bon_Fournisseur_Global" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #3f51b5;" text="Bons Global" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets right="25.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button fx:id="closeButton" layoutX="1130.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #3f51b5;" text="Exit" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </HBox>
+                  <Button fx:id="closeButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #3f51b5;" text="Exit" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="1150.0" />
+                     </VBox.margin>
+                  </Button>
                </children>
             </VBox>
       </children>
