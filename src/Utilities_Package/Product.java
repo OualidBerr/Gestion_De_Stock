@@ -2,6 +2,8 @@ package Utilities_Package;
 
 import javafx.beans.property.*;
 
+import java.math.BigDecimal;
+
 public class Product {
 
     public Product(){
@@ -9,7 +11,7 @@ public class Product {
     }
 
     private IntegerProperty  id ;
-    private IntegerProperty  quantite ;
+    private DoubleProperty  quantite ;
     private IntegerProperty  Nbr_pcs ;
     private IntegerProperty  alert ;
     private IntegerProperty  Nbr_pcs_crt ;
@@ -37,19 +39,19 @@ public class Product {
 
     // Constructor
     public Product(    Integer ID,        String REF,        String DESIGNATION,  Integer  NBR_PCS_CRT,
-                       Integer QUANTITY ,Integer NBR_PCS,    String CODE_BARE,    String   DATE_ENTRE
+                       Double  QUANTITY ,Integer NBR_PCS,    String CODE_BARE,    String   DATE_ENTRE
             ,Integer ALERT,   String EXPIRATION,  Double PRIX_ACHAT,   Double   PRIX_VENT
             ,String FOURNISSEUR, double VALUE  )
     {
-        int I = NBR_PCS_CRT*QUANTITY;
-        double V= I*PRIX_ACHAT;
+
+        double V = NBR_PCS*PRIX_ACHAT;
 
         this.id             = new SimpleIntegerProperty(ID);
         this.ref            = new SimpleStringProperty(REF);
         this.designiation   = new SimpleStringProperty(DESIGNATION);
         this.Nbr_pcs_crt    = new SimpleIntegerProperty(NBR_PCS_CRT);
-        this.quantite       = new SimpleIntegerProperty(QUANTITY);
-        this.Nbr_pcs        = new SimpleIntegerProperty(I);
+        this.quantite       = new SimpleDoubleProperty(QUANTITY);
+        this.Nbr_pcs        = new SimpleIntegerProperty(NBR_PCS);
         this.code_bare      = new SimpleStringProperty(CODE_BARE);
         this.date_entre     = new SimpleStringProperty(DATE_ENTRE);
         this.alert          = new SimpleIntegerProperty(ALERT);
@@ -64,31 +66,29 @@ public class Product {
 
     // Constructor Stock.
     public Product(    Integer ID,        String REF,        String DESIGNATION,  Integer  NBR_PCS_CRT,
-                       Integer QUANTITY ,Integer NBR_PCS, Double   PRIX_VENT , double VALUE )
+                       Double QUANTITY ,Integer NBR_PCS, Double   PRIX_VENT , double VALUE )
     {
-        int I = NBR_PCS_CRT*QUANTITY;
-        double V = I*PRIX_VENT;
+
+        double V = NBR_PCS*PRIX_VENT;
 
         this.id             = new SimpleIntegerProperty(ID);
         this.ref            = new SimpleStringProperty(REF);
         this.designiation   = new SimpleStringProperty(DESIGNATION);
         this.Nbr_pcs_crt    = new SimpleIntegerProperty(NBR_PCS_CRT);
-        this.quantite       = new SimpleIntegerProperty(QUANTITY);
-        this.Nbr_pcs        = new SimpleIntegerProperty(I);
+        this.quantite       = new SimpleDoubleProperty(QUANTITY);
+        this.Nbr_pcs        = new SimpleIntegerProperty(NBR_PCS);
         this.prix_ventt     = new SimpleDoubleProperty(PRIX_VENT);
         this.value          = new SimpleDoubleProperty(V);
 
     }
 
     // Constructor Bon Client
-    public Product(double Prix,int NBR_PCS_CRT,int QUAN,int NBR_PCS,String DES){
-
-        int I = NBR_PCS_CRT*QUAN;
+    public Product(double Prix, int NBR_PCS_CRT, double QUAN, int NBR_PCS, String DES){
 
         this.designiation   = new SimpleStringProperty(DES);
         this.Nbr_pcs_crt    = new SimpleIntegerProperty(NBR_PCS_CRT);
-        this.quantite       = new SimpleIntegerProperty(QUAN);
-        this.Nbr_pcs        = new SimpleIntegerProperty(I);
+        this.quantite       = new SimpleDoubleProperty(QUAN);
+        this.Nbr_pcs        = new SimpleIntegerProperty(NBR_PCS);
         this.prix_ventt     = new SimpleDoubleProperty(Prix);
 
 
@@ -103,10 +103,10 @@ public class Product {
     public IntegerProperty idProperty() {
         return id;
     }
-    public int getQuantite() {
+    public double getQuantite() {
         return quantite.get();
     }
-    public IntegerProperty quantiteProperty() {
+    public DoubleProperty quantiteProperty() {
         return quantite;
     }
     public int getNbr_pcs() {
@@ -178,7 +178,7 @@ public class Product {
     public void setId(int id) {
         this.id.set(id);
     }
-    public void setQuantite(int quantite) {
+    public void setQuantite(double quantite) {
         this.quantite.set(quantite);
     }
     public void setNbr_pcs(int nbr_pcs) {

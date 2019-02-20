@@ -144,7 +144,7 @@
                   <TableView fx:id="client_table" onMouseClicked="#showOnClick" prefHeight="420.0" prefWidth="1024.0" tableMenuButtonVisible="true">
                     <columns>
                       <TableColumn fx:id="id_colomn" prefWidth="75.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold; -fx-font-size: 14;" text="N°" />
-                      <TableColumn fx:id="name_colomn" prefWidth="200.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold; -fx-font-size: 14;" text="Nom et Prénom" />
+                      <TableColumn fx:id="name_colomn" prefWidth="200.0" style="-fx-background-radius: 20; -fx-font-weight: Bold; -fx-font-size: 14;" text="Nom et Prénom" />
                         <TableColumn fx:id="address_colomn" prefWidth="220.0" style="-fx-background-radius: 20; -fx-font-weight: Bold; -fx-font-size: 14;" text="Address" />
                         <TableColumn fx:id="phone_colomn" minWidth="1.6666717529296875" prefWidth="147.6666259765625" style="-fx-background-radius: 20; -fx-font-weight: Bold; -fx-alignment: Center; -fx-font-size: 14;" text="Télephone" />
                         <TableColumn fx:id="sold_colomn" prefWidth="171.0" style="-fx-background-radius: 20; -fx-font-weight: Bold; -fx-alignment: Center; -fx-font-size: 14;" text="Sold" />

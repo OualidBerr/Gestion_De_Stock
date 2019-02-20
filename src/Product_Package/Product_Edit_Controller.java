@@ -60,7 +60,7 @@ public class Product_Edit_Controller implements Initializable {
     public static String DESIGNIATON;
     public static String REF;
     public static int NBR_PCS_CRT;
-    public static int QUANT;
+    public static double QUANT;
     public static int NBR_PCS;             //Nombre de piece total
     public static String CODE_BARE;
     public static String FOURNISSEUR;
@@ -134,7 +134,7 @@ public class Product_Edit_Controller implements Initializable {
             String   reference         =  ref_txt.getText();
             int      nombre_de_pcs_crt = Integer.parseInt(nbr_pcs_crt_txt.getText()) ;
             int      nombre_de_pcs     = Integer.parseInt(nbr_pcs_txt.getText())  ;
-            int      quantite          = Integer.parseInt(quant_txt.getText())  ;
+            double   quantite          = Double.parseDouble(quant_txt.getText())  ;
             String   code_bare         = code_bare_txt.getText();
             String   fourniseur        = fournisseur_cambo.getValue().toString();
             int      alert             =  Integer.parseInt(alert_txt.getText()) ;
@@ -147,7 +147,7 @@ public class Product_Edit_Controller implements Initializable {
 
 
             date_DatePicker.setValue(LocalDate.now());
-            Product product = new Product(0,"","",0,0,0,
+            Product product = new Product(0,"","",0,0.0,0,
                     "","",0,"",
                     0.25,0.25,"",0.0);
             product.setDesigniation(designiation);
@@ -175,7 +175,7 @@ public class Product_Edit_Controller implements Initializable {
                 preparesStatemnt.setString(1, product.getRef());
                 preparesStatemnt.setString(2, product.getDesigniation());
                 preparesStatemnt.setInt   (3, product.getNbr_pcs_crt());
-                preparesStatemnt.setInt   (4, product.getQuantite());
+                preparesStatemnt.setDouble   (4, product.getQuantite());
                 preparesStatemnt.setInt   (5, product.getNbr_pcs());      // Nombre de piece total
                 preparesStatemnt.setString(6, product.getCode_bare());
                 preparesStatemnt.setInt   (7, product.getAlert());

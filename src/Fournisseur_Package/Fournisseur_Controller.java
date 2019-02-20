@@ -344,11 +344,6 @@ public class Fournisseur_Controller implements Initializable
 
     }
     @FXML
-    public void goBack_To_Home_Window(Event event) throws IOException {
-
-        new Utility().go_Home(event);
-    }
-    @FXML
     public void open_Add_New_Fournisseur_Form(Event event) throws IOException{
 
         New_Fournisseur_Controller.add_button_Visibility = true;

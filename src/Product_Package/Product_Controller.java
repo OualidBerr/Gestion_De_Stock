@@ -33,7 +33,7 @@ public class Product_Controller implements Initializable {
     public TableColumn<Product,String>  ref_column;
     public TableColumn<Product,String>  des_column;
     public TableColumn<Product,Integer> nbr_pcs_crt__column;
-    public TableColumn<Product,Integer> quantity_column;
+    public TableColumn<Product,Double> quantity_column;
     public TableColumn<Product,Integer> nbr_pcs_column;
     public TableColumn<Product,String>  code_bare_column;
     public TableColumn<Product,String>  date_entre_column;
@@ -68,7 +68,7 @@ public class Product_Controller implements Initializable {
                         rs.getString("ref"),
                         rs.getString("des"),
                         rs.getInt("nbr_pcs_crt"),
-                        rs.getInt("quan"),
+                        rs.getDouble("quan"),
                         rs.getInt("nbr_pcs"),
                         rs.getString("code_bare"),
                         rs.getString("date_entre"),

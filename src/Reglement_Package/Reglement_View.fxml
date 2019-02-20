@@ -107,7 +107,7 @@
             <TableColumn fx:id="note_column" prefWidth="250.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="Remarque" />
         </columns>
       </TableView>
-      <VBox layoutX="754.0" layoutY="75.0" prefHeight="153.0" prefWidth="174.0" style="-fx-background-color: #0080ff; -fx-background-radius: 20;" AnchorPane.leftAnchor="754.0" AnchorPane.topAnchor="75.0">
+      <VBox layoutX="754.0" layoutY="75.0" prefHeight="153.0" prefWidth="174.0" style="-fx-background-color: #D7BDE2; -fx-background-radius: 20;" AnchorPane.leftAnchor="754.0" AnchorPane.topAnchor="75.0">
          <children>
             <Button fx:id="reglement_add_btn" mnemonicParsing="false" onAction="#add_reglement" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #1f8c2d;" text="Ajouter   Enter" textFill="WHITE">
                <VBox.margin>

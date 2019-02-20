@@ -71,7 +71,7 @@ private PasswordField txtpassword;
             } else {
                 if (role_User.equals("Admin")) {
                     new Utility().log_In("Admin", event);
-                    utility.show_TrayNotification("Welcome");
+                   // utility.show_TrayNotification("Welcome");
 
                 } else if (role_User.equals("User")) {
                     new Utility().log_In("User", event);

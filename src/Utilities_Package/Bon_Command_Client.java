@@ -8,7 +8,7 @@ public class Bon_Command_Client {
     private StringProperty  ref ;
     private StringProperty  des ;
     private IntegerProperty nbr_pcs_crt ;
-    private IntegerProperty quantite ;
+    private DoubleProperty quantite ;
     private IntegerProperty nbr_pcs ;
     private DoubleProperty  prix_vent ;
     private DoubleProperty  value;
@@ -17,14 +17,14 @@ public class Bon_Command_Client {
     private StringProperty  date ;
 
 
-    public Bon_Command_Client(int ID,String REF,String DES,int QUN,int NBR_PCS_CRT ,int NBR_PCS,
+    public Bon_Command_Client(int ID,String REF,String DES,double QUN,int NBR_PCS_CRT ,int NBR_PCS,
                                    double prix_vent,double value,String DATE)
       {
         this.id                  = new SimpleIntegerProperty(ID);
         this.ref                 = new SimpleStringProperty(REF);
         this.des                 = new SimpleStringProperty(DES);
         this.nbr_pcs_crt         = new SimpleIntegerProperty(NBR_PCS_CRT);
-        this.quantite            = new SimpleIntegerProperty(QUN);
+        this.quantite            = new SimpleDoubleProperty(QUN);
         this.nbr_pcs             = new SimpleIntegerProperty(NBR_PCS);
         this.prix_vent           = new SimpleDoubleProperty(prix_vent);
         this.value               = new SimpleDoubleProperty(value);
@@ -37,14 +37,14 @@ public class Bon_Command_Client {
 
     // Constructor
     public Bon_Command_Client(int ID, String REF, String DES, int NBR_PCS_CRT,
-                              int QUANTIT, int NBR_PCS, double PRIX_vent, double VALUE,
+                              double QUANTIT, int NBR_PCS, double PRIX_vent, double VALUE,
                               int CLIENTID, int BON_ID, String DATE)
     {
         this.id                  = new SimpleIntegerProperty(ID);
         this.ref                 = new SimpleStringProperty(REF);
         this.des                 = new SimpleStringProperty(DES);
         this.nbr_pcs_crt         = new SimpleIntegerProperty(NBR_PCS_CRT);
-        this.quantite            = new SimpleIntegerProperty(QUANTIT);
+        this.quantite            = new SimpleDoubleProperty(QUANTIT);
         this.nbr_pcs             = new SimpleIntegerProperty(NBR_PCS);
         this.prix_vent           = new SimpleDoubleProperty(PRIX_vent);
         this.value               = new SimpleDoubleProperty(VALUE);
@@ -102,11 +102,11 @@ public class Bon_Command_Client {
         this.nbr_pcs_crt.set(nbr_pcs_crt);
     }
 
-    public int getQuantite() {
+    public double getQuantite() {
         return quantite.get();
     }
 
-    public IntegerProperty quantiteProperty() {
+    public DoubleProperty quantiteProperty() {
         return quantite;
     }
 

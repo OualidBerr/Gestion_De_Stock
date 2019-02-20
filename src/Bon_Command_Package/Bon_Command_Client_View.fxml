@@ -28,7 +28,7 @@
       </Label>
       <TableView fx:id="bon_command_client_table" layoutX="20.0" layoutY="238.0" prefHeight="408.0" prefWidth="1284.0" style="-fx-font-weight: Bold; -fx-font-size: 14;" tableMenuButtonVisible="true" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="131.0">
          <columns>
-            <TableColumn fx:id="id_column" prefWidth="100.0" style="-fx-alignment: Center;" text="N" />
+            <TableColumn fx:id="id_column" prefWidth="100.0" style="-fx-alignment: Center;" text="N° " />
             <TableColumn fx:id="ref_column" prefWidth="100.0" style="-fx-alignment: Center;" text="Ref" />
             <TableColumn fx:id="des_column" prefWidth="300.0" text="Designiation" />
             <TableColumn fx:id="quantity_column" prefWidth="100.0" style="-fx-alignment: Center;" text="Quantite" />

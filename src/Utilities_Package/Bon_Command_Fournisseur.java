@@ -8,7 +8,7 @@ public class Bon_Command_Fournisseur {
     private StringProperty  ref ;
     private StringProperty  des ;
     private IntegerProperty nbr_pcs_crt ;
-    private IntegerProperty quantite ;
+    private DoubleProperty quantite ;
     private IntegerProperty nbr_pcs ;
     private DoubleProperty  prix_vent ;
     private DoubleProperty  prix_achat ;
@@ -31,14 +31,14 @@ public class Bon_Command_Fournisseur {
 
 
 
-    public Bon_Command_Fournisseur(int ID,String REF,String DES,int NBR_PCS_CRT,int QUN,int NBR_PCS,
+    public Bon_Command_Fournisseur(int ID,String REF,String DES,int NBR_PCS_CRT,double QUN,int NBR_PCS,
                    double prix_vent,double prix_achat,double value,String DATE)
        {
            this.id                  = new SimpleIntegerProperty(ID);
            this.ref                 = new SimpleStringProperty(REF);
            this.des                 = new SimpleStringProperty(DES);
            this.nbr_pcs_crt         = new SimpleIntegerProperty(NBR_PCS_CRT);
-           this.quantite            = new SimpleIntegerProperty(QUN);
+           this.quantite            = new SimpleDoubleProperty(QUN);
            this.nbr_pcs             = new SimpleIntegerProperty(NBR_PCS);
            this.prix_vent           = new SimpleDoubleProperty(prix_vent);
            this.prix_achat          = new SimpleDoubleProperty(prix_achat);
@@ -53,14 +53,14 @@ public class Bon_Command_Fournisseur {
 
     // Constructor
     public Bon_Command_Fournisseur(int ID,String REF,String DES,int NBR_PCS_CRT,
-                                   int QUANTIT,int NBR_PCS,double PRIX_vent,double PRIX_Achat,double VALUE,
+                                   double QUANTIT,int NBR_PCS,double PRIX_vent,double PRIX_Achat,double VALUE,
                                    int FOURNISSEURID,int BON_ID, String DATE)
     {
         this.id                  = new SimpleIntegerProperty(ID);
         this.ref                 = new SimpleStringProperty(REF);
         this.des                 = new SimpleStringProperty(DES);
         this.nbr_pcs_crt         = new SimpleIntegerProperty(NBR_PCS_CRT);
-        this.quantite            = new SimpleIntegerProperty(QUANTIT);
+        this.quantite            = new SimpleDoubleProperty(QUANTIT);
         this.nbr_pcs             = new SimpleIntegerProperty(NBR_PCS);
         this.prix_vent           = new SimpleDoubleProperty(PRIX_vent);
         this.prix_achat          = new SimpleDoubleProperty(PRIX_Achat);
@@ -123,10 +123,10 @@ public class Bon_Command_Fournisseur {
     public void setNbr_pcs_crt(int nbr_pcs_crt) {
         this.nbr_pcs_crt.set(nbr_pcs_crt);
     }
-    public int getQuantite() {
+    public double getQuantite() {
         return quantite.get();
     }
-    public IntegerProperty quantiteProperty() {
+    public DoubleProperty quantiteProperty() {
         return quantite;
     }
     public void setQuantite(int quantite) {

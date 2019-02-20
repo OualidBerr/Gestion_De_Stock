@@ -62,7 +62,7 @@ import java.util.ResourceBundle;
         public TableColumn<Product, Integer> id_column;
         public TableColumn<Product, String> ref_column;
         public TableColumn<Product, String> des_column;
-        public TableColumn<Product, Integer> quantity_column;
+        public TableColumn<Product, Double> quantity_column;
         public TableColumn<Product, Integer> nbr_pcs_crt__column;
         public TableColumn<Product, Integer> nbr_pcs_column;
         public TableColumn<Product, Double> prix_vent_column;
@@ -104,7 +104,7 @@ import java.util.ResourceBundle;
                             utility.get_Product_detail_S(rs.getInt("productID"),"ref").toString(),   // ref
                             utility.get_Product_detail_S(rs.getInt("productID"),"des").toString(),   //des
                             (int) utility.get_Product_detail_S(rs.getInt("productID"),"nbr_pcs_crt"),// nbr_pcs/carton
-                            rs.getInt("quant"),   // quantity
+                            rs.getDouble("quant"),   // quantity
                             rs.getInt("quant")*((int) utility.get_Product_detail_S(rs.getInt("productID"),"nbr_pcs_crt")), // nbr pcs total
                             rs.getDouble("prix_vent"),   // pris achat
                             rs.getDouble("prix_achat"),    // pris vent
@@ -159,7 +159,7 @@ import java.util.ResourceBundle;
                             rs.getString(2),
                             rs.getString(3),
                             rs.getInt(4),
-                            rs.getInt(5),
+                            rs.getDouble(5),
                             rs.getInt(6),
                             rs.getDouble(7),
                             rs.getDouble(8),
@@ -219,7 +219,7 @@ import java.util.ResourceBundle;
                 {
                     String des = des_TXT.getText();
                     int id_order = utility.getMax_ID("demo.bon_detail_table","id")+1;
-                    int quant = Integer.parseInt(quant_TXT.getText());
+                    double quant = Double.parseDouble(quant_TXT.getText());
                     double prix_vent = Double.parseDouble(prix_vent_TXT.getText());
                     double prix_achat = Double.parseDouble(prix_achat_TXT.getText());
                     int productID = utility.getProduct_ID(des);
@@ -230,7 +230,7 @@ import java.util.ResourceBundle;
                     try {
                         preparesStatemnt = conn.connect().prepareStatement(query_2);
                         preparesStatemnt.setInt   (1, id_order);
-                        preparesStatemnt.setInt(2, quant);
+                        preparesStatemnt.setDouble(2, quant);
                         preparesStatemnt.setDouble(3, prix_vent);
                         preparesStatemnt.setDouble(4, prix_achat);
                         preparesStatemnt.setDouble(5, value);
@@ -284,8 +284,8 @@ import java.util.ResourceBundle;
                     // Update product
 
                     int product_Old_Quantity = utility.get_Product_quantity(productID);
-                    int new_product_quantity= product_Old_Quantity +  quant  ;
-                    int new_Nbr_Pcs = new_product_quantity*utility.get_Product_Nbr_pcs_crt(productID);
+                    double new_product_quantity= product_Old_Quantity +  quant  ;
+                    int new_Nbr_Pcs = (int) new_product_quantity*utility.get_Product_Nbr_pcs_crt(productID);
                     double new_value = new_Nbr_Pcs*prix_vent;
 
                     try{
@@ -295,7 +295,7 @@ import java.util.ResourceBundle;
 
                         preparesStatemnt = conn.connect().prepareStatement(Query);
 
-                        preparesStatemnt.setInt      (1,  new_product_quantity);
+                        preparesStatemnt.setDouble      (1,  new_product_quantity);
                         preparesStatemnt.setInt      (2,  new_Nbr_Pcs);
                         preparesStatemnt.setDouble   (3,  prix_achat);
                         preparesStatemnt.setDouble   (4,  prix_vent);

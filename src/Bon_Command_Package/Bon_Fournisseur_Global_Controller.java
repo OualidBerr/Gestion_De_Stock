@@ -31,7 +31,7 @@ public class Bon_Fournisseur_Global_Controller implements Initializable {
     public TableColumn<Product, Integer> Id_column;
     public TableColumn<Product, String> ref_column;
     public TableColumn<Product, String> des_column;
-    public TableColumn<Product, Integer> quantity_column;
+    public TableColumn<Product, Double> quantity_column;
     public TableColumn<Product, Integer> nbr_pcs_crt__column;
     public TableColumn<Product, Integer> nbr_pcs_column;
     public TableColumn<Product, Double> prix_vent_column;
@@ -110,7 +110,7 @@ public class Bon_Fournisseur_Global_Controller implements Initializable {
                             utility.get_Product_detail_S(rs.getInt("productID"),"ref").toString(),   // ref
                             utility.get_Product_detail_S(rs.getInt("productID"),"des").toString(),   //des
                             (int) utility.get_Product_detail_S(rs.getInt("productID"),"nbr_pcs_crt"),// nbr_pcs/carton
-                            rs.getInt("quant"),   // quantity
+                            rs.getDouble("quant"),   // quantity
                             rs.getInt("quant")*((int) utility.get_Product_detail_S(rs.getInt("productID"),"nbr_pcs_crt")), // nbr pcs total
                             rs.getDouble("prix_vent"),   // pris achat
                             rs.getDouble("prix_achat"),    // pris vent

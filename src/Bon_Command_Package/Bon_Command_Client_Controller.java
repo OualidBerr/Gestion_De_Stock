@@ -28,7 +28,7 @@ public class Bon_Command_Client_Controller implements Initializable {
     public TableColumn<Product, String>   des_show_column;
     public TableColumn<Product, Integer>  nbr_pcs_crt_show_column;
     public TableColumn<Product, Integer>  nbr_pcs_show_column;
-    public TableColumn<Product, Integer>   quant_show_column;
+    public TableColumn<Product, Double>   quant_show_column;
     public TableColumn<Product, Double>   prix_show_column;
     @FXML
     public TableView<Bon_Command_Client> bon_command_client_table;
@@ -93,7 +93,7 @@ public class Bon_Command_Client_Controller implements Initializable {
                         rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        rs.getInt(4),
+                        rs.getDouble(4),
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getDouble(7),
@@ -143,7 +143,7 @@ public class Bon_Command_Client_Controller implements Initializable {
                         rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        rs.getInt(4),
+                        rs.getDouble(4),
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getDouble(7),
@@ -194,7 +194,7 @@ public class Bon_Command_Client_Controller implements Initializable {
     public void add_New_Client_Bon() throws SQLException {
         String product = product_txt.getText();
         int productID = utility.getProduct_ID(product);
-        int quant = Integer.parseInt(quant_txt.getText());
+        double quant = Double.parseDouble(quant_txt.getText());
         int id_order = utility.getMax_ID("demo.bon_detail_table","id")+1;
         int product_Nbr_pcs_crt = utility.get_Product_Nbr_pcs_crt(productID);
         double prix_vent = utility.get_Product_price(productID);
@@ -204,14 +204,12 @@ public class Bon_Command_Client_Controller implements Initializable {
         if (!product_txt.getText().isEmpty()&& !quant_txt.getText().isEmpty())
           {
 
-
-
             String query_2 = "INSERT INTO demo.bon_detail_table (id,quant,prix_vent,value,bonID,productID) Values (?,?,?,?,?,?)";
 
             try {
                 preparesStatemnt = conn.connect().prepareStatement(query_2);
                 preparesStatemnt.setInt   (1, id_order);
-                preparesStatemnt.setInt(2, quant);
+                preparesStatemnt.setDouble(2, quant);
                 preparesStatemnt.setDouble(3, prix_vent);
                 preparesStatemnt.setDouble(4, value);
                 preparesStatemnt.setInt   (5, BON_ID);
@@ -267,8 +265,8 @@ public class Bon_Command_Client_Controller implements Initializable {
         // Update product
 
         int product_Old_Quantity = utility.get_Product_quantity(productID);
-        int new_product_quantity= product_Old_Quantity -  quant  ;
-        int new_Nbr_Pcs = new_product_quantity*utility.get_Product_Nbr_pcs_crt(productID);
+        double new_product_quantity= product_Old_Quantity -  quant  ;
+        int new_Nbr_Pcs = (int) new_product_quantity*utility.get_Product_Nbr_pcs_crt(productID);
         double new_value = new_Nbr_Pcs*prix_vent;
 
         try{
@@ -276,7 +274,7 @@ public class Bon_Command_Client_Controller implements Initializable {
             String Query  = "UPDATE demo.product_table SET quan =?,nbr_pcs=?,date_entre=?,value=? Where id="+productID;
 
             preparesStatemnt = conn.connect().prepareStatement(Query);
-            preparesStatemnt.setInt      (1,  new_product_quantity);
+            preparesStatemnt.setDouble      (1,  new_product_quantity);
             preparesStatemnt.setInt      (2,  new_Nbr_Pcs);
             preparesStatemnt.setString   (3, LocalDate.now().toString());
             preparesStatemnt.setDouble   (4,  new_value);
@@ -427,6 +425,7 @@ public class Bon_Command_Client_Controller implements Initializable {
 
 
     }
+
     public double get_Bon_Total(int bonID,int personID) throws SQLException {
         double total = 0.25;
         rs = conn.connect().createStatement().executeQuery("SELECT * FROM demo.bon_table where id="+bonID+" and personID="+personID);

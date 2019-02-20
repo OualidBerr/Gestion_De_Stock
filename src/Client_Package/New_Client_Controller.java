@@ -62,7 +62,7 @@ public class New_Client_Controller implements Initializable {
     public void add_Client() throws SQLException {
 
         int max_id = 0;
-        max_id  = utility.getMax_ID("client_table","id") ;
+        max_id  = utility.getMax_ID("demo.person_table","id") ;
 
         if (!nametxt.getText().isEmpty() &&
                 !addresstxt.getText().isEmpty() &&
@@ -75,7 +75,7 @@ public class New_Client_Controller implements Initializable {
             String Sold_max_String = sold_maxtxt.getText();  double Sold_max = Double.parseDouble(Sold_max_String);
             String Registre    = registretxt.getText();
             PreparedStatement preparesStatemnt = null;
-            String query = "INSERT INTO demo.client_table (id,name,address,telephone,period,soldmax,registre,PersonType) VALUES (?,?,?,?,?,?,?,0)";
+            String query = "INSERT INTO demo.person_table (id,name,address,telephone,period,soldmax,registre,PersonType) VALUES (?,?,?,?,?,?,?,1)";
 
             preparesStatemnt = conn.connect().prepareStatement(query);
             preparesStatemnt.setInt(   1, max_id+1);

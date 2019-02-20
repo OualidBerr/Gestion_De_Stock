@@ -28,7 +28,7 @@ public class Bon_Client_Global_Controller implements Initializable {
     public TableColumn<Product, Integer> Id_column;
     public TableColumn<Product, String> ref_column;
     public TableColumn<Product, String> des_column;
-    public TableColumn<Product, Integer> quantity_column;
+    public TableColumn<Product, Double> quantity_column;
     public TableColumn<Product, Integer> nbr_pcs_crt__column;
     public TableColumn<Product, Integer> nbr_pcs_column;
     public TableColumn<Product, Double> prix_vent_column;
@@ -153,7 +153,7 @@ public class Bon_Client_Global_Controller implements Initializable {
                         rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        rs.getInt(4),
+                        rs.getDouble(4),
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getDouble(7),
