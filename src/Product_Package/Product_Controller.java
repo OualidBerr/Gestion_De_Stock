@@ -55,6 +55,7 @@ public class Product_Controller implements Initializable {
     PreparedStatement preparesStatemnt = null;
     ResultSet resultSet = null;
     Utility utility = new Utility();
+    Notification notification = new Notification();
     //************************
     public  void loadData() throws SQLException {
         Connection cnn = conn.connect();
@@ -181,7 +182,7 @@ public class Product_Controller implements Initializable {
                     preparesStatemnt.executeUpdate();
                     preparesStatemnt.close();
                     loadData();
-                    utility.showAlert("Product has been deleted");
+                    notification.show_Confirmation("Product has been deleted");
                     conn.connect().close();
                 }
 
@@ -238,11 +239,7 @@ public class Product_Controller implements Initializable {
     public void Open_Caisse_Window(Event event) throws IOException {
         new Utility().go_Caisse(event);
     }
-    // Log out
-    @FXML
-    public void log_Out_Function(Event event) throws IOException {
-        new Utility().log_Out(event);
-    }
+
 
     @FXML
     public void open_Edit_Product_Window(Event event)throws IOException {

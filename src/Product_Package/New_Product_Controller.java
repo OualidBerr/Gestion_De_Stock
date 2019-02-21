@@ -1,9 +1,6 @@
 package Product_Package;
 
-import Utilities_Package.Db_Connection;
-import Utilities_Package.Fournisseur;
-import Utilities_Package.Reglement;
-import Utilities_Package.Utility;
+import Utilities_Package.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -52,6 +49,7 @@ public class New_Product_Controller implements Initializable {
     PreparedStatement preparesStatemnt = null;
     ResultSet rs = null;
     Utility utility = new Utility();
+    Notification notification = new Notification();
     public ArrayList data_2;
 
 
@@ -137,7 +135,8 @@ public class New_Product_Controller implements Initializable {
             finally {
                 loadData();
                 clear();
-                utility.showAlert("New User added successfully");
+
+                notification.show_Confirmation("New Product added successfully");
                 if (conn.connect()   != null) {conn.connect().close();}
                 if (preparesStatemnt != null) {preparesStatemnt.close();}
                 if (preparesStatemnt != null) {preparesStatemnt.close();}

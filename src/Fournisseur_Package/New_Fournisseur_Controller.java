@@ -67,6 +67,7 @@ public class New_Fournisseur_Controller implements Initializable {
     Db_Connection conn = new Db_Connection();
     PreparedStatement  preparesStatemnt = null;
     Utility utility = new Utility();
+    Notification notification = new Notification();
 
     // Add
     @FXML
@@ -105,11 +106,12 @@ public class New_Fournisseur_Controller implements Initializable {
                 idetxt.clear();
                 registretxt.clear();
 
-                utility.showAlert("New User added successfully");
+                notification.show_Confirmation("New User added successfully");
             }
 
             else if  (nametxt.getText().isEmpty() && addresstxt.getText().isEmpty() && telephonetxt.getText().isEmpty()){
-                utility.showAlert("Some fields are empty");
+
+                notification.show_Warrning("Some fields are empty");
                   }
            }
 
@@ -168,9 +170,9 @@ public class New_Fournisseur_Controller implements Initializable {
               }
 
         else{
-            utility.showAlert("Fields are not filled");
+            notification.show_Warrning("Some fields are empty");
             }
-        utility.showAlert("Fournisseur has been Updated");
+        notification.show_Confirmation("Fournisseur Updated successfully");
 
     }
     @FXML

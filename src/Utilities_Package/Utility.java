@@ -66,6 +66,7 @@ public class Utility {
         App_Stage.setScene(Home_page_Scene);
         App_Stage.setTitle(title);
         App_Stage.setFullScreen(true);
+        App_Stage.setMaximized(true);
         App_Stage.setResizable(true);
         App_Stage.show();
 
@@ -233,11 +234,20 @@ public class Utility {
                 Notifications note = create()
                         .text(s)
                         .hideAfter(Duration.seconds(3))
-                        .position(Pos.BOTTOM_RIGHT)
-                        .darkStyle();
-                note.showConfirm();
+                        .position(Pos.BOTTOM_RIGHT);
+
+                    note.showInformation();
 
         }
+
+
+
+
+
+
+
+
+
         // String Date Converter
          public LocalDate stringToDateConverter(String stringDate){
 

@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class Contoire_Controller implements Initializable {
@@ -48,11 +49,14 @@ public class Contoire_Controller implements Initializable {
     @FXML
     Label client_lb,total_lb;
     @FXML
-    public Button closeButton,add_ventbtn;
+    public Button closeButton,add_ventbtn,paiment_btn,delete_btn;
+    @FXML
+    public Button edit_btn,save_btn;
+
     @FXML
     public ComboBox client_Combo;
     @FXML
-    public TextField product_txt,quant_txt;
+    public TextField product_txt,quant_txt,paiment_txt;
     @FXML
     public DatePicker datePicker;
     @FXML
@@ -63,33 +67,30 @@ public class Contoire_Controller implements Initializable {
     PreparedStatement preparesStatemnt = null;
     ResultSet rs = null;
     Utility utility = new Utility();
+    Notification notification = new Notification();
     ArrayList product_list = new ArrayList();
 
 
     public static int VENT_ID;
-
     public  void loadData() throws SQLException {
         Connection cnn = conn.connect();
         ResultSet rs = null;
 
         try{
-
             rs = cnn.createStatement().executeQuery("SELECT * FROM demo.person_table where ABS(personType)=1");
             while(rs.next()){
 
                 client_Combo.getItems().add(rs.getString("name"));
-
             }
         }
         catch(SQLException eX){
             System.out.println("error ! Not Connected to Db****");
-        }
+                }
 
         finally {
             if (conn.connect()   != null) {conn.connect().close();}
             if (rs != null) {rs.close();}
-        }
-
+             }
 
         try{
 
@@ -97,7 +98,6 @@ public class Contoire_Controller implements Initializable {
             while(rs.next()){
 
                 product_list.add(rs.getString("des"));
-
             }
         }
         catch(SQLException eX){
@@ -110,17 +110,7 @@ public class Contoire_Controller implements Initializable {
         }
 
 
-
-
-
-
-
-
-
-
     }
-
-
     @FXML
     public void refresh(int ventID) throws SQLException {
 
@@ -128,7 +118,7 @@ public class Contoire_Controller implements Initializable {
 
             data = FXCollections.observableArrayList();
 
-            ResultSet rs = conn.connect().createStatement().executeQuery("SELECT v.id , p.ref , p.des , v.nbr_pcs , p.prix_vent , v.value,d.personID,d.id,d.date FROM demo.vent_table v, demo.product_table p, demo.bon_table d where v.productID = p.id and v.ventID = d.id  and v.ventID= "+ventID);
+            ResultSet rs = conn.connect().createStatement().executeQuery("SELECT v.id , p.ref , p.des , v.nbr_pcs , p.prix_vent , v.value,d.personID,d.id,d.date FROM demo.vent_table v, demo.product_table p, demo.bon_table d where v.productID = p.id and v.ventID = d.id  and v.ventID="+ventID);
             while (rs.next()) {
 
                 data.add(new Vent(
@@ -145,7 +135,7 @@ public class Contoire_Controller implements Initializable {
 
                 ));
 
-
+                vent_table.setItems(data);
             }
         } catch (SQLException eX) {
             eX.printStackTrace();
@@ -167,8 +157,6 @@ public class Contoire_Controller implements Initializable {
         }
 
      }
-
-
     public double get_Bon_Total(int bonID,int personID) throws SQLException {
         double total = 0.25;
         rs = conn.connect().createStatement().executeQuery("SELECT * FROM demo.bon_table where id="+bonID+" and personID="+personID);
@@ -180,6 +168,180 @@ public class Contoire_Controller implements Initializable {
     }
 
 
+    @FXML
+    public void delete_vent() throws SQLException {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText("Look, a Confirmation Dialog");
+        alert.setContentText("Are you ok with this?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            // ... user chose OK
+            Vent vent = vent_table.getSelectionModel().getSelectedItem();
+            // Now delete
+            if(! vent_table.getSelectionModel().isEmpty() ) {
+                int id = vent.getId();
+                String product_Name = vent.getDes();
+                int productID = utility.getProduct_ID(product_Name);
+                double prix = vent.getPrix_vent();
+                int ventID = vent.getVentID();
+                int personID = vent.getClientID();
+                try {
+
+                    String query = "DELETE FROM  demo.vent_table WHERE id="+id;
+                    preparesStatemnt = conn.connect().prepareStatement(query);
+                    preparesStatemnt.executeUpdate();
+
+                    refresh(VENT_ID);
+                    preparesStatemnt.close();
+                    conn.connect().close();
+           ////////////////// // Update product:///////////////////////
+                    double new_value;
+                    int old_nbr_pcs = utility.get_Product_Nbr_pcs(productID);
+                    int  new_nbr_pcs = old_nbr_pcs + vent.getNbr_pcs();
+                    new_value = new_nbr_pcs*prix;
+                    int nbr_pcs_crt = utility.get_Product_Nbr_pcs_crt(productID);
+                    double new_quantite = ((double) new_nbr_pcs)/nbr_pcs_crt;
+
+                    String Query  = "UPDATE demo.product_table SET quan=?, nbr_pcs=? , value=? Where id="+productID;
+                    preparesStatemnt = conn.connect().prepareStatement(Query);
+                    preparesStatemnt.setDouble      (1,  new_quantite);
+                    preparesStatemnt.setInt         (2,  new_nbr_pcs);
+                    preparesStatemnt.setDouble      (3,  new_value);
+                    preparesStatemnt.executeUpdate();
+                    preparesStatemnt.close();
+                    product_txt.clear();
+                    quant_txt.clear();
+                    utility.setTextFieldFocus(product_txt);
+                    notification.show_Confirmation("Vent Deleted");
+
+
+                    }
+                catch (SQLException e) { e.printStackTrace(); }
+                finally {
+
+                    if (conn.connect() != null) {
+                        conn.connect().close();
+                    }
+                }
+
+                //Update Total
+                double total=0.25;
+                try{
+                    total=0.25;
+                    try{
+                        String Query =" SELECT sum(value)  FROM demo.vent_table where ventID="+VENT_ID   ;
+                        ResultSet   rs = conn.connect().createStatement().executeQuery(Query);
+                        if (rs.next()){
+                            total = rs.getDouble(1);
+                        }
+                    }
+
+                    catch (Exception ex){ex.printStackTrace();}
+                    String Query  = "UPDATE demo.bon_table SET total =? Where id="+VENT_ID;
+                    preparesStatemnt = conn.connect().prepareStatement(Query);
+                    preparesStatemnt.setDouble   (1,  total);
+                    preparesStatemnt.executeUpdate();
+                    pane.setVisible(true);
+                    vent_table.setVisible(true);
+                    delete_btn.setVisible(true);
+                    edit_btn.setVisible(true);
+                    save_btn.setVisible(true);
+                    double total_vent = get_Bon_Total(ventID,personID) ;
+                    total_lb.setText("TOTAL : "+String.format("%,.2f", total_vent)+" DZD");
+
+                    preparesStatemnt.close();
+                    conn.connect().close();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+                finally {
+
+                    if (conn.connect()   != null) {conn.connect().close();}
+                    if (preparesStatemnt != null) {preparesStatemnt.close();}
+                    if (rs != null) {rs.close();}
+                }
+
+
+
+
+            }
+
+
+        }
+
+        else {
+            // ... user chose CANCEL or closed the dialog
+
+        }
+
+
+
+
+
+
+
+
+    }
+
+
+    public void reglement_rapid() throws SQLException{
+
+        if (!client_Combo.getValue().toString().isEmpty()){
+             String client_NAME = client_Combo.getValue().toString();
+            double amount = Double.parseDouble(paiment_txt.getText());
+            int Reglement_id ;
+            int  max_id  = utility.getMax_ID("demo.person_reglement_table","id") ;
+            Reglement_id = max_id +1;   // 1) Reglement id
+            String note = "/";  // 5) Note
+
+            String mode = "Espece"; // 7) Mode
+            String date = datePicker.getValue().toString(); // 8 payement date
+            int clientID = utility.getFournisseur_ID(client_NAME); //9) clientID
+            double old_Sold =  utility.get_Sold(clientID); // 3) Old Sold
+            double new_sold = old_Sold - amount; // 4) new sold
+
+            if (!paiment_txt.getText().isEmpty()){
+
+                String query = "INSERT INTO demo.person_reglement_table " +
+                        "(id,amount,old_sold,sold,mode,date,note,personID) VALUES (?,?,?,?,?,?,?,?)";
+
+                preparesStatemnt = conn.connect().prepareStatement(query);
+                preparesStatemnt.setInt   (1, Reglement_id);
+                preparesStatemnt.setDouble(2, amount);
+                preparesStatemnt.setDouble(3, old_Sold);
+                preparesStatemnt.setDouble(4,new_sold);
+                preparesStatemnt.setString(5, mode);
+                preparesStatemnt.setString(6, date);
+                preparesStatemnt.setString(7, note);
+                preparesStatemnt.setInt   (8, clientID);
+                preparesStatemnt.execute();
+                preparesStatemnt.close();
+                conn.connect().close();
+                String query_sold = "UPDATE demo.person_table SET sold =? Where id="+clientID;
+                preparesStatemnt = conn.connect().prepareStatement(query_sold);
+                preparesStatemnt.setDouble(1,new_sold);
+                preparesStatemnt.executeUpdate();
+                notification.show_Confirmation("Paiment de : " + amount + " DZD"+ " received !");
+                vent_table.setItems(null);
+                pane.setVisible(false);
+                paiment_btn.setVisible(false);
+                paiment_txt.setVisible(false);
+                client_Combo.setValue("Client_Vent");
+                pane.setVisible(false);
+                vent_table.setVisible(false);
+                client_lb.setText(client_Combo.getValue().toString());
+                paiment_txt.clear();
+
+            }
+
+        }
+
+
+    }
    @FXML
    public void add_vent() throws SQLException {
 
@@ -242,6 +404,11 @@ public class Contoire_Controller implements Initializable {
                preparesStatemnt.setDouble   (1,  total);
                preparesStatemnt.executeUpdate();
                pane.setVisible(true);
+               vent_table.setVisible(true);
+
+               delete_btn.setVisible(true);
+               edit_btn.setVisible(true);
+               save_btn.setVisible(true);
                 double total_vent = get_Bon_Total(ventID,personID) ;
                total_lb.setText("TOTAL : "+String.format("%,.2f", total_vent)+" DZD");
 
@@ -277,8 +444,7 @@ public class Contoire_Controller implements Initializable {
            preparesStatemnt.setDouble      (3,  new_value);
            preparesStatemnt.executeUpdate();
            preparesStatemnt.close();
-           utility.showAlert("Product updated");
-
+           notification.show_Confirmation("Product updated");
            product_txt.clear();
            quant_txt.clear();
            utility.setTextFieldFocus(product_txt);
@@ -288,8 +454,27 @@ public class Contoire_Controller implements Initializable {
 
 
    }
+    @FXML
+    public void save_bon() throws SQLException {
+        String client_Name = client_Combo.getValue().toString();
+        int personID = utility.getFournisseur_ID(client_Name);
 
+        double total = get_Bon_Total(VENT_ID,personID);
+        // Update client Sold
+        double old_sold = utility.get_Sold(personID);
+        utility.update_Fournisseur_Sold(total, old_sold, personID);
+        paiment_txt.setVisible(true);
+        paiment_btn.setVisible(true);
+        add_ventbtn.setVisible(false);
+        quant_txt.setVisible(false);
 
+        delete_btn.setVisible(false);
+        edit_btn.setVisible(false);
+        save_btn.setVisible(false);
+        utility.setTextFieldFocus(paiment_txt);
+        notification.show_Confirmation("saved successfully");
+       // closeButtonAction();
+    }
    @FXML
    public void open_new_Bon() throws SQLException {
     // OPEN NEW BON
@@ -315,7 +500,7 @@ public class Contoire_Controller implements Initializable {
         preparesStatemnt.setString(3, "2019-02-02");     // date
         preparesStatemnt.setInt   (4, clientId);   // clientId
         preparesStatemnt.execute();
-        utility.showAlert("new Bon Created");
+
         preparesStatemnt.close();
         conn.connect().close();
     }
@@ -326,7 +511,6 @@ public class Contoire_Controller implements Initializable {
 
     }
 }
-
     // Fournisseur
     @FXML
     public void Open_Fournisseur_Window(Event event) throws IOException {
@@ -379,7 +563,6 @@ public class Contoire_Controller implements Initializable {
 
 
     }
-
     @FXML
     public void closeButtonAction(){
         // get a handle to the stage
@@ -420,13 +603,24 @@ public class Contoire_Controller implements Initializable {
                     //  call add bon function
                      add_vent();
                 }
+                else if (!paiment_txt.getText().isEmpty())
+                {
+                    reglement_rapid();
+
+                }
+
                 break;
         }
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-
+        vent_table.setVisible(false);
+        paiment_btn.setVisible(false);
+        delete_btn.setVisible(false);
+        edit_btn.setVisible(false);
+        paiment_btn.setVisible(false);
+        save_btn.setVisible(false);
+        paiment_txt.setVisible(false);
         quant_txt.setVisible(false);
         add_ventbtn.setVisible(false);
         show_table.setVisible(false);

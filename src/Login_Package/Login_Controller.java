@@ -3,6 +3,7 @@
 
 package Login_Package;
 import Utilities_Package.Db_Connection;
+import Utilities_Package.Notification;
 import Utilities_Package.Product;
 import Utilities_Package.Utility;
 
@@ -39,6 +40,7 @@ private PasswordField txtpassword;
     PreparedStatement  preparesStatemnt = null;
     ResultSet resultSet = null;
     Utility utility = new Utility();
+    Notification notification = new Notification();
 
     public void Login(Event event) throws SQLException {
 
@@ -67,7 +69,8 @@ private PasswordField txtpassword;
             resultSet = preparesStatemnt.executeQuery(query);
             if (!resultSet.next()) {
                 System.out.println("Enter Valid username and password");
-                utility.showAlert("Please Enter Valid Username and Password");
+               // utility.showAlert("Please Enter Valid Username and Password");
+                notification.show_Error("Please Enter Valid Username and Password");
             } else {
                 if (role_User.equals("Admin")) {
                     new Utility().log_In("Admin", event);

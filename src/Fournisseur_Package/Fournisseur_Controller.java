@@ -41,6 +41,8 @@ public class Fournisseur_Controller implements Initializable
 
     @FXML
     public DatePicker reglement_datePicker;
+    @FXML
+    public Label fournisseur_name_lb;
 
     @FXML
     public  TableView<Person> Fournisseur_Table;
@@ -62,6 +64,7 @@ public class Fournisseur_Controller implements Initializable
     PreparedStatement preparesStatemnt = null;
     ResultSet resultSet = null;
     Utility utility = new Utility();
+    Notification notification = new Notification();
     public final int   Fournisseur_Active = PersonType.Active_Fournisseur;
     public final int   Fournisseur_UnActive = PersonType.Deactivated_Fournisseur;
 
@@ -105,8 +108,7 @@ public class Fournisseur_Controller implements Initializable
                     preparesStatemnt = conn.connect().prepareStatement(query_sold);
                     preparesStatemnt.setDouble(1,new_sold);
                     preparesStatemnt.executeUpdate();
-
-                    utility.show_TrayNotification("Verssement : " + amount + " DZD"+ " received !");
+                    notification.show_Confirmation("Verssement : " + amount + " DZD"+ " received !");
                     loadData();
                     verssement_txt.clear();
 
@@ -252,8 +254,12 @@ public class Fournisseur_Controller implements Initializable
     public void showOnClick() {
 
        if ( !Fournisseur_Table.getSelectionModel().isEmpty()  ){
+           Person fournisseur = Fournisseur_Table.getSelectionModel().getSelectedItem();
+           String fournisseur_Name = fournisseur.getName();
+           fournisseur_name_lb.setVisible(true);
+           fournisseur_name_lb.setText(fournisseur_Name);
            verssement_txt.setVisible(true);
-       }
+            }
 
     }
     @FXML
@@ -282,7 +288,7 @@ public class Fournisseur_Controller implements Initializable
                     preparesStatemnt.close();
                     conn.connect().close();
                     loadData();
-                    utility.show_TrayNotification("Fournisseur deleted successfully!");
+                    notification.show_Confirmation("Fournisseur deleted successfully!");
 
                    }
 
@@ -444,7 +450,7 @@ public class Fournisseur_Controller implements Initializable
 
         else
             {
-                utility.showAlert("Nothing is Slected");
+                notification.show_Warrning("Nothing is selected");
             }
 
     }
@@ -517,6 +523,17 @@ public class Fournisseur_Controller implements Initializable
     }
     @Override
     public void initialize(URL location, ResourceBundle resources)  {
+        fournisseur_name_lb.setVisible(false);
+
+        /////// Value changed listener in the Table
+        Fournisseur_Table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+                    if (newSelection != null) {
+                        showOnClick();
+
+                    }
+                }
+        );
+
 
         try {
             delet_empty_bon();

@@ -8,11 +8,8 @@ import Bon_Command_Package.Bon_Client_Global_Controller;
 import Bon_Command_Package.Bon_Command_Client_Controller;
 import Bon_Command_Package.Bon_Command_Fournisseur_Controller;
 import Reglement_Package.Reglement_Controller;
-import Utilities_Package.Db_Connection;
+import Utilities_Package.*;
 
-import Utilities_Package.Person;
-import Utilities_Package.PersonType;
-import Utilities_Package.Utility;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -69,6 +66,8 @@ public class Client_Controller implements Initializable {
     public Button bon_command_Global_btn = new Button();
     @FXML
     public Button closeButton;
+    @FXML
+    public Label client_lb;
 
 
     public ObservableList<Person> data;
@@ -76,6 +75,7 @@ public class Client_Controller implements Initializable {
     PreparedStatement preparesStatemnt = null;
     ResultSet resultSet = null;
     Utility utility = new Utility();
+    Notification notification = new Notification();
     // OPEN NEW BON
 
 
@@ -141,7 +141,7 @@ public class Client_Controller implements Initializable {
 
         }
         else if (client_table.getSelectionModel().isEmpty()){
-            utility.show_TrayNotification("No Client is Selected from the table");
+            notification.show_Warrning("No Client is Selected from the table");
         }
 
 
@@ -184,7 +184,7 @@ public class Client_Controller implements Initializable {
                 preparesStatemnt = conn.connect().prepareStatement(query_sold);
                 preparesStatemnt.setDouble(1,new_sold);
                 preparesStatemnt.executeUpdate();
-                utility.show_TrayNotification("Verssement : " + amount + " DZD"+ " received !");
+                notification.show_Confirmation("Verssement : " + amount + " DZD"+ " received !");
                 loadData();
                 verssement_txt.clear();
 
@@ -306,7 +306,7 @@ public class Client_Controller implements Initializable {
                     preparesStatemnt.executeUpdate();
                     preparesStatemnt.close();
                     loadData();
-                    utility.showAlert("Client has been deleted");
+                    notification.show_Confirmation("Client has been deleted");
                     conn.connect().close();
                 }
 
@@ -327,7 +327,7 @@ public class Client_Controller implements Initializable {
 
         else {
 
-            utility.showAlert("Nothing is selected");
+            notification.show_Confirmation("Nothing is selected");
         }
 
 
@@ -410,6 +410,11 @@ public class Client_Controller implements Initializable {
     public void showOnClick() {
 
         if ( !client_table.getSelectionModel().isEmpty()  ){
+
+            Person client = client_table.getSelectionModel().getSelectedItem();
+            String client_Name = client.getName();
+            client_lb.setVisible(true);
+            client_lb.setText(client_Name);
             verssement_txt.setVisible(true);
         }
 
@@ -453,6 +458,14 @@ public class Client_Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        client_lb.setVisible(false);
+        /////// Value changed listener in the Table
+        client_table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+                    if (newSelection != null) {
+                        showOnClick();
+                    }
+                }
+        );
 
         final Tooltip tooltip = new Tooltip();
         tooltip.setText("Search Box");

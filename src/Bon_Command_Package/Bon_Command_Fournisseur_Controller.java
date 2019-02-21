@@ -79,6 +79,7 @@ import java.util.ResourceBundle;
         PreparedStatement preparesStatemnt = null;
         ResultSet rs = null;
         Utility utility = new Utility();
+        Notification notification = new Notification();
         public static ArrayList data_2;
         Connection cnn = conn.connect();
 
@@ -207,7 +208,7 @@ import java.util.ResourceBundle;
                 // Update Fournisseur Sold
                 double old_sold = utility.get_Sold(FOURNISSEUR_ID);
                 utility.update_Fournisseur_Sold(total, old_sold, FOURNISSEUR_ID);
-                utility.show_TrayNotification("saved successfully");
+              notification.show_Confirmation("Bon Saved successfully");
                   closeButtonAction();
         }
         @FXML
@@ -424,12 +425,6 @@ import java.util.ResourceBundle;
                  list.getSelectionModel().select(1);
              }
          });
-
-
-
-
-
-
 
 
     }

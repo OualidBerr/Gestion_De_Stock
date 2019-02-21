@@ -253,11 +253,7 @@ public class Bon_Fournisseur_Global_Controller implements Initializable {
                     show_total.setVisible(false);
                 }
 
-
-
-
             break;
-
         }
     }
     public void delet_empty_bon() throws SQLException{

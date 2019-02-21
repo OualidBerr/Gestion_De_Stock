@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class Product_Edit_Controller implements Initializable {
+public class Product_Edit_Controller extends Notification implements Initializable {
 
     @FXML
     public TextField ref_txt;
@@ -79,6 +79,7 @@ public class Product_Edit_Controller implements Initializable {
     PreparedStatement preparesStatemnt = null;
     ResultSet resultSet = null;
     Utility utility = new Utility();
+
 
 
     @FXML
@@ -184,10 +185,11 @@ public class Product_Edit_Controller implements Initializable {
                 preparesStatemnt.setDouble(10, product.getPrix_ventt());
                 preparesStatemnt.setInt(11, utility.getFournisseur_ID(product.getFournisseur()));
                 preparesStatemnt.setString(12, product.getDate_entre());
-                utility.showAlert("User has been Updated");
+
+
                 preparesStatemnt.executeUpdate();
 
-
+                show_Confirmation("product Updated");
                 clear();
                 closeButtonAction_2();
                 conn.connect().close();
@@ -199,11 +201,11 @@ public class Product_Edit_Controller implements Initializable {
 
         else if (!istextFieldsNotEmpty()){
 
-            utility.showAlert("Fields are not filled");
+            show_Warrning("Fields are not filled");
 
 
         }
-        utility.showAlert("User has been Updated");
+
     }
 
     // Clear all textFields

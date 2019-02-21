@@ -70,6 +70,7 @@ public class Reglement_Controller implements Initializable {
     PreparedStatement preparesStatemnt = null;
     ResultSet rs = null;
     Utility utility = new Utility();
+    Notification notification = new Notification();
 
 
     public void loadTable() throws SQLException {
@@ -208,7 +209,7 @@ public class Reglement_Controller implements Initializable {
                         conn.connect().close();
                     }
                 }
-                utility.showAlert(deleted_amount+" DZD deleted Successfully !");
+                notification.show_Confirmation(deleted_amount+" DZD deleted Successfully !");
 
             }
 
@@ -272,7 +273,7 @@ public class Reglement_Controller implements Initializable {
                 preparesStatemnt.setString   (3,reglement.getDate());
                 preparesStatemnt.executeUpdate();
                 loadTable(fournisseurID);
-                utility.showAlert("Transaction updated Successfully!");
+                notification.show_Confirmation("Transaction updated Successfully!");
                 preparesStatemnt.close();
                 conn.connect().close();
 
@@ -293,7 +294,7 @@ public class Reglement_Controller implements Initializable {
         }
          else if (reglement_tableView.getSelectionModel().isEmpty()){
 
-            utility.showAlert("Nothing is SELECTED");
+           notification.show_Warrning("Nothing is Selected");
         }
 
 
@@ -338,7 +339,7 @@ public class Reglement_Controller implements Initializable {
                 preparesStatemnt.close();
                 utility.setTextFieldFocus(NumberTextField);
                 clear();
-                utility.show_TrayNotification("Verssement : " + amount + " DZD"+ " received !");
+                notification.show_Confirmation("Verssement : " + amount + " DZD"+ " received !");
             }
             catch (Exception e){e.printStackTrace();}
             finally{
@@ -380,7 +381,7 @@ public class Reglement_Controller implements Initializable {
                   )
 
              {
-                 utility.showAlert("One of the fields is empty");
+                 notification.show_Warrning("One of the fields is empty");
              }
 
 

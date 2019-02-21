@@ -77,6 +77,7 @@ public class Bon_Command_Client_Controller implements Initializable {
     PreparedStatement preparesStatemnt = null;
     ResultSet rs = null;
     Utility utility = new Utility();
+    Notification notification = new Notification();
 
     // refresh
     public void refresh(int bonID) throws SQLException {
@@ -187,7 +188,7 @@ public class Bon_Command_Client_Controller implements Initializable {
         // Update client Sold
         double old_sold = utility.get_Sold(ID);
         utility.update_Fournisseur_Sold(total, old_sold, ID);
-        utility.show_TrayNotification("saved successfully");
+     notification.show_Confirmation("Bon saved Successfully!");
          closeButtonAction();
     }
     @FXML
@@ -219,7 +220,7 @@ public class Bon_Command_Client_Controller implements Initializable {
 
               utility.total_sum_calculator(BON_ID,productID,show_lb);
                 preparesStatemnt.close();
-                utility.showAlert("Bon added successfully!");
+                notification.show_Confirmation("Bon added successfully!");
                 conn.connect().close();
 
                    }

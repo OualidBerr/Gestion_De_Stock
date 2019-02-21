@@ -1,10 +1,7 @@
 package Client_Package;
 
 
-import Utilities_Package.Db_Connection;
-import Utilities_Package.Fournisseur;
-import Utilities_Package.Person;
-import Utilities_Package.Utility;
+import Utilities_Package.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -53,6 +50,7 @@ public class New_Client_Controller implements Initializable {
     Db_Connection conn = new Db_Connection();
     ResultSet resultSet = null;
     Utility utility = new Utility();
+    Notification notification = new Notification();
 
     public static boolean add_button_Visibility;
     public static boolean edit_button_Visibility;
@@ -90,8 +88,7 @@ public class New_Client_Controller implements Initializable {
             preparesStatemnt.close();
               clear();
 
-
-            utility.showAlert("New User added successfully");
+            notification.show_Information("New Client added successfully !");
 
 
         }
@@ -153,7 +150,7 @@ public class New_Client_Controller implements Initializable {
 
         else{
 
-            utility.showAlert("Fields are not filled");
+           notification.show_Confirmation("changes completed successfully!");
         }
 
         clear();

@@ -24,7 +24,7 @@
         </Label>
             <ToolBar prefHeight="54.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #1f8c2d;" text="Home" textFill="WHITE">
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #1f8c2d;" text="Home" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -71,27 +71,27 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Button fx:id="closeButton" layoutX="1034.0" layoutY="509.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #3F51B5;" text="Exit" textFill="WHITE">
+                  <Button fx:id="closeButton" layoutX="1116.0" layoutY="510.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #3F51B5;" text="Exit" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="closeButton1" layoutX="966.0" layoutY="296.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="172.0" style="-fx-background-color: #1f8c2d;" text="Confirm" textFill="WHITE">
+                  <Button fx:id="save_btn" layoutX="1007.0" layoutY="283.0" mnemonicParsing="false" onAction="#save_bon" prefHeight="40.0" prefWidth="182.0" style="-fx-background-color: #1f8c2d;" text="Confirm" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="closeButton11" layoutX="968.0" layoutY="384.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="172.0" style="-fx-background-color: #3F51B5;" text="Edit" textFill="WHITE">
+                  <Button fx:id="edit_btn" layoutX="1008.0" layoutY="371.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="172.0" style="-fx-background-color: #3F51B5;" text="Edit" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="closeButton111" layoutX="968.0" layoutY="428.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="172.0" style="-fx-background-color: #3F51B5;" text="Delete" textFill="WHITE">
+                  <Button fx:id="delete_btn" layoutX="1008.0" layoutY="415.0" mnemonicParsing="false" onAction="#delete_vent" prefHeight="35.0" prefWidth="172.0" style="-fx-background-color: #3F51B5;" text="Delete" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="closeButton12" layoutX="968.0" layoutY="340.0" mnemonicParsing="false" prefWidth="172.0" style="-fx-background-color: #3F51B5;" text="Paiment" textFill="WHITE">
+                  <Button fx:id="paiment_btn" layoutX="1009.0" layoutY="237.0" mnemonicParsing="false" onAction="#reglement_rapid" prefHeight="40.0" prefWidth="182.0" style="-fx-background-color: #1f8c2d;" text="Send paiment" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -107,6 +107,11 @@
                         <TableColumn fx:id="prix_show_column" prefWidth="97.666748046875" style="-fx-alignment: Center;" text="Prix Unitaire" />
                      </columns>
                   </TableView>
+                  <TextField fx:id="paiment_txt" alignment="CENTER" layoutX="934.0" layoutY="182.0" prefHeight="45.0" prefWidth="324.0" promptText="Paiment" style="-fx-background-radius: 25; -fx-text-fill: #3F51B5;">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </TextField>
                </children>
             </Pane>
             <Button fx:id="add_ventbtn" layoutX="168.0" layoutY="219.0" mnemonicParsing="false" onAction="#add_vent" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #1f8c2d;" text="Add " textFill="WHITE">
