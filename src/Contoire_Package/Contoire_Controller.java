@@ -1,5 +1,6 @@
 package Contoire_Package;
 
+import Login_Package.Manage_Users_Controller;
 import Utilities_Package.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,8 +25,24 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Contoire_Controller implements Initializable {
+    @FXML
+    public TableView<Bon_Fournisseur_Global> Bon_Client_Global_table;
+    @FXML
+    public TableColumn<Bon_Fournisseur_Global,Integer> id_column;
+    @FXML
+    public TableColumn<Bon_Fournisseur_Global,String> n_bon_column;
+    @FXML
+    public TableColumn<Bon_Fournisseur_Global,Double> valeur_column;
+    @FXML
+    public TableColumn<Bon_Fournisseur_Global,String> date_column;
+
+
+
+
     // Helping Table
     @FXML
     public TableView<Product> show_table;
@@ -45,6 +62,8 @@ public class Contoire_Controller implements Initializable {
     public TableColumn<Vent,Integer> nbr_pcs_Column;
     public TableColumn<Vent,Double> prix_Column;
     public TableColumn<Vent,Double> value_Column;
+    @FXML
+    public ToggleButton toggleButton = new ToggleButton();
 
     @FXML
     Label client_lb,total_lb;
@@ -63,6 +82,7 @@ public class Contoire_Controller implements Initializable {
     public Pane pane;
     public ObservableList<Product> show_data_List;
     public ObservableList<Vent> data;
+    public ObservableList<Bon_Fournisseur_Global> data_2;
     Db_Connection conn = new Db_Connection();
     PreparedStatement preparesStatemnt = null;
     ResultSet rs = null;
@@ -80,7 +100,7 @@ public class Contoire_Controller implements Initializable {
             rs = cnn.createStatement().executeQuery("SELECT * FROM demo.person_table where ABS(personType)=1");
             while(rs.next()){
 
-                client_Combo.getItems().add(rs.getString("name"));
+                //client_Combo.getItems().add(rs.getString("name"));
             }
         }
         catch(SQLException eX){
@@ -111,6 +131,49 @@ public class Contoire_Controller implements Initializable {
 
 
     }
+
+    public  void loadData_Global() throws SQLException {
+       // delet_empty_bon();
+        Connection cnn = conn.connect();
+        try{
+
+            data_2 = FXCollections.observableArrayList();
+            rs = cnn.createStatement().executeQuery("SELECT * FROM demo.bon_table where personID= 12");
+            while(rs.next()){
+
+                data_2.add(new Bon_Fournisseur_Global(
+
+                        rs.getInt(   "id"),
+                        "Vent_"+rs.getString("id"),
+                        rs.getDouble("total"),
+                        rs.getString("date"),
+                        rs.getInt(   "personID")
+                ));
+
+            }
+        }
+        catch(SQLException eX){
+            eX.printStackTrace();
+            System.out.println("error ! Not Connected to Db****");
+        }
+
+
+        finally {
+
+            id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
+            n_bon_column.setCellValueFactory(new PropertyValueFactory<>("n_bon"));
+            valeur_column.setCellValueFactory(new PropertyValueFactory<>("valeur"));
+            date_column.setCellValueFactory(new PropertyValueFactory<>("date"));
+            Bon_Client_Global_table.setItems(data_2);
+
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (rs != null) {rs.close();}
+        }
+
+    }
+
+
     @FXML
     public void refresh(int ventID) throws SQLException {
 
@@ -278,14 +341,31 @@ public class Contoire_Controller implements Initializable {
 
         }
 
-
-
-
-
-
-
-
     }
+
+     @FXML
+    public void show_vent_detail() throws SQLException {
+         delet_empty_bon();
+        Bon_Client_Global_table.setVisible(true);
+        vent_table.setVisible(true);
+        paiment_btn.setVisible(false);
+        delete_btn.setVisible(false);
+        edit_btn.setVisible(false);
+        paiment_btn.setVisible(false);
+        save_btn.setVisible(false);
+        paiment_txt.setVisible(false);
+        quant_txt.setVisible(false);
+        add_ventbtn.setVisible(false);
+        show_table.setVisible(false);
+        client_lb.setVisible(false);
+        pane.setVisible(false);
+         loadData_Global();
+
+
+
+       }
+
+
 
 
     public void reglement_rapid() throws SQLException{
@@ -478,12 +558,13 @@ public class Contoire_Controller implements Initializable {
    @FXML
    public void open_new_Bon() throws SQLException {
     // OPEN NEW BON
+
     int id_bon = utility.getMax_ID("demo.bon_table","id")+1;
     double total =0.0;
     String date = datePicker.getValue().toString();
     String client_Name = client_Combo.getValue().toString();
     int clientId = utility.getFournisseur_ID(client_Name);
-       client_lb.setText(client_Name);
+       client_lb.setText("Vent_N : "+id_bon+"");
        client_lb.setVisible(true);
        product_txt.setVisible(true);
        quant_txt.setVisible(true);
@@ -612,8 +693,67 @@ public class Contoire_Controller implements Initializable {
                 break;
         }
     }
+
+    @FXML
+    public void show_onClick(){
+
+        Bon_Fournisseur_Global bon_fournisseur_global = Bon_Client_Global_table.getSelectionModel().getSelectedItem();
+        int Vent_ID = bon_fournisseur_global.getId();
+         VENT_ID = Vent_ID;
+         try{
+             refresh(VENT_ID);
+            }
+         catch (Exception s){ s.printStackTrace();}
+
+        }
+
+
+    public void delet_empty_bon() throws SQLException{
+
+        String query = "Delete from demo.bon_table where total=0";
+        preparesStatemnt = conn.connect().prepareStatement(query);
+        preparesStatemnt.executeUpdate();
+        preparesStatemnt.close();
+        conn.connect().close();
+    }
+
+    @FXML
+    private  void handel_toggle_Button_event()throws SQLException{
+
+        if(toggleButton.isSelected())
+        {
+            toggleButton.setText("Hide Details");
+            Bon_Client_Global_table.setVisible(true);
+            vent_table.setVisible(true);
+            loadData_Global();
+            show_onClick();
+
+
+        }
+        else
+        {
+            Bon_Client_Global_table.setVisible(false);
+            vent_table.setVisible(false);
+            toggleButton.setText("Show Details");
+        }
+
+    }
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources)   {
+        /////// Value changed listener in the Table
+        Bon_Client_Global_table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+                    if (newSelection != null) {
+
+                        show_onClick();
+
+                    }
+                }
+        );
+
+
+
+
+        Bon_Client_Global_table.setVisible(false);
         vent_table.setVisible(false);
         paiment_btn.setVisible(false);
         delete_btn.setVisible(false);
@@ -633,7 +773,6 @@ public class Contoire_Controller implements Initializable {
         } catch (SQLException e) { e.printStackTrace(); }
 
         TextFields.bindAutoCompletion(product_txt,product_list);
-
 
     }
 }

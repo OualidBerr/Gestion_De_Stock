@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -38,6 +39,16 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
+                  <Button layoutX="250.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#show_vent_detail" prefHeight="49.0" prefWidth="130.0" style="-fx-background-color: #3F51B5;" text="Show Glob" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <ToggleButton fx:id="toggleButton" mnemonicParsing="false" onAction="#handel_toggle_Button_event" prefHeight="49.0" prefWidth="146.0" style="-fx-background-color: #3F51B5;" text="Show Glob details" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </ToggleButton>
               </items>
             </ToolBar>
             <Pane layoutX="8.0" layoutY="77.0" prefHeight="566.0" prefWidth="1292.0" style="-fx-background-color: #D7BDE2;">
@@ -52,7 +63,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </TextField>
-                  <TableView fx:id="vent_table" layoutX="32.0" layoutY="190.0" prefHeight="338.0" prefWidth="865.0" style="-fx-font-weight: Bold;" tableMenuButtonVisible="true">
+                  <TableView fx:id="vent_table" layoutX="32.0" layoutY="219.0" prefHeight="334.0" prefWidth="865.0" style="-fx-font-weight: Bold;" tableMenuButtonVisible="true">
                     <columns>
                       <TableColumn fx:id="id_Column" prefWidth="75.0" text="N° " />
                       <TableColumn fx:id="ref_Column" prefWidth="100.33332824707031" text="Ref" />
@@ -96,8 +107,8 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <ComboBox fx:id="client_Combo" layoutX="920.0" layoutY="37.0" prefHeight="26.0" prefWidth="243.0" style="-fx-font-weight: Bold; -fx-font-size: 14;" />
-                  <DatePicker fx:id="datePicker" layoutX="921.0" layoutY="3.0" prefHeight="25.0" prefWidth="243.0" style="-fx-font-weight: Bold;" />
+                  <ComboBox fx:id="client_Combo" layoutX="1024.0" layoutY="37.0" prefHeight="26.0" prefWidth="243.0" style="-fx-font-weight: Bold; -fx-font-size: 14;" />
+                  <DatePicker fx:id="datePicker" layoutX="1024.0" layoutY="3.0" prefHeight="25.0" prefWidth="243.0" style="-fx-font-weight: Bold;" />
                   <TableView fx:id="show_table" layoutX="519.0" layoutY="89.0" opacity="0.5" prefHeight="75.0" prefWidth="749.0" style="-fx-font-weight: Bold; -fx-font-size: 14;" tableMenuButtonVisible="true">
                      <columns>
                         <TableColumn fx:id="des_show_column" prefWidth="318.6666259765625" text="Desegniation" />
@@ -112,6 +123,14 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </TextField>
+                  <TableView fx:id="Bon_Client_Global_table" layoutX="37.0" layoutY="11.0" onKeyPressed="#handlekeyPressed" onMouseMoved="#show_onClick" prefHeight="186.0" prefWidth="475.0" style="-fx-font-weight: Bold; -fx-font-size: 14;" tableMenuButtonVisible="true">
+                     <columns>
+                        <TableColumn fx:id="id_column" prefWidth="75.0" style="-fx-alignment: Center;" text="N°" />
+                        <TableColumn fx:id="n_bon_column" prefWidth="120.33332824707031" style="-fx-alignment: Center;" text="Vent_Num" />
+                        <TableColumn fx:id="valeur_column" prefWidth="138.0" style="-fx-alignment: Center;" text="Total" />
+                        <TableColumn fx:id="date_column" prefWidth="111.66668701171875" style="-fx-alignment: Center;" text="Date" />
+                     </columns>
+                  </TableView>
                </children>
             </Pane>
             <Button fx:id="add_ventbtn" layoutX="168.0" layoutY="219.0" mnemonicParsing="false" onAction="#add_vent" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #1f8c2d;" text="Add " textFill="WHITE">

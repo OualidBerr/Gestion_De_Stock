@@ -78,7 +78,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="1331.0" layoutY="303.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #152a93;" text="Impression" textFill="WHITE" AnchorPane.rightAnchor="15.0">
+      <Button layoutX="1316.0" layoutY="427.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #152a93;" text="Impression" textFill="WHITE" AnchorPane.rightAnchor="15.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -105,6 +105,11 @@
          </font>
       </Button>
       <Button layoutX="1328.0" layoutY="254.0" mnemonicParsing="false" onAction="#save_bon" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #152a93;" text="Save" textFill="WHITE" AnchorPane.rightAnchor="15.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="1318.0" layoutY="364.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #152a93;" text="Delete" textFill="WHITE" AnchorPane.rightAnchor="15.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

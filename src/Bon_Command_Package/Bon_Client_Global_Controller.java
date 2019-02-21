@@ -100,7 +100,7 @@ public class Bon_Client_Global_Controller implements Initializable {
         try{
 
             data = FXCollections.observableArrayList();
-             rs = cnn.createStatement().executeQuery("SELECT * FROM demo.bon_table where personID="+CLIENT_ID);
+             rs = cnn.createStatement().executeQuery("SELECT * FROM demo.bon_table where personID= "+CLIENT_ID+" and personID <> 12 ");
             while(rs.next()){
 
                 data.add(new Bon_Fournisseur_Global(
@@ -182,7 +182,7 @@ public class Bon_Client_Global_Controller implements Initializable {
             if (conn.connect()   != null) {conn.connect().close();}
             if (preparesStatemnt != null) {preparesStatemnt.close();}
             if (rs != null) {rs.close();}
-        }
+              }
 
         ////////////////////////////////
 
