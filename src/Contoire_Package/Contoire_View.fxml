@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -14,9 +15,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox onKeyPressed="#handlekeyPressed" prefHeight="675.0" prefWidth="1308.0" style="-fx-background-color: #4FC3F7;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Contoire_Package.Contoire_Controller">
+<VBox onKeyPressed="#handlekeyPressed" prefHeight="675.0" prefWidth="1308.0" style="-fx-background-color: #4FC3F7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Contoire_Package.Contoire_Controller">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" style="-fx-background-color: #3498DB;" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1308.0" style="-fx-background-color: #3498DB;" VBox.vgrow="ALWAYS">
       <children>
         <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
           <font>
@@ -25,33 +26,45 @@
         </Label>
             <ToolBar prefHeight="54.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #1f8c2d;" text="Home" textFill="WHITE">
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="50.0" prefWidth="120.0" textFill="WHITESMOKE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="HOME" size="40" />
+                     </graphic>
+                  </Button>
+                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #9C44A9;" textFill="WHITESMOKE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITESMOKE" glyphName="SHOPPING_BASKET" size="40" />
+                     </graphic></Button>
+                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_new_Bon" prefHeight="49.0" prefWidth="130.0" style="-fx-background-color: #ccb3ff;" textFill="#303030">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="CART_PLUS" size="40" />
+                     </graphic>
+                  </Button>
+                  <Button layoutX="250.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#show_vent_detail" prefHeight="49.0" prefWidth="130.0" style="-fx-background-color: #ccb3ff;" textFill="#303030">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #bb7b0d;" text="Contoire" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font></Button>
-                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_new_Bon" prefHeight="49.0" prefWidth="130.0" style="-fx-background-color: #3F51B5;" text="New Vent" textFill="WHITE">
+                  <ToggleButton fx:id="toggleButton" mnemonicParsing="false" onAction="#handel_toggle_Button_event" prefHeight="49.0" prefWidth="146.0" style="-fx-background-color: #ccb3ff;" textFill="#303030">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
-                  </Button>
-                  <Button layoutX="250.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#show_vent_detail" prefHeight="49.0" prefWidth="130.0" style="-fx-background-color: #3F51B5;" text="Show Glob" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <ToggleButton fx:id="toggleButton" mnemonicParsing="false" onAction="#handel_toggle_Button_event" prefHeight="49.0" prefWidth="146.0" style="-fx-background-color: #3F51B5;" text="Show Glob details" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="EYE" size="40" />
+                     </graphic>
                   </ToggleButton>
               </items>
             </ToolBar>
-            <Pane layoutX="8.0" layoutY="77.0" prefHeight="566.0" prefWidth="1292.0" style="-fx-background-color: #D7BDE2;">
+            <Pane layoutX="8.0" layoutY="77.0" prefHeight="591.0" prefWidth="1292.0" style="-fx-background-color: #ccb3ff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
                <children>
                   <TextField fx:id="product_txt" layoutX="45.0" layoutY="92.0" prefHeight="30.0" prefWidth="324.0" promptText="Produits">
                      <font>
@@ -73,39 +86,54 @@
                         <TableColumn fx:id="value_Column" prefWidth="143.3333740234375" text="Value" />
                     </columns>
                   </TableView>
-                  <Pane fx:id="pane" layoutX="479.0" layoutY="12.0" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: Black; -fx-background-radius: 20;">
+                  <Pane fx:id="pane" layoutX="476.0" layoutY="554.0" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #303030; -fx-background-radius: 20;">
                      <children>
-                        <Label fx:id="total_lb" alignment="CENTER" layoutX="9.0" layoutY="2.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="389.0" text="3500 DZD" textFill="#f1c40f">
+                        <Label fx:id="total_lb" alignment="CENTER" layoutX="5.0" layoutY="2.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="389.0" text="3500 DZD" textFill="#f8ca11">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Label>
                      </children>
                   </Pane>
-                  <Button fx:id="closeButton" layoutX="1116.0" layoutY="510.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #3F51B5;" text="Exit" textFill="WHITE">
+                  <Button fx:id="closeButton" layoutX="1165.0" layoutY="586.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #9C44A9;" textFill="WHITESMOKE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="#fcfcfc" glyphName="SIGN_OUT" size="30" />
+                     </graphic>
                   </Button>
-                  <Button fx:id="save_btn" layoutX="1007.0" layoutY="283.0" mnemonicParsing="false" onAction="#save_bon" prefHeight="40.0" prefWidth="182.0" style="-fx-background-color: #1f8c2d;" text="Confirm" textFill="WHITE">
+                  <Button fx:id="save_btn" layoutX="1007.0" layoutY="283.0" mnemonicParsing="false" onAction="#save_bon" prefHeight="40.0" prefWidth="182.0" style="-fx-background-color: #9C44A9;" textFill="#303030">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="#8cff66" glyphName="CHECK_SQUARE_ALT" size="30" />
+                     </graphic>
                   </Button>
-                  <Button fx:id="edit_btn" layoutX="1008.0" layoutY="371.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="172.0" style="-fx-background-color: #3F51B5;" text="Edit" textFill="WHITE">
+                  <Button fx:id="edit_btn" layoutX="1008.0" layoutY="371.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="172.0" style="-fx-background-color: #9C44A9;" textFill="WHITESMOKE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITESMOKE" glyphName="EDIT" size="30" />
+                     </graphic>
                   </Button>
-                  <Button fx:id="delete_btn" layoutX="1008.0" layoutY="415.0" mnemonicParsing="false" onAction="#delete_vent" prefHeight="35.0" prefWidth="172.0" style="-fx-background-color: #3F51B5;" text="Delete" textFill="WHITE">
+                  <Button fx:id="delete_btn" layoutX="1008.0" layoutY="436.0" mnemonicParsing="false" onAction="#delete_vent" prefHeight="35.0" prefWidth="172.0" style="-fx-background-color: #9C44A9;" textFill="WHITESMOKE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="#e8e8e8" glyphName="TRASH_ALT" size="30" />
+                     </graphic>
                   </Button>
-                  <Button fx:id="paiment_btn" layoutX="1009.0" layoutY="237.0" mnemonicParsing="false" onAction="#reglement_rapid" prefHeight="40.0" prefWidth="182.0" style="-fx-background-color: #1f8c2d;" text="Send paiment" textFill="WHITE">
+                  <Button fx:id="paiment_btn" layoutX="1009.0" layoutY="237.0" mnemonicParsing="false" onAction="#reglement_rapid" prefHeight="40.0" prefWidth="182.0" style="-fx-background-color: #8cff66;" textFill="#303030">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="CHECK_CIRCLE" size="30" />
+                     </graphic>
                   </Button>
                   <ComboBox fx:id="client_Combo" layoutX="1024.0" layoutY="37.0" prefHeight="26.0" prefWidth="243.0" style="-fx-font-weight: Bold; -fx-font-size: 14;" />
                   <DatePicker fx:id="datePicker" layoutX="1024.0" layoutY="3.0" prefHeight="25.0" prefWidth="243.0" style="-fx-font-weight: Bold;" />
@@ -133,12 +161,15 @@
                   </TableView>
                </children>
             </Pane>
-            <Button fx:id="add_ventbtn" layoutX="168.0" layoutY="219.0" mnemonicParsing="false" onAction="#add_vent" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #1f8c2d;" text="Add " textFill="WHITE">
+            <Button fx:id="add_ventbtn" layoutX="168.0" layoutY="219.0" mnemonicParsing="false" onAction="#add_vent" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #9C44A9;" textFill="WHITESMOKE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
+               <graphic>
+                  <FontAwesomeIconView fill="#8cff66" glyphName="PLUS_CIRCLE" size="25" />
+               </graphic>
             </Button>
-            <Label fx:id="client_lb" alignment="TOP_CENTER" layoutX="25.0" layoutY="90.0" prefHeight="40.0" prefWidth="430.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;" text="Client" textFill="WHITE">
+            <Label fx:id="client_lb" alignment="TOP_CENTER" layoutX="25.0" layoutY="90.0" prefHeight="40.0" prefWidth="430.0" style="-fx-background-color: #ccb3ff; -fx-background-radius: 20;" text="   Client" textFill="#9c44a9">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handlekeyPressed" prefHeight="599.0" prefWidth="772.0" style="-fx-background-color: #D7BDE2;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login_Package.Manage_Users_Controller">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handlekeyPressed" prefHeight="599.0" prefWidth="772.0" style="-fx-background-color: #9C44A9;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login_Package.Manage_Users_Controller">
    <children>
       <TableView fx:id="usertableView" layoutX="9.0" layoutY="268.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showOnClick" prefHeight="326.0" prefWidth="755.0" AnchorPane.topAnchor="268.0">
         <columns>
@@ -101,7 +101,7 @@
       </VBox>
       <HBox layoutX="146.0" layoutY="231.0" prefHeight="25.0" prefWidth="363.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#add_New_User" prefHeight="41.0" prefWidth="75.0" style="-fx-background-radius: 20;" text="Add " textFill="#0080ff">
+            <Button mnemonicParsing="false" onAction="#add_New_User" prefHeight="41.0" prefWidth="75.0" style="-fx-background-color: #ccb3ff;" text="Add " textFill="#1d1f22">
                <HBox.margin>
                   <Insets left="20.0" right="10.0" />
                </HBox.margin>
@@ -109,7 +109,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#update_User" prefHeight="41.0" prefWidth="75.0" style="-fx-background-radius: 20;" text="Edit" textFill="#0080ff">
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#update_User" prefHeight="41.0" prefWidth="75.0" style="-fx-background-color: #ccb3ff;" text="Edit" textFill="#1d1f22">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
@@ -117,14 +117,14 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button layoutX="85.0" layoutY="10.0" mnemonicParsing="false" onAction="#deletUser" prefHeight="41.0" prefWidth="75.0" style="-fx-background-radius: 20;" text="Delete" textFill="#0080ff">
+            <Button layoutX="85.0" layoutY="10.0" mnemonicParsing="false" onAction="#deletUser" prefHeight="41.0" prefWidth="75.0" style="-fx-background-color: #ccb3ff;" text="Delete" textFill="#1d1f22">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
                <font>
                   <Font name="System Bold" size="14.0" />
                </font></Button>
-            <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="25.0" prefWidth="75.0" style="-fx-background-radius: 20;" text="CLOSE" textFill="#0080ff">
+            <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #ccb3ff;" text="CLOSE" textFill="#1d1f22">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font></Button>

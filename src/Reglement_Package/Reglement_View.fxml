@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onKeyPressed="#handlekeyPressed" onMouseClicked="#clear" prefHeight="650.0" prefWidth="1250.0" style="-fx-background-color: #E8DAEF;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Reglement_Package.Reglement_Controller">
+<AnchorPane onKeyPressed="#handlekeyPressed" onMouseClicked="#clear" prefHeight="650.0" prefWidth="1250.0" style="-fx-background-color: #9C44A9;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Reglement_Package.Reglement_Controller">
    <children>
       <VBox alignment="CENTER" layoutX="76.0" layoutY="19.0" prefHeight="243.0" prefWidth="379.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="5.0">
          <children>
@@ -33,29 +34,27 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label prefHeight="50.0" prefWidth="139.0" text="Montant" textFill="#fffbfb">
+                        <Label prefHeight="50.0" prefWidth="40.0" textFill="#fffbfb">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets left="10.0" />
+                              <Insets left="50.0" />
                            </GridPane.margin>
+                           <graphic>
+                              <FontAwesomeIconView fill="#8cff66" glyphName="MONEY" size="20" />
+                           </graphic>
                         </Label>
-                        <Label layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="139.0" text="Remarque" textFill="#fffbfb" GridPane.rowIndex="1">
+                        <Label layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="40.0" textFill="#fffbfb" GridPane.rowIndex="1">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets left="10.0" />
+                              <Insets left="50.0" />
                            </GridPane.margin>
-                        </Label>
-                        <Label layoutX="10.0" layoutY="41.0" prefHeight="50.0" prefWidth="139.0" text="Mode" textFill="#fffbfb" GridPane.rowIndex="2">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets left="10.0" />
-                           </GridPane.margin>
+                           <graphic>
+                              <FontAwesomeIconView fill="#fffbfb" glyphName="CALENDAR_CHECK_ALT" size="20" />
+                           </graphic>
                         </Label>
                         <TextField fx:id="reglement_note_txt" layoutX="149.0" layoutY="10.0" prefHeight="25.0" prefWidth="244.0" promptText="Remarque" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <GridPane.margin>
@@ -79,15 +78,21 @@
                            </opaqueInsets>
                         </ComboBox>
                         <DatePicker fx:id="reglement_datePicker" prefHeight="25.0" prefWidth="242.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label layoutX="20.0" layoutY="72.0" prefHeight="50.0" prefWidth="139.0" text="Date" textFill="#fffbfb" GridPane.rowIndex="3">
+                        <Label layoutX="20.0" layoutY="72.0" prefHeight="30.0" prefWidth="40.0" textFill="#fffbfb" GridPane.rowIndex="3">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets left="10.0" />
+                              <Insets left="50.0" />
                            </GridPane.margin>
+                           <graphic>
+                              <FontAwesomeIconView fill="#fffbfb" glyphName="CALENDAR" size="20" />
+                           </graphic>
                         </Label>
                      </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
                   </GridPane>
                </children>
                <VBox.margin>
@@ -96,7 +101,7 @@
             </VBox>
          </children>
       </VBox>
-      <TableView fx:id="reglement_tableView" layoutX="13.0" layoutY="238.0" prefHeight="355.0" prefWidth="1200.0" style="-fx-font-size: 14;" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="238.0">
+      <TableView fx:id="reglement_tableView" layoutX="13.0" layoutY="238.0" prefHeight="336.0" prefWidth="1200.0" style="-fx-font-size: 14;" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="76.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="238.0">
         <columns>
           <TableColumn fx:id="Id_column" prefWidth="100.0" sortType="DESCENDING" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="N°" />
             <TableColumn fx:id="amount_column" prefWidth="200.0" style="-fx-background-radius: 20; -fx-font-weight: Bold; -fx-alignment: Center;" text="Montant de paiment" />
@@ -107,34 +112,6 @@
             <TableColumn fx:id="note_column" prefWidth="250.0" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="Remarque" />
         </columns>
       </TableView>
-      <VBox layoutX="754.0" layoutY="75.0" prefHeight="153.0" prefWidth="174.0" style="-fx-background-color: #D7BDE2; -fx-background-radius: 20;" AnchorPane.leftAnchor="754.0" AnchorPane.topAnchor="75.0">
-         <children>
-            <Button fx:id="reglement_add_btn" mnemonicParsing="false" onAction="#add_reglement" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #1f8c2d;" text="Ajouter   Enter" textFill="WHITE">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-            <Button layoutX="20.0" layoutY="78.0" mnemonicParsing="false" onAction="#edit_reglment" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #3F51B5;" text="EDIT" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="reglement_delete_btn" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" onAction="#delet_reglement" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #3F51B5;" text="Delete" textFill="WHITE">
-               <VBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-         </children>
-      </VBox>
       <TextField fx:id="f_Id_txt" alignment="CENTER" editable="false" layoutX="53.0" layoutY="65.0" prefHeight="25.0" prefWidth="200.0" style="-fx-font-weight: Bold;" AnchorPane.leftAnchor="25.0">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -157,45 +134,48 @@
       <TextField fx:id="show_encient_sold_txt" alignment="CENTER" editable="false" layoutX="1093.0" layoutY="139.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20; -fx-font-weight: Bold; -fx-text-fill: #3F51B5;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="140.0" />
       <TextField fx:id="show__sold_txt" alignment="CENTER" editable="false" layoutX="1091.0" layoutY="168.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20; -fx-font-weight: Bold; -fx-text-fill: #3F51B5;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="170.0" />
       <TextField fx:id="show__note_txt" alignment="CENTER" editable="false" layoutX="1075.0" layoutY="200.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #EAEDED; -fx-background-radius: 20; -fx-font-weight: Bold; -fx-text-fill: #3F51B5;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="200.0" />
-      <Label layoutX="973.0" layoutY="55.0" prefHeight="22.0" prefWidth="105.0" text="N° Operation " AnchorPane.rightAnchor="172.0" AnchorPane.topAnchor="55.0">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="973.0" layoutY="85.0" prefHeight="22.0" prefWidth="105.0" text="La Date" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="85.0">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="975.0" layoutY="113.0" prefHeight="22.0" prefWidth="105.0" text="Montant" AnchorPane.rightAnchor="170.0">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="976.0" layoutY="136.0" prefHeight="22.0" prefWidth="105.0" text="Ancient Sold" AnchorPane.rightAnchor="170.0">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="976.0" layoutY="166.0" prefHeight="22.0" prefWidth="105.0" text="Sold" AnchorPane.rightAnchor="170.0">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="977.0" layoutY="194.0" prefHeight="22.0" prefWidth="105.0" text="Note" AnchorPane.rightAnchor="170.0">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="show_Label" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="14.0" prefHeight="38.0" prefWidth="437.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;" text="Fournisseur " textFill="#f2f2f2" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="15.0">
+      <Label fx:id="show_Label" alignment="CENTER" contentDisplay="CENTER" layoutX="440.0" layoutY="14.0" prefHeight="38.0" prefWidth="321.0" style="-fx-background-color: #9C44A9; -fx-background-radius: 20;" text="Fournisseur " textFill="WHITE" AnchorPane.leftAnchor="440.0" AnchorPane.rightAnchor="489.0" AnchorPane.topAnchor="15.0">
          <font>
             <Font name="Lucida Bright Demibold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="closeButton" layoutX="1101.0" layoutY="607.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="36.0" prefWidth="131.0" style="-fx-background-color: #3F51B5;" text="Exit" textFill="WHITE" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="50.0">
+      <Button fx:id="closeButton" layoutX="1101.0" layoutY="607.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="50.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
+         <graphic>
+            <FontAwesomeIconView glyphName="SHARE_SQUARE_ALT" size="25" />
+         </graphic>
       </Button>
+      <Button fx:id="reglement_delete_btn" layoutX="906.0" layoutY="606.0" mnemonicParsing="false" onAction="#delet_reglement" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="225.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIconView fill="#ee0303" glyphName="TIMES_CIRCLE" size="25" />
+         </graphic>
+      </Button>
+      <Button layoutX="765.0" layoutY="606.0" mnemonicParsing="false" onAction="#edit_reglment" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="400.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIconView glyphName="PENCIL_SQUARE_ALT" size="25" />
+         </graphic>
+      </Button>
+      <Button fx:id="reglement_add_btn" layoutX="764.0" layoutY="105.0" mnemonicParsing="false" onAction="#add_reglement" prefHeight="40.0" prefWidth="121.0" style="-fx-background-color: #8cff66;" textFill="#0d0d0d">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIconView fill="#9c44a9" glyphName="PLUS_SQUARE" size="35" />
+         </graphic>
+      </Button>
+      <FontAwesomeIconView fill="#fffbfb" glyphName="USER" layoutX="455.0" layoutY="49.0" nodeOrientation="LEFT_TO_RIGHT" size="40" textAlignment="JUSTIFY" />
+      <FontAwesomeIconView fill="#fffbfb" glyphName="CALENDAR" layoutX="1037.0" layoutY="98.0" size="20" AnchorPane.rightAnchor="200.0" />
+      <FontAwesomeIconView fill="#8cff66" glyphName="MONEY" layoutX="1037.0" layoutY="129.0" size="20" AnchorPane.rightAnchor="200.0" />
+      <FontAwesomeIconView fill="#fffbfb" glyphName="CALENDAR_CHECK_ALT" layoutX="1038.0" layoutY="219.0" size="20" AnchorPane.rightAnchor="200.0" />
+      <FontAwesomeIconView fill="#fffbfb" glyphName="MONEY" layoutX="1037.0" layoutY="156.0" size="20" AnchorPane.rightAnchor="200.0" />
+      <FontAwesomeIconView fill="#fffbfb" glyphName="MONEY" layoutX="1037.0" layoutY="188.0" size="20" AnchorPane.rightAnchor="200.0" />
    </children>
 </AnchorPane>

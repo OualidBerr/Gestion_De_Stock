@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox onKeyPressed="#handlekeyPressed" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #4FC3F7;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Home_Package.Home_Controller">
+<VBox onKeyPressed="#handlekeyPressed" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #4FC3F7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Home_Package.Home_Controller">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -58,62 +60,97 @@
             </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" style="-fx-background-color: #3498DB;" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" style="-fx-background-color: #9C44A9;" VBox.vgrow="ALWAYS">
       <children>
-        <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
-          <font>
-            <Font size="18.0" />
-          </font>
-        </Label>
             <ToolBar prefHeight="54.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #1f8c2d;" text="Home" textFill="WHITE">
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" textFill="WHITESMOKE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="HOME" size="40" />
+                     </graphic>
                   </Button>
-                <Button mnemonicParsing="false" onAction="#Open_Contoire_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Contoire" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font></Button>
-                  <Button fx:id="products_btn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Product_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Produits" textFill="WHITE">
+                <Button mnemonicParsing="false" onAction="#Open_Contoire_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" textFill="WHITESMOKE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="SHOPPING_CART" size="40" />
+                     </graphic></Button>
+                  <Button fx:id="products_btn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Product_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" textFill="WHITESMOKE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="PRODUCT_HUNT" size="40" />
+                     </graphic>
                   </Button>
-                  <Button fx:id="stock_btn" layoutX="125.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Stock_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Stock" textFill="WHITE">
+                  <Button fx:id="stock_btn" layoutX="125.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Stock_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" textFill="WHITESMOKE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="CUBES" size="40" />
+                     </graphic>
                   </Button>
-                  <Button fx:id="fournisseur_btn" layoutX="240.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Fournisseur_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Fournisseurs" textFill="WHITE">
+                  <Button fx:id="fournisseur_btn" layoutX="240.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Fournisseur_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" textFill="WHITESMOKE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="USER" size="40" />
+                     </graphic>
                   </Button>
-                  <Button fx:id="client_btn" layoutX="355.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Client_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Clients" textFill="WHITE">
+                  <Button fx:id="client_btn" layoutX="355.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Client_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" textFill="WHITESMOKE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="USERS" size="40" />
+                     </graphic>
                   </Button>
-                  <Button fx:id="caisse_btn1" layoutX="585.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Caisse_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Caisse" textFill="WHITE">
+                  <Button fx:id="caisse_btn1" layoutX="585.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Caisse_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" textFill="WHITESMOKE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="#489a2c" glyphName="MONEY" size="40" />
+                     </graphic>
                   </Button>
-                  <Button layoutX="585.0" layoutY="10.0" mnemonicParsing="false" onAction="#Open_Bon_Command_Window" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #3f51b5;" text="Bon Command" textFill="WHITE">
+                  <Pane prefHeight="50.0" prefWidth="96.0" style="-fx-background-color: #ccb3ff;">
+                     <children>
+                        <FontAwesomeIconView glyphName="BELL_ALT" layoutX="18.0" layoutY="40.0" size="40" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="3.0" prefHeight="28.0" prefWidth="30.0" style="-fx-background-color: #ee0303; -fx-background-radius: 50;" text="7" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="878.0" layoutY="10.0" prefHeight="50.0" prefWidth="96.0" style="-fx-background-color: #ccb3ff;">
+                     <children>
+                        <FontAwesomeIconView glyphName="ENVELOPE_SQUARE" layoutX="18.0" layoutY="40.0" size="40" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="3.0" prefHeight="28.0" prefWidth="30.0" style="-fx-background-color: #ee0303; -fx-background-radius: 50;" text="3" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Button fx:id="logout_btn" layoutX="470.0" layoutY="10.0" mnemonicParsing="false" onAction="#log_Out_Function" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" textFill="WHITESMOKE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
-                  </Button>
-                  <Button fx:id="logout_btn" layoutX="470.0" layoutY="10.0" mnemonicParsing="false" onAction="#log_Out_Function" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Deconnexion" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="SIGN_OUT" size="40" />
+                     </graphic>
                   </Button>
               </items>
             </ToolBar>
-            <HBox layoutX="5.0" layoutY="54.0" prefHeight="586.0" prefWidth="1190.0" style="-fx-background-color: #D7BDE2;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="54.0" />
+            <TextField layoutX="729.0" layoutY="85.0" prefHeight="38.0" prefWidth="453.0" />
+            <FontAwesomeIconView fill="#0080ff" glyphName="SEARCH" layoutX="1145.0" layoutY="111.0" size="25" />
       </children>
     </AnchorPane>
   </children>

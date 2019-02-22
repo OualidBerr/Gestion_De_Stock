@@ -12,8 +12,8 @@ public class Notification {
         Notifications note = create()
                 .text(s)
                 .hideAfter(Duration.seconds(3))
-                .position(Pos.BOTTOM_RIGHT)
-                .darkStyle();
+                .position(Pos.BOTTOM_RIGHT);
+
 
         note.showInformation();
     }
@@ -22,7 +22,7 @@ public class Notification {
         Notifications note = create()
                 .text(s)
                 .hideAfter(Duration.seconds(3))
-                .position(Pos.BOTTOM_RIGHT) .darkStyle();
+                .position(Pos.BOTTOM_RIGHT) ;
                note.showWarning();
 
     }
@@ -31,14 +31,14 @@ public class Notification {
         Notifications note = create()
                 .text(s)
                 .hideAfter(Duration.seconds(3))
-                .position(Pos.BOTTOM_RIGHT) .darkStyle();
+                .position(Pos.BOTTOM_RIGHT) ;
                 note.showConfirm();
 
     }
     public void show_Error(String s){
 
         Notifications note = create()
-                .text(s).position(Pos.TOP_LEFT).darkStyle()
+                .text(s).position(Pos.TOP_LEFT)
                 .hideAfter(Duration.seconds(3));
                 note.showError();
 

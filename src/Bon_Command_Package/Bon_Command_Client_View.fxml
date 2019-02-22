@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onKeyPressed="#handlekeyPressed" prefHeight="700.0" prefWidth="1435.0" style="-fx-background-color: #D7BDE2;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bon_Command_Package.Bon_Command_Client_Controller">
+<AnchorPane onKeyPressed="#handlekeyPressed" prefHeight="700.0" prefWidth="1435.0" style="-fx-background-color: #9C44A9;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bon_Command_Package.Bon_Command_Client_Controller">
    <children>
       <TextField fx:id="product_txt" layoutX="28.0" layoutY="128.0" prefHeight="35.0" prefWidth="409.0" promptText="Produit">
          <font>
@@ -21,7 +22,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <Label fx:id="show_lb" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="28.0" prefHeight="56.0" prefWidth="391.0" style="-fx-background-color: Black; -fx-background-radius: 20;" text="Total amount" textFill="#f1c40f" AnchorPane.topAnchor="30.0">
+      <Label fx:id="show_lb" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="28.0" prefHeight="56.0" prefWidth="391.0" style="-fx-background-color: #303030; -fx-background-radius: 20;" text="Total amount" textFill="#f1c40f" AnchorPane.topAnchor="30.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -48,40 +49,49 @@
             <TableColumn fx:id="prix_show_column" prefWidth="97.666748046875" style="-fx-alignment: Center;" text="Prix Unitaire" />
         </columns>
       </TableView>
-      <Label fx:id="name_lb" alignment="TOP_LEFT" layoutX="69.0" layoutY="7.0" prefHeight="50.0" prefWidth="501.0" text="Client Name" textFill="#152a93">
+      <Label fx:id="name_lb" alignment="TOP_LEFT" layoutX="69.0" layoutY="7.0" prefHeight="50.0" prefWidth="501.0" text="Client Name" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="address_lb" alignment="TOP_LEFT" layoutX="167.0" layoutY="39.0" prefHeight="26.0" prefWidth="501.0" text="Address :" textFill="#152a93">
+      <Label fx:id="address_lb" alignment="TOP_LEFT" layoutX="95.0" layoutY="43.0" prefHeight="26.0" prefWidth="424.0" text="Address :" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="phone_lb" alignment="TOP_LEFT" layoutX="163.0" layoutY="58.0" prefHeight="26.0" prefWidth="291.0" text="Telephone :" textFill="#152a93">
+      <Label fx:id="phone_lb" alignment="TOP_LEFT" layoutX="94.0" layoutY="65.0" prefHeight="26.0" prefWidth="291.0" text="Telephone :" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button layoutX="207.0" layoutY="182.0" mnemonicParsing="false" onAction="#add_New_Client_Bon" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #1f8c2d;" text="Add " textFill="WHITE">
+      <Button layoutX="207.0" layoutY="182.0" mnemonicParsing="false" onAction="#add_New_Client_Bon" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #8cff66;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
+         <graphic>
+            <FontAwesomeIconView glyphName="PLUS_CIRCLE" size="30" />
+         </graphic>
       </Button>
-      <Label alignment="TOP_LEFT" layoutX="81.0" layoutY="80.0" prefHeight="26.0" prefWidth="316.0" text="N Registre  : 1268743698" textFill="#152a93">
+      <Label alignment="TOP_LEFT" layoutX="90.0" layoutY="84.0" prefHeight="26.0" prefWidth="154.0" text=" 1268743698" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="show_details_btn" layoutX="463.0" layoutY="128.0" mnemonicParsing="false" onAction="#show_product_details" prefHeight="39.0" prefWidth="57.0" style="-fx-background-color: #152a93;" text="&gt;&gt;" textFill="WHITE">
+      <Button fx:id="show_details_btn" layoutX="463.0" layoutY="128.0" mnemonicParsing="false" onAction="#show_product_details" prefHeight="39.0" prefWidth="57.0" style="-fx-background-color: #ccb3ff;" textFill="#303030">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
+         <graphic>
+            <FontAwesomeIconView glyphName="ANGLE_DOUBLE_RIGHT" size="30" />
+         </graphic>
       </Button>
-      <Button layoutX="1316.0" layoutY="427.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #152a93;" text="Impression" textFill="WHITE" AnchorPane.rightAnchor="15.0">
+      <Button layoutX="1316.0" layoutY="427.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ccb3ff;" textFill="#111111" AnchorPane.rightAnchor="15.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
+         <graphic>
+            <FontAwesomeIconView glyphName="PRINT" size="30" />
+         </graphic>
       </Button>
       <DatePicker fx:id="datePicker" layoutX="1121.0" layoutY="19.0" style="-fx-font-weight: Bold;" AnchorPane.rightAnchor="100.0" />
       <Label fx:id="title_lb" alignment="CENTER" layoutX="722.0" layoutY="72.0" prefHeight="50.0" prefWidth="206.0" textFill="#0c25e1">
@@ -89,30 +99,33 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="address_lb1" alignment="TOP_LEFT" layoutX="82.0" layoutY="39.0" prefHeight="26.0" prefWidth="62.0" text="Address :" textFill="#152a93">
+      <Button fx:id="closeButton" layoutX="1329.0" layoutY="655.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ccb3ff;" textFill="#111111" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
-      </Label>
-      <Label fx:id="address_lb11" alignment="TOP_LEFT" layoutX="78.0" layoutY="58.0" prefHeight="26.0" prefWidth="86.0" text="Telephone :" textFill="#152a93">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Button fx:id="closeButton" layoutX="1329.0" layoutY="655.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #152a93;" text="Exit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
+         <graphic>
+            <FontAwesomeIconView glyphName="SIGN_OUT" size="30" />
+         </graphic>
       </Button>
-      <Button layoutX="1328.0" layoutY="254.0" mnemonicParsing="false" onAction="#save_bon" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #152a93;" text="Save" textFill="WHITE" AnchorPane.rightAnchor="15.0">
+      <Button layoutX="1328.0" layoutY="254.0" mnemonicParsing="false" onAction="#save_bon" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ccb3ff;" textFill="#111111" AnchorPane.rightAnchor="15.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
+         <graphic>
+            <FontAwesomeIconView glyphName="SAVE" size="30" />
+         </graphic>
       </Button>
-      <Button layoutX="1318.0" layoutY="364.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #152a93;" text="Delete" textFill="WHITE" AnchorPane.rightAnchor="15.0">
+      <Button layoutX="1318.0" layoutY="364.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ccb3ff;" textFill="#111111" AnchorPane.rightAnchor="15.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
+         <graphic>
+            <FontAwesomeIconView fill="#d71414" glyphName="TRASH" size="30" />
+         </graphic>
       </Button>
+      <FontAwesomeIconView fill="#fcf3f3" glyphName="USER" layoutX="39.0" layoutY="30.0" size="30" />
+      <FontAwesomeIconView fill="#fcf3f3" glyphName="INFO_CIRCLE" layoutX="73.0" layoutY="98.0" size="18" />
+      <FontAwesomeIconView fill="#fcf3f3" glyphName="PHONE" layoutX="75.0" layoutY="77.0" size="15" />
+      <FontAwesomeIconView fill="#fcf3f3" glyphName="HOME" layoutX="75.0" layoutY="57.0" size="15" />
    </children>
 </AnchorPane>

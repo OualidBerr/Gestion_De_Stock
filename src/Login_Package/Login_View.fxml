@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -15,22 +16,22 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" onKeyPressed="#handlekeyPressed" prefHeight="555.0" prefWidth="1037.0" style="-fx-background-color: #BB8FCE;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login_Package.Login_Controller">
+<AnchorPane id="AnchorPane" onKeyPressed="#handlekeyPressed" prefHeight="555.0" prefWidth="1037.0" style="-fx-background-color: #9C44A9;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login_Package.Login_Controller">
    <children>
-      <Label layoutX="31.0" layoutY="18.0" prefHeight="58.0" prefWidth="265.0" style="-fx-alignment: center; -fx-background-color: #3F51B5; -fx-background-radius: 20;" text="Gestion De Stock Application" textFill="#fffbfb" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0">
+      <Label layoutX="31.0" layoutY="18.0" prefHeight="58.0" prefWidth="265.0" style="-fx-alignment: center; -fx-background-color: #9C44A9; -fx-background-radius: 20;" text="Gestion De Stock Application" textFill="#fffbfb" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="System Bold Italic" size="18.0" />
          </font>
       </Label>
       <TabPane layoutX="353.0" layoutY="56.0" prefHeight="377.0" prefWidth="398.0" style="-fx-background-radius: 20;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab style="-fx-font-weight: Bold;" text="Login Information">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="319.0" prefWidth="335.0" style="-fx-background-radius: 20; -fx-background-color: #FDFEFE;">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="321.0" prefWidth="398.0" style="-fx-background-radius: 20; -fx-background-color: #FDFEFE;">
                      <children>
-                        <AnchorPane layoutX="7.0" layoutY="8.0" prefHeight="327.0" prefWidth="385.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;">
+                        <AnchorPane layoutX="7.0" layoutY="8.0" prefHeight="333.0" prefWidth="385.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;">
                            <children>
-                              <VBox layoutX="16.0" layoutY="75.0" prefHeight="210.0" prefWidth="341.0" style="-fx-alignment: Center; -fx-background-color: #5DADE2; -fx-background-radius: 20;" AnchorPane.topAnchor="75.0">
+                              <VBox layoutX="16.0" layoutY="75.0" prefHeight="166.0" prefWidth="341.0" style="-fx-alignment: Center; -fx-background-color: #5DADE2; -fx-background-radius: 20;" AnchorPane.topAnchor="75.0">
                                  <children>
                                     <ComboBox fx:id="admcambo" prefHeight="25.0" prefWidth="250.0" promptText="                       Admin" style="-fx-background-radius: 20; -fx-alignment: Center;">
                                        <opaqueInsets>
@@ -40,7 +41,7 @@
                                           <Insets bottom="10.0" left="20.0" right="20.0" />
                                        </VBox.margin>
                                     </ComboBox>
-                                    <TextField fx:id="txtusername" prefHeight="32.0" prefWidth="250.0" promptText="إســـم المستخدم" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="apc">
+                                    <TextField fx:id="txtusername" prefHeight="32.0" prefWidth="262.0" promptText="إســـم المستخدم" style="-fx-background-radius: 20; -fx-alignment: Center; -fx-font-weight: Bold;" text="apc">
                                        <VBox.margin>
                                           <Insets bottom="10.0" left="20.0" right="20.0" />
                                        </VBox.margin>
@@ -56,14 +57,6 @@
                                           <Font name="Arabic Typesetting" size="16.0" />
                                        </font>
                                     </PasswordField>
-                                    <Button fx:id="loginbtn" mnemonicParsing="false" onAction="#LoginBtnFunction" prefHeight="40.0" prefWidth="241.0" style="-fx-background-color: #1f8c2d;" text="LOG IN" textFill="#fffdfd">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets left="50.0" right="50.0" />
-                                       </VBox.margin>
-                                    </Button>
                                  </children>
                                  <opaqueInsets>
                                     <Insets />
@@ -72,16 +65,25 @@
                                     <Insets top="10.0" />
                                  </padding>
                               </VBox>
-                              <Label layoutX="-3.0" prefHeight="74.0" prefWidth="388.0" style="-fx-alignment: Center;" text="Sign In" textFill="#f8f3f3">
+                              <Label layoutX="140.0" prefHeight="74.0" prefWidth="180.0" style="-fx-alignment: Center;" text="Sign In" textFill="#f8f3f3">
                                  <font>
                                     <Font name="Apple Symbols" size="51.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="85.0" layoutY="289.0" prefHeight="27.0" prefWidth="204.0" text="Forgot password ?" textFill="#f5f0f0">
+                              <Label layoutX="239.0" layoutY="249.0" prefHeight="27.0" prefWidth="118.0" text="Forgot password ?" textFill="#f5f0f0">
                                  <font>
                                     <Font name="System Italic" size="12.0" />
                                  </font>
                               </Label>
+                              <Button fx:id="loginbtn" layoutX="94.0" layoutY="279.0" mnemonicParsing="false" onAction="#LoginBtnFunction" prefHeight="46.0" prefWidth="182.0" style="-fx-background-color: #8cff66;" textFill="#303030">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="SIGN_IN" size="35" />
+                                 </graphic>
+                              </Button>
+                              <FontAwesomeIconView fill="#fcf6f6" glyphName="USER" layoutX="66.0" layoutY="65.0" size="75" />
                            </children>
                         </AnchorPane>
                      </children>

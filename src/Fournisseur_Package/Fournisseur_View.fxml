@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
@@ -17,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox onKeyPressed="#handlekeyPressed" prefHeight="675.0" prefWidth="1408.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Fournisseur_Package.Fournisseur_Controller">
+<VBox onKeyPressed="#handlekeyPressed" prefHeight="675.0" prefWidth="1408.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Fournisseur_Package.Fournisseur_Controller">
   <children>
     <MenuBar onMouseClicked="#loadData" prefHeight="24.0" prefWidth="1219.0" VBox.vgrow="NEVER">
       <menus>
@@ -58,7 +59,7 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="746.0" prefWidth="1408.0" style="-fx-background-color: #3498DB;" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="746.0" prefWidth="1408.0" style="-fx-background-color: #9C44A9;" VBox.vgrow="ALWAYS">
       <children>
         <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
           <font>
@@ -67,62 +68,89 @@
         </Label>
             <ToolBar onKeyPressed="#handlekeyPressed" onMouseClicked="#loadData" prefHeight="69.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
-                <Button fx:id="goHome_btn" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #1f8c2d;" text="Home" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font></Button>
-                  <Button fx:id="goHome_btn1" layoutX="10.0" layoutY="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #bb7b0d;" text="Fournisseur" textFill="WHITE">
+                <Button fx:id="goHome_btn" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="#000000e0" glyphName="HOME" size="40" />
+                     </graphic></Button>
+                  <Button fx:id="goHome_btn1" layoutX="10.0" layoutY="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #9C44A9;" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="#e7e7e7" glyphName="USER" size="40" />
+                     </graphic>
                   </Button>
-                  <Button fx:id="new_Fournisseur_btn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Add_New_Fournisseur_Form" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="New Fourni" textFill="WHITE">
+                  <Button fx:id="new_Fournisseur_btn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Add_New_Fournisseur_Form" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="USER_PLUS" size="40" />
+                     </graphic>
                   </Button>
-                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#show_Edit_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Modifié" textFill="WHITE">
+                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#show_Edit_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="EDIT" size="40" />
+                     </graphic>
                   </Button>
-                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete_Fournisseur" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Suprime" textFill="#fcf8f8">
+                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete_Fournisseur" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="USER_TIMES" size="40" />
+                     </graphic>
                   </Button>
-                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Bon_Fournissur_Form" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Bon Fournisseur" textFill="WHITE">
+                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Bon_Fournissur_Form" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="CART_ARROW_DOWN" size="40" />
+                     </graphic>
                   </Button>
-                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Bon_Fournisseur_Global" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Bons Global" textFill="WHITE">
+                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Bon_Fournisseur_Global" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="LIST_OL" size="40" />
+                     </graphic>
                   </Button>
-                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Reglement_Form" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Verssement" textFill="WHITE">
+                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Reglement_Form" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="#489a2c" glyphName="MONEY" size="40" />
+                     </graphic>
                   </Button>
                   <Button mnemonicParsing="false" onAction="#Load_Unactive_Fournisseur" prefHeight="48.0" prefWidth="95.0" text="Un_Active" />
-                  <TextField fx:id="verssement_txt" alignment="CENTER" onMouseClicked="#fournisseurSearchThread" prefHeight="35.0" prefWidth="218.0" promptText="Verssement" style="-fx-background-radius: 20; -fx-background-color: #ABEBC6; -fx-text-fill: #3f51b5;">
+                  <TextField fx:id="verssement_txt" alignment="CENTER" onMouseClicked="#fournisseurSearchThread" prefHeight="35.0" prefWidth="218.0" promptText="Verssement" style="-fx-background-radius: 20; -fx-text-fill: #3f51b5;">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </TextField>
               </items>
             </ToolBar>
-            <VBox layoutX="-1.0" layoutY="69.0" onMouseClicked="#loadData" prefHeight="571.0" prefWidth="1388.0" style="-fx-background-color: #D7BDE2;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0">
+            <VBox layoutX="-1.0" layoutY="69.0" onMouseClicked="#loadData" prefHeight="571.0" prefWidth="1388.0" style="-fx-background-color: #9C44A9;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0">
                <children>
-                  <Label fx:id="fournisseur_name_lb" alignment="TOP_CENTER" prefHeight="50.0" prefWidth="500.0" style="-fx-background-color: #3F51B5; -fx-background-radius: 20;" text="Fournisseur" textFill="WHITE">
+                  <Label fx:id="fournisseur_name_lb" alignment="TOP_CENTER" prefHeight="50.0" prefWidth="500.0" style="-fx-background-color: #9C44A9; -fx-background-radius: 20;" text="     Fournisseur" textFill="#e7e7e7">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
                      <VBox.margin>
                         <Insets left="500.0" top="10.0" />
                      </VBox.margin>
+                     <graphic>
+                        <FontAwesomeIconView fill="#e7e7e7" glyphName="USER" size="40" />
+                     </graphic>
                   </Label>
                   <HBox prefHeight="48.0" prefWidth="1388.0">
                      <children>
@@ -157,13 +185,16 @@
                         <Insets left="50.0" right="100.0" />
                      </VBox.margin>
                   </TableView>
-                  <Button fx:id="closeButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #3f51b5;" text="Exit" textFill="WHITE">
+                  <Button fx:id="closeButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #ccb3ff;" textFill="#0d0d0d">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                      <VBox.margin>
                         <Insets left="1150.0" top="10.0" />
                      </VBox.margin>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="SIGN_OUT" size="35" />
+                     </graphic>
                   </Button>
                </children>
             </VBox>

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onKeyPressed="#handlekeyPressed" prefHeight="686.0" prefWidth="1350.0" style="-fx-background-color: #D7BDE2;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bon_Command_Package.Bon_Command_Fournisseur_Controller">
+<AnchorPane onKeyPressed="#handlekeyPressed" prefHeight="686.0" prefWidth="1350.0" style="-fx-background-color: #9C44A9;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bon_Command_Package.Bon_Command_Fournisseur_Controller">
    <children>
       <TextField fx:id="fournisseurID_TXT" editable="false" layoutX="193.0" layoutY="7.0" prefHeight="25.0" prefWidth="50.0" />
       <TextField fx:id="fournisseur_Name_TXT" editable="false" layoutX="39.0" layoutY="7.0" />
@@ -44,28 +44,28 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></TextField>
-      <Button layoutX="703.0" layoutY="217.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#add_New_Bon" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #1f8c2d;" text="Add  " textFill="WHITE">
+      <Button layoutX="703.0" layoutY="217.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#add_New_Bon" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #8cff66;" text="Add  " textFill="#303030">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>
       <ListView fx:id="list" layoutX="42.0" layoutY="50.0" prefHeight="227.0" prefWidth="391.0" style="-fx-font-weight: Bold;" />
-      <Button fx:id="get_Itembtn" layoutX="456.0" layoutY="117.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="&gt;&gt;" textFill="WHITE">
+      <Button fx:id="get_Itembtn" layoutX="456.0" layoutY="117.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" text="&gt;&gt;" textFill="#303030">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
       <DatePicker fx:id="datePicker" layoutX="1121.0" layoutY="19.0" style="-fx-font-weight: Bold;" AnchorPane.rightAnchor="50.0" />
-      <Button fx:id="closeButton" layoutX="1203.0" layoutY="639.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="EXIT" textFill="WHITE" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="639.0">
+      <Button fx:id="closeButton" layoutX="1203.0" layoutY="639.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" text="EXIT" textFill="#303030" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="639.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Label fx:id="show_lb" alignment="CENTER" contentDisplay="CENTER" layoutX="945.0" layoutY="117.0" prefHeight="37.0" prefWidth="382.0" style="-fx-background-color: Black; -fx-background-radius: 20;" text="Total amount" textFill="#f1c40f" AnchorPane.rightAnchor="50.0">
+      <Label fx:id="show_lb" alignment="CENTER" contentDisplay="CENTER" layoutX="945.0" layoutY="117.0" prefHeight="37.0" prefWidth="382.0" style="-fx-background-color: #303030; -fx-background-radius: 20;" text="Total amount" textFill="#f1c40f" AnchorPane.rightAnchor="50.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button layoutX="1208.0" layoutY="553.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#save_bon" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #3f51b5;" text="Save" textFill="WHITE">
+      <Button layoutX="1208.0" layoutY="553.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#save_bon" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" text="Save" textFill="#303030">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
