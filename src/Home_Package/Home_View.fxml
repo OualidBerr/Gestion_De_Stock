@@ -7,12 +7,16 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <VBox onKeyPressed="#handlekeyPressed" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #4FC3F7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Home_Package.Home_Controller">
   <children>
@@ -60,7 +64,7 @@
             </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" style="-fx-background-color: #9C44A9;" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#load_notifications" prefHeight="690.0" prefWidth="1200.0" style="-fx-background-color: #9C44A9;" VBox.vgrow="ALWAYS">
       <children>
             <ToolBar prefHeight="54.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
@@ -119,20 +123,10 @@
                         <FontAwesomeIconView fill="#489a2c" glyphName="MONEY" size="40" />
                      </graphic>
                   </Button>
-                  <Pane prefHeight="50.0" prefWidth="96.0" style="-fx-background-color: #ccb3ff;">
+                  <Pane fx:id="notificationn_pane" onMouseClicked="#show_notification_vbox" prefHeight="50.0" prefWidth="96.0" style="-fx-background-color: #ccb3ff;">
                      <children>
                         <FontAwesomeIconView glyphName="BELL_ALT" layoutX="18.0" layoutY="40.0" size="40" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="3.0" prefHeight="28.0" prefWidth="30.0" style="-fx-background-color: #ee0303; -fx-background-radius: 50;" text="7" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="878.0" layoutY="10.0" prefHeight="50.0" prefWidth="96.0" style="-fx-background-color: #ccb3ff;">
-                     <children>
-                        <FontAwesomeIconView glyphName="ENVELOPE_SQUARE" layoutX="18.0" layoutY="40.0" size="40" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="3.0" prefHeight="28.0" prefWidth="30.0" style="-fx-background-color: #ee0303; -fx-background-radius: 50;" text="3" textFill="WHITE">
+                        <Label fx:id="notification_lb" alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="3.0" prefHeight="28.0" prefWidth="30.0" style="-fx-background-color: #ee0303; -fx-background-radius: 50;" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -149,8 +143,79 @@
                   </Button>
               </items>
             </ToolBar>
-            <TextField layoutX="729.0" layoutY="85.0" prefHeight="38.0" prefWidth="453.0" />
-            <FontAwesomeIconView fill="#0080ff" glyphName="SEARCH" layoutX="1145.0" layoutY="111.0" size="25" />
+            <TextField layoutX="37.0" layoutY="87.0" onMouseClicked="#hide_notification_vbox" prefHeight="38.0" prefWidth="478.0" />
+            <TitledPane fx:id="notification_titlePane" animated="false" layoutX="642.0" layoutY="65.0" prefHeight="258.0" prefWidth="512.0" text="Notifications">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="428.0" style="-fx-background-color: #ccb3ff;">
+                     <children>
+                        <TableView fx:id="note_table" layoutX="1.0" layoutY="47.0" onMouseClicked="#on_Click" prefHeight="180.0" prefWidth="507.0" style="-fx-font-weight: Bold;">
+                          <columns>
+                            <TableColumn fx:id="id_Column" prefWidth="55.0" style="-fx-alignment: Center;" text="N" />
+                            <TableColumn fx:id="note_Column" prefWidth="321.33331298828125" text="Note" />
+                              <TableColumn fx:id="date_Column" prefWidth="120.66668701171875" style="-fx-alignment: Center;" text="Date" />
+                          </columns>
+                        </TableView>
+                        <TextField fx:id="notification_search_txt" layoutX="178.0" layoutY="-2.0" onKeyPressed="#Notifications_SearchThread" prefHeight="29.0" prefWidth="331.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="-2.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </TextField>
+                        <FontAwesomeIconView glyphName="SEARCH" layoutX="469.0" layoutY="30.0" size="20" />
+                        <Button layoutX="23.0" layoutY="10.0" mnemonicParsing="false" onAction="#remove_notification" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: #0095FF;" text="Dismiss" textFill="WHITESMOKE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+              </content>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TitledPane>
+            <FontAwesomeIconView fill="WHITESMOKE" glyphName="USER" layoutX="417.0" layoutY="607.0" size="75" />
+            <FontAwesomeIconView fill="WHITESMOKE" glyphName="USERS" layoutX="536.0" layoutY="605.0" size="75" />
+            <FontAwesomeIconView fill="WHITESMOKE" glyphName="PLUS_CIRCLE" layoutX="414.0" layoutY="552.0" size="20" />
+            <FontAwesomeIconView fill="WHITESMOKE" glyphName="PLUS_CIRCLE" layoutX="521.0" layoutY="550.0" size="20" />
+            <FontAwesomeIconView fill="WHITESMOKE" glyphName="PRODUCT_HUNT" layoutX="276.0" layoutY="603.0" size="75" />
+            <FontAwesomeIconView fill="WHITESMOKE" glyphName="PLUS_CIRCLE" layoutX="271.0" layoutY="547.0" size="20" />
+            <FontAwesomeIconView fill="WHITESMOKE" glyphName="COPYRIGHT" layoutX="248.0" layoutY="670.0" size="20" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="250.0" />
+            <Text fill="WHITESMOKE" layoutX="14.0" layoutY="667.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All rghts reserved Oualid Berrim 2019" wrappingWidth="252.35614013671875" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
+            <FontAwesomeIconView fill="#ccb3ff" glyphName="POWER_OFF" layoutX="1131.0" layoutY="669.0" onMouseClicked="#log_Out_Function" size="50" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="24.0" />
+            <FontAwesomeIconView fill="#0080ff" glyphName="SEARCH" layoutX="483.0" layoutY="113.0" size="25" />
+            <FontAwesomeIconView fill="#171515" glyphName="PHONE" layoutX="639.0" layoutY="668.8125" size="25" AnchorPane.bottomAnchor="17.127790451049805" AnchorPane.leftAnchor="639.0" />
+            <Text fill="WHITESMOKE" layoutX="664.0" layoutY="667.0" strokeType="OUTSIDE" strokeWidth="0.0" text="077 66 99 211" wrappingWidth="89.99999463558197" AnchorPane.bottomAnchor="19.7373046875" AnchorPane.leftAnchor="664.0">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
+            <Text fill="WHITESMOKE" layoutX="573.0" layoutY="666.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact :" wrappingWidth="60.26785606518388" AnchorPane.bottomAnchor="20.7373046875" AnchorPane.leftAnchor="573.0">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
+            <FontAwesomeIconView fill="#ccb3ff" glyphName="HOME" layoutX="285.0" layoutY="669.0" size="25" AnchorPane.bottomAnchor="16.940290451049805" AnchorPane.leftAnchor="285.0" />
+            <Text fill="WHITESMOKE" layoutX="328.0" layoutY="667.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cite 400 Logement Bloc N43,Apt N4" wrappingWidth="224.26785606518388" AnchorPane.bottomAnchor="19.7373046875" AnchorPane.leftAnchor="328.0">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
+            <FontAwesomeIconView fill="#0095ff" glyphName="INTERNET_EXPLORER" layoutX="761.0" layoutY="666.46484375" size="25" AnchorPane.bottomAnchor="19.475446701049805" AnchorPane.leftAnchor="761.0" />
+            <Text fill="WHITESMOKE" layoutX="805.0" layoutY="664.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oualidberr@hotmail.fr" wrappingWidth="140.66668164730072" AnchorPane.bottomAnchor="22.7373046875" AnchorPane.leftAnchor="805.0">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
+            <FontAwesomeIconView fill="WHITESMOKE" glyphName="FACEBOOK_OFFICIAL" layoutX="952.0" layoutY="667.0" size="25" AnchorPane.bottomAnchor="18.940290451049805" AnchorPane.leftAnchor="952.0" />
+            <Text fill="WHITESMOKE" layoutX="983.0" layoutY="664.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oualid Berrim " wrappingWidth="89.99999463558197" AnchorPane.bottomAnchor="22.7373046875" AnchorPane.leftAnchor="983.0">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
       </children>
     </AnchorPane>
   </children>

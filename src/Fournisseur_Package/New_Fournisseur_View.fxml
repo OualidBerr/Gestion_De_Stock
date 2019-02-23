@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -12,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onKeyPressed="#handlekeyPressed" prefHeight="536.0" prefWidth="550.0" style="-fx-background-color: #D7BDE2;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Fournisseur_Package.New_Fournisseur_Controller">
+<AnchorPane onKeyPressed="#handlekeyPressed" prefHeight="536.0" prefWidth="550.0" style="-fx-background-color: #D7BDE2;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Fournisseur_Package.New_Fournisseur_Controller">
    <children>
       <VBox layoutX="178.0" layoutY="170.0" onKeyPressed="#handlekeyPressed" prefHeight="275.0" prefWidth="419.0" style="-fx-background-color: #0080ff; -fx-background-radius: 20;" AnchorPane.bottomAnchor="91.0" AnchorPane.leftAnchor="178.0" AnchorPane.rightAnchor="138.0" AnchorPane.topAnchor="170.0">
          <children>
@@ -106,20 +107,29 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="closeButton" layoutX="582.0" layoutY="492.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="30.0" prefWidth="120.0" style="-fx-background-radius: 20; -fx-background-color: White;" text="EXIT" textFill="#0080ff" AnchorPane.topAnchor="490.0">
+      <Button fx:id="closeButton" layoutX="582.0" layoutY="492.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="30.0" prefWidth="120.0" textFill="#0080ff" AnchorPane.topAnchor="490.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
+         <graphic>
+            <FontAwesomeIconView glyphName="SIGN_OUT" size="25" />
+         </graphic>
       </Button>
-      <Button fx:id="update_fournisseurbtn" layoutX="314.0" layoutY="457.0" mnemonicParsing="false" onAction="#update_Fournisseur" prefHeight="37.0" prefWidth="120.0" style="-fx-background-radius: 20; -fx-background-color: White;" text="Modifier" textFill="#0080ff" AnchorPane.topAnchor="475.0">
+      <Button fx:id="update_fournisseurbtn" layoutX="314.0" layoutY="457.0" mnemonicParsing="false" onAction="#update_Fournisseur" prefHeight="37.0" prefWidth="120.0" textFill="#0080ff" AnchorPane.topAnchor="475.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
+         <graphic>
+            <FontAwesomeIconView glyphName="EDIT" size="25" />
+         </graphic>
       </Button>
-      <Button fx:id="add_Fournisseur_btn" layoutX="314.0" layoutY="457.0" mnemonicParsing="false" onAction="#add_Fournisseur" prefHeight="37.0" prefWidth="120.0" style="-fx-background-radius: 20; -fx-background-color: White;" text="Ajouter" textFill="#0080ff" AnchorPane.topAnchor="475.0">
+      <Button fx:id="add_Fournisseur_btn" layoutX="314.0" layoutY="457.0" mnemonicParsing="false" onAction="#add_Fournisseur" prefHeight="37.0" prefWidth="120.0" textFill="#0080ff" AnchorPane.topAnchor="475.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
+         <graphic>
+            <FontAwesomeIconView glyphName="USER_PLUS" size="25" />
+         </graphic>
       </Button>
    </children>
 </AnchorPane>

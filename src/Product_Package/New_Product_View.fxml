@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handlekeyPressed" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #E8DAEF;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Product_Package.New_Product_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handlekeyPressed" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #E8DAEF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Product_Package.New_Product_Controller">
    <children>
       <VBox layoutX="-8.0" layoutY="4.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="635.0" prefWidth="500.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
@@ -149,18 +150,24 @@
                         </Button>
                         <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#add_New_Produit" prefHeight="31.0" prefWidth="100.0" style="-fx-background-radius: 20;" text="Ajouter">
+                              <Button mnemonicParsing="false" onAction="#add_New_Produit" prefHeight="31.0" prefWidth="100.0">
                                  <HBox.margin>
                                     <Insets right="170.0" />
                                  </HBox.margin>
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="PLUS_CIRCLE" size="25" />
+                                 </graphic>
                               </Button>
-                              <Button fx:id="closeButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="31.0" prefWidth="100.0" style="-fx-background-radius: 20;" text="Close">
+                              <Button fx:id="closeButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="31.0" prefWidth="100.0">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="SIGN_OUT" size="25" />
+                                 </graphic>
                               </Button>
                            </children>
                         </HBox>

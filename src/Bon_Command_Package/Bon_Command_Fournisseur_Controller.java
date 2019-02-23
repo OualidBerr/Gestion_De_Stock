@@ -394,6 +394,7 @@ import java.util.ResourceBundle;
      public void initialize(URL location, ResourceBundle resources) {
 
          datePicker.setValue(LocalDate.now());
+
         list.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {

@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -80,6 +81,8 @@ public class Contoire_Controller implements Initializable {
     public DatePicker datePicker;
     @FXML
     public Pane pane;
+
+
     public ObservableList<Product> show_data_List;
     public ObservableList<Vent> data;
     public ObservableList<Bon_Fournisseur_Global> data_2;
