@@ -387,10 +387,14 @@ public class Contoire_Controller implements Initializable {
             double old_Sold =  utility.get_Sold(clientID); // 3) Old Sold
             double new_sold = old_Sold - amount; // 4) new sold
 
+            double old_total  = utility.get_caisse_total();
+            double new_total = old_total + amount;
+
+
             if (!paiment_txt.getText().isEmpty()){
 
                 String query = "INSERT INTO demo.person_reglement_table " +
-                        "(id,amount,old_sold,sold,mode,date,note,personID) VALUES (?,?,?,?,?,?,?,?)";
+                        "(id,amount,old_sold,sold,mode,date,note,personID,old_total_caisse,total_caisse) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
                 preparesStatemnt = conn.connect().prepareStatement(query);
                 preparesStatemnt.setInt   (1, Reglement_id);
@@ -401,9 +405,12 @@ public class Contoire_Controller implements Initializable {
                 preparesStatemnt.setString(6, date);
                 preparesStatemnt.setString(7, note);
                 preparesStatemnt.setInt   (8, clientID);
+                preparesStatemnt.setDouble(9, old_total);
+                preparesStatemnt.setDouble(10, new_total);
                 preparesStatemnt.execute();
                 preparesStatemnt.close();
                 conn.connect().close();
+                utility.update_Caisse_total(new_total);
                 String query_sold = "UPDATE demo.person_table SET sold =? Where id="+clientID;
                 preparesStatemnt = conn.connect().prepareStatement(query_sold);
                 preparesStatemnt.setDouble(1,new_sold);
@@ -527,11 +534,16 @@ public class Contoire_Controller implements Initializable {
            preparesStatemnt.setDouble      (3,  new_value);
            preparesStatemnt.executeUpdate();
            preparesStatemnt.close();
+           ////////////////////////
+           // Notification check
+
+           double product_Quantity = utility.get_Product_quantity(productID);
+           int alert = utility.get_Product_Alert(productID);
+           utility.Product_Notification(product_Quantity,alert,product_Name);
            notification.show_Confirmation("Product updated");
            product_txt.clear();
            quant_txt.clear();
            utility.setTextFieldFocus(product_txt);
-
 
        }
 

@@ -284,6 +284,9 @@ public class Bon_Command_Client_Controller implements Initializable {
 
             preparesStatemnt.close();
             conn.connect().close();
+
+
+
            }
         catch (Exception e){
             e.printStackTrace();
@@ -293,6 +296,13 @@ public class Bon_Command_Client_Controller implements Initializable {
             if (preparesStatemnt != null) {preparesStatemnt.close();}
             if (rs != null) {rs.close();}
           }
+
+        // Notification check
+
+        double product_Quantity = utility.get_Product_quantity(productID);
+        int alert = utility.get_Product_Alert(productID);
+
+        utility.Product_Notification(product_Quantity,alert,product);
 
            quant_txt.clear();
            product_txt.clear();
@@ -353,8 +363,6 @@ public class Bon_Command_Client_Controller implements Initializable {
             if (preparesStatemnt != null) {preparesStatemnt.close();}
             if (rs != null) {rs.close();}
         }
-
-
 
     }
      public void clear(){
@@ -426,7 +434,6 @@ public class Bon_Command_Client_Controller implements Initializable {
 
 
     }
-
     public double get_Bon_Total(int bonID,int personID) throws SQLException {
         double total = 0.25;
         rs = conn.connect().createStatement().executeQuery("SELECT * FROM demo.bon_table where id="+bonID+" and personID="+personID);
@@ -436,8 +443,6 @@ public class Bon_Command_Client_Controller implements Initializable {
 
         return total;
     }
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

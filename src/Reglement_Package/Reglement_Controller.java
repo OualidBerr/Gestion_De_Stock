@@ -46,7 +46,7 @@ public class Reglement_Controller implements Initializable {
     public Button reglement_delete_btn;
     public Button closeButton;
     @FXML
-    public TableView<Reglement>            reglement_tableView;
+    public TableView<Reglement>           reglement_tableView;
     public TableColumn<Reglement,Integer>  Id_column    ;
     public TableColumn<Reglement,  Date>   date_column ;
     public TableColumn<Reglement,String>   mode_column ;
@@ -151,75 +151,132 @@ public class Reglement_Controller implements Initializable {
         }
     }
     @FXML
-    public void delet_reglement() throws SQLException {
+    public void annuler_reglement() throws SQLException {
+           // UPDATE NOTE
 
+        if (!reglement_tableView.getSelectionModel().isEmpty()){
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation Dialog");
-        alert.setHeaderText("Look, a Confirmation Dialog");
-        alert.setContentText("Are you ok with this?");
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
-            // ... user chose OK
             Reglement reglement = reglement_tableView.getSelectionModel().getSelectedItem();
-            int fournisseurID = reglement.getPersonID();
-            double deleted_amount = reglement.getAmount();
-            double old_sold = Double.parseDouble(f_old_sold_txt.getText());
-            double sold = deleted_amount + old_sold;
 
-            // Update Sold
+            int id = reglement.getId();
+            int fournisseurID = reglement.getPersonID();
+            reglement.setNote("ERROR");
+
+
             try
             {
-                String query  = "UPDATE demo.person_table SET sold ="+sold+" Where id="+fournisseurID;
+
+                String query  = "UPDATE  demo.person_reglement_table SET note =? Where id="+id ;
                 preparesStatemnt = conn.connect().prepareStatement(query);
+                preparesStatemnt.setString(1, reglement.getNote());
                 preparesStatemnt.executeUpdate();
+                loadTable(fournisseurID);
+                notification.show_Confirmation("Transaction updated Successfully!");
                 preparesStatemnt.close();
                 conn.connect().close();
-                f_old_sold_txt.setText(sold+"");
+
             }
             catch (Exception ex)
             {
                 ex.getStackTrace();
             }
             finally{
+
                 conn.connect().close();
                 rs.close();
                 preparesStatemnt.close();
-            }
-
-            // Now delete
-
-            if(! reglement_tableView.getSelectionModel().isEmpty() ) {
-
-                try {
-
-                    int reglement_id = reglement.getId();
-                    String query = "DELETE FROM  demo.person_reglement_table WHERE id =" + reglement_id;
-                    preparesStatemnt = conn.connect().prepareStatement(query);
-                    preparesStatemnt.executeUpdate();
-                    preparesStatemnt.close();
-                    conn.connect().close();
-                }
-
-                catch (SQLException e) { e.printStackTrace(); }
-                finally {
-                    loadTable(fournisseurID);
-                    if (conn.connect() != null) {
-                        conn.connect().close();
-                    }
-                }
-                notification.show_Confirmation(deleted_amount+" DZD deleted Successfully !");
 
             }
 
 
+        }
+        else if (reglement_tableView.getSelectionModel().isEmpty()){
 
-           }
+            notification.show_Warrning("Nothing is Selected");
+        }
 
-        else {
-            // ... user chose CANCEL or closed the dialog
+        // insert nergative amount
+        double amount     =  (Double.parseDouble(NumberTextField.getText()))*(-1);
+        int fournisseurID = Integer.parseInt(f_Id_txt.getText());
+        double oldsold    =  utility.get_Sold(fournisseurID);
+        double sold       = oldsold - amount;
+        String mode       = payement_Mod_cambo.getValue().toString();
+        String date       = reglement_datePicker.getValue().toString();
+        String note       = reglement_note_txt.getText();
 
+
+        //  double amount     =  Double.parseDouble(NumberTextField.getText());
+        double new_total=0.02;
+        int personType    =  utility.getPerson_Type(fournisseurID);
+        double old_total  = utility.get_caisse_total();
+
+
+        if ( personType == 1 )
+        {
+            new_total = old_total + amount;  // paiment
+        }
+        else if (personType == 2)
+        {
+            new_total = old_total - amount;   // verssement
+        }
+
+
+
+
+        try{
+            int id = utility.getMax_ID("demo.person_reglement_table","id")+1;
+
+            String query = "INSERT INTO demo.person_reglement_table (id,amount,old_sold,sold,mode,date,note,personID,old_total_caisse,total_caisse) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            preparesStatemnt = conn.connect().prepareStatement(query);
+            preparesStatemnt.setInt(1, id);
+            preparesStatemnt.setDouble(2, amount);
+            preparesStatemnt.setDouble(3, oldsold);
+            preparesStatemnt.setDouble(4, sold);
+            preparesStatemnt.setString(5, mode);
+            preparesStatemnt.setString(6, date);
+            preparesStatemnt.setString(7, "Correction");
+            preparesStatemnt.setInt(8, fournisseurID);
+            preparesStatemnt.setDouble(9, old_total);
+            preparesStatemnt.setDouble(10, new_total);
+
+            preparesStatemnt.execute();
+            conn.connect().close();
+            rs.close();
+            preparesStatemnt.close();
+            utility.update_Caisse_total(new_total);
+            utility.setTextFieldFocus(NumberTextField);
+            clear();
+//            notification.show_Confirmation("Verssement : " + amount + " DZD"+ " received !");
+        }
+        catch (Exception e){e.printStackTrace();}
+        finally{
+            conn.connect().close();
+            rs.close();
+            preparesStatemnt.close();
+        }
+
+
+
+        // Update Sold
+
+        try
+        {
+
+            String query  = "UPDATE demo.person_table SET sold ="+sold+" Where id="+fournisseurID;
+            preparesStatemnt = conn.connect().prepareStatement(query);
+            preparesStatemnt.executeUpdate();
+            f_old_sold_txt.setText(sold+"");
+
+        }
+        catch (Exception ex)
+        {
+            ex.getStackTrace();
+        }
+        finally{
+            loadTable(fournisseurID);
+            conn.connect().close();
+            rs.close();
+            preparesStatemnt.close();
 
         }
 
@@ -234,7 +291,19 @@ public class Reglement_Controller implements Initializable {
 
 
 
+
+
+
+
+
+
+
+
+
+
     }
+
+
     public void clear(){
        reglement_note_txt.setText("/");
        NumberTextField.clear();
@@ -311,19 +380,37 @@ public class Reglement_Controller implements Initializable {
             )
 
           {
-
+              double amount     =  Double.parseDouble(NumberTextField.getText());
             int fournisseurID = Integer.parseInt(f_Id_txt.getText());
-            double amount     =  Double.parseDouble(NumberTextField.getText());
             double oldsold    =  utility.get_Sold(fournisseurID);
             double sold       = oldsold - amount;
-            String mode       = payement_Mod_cambo.getValue().toString();
-            String date       = reglement_datePicker.getValue().toString();
-            String note       = reglement_note_txt.getText();
+              String mode       = payement_Mod_cambo.getValue().toString();
+              String date       = reglement_datePicker.getValue().toString();
+              String note       = reglement_note_txt.getText();
+
+
+              //  double amount     =  Double.parseDouble(NumberTextField.getText());
+              double new_total=0.02;
+              int personType    =  utility.getPerson_Type(fournisseurID);
+              double old_total  = utility.get_caisse_total();
+
+
+            if ( personType == 1 )
+               {
+                new_total = old_total + amount;  // paiment
+               }
+            else if (personType == 2)
+               {
+                new_total = old_total - amount;   // verssement
+               }
+
+
+
 
             try{
                 int id = utility.getMax_ID("demo.person_reglement_table","id")+1;
 
-                String query = "INSERT INTO demo.person_reglement_table (id,amount,old_sold,sold,mode,date,note,personID) VALUES (?,?,?,?,?,?,?,?)";
+                String query = "INSERT INTO demo.person_reglement_table (id,amount,old_sold,sold,mode,date,note,personID,old_total_caisse,total_caisse) VALUES (?,?,?,?,?,?,?,?,?,?)";
                 preparesStatemnt = conn.connect().prepareStatement(query);
                 preparesStatemnt.setInt(1, id);
                 preparesStatemnt.setDouble(2, amount);
@@ -333,10 +420,14 @@ public class Reglement_Controller implements Initializable {
                 preparesStatemnt.setString(6, date);
                 preparesStatemnt.setString(7, note);
                 preparesStatemnt.setInt(8, fournisseurID);
+                preparesStatemnt.setDouble(9, old_total);
+                preparesStatemnt.setDouble(10, new_total);
+
                 preparesStatemnt.execute();
                 conn.connect().close();
                 rs.close();
                 preparesStatemnt.close();
+                utility.update_Caisse_total(new_total);
                 utility.setTextFieldFocus(NumberTextField);
                 clear();
                 notification.show_Confirmation("Verssement : " + amount + " DZD"+ " received !");
@@ -347,6 +438,8 @@ public class Reglement_Controller implements Initializable {
                 rs.close();
                 preparesStatemnt.close();
             }
+
+
 
             // Update Sold
 

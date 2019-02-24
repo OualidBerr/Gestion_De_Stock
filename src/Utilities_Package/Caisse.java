@@ -13,10 +13,12 @@ public class Caisse {
     private DoubleProperty sold;
     private StringProperty note ;
     private IntegerProperty personID;
+    private DoubleProperty old_total;
+    private DoubleProperty total;
 
     // Constructor
     public Caisse(int ID,String PERSONNAME,String OPERATIONTYPE,String DATE,
-                  double AMOUNT,double OLDSOLD,double SOLD,String NOTE,int PERSONID)
+                  double AMOUNT,double OLDSOLD,double SOLD,String NOTE,int PERSONID,double OLDTOTAL,double TOTAL)
     {
         this.id            = new SimpleIntegerProperty(ID);
         this.personName    = new SimpleStringProperty(PERSONNAME);
@@ -27,8 +29,37 @@ public class Caisse {
         this.sold          = new SimpleDoubleProperty(SOLD)   ;
         this.note          = new SimpleStringProperty(NOTE)    ;
         this.personID      = new SimpleIntegerProperty(PERSONID)  ;
+        this.old_total      = new SimpleDoubleProperty(OLDTOTAL);
+        this.total          = new SimpleDoubleProperty(TOTAL)   ;
+
 
     }
+
+    public double getOld_total() {
+        return old_total.get();
+    }
+
+    public DoubleProperty old_totalProperty() {
+        return old_total;
+    }
+
+    public void setOld_total(double old_total) {
+        this.old_total.set(old_total);
+    }
+
+    public double getTotal() {
+        return total.get();
+    }
+
+    public DoubleProperty totalProperty() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total.set(total);
+    }
+
+
 
     public int getId() {
         return id.get();

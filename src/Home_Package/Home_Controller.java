@@ -113,6 +113,7 @@ public class Home_Controller extends Notification implements Initializable {
      finally {
           int size =data.size();
           if (size!=0){
+              notification_lb.setVisible(true);
               notification_lb.setText(size+"");
           }
           else {
@@ -286,7 +287,7 @@ public class Home_Controller extends Notification implements Initializable {
 
 
 
-     notification_titlePane.setVisible(false);
+
         try {
             load_notifications();
         } catch (SQLException e) {
@@ -295,6 +296,7 @@ public class Home_Controller extends Notification implements Initializable {
 
         int size =data.size();
        if (size!=0){
+           notification_lb.setVisible(true);
            notification_lb.setText(size+"");
            }
        else {

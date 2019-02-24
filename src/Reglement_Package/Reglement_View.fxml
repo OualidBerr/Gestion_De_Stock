@@ -147,14 +147,6 @@
             <FontAwesomeIconView glyphName="SHARE_SQUARE_ALT" size="25" />
          </graphic>
       </Button>
-      <Button fx:id="reglement_delete_btn" layoutX="906.0" layoutY="606.0" mnemonicParsing="false" onAction="#delet_reglement" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="225.0">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-         <graphic>
-            <FontAwesomeIconView fill="#ee0303" glyphName="TIMES_CIRCLE" size="25" />
-         </graphic>
-      </Button>
       <Button layoutX="765.0" layoutY="606.0" mnemonicParsing="false" onAction="#edit_reglment" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="400.0">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -168,7 +160,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
          <graphic>
-            <FontAwesomeIconView fill="#9c44a9" glyphName="PLUS_SQUARE" size="35" />
+            <FontAwesomeIconView glyphName="PLUS_SQUARE" size="35" />
          </graphic>
       </Button>
       <FontAwesomeIconView fill="#fffbfb" glyphName="USER" layoutX="455.0" layoutY="49.0" nodeOrientation="LEFT_TO_RIGHT" size="40" textAlignment="JUSTIFY" />
@@ -177,5 +169,10 @@
       <FontAwesomeIconView fill="#fffbfb" glyphName="CALENDAR_CHECK_ALT" layoutX="1038.0" layoutY="219.0" size="20" AnchorPane.rightAnchor="200.0" />
       <FontAwesomeIconView fill="#fffbfb" glyphName="MONEY" layoutX="1037.0" layoutY="156.0" size="20" AnchorPane.rightAnchor="200.0" />
       <FontAwesomeIconView fill="#fffbfb" glyphName="MONEY" layoutX="1037.0" layoutY="188.0" size="20" AnchorPane.rightAnchor="200.0" />
+      <Button layoutX="909.0" layoutY="596.0" mnemonicParsing="false" onAction="#annuler_reglement" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" text="Annuler">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

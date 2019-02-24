@@ -66,58 +66,58 @@
         </Label>
             <ToolBar onKeyPressed="#handlekeyPressed" prefHeight="69.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
-                <Button fx:id="goHome_btn" mnemonicParsing="false" onAction="#goBack_To_Home_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" textFill="WHITE">
+                <Button fx:id="goHome_btn" contentDisplay="TOP" mnemonicParsing="false" onAction="#goBack_To_Home_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" text="Home" textFill="#303030">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="12.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView glyphName="HOME" size="40" />
+                        <FontAwesomeIconView fill="#9c44a9" glyphName="HOME" size="25" />
                      </graphic></Button>
-                  <Button fx:id="goHome_btn1" layoutX="10.0" layoutY="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #9C44A9;" textFill="WHITE">
+                  <Button fx:id="goHome_btn1" contentDisplay="TOP" layoutX="10.0" layoutY="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #9C44A9;" text="Produits" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="12.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView fill="#ebebeb" glyphName="PRODUCT_HUNT" size="40" />
+                        <FontAwesomeIconView fill="#ebebeb" glyphName="PRODUCT_HUNT" size="25" />
                      </graphic>
                   </Button>
-                  <Button fx:id="newProduct_btn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Add_New_Product_Form" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" textFill="#303030">
+                  <Button fx:id="newProduct_btn" contentDisplay="TOP" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Add_New_Product_Form" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" text="Nouveau" textFill="#303030">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="12.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView glyphName="DOWNLOAD" size="40" />
+                        <FontAwesomeIconView fill="#9c44a9" glyphName="PLUS" size="25" />
                      </graphic>
                   </Button>
-                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Edit_Product_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" textFill="#303030">
+                  <Button contentDisplay="TOP" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_Edit_Product_Window" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" text="Modifier" textFill="#303030">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="12.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView glyphName="EDIT" size="40" />
+                        <FontAwesomeIconView fill="#9c44a9" glyphName="EDIT" size="25" />
                      </graphic>
                   </Button>
-                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete_Product" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" textFill="#303030">
+                  <Button contentDisplay="TOP" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete_Product" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" text="Suprimer" textFill="#303030">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="12.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView glyphName="TRASH" size="40" />
+                        <FontAwesomeIconView fill="#cd0a0a" glyphName="TRASH" size="25" />
                      </graphic>
                   </Button>
-                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" textFill="#303030">
+                  <Button contentDisplay="TOP" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #ccb3ff;" textFill="#303030">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView glyphName="" size="40" />
+                        <FontAwesomeIconView glyphName="" size="25" />
                      </graphic>
                   </Button>
               </items>
             </ToolBar>
             <VBox layoutX="-1.0" layoutY="69.0" prefHeight="571.0" prefWidth="1316.0" style="-fx-background-color: #9C44A9;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0">
                <children>
-                  <TextField fx:id="search_Textfield" onAction="#fournisseurSearchThread" onMouseClicked="#fournisseurSearchThread" promptText="Search" style="-fx-background-radius: 20; -fx-font-weight: Bold;">
+                  <TextField fx:id="search_Textfield" onAction="#fournisseurSearchThread" onMouseClicked="#fournisseurSearchThread" promptText="Search" style="-fx-font-weight: Bold;">
                      <VBox.margin>
                         <Insets bottom="10.0" left="20.0" right="800.0" top="10.0" />
                      </VBox.margin>
@@ -146,7 +146,7 @@
                         <Insets bottom="30.0" left="5.0" right="50.0" />
                      </VBox.margin>
                   </TableView>
-                  <Button fx:id="closeButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #ccb3ff;" textFill="#303030">
+                  <Button fx:id="closeButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #ccb3ff;" text="Exit" textFill="#303030">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -154,7 +154,7 @@
                         <Insets left="1200.0" />
                      </VBox.margin>
                      <graphic>
-                        <FontAwesomeIconView glyphName="SIGN_OUT" size="40" />
+                        <FontAwesomeIconView fill="#9c44a9" glyphName="SIGN_OUT" size="25" />
                      </graphic>
                   </Button>
                </children>

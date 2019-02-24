@@ -162,11 +162,24 @@ public class Client_Controller implements Initializable {
             int clientID = client.getId(); //9) clientID
             double old_Sold =  client.getSold(); // 3) Old Sold
             double new_sold = old_Sold - amount; // 4) new sold
+            double new_total=0.02;
+            int personType    =  utility.getPerson_Type(clientID);
+            double old_total  = utility.get_caisse_total();
+
+
+            if ( personType == 1 )
+            {
+                new_total = old_total + amount;  // paiment
+            }
+            else if (personType == 2)
+            {
+                new_total = old_total - amount;   // verssement
+            }
 
             if (!verssement_txt.getText().isEmpty()){
 
                 String query = "INSERT INTO demo.person_reglement_table " +
-                        "(id,amount,old_sold,sold,mode,date,note,personID) VALUES (?,?,?,?,?,?,?,?)";
+                        "(id,amount,old_sold,sold,mode,date,note,personID,old_total_caisse,total_caisse) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
                 preparesStatemnt = conn.connect().prepareStatement(query);
                 preparesStatemnt.setInt   (1, Reglement_id);
@@ -177,9 +190,12 @@ public class Client_Controller implements Initializable {
                 preparesStatemnt.setString(6, date);
                 preparesStatemnt.setString(7, note);
                 preparesStatemnt.setInt   (8, clientID);
+                preparesStatemnt.setDouble(9, old_total);
+                preparesStatemnt.setDouble(10, new_total);
                 preparesStatemnt.execute();
                 preparesStatemnt.close();
                 conn.connect().close();
+                utility.update_Caisse_total(new_total);
                 String query_sold = "UPDATE demo.person_table SET sold =? Where id="+clientID;
                 preparesStatemnt = conn.connect().prepareStatement(query_sold);
                 preparesStatemnt.setDouble(1,new_sold);

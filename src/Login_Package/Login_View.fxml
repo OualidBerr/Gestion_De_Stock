@@ -75,15 +75,15 @@
                                     <Font name="System Italic" size="12.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="loginbtn" layoutX="94.0" layoutY="279.0" mnemonicParsing="false" onAction="#LoginBtnFunction" prefHeight="46.0" prefWidth="182.0" style="-fx-background-color: #8cff66;" textFill="#303030">
+                              <Button fx:id="loginbtn" layoutX="94.0" layoutY="279.0" mnemonicParsing="false" onAction="#LoginBtnFunction" prefHeight="46.0" prefWidth="182.0" style="-fx-background-color: #8cff66;" text="LOG_IN" textFill="#303030">
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="System Bold" size="12.0" />
                                  </font>
                                  <graphic>
-                                    <FontAwesomeIconView glyphName="SIGN_IN" size="35" />
+                                    <FontAwesomeIconView glyphName="SIGN_IN" size="25" />
                                  </graphic>
                               </Button>
-                              <FontAwesomeIconView fill="#fcf6f6" glyphName="USER" layoutX="66.0" layoutY="65.0" size="75" />
+                              <FontAwesomeIconView fill="#fcf6f6" glyphName="USER" layoutX="70.0" layoutY="57.0" size="60" />
                            </children>
                         </AnchorPane>
                      </children>

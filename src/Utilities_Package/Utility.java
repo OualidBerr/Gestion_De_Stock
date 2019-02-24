@@ -308,21 +308,17 @@ public class Utility {
 
        }
        // Update CLIENT Sold
-        public void update_Client_Sold(double amount, double old_sold, int id) throws SQLException {
+        public void update_Caisse_total(double new_total) throws SQLException {
 
         Db_Connection conn = new Db_Connection();
 
-
         try{
-
-            double new_Sold = (old_sold + amount);
-            String query    = "UPDATE demo.person_table SET sold =? Where id="+id + " and PersonType="+PersonType.Active_Client;
-
+            String query    = "UPDATE demo.person_reglement_table SET total_caisse =? Where id=0;";
             preparesStatemnt = conn.connect().prepareStatement(query);
-            preparesStatemnt.setDouble(1, new_Sold);
+            preparesStatemnt.setDouble(1, new_total);
             preparesStatemnt.executeUpdate();
             conn.connect().close();
-        }
+           }
 
         catch (Exception ex){ex.printStackTrace();}
 
@@ -330,8 +326,7 @@ public class Utility {
             if (conn.connect()   != null) {conn.connect().close();}
             if (preparesStatemnt != null) {preparesStatemnt.close();}
 
-        }
-
+             }
 
     }
         // update stock
@@ -436,6 +431,35 @@ public class Utility {
               return product_Nbr_pcs;
           }
 
+          //get product Alert
+
+          public int get_Product_Alert(int productID) throws SQLException {
+
+              int Alert = 0;
+              String query = "SELECT alert from demo.product_table  where id ="+productID;
+
+              Connection cnn = conn.connect();
+              try{
+                  preparesStatemnt = cnn.prepareStatement(query);
+                  resultSet = preparesStatemnt.executeQuery();
+                  if(resultSet.next()){
+                      Alert = resultSet.getInt(1);
+                  }
+                  cnn.close();
+                  preparesStatemnt.close();
+                  resultSet.close();
+              }
+
+              catch (Exception ex){ex.printStackTrace();}
+
+              finally {
+                  if (conn.connect()   != null) {conn.connect().close();}
+                  if (preparesStatemnt != null) {preparesStatemnt.close();}
+                  if (resultSet != null) {resultSet.close();}
+              }
+
+              return Alert;
+          }
 
         // get Product Nbr_pcs_crt
           public int get_Product_Nbr_pcs_crt(int productID) throws SQLException {
@@ -522,8 +546,54 @@ public class Utility {
 
                return fournisseurID;
 
-
           }
+    // get person Type
+    public int getPerson_Type(int  personID) throws SQLException {
+
+       int personType =0;
+        String query = "SELECT PersonType from demo.person_table  where id ="+personID;
+        Connection cnn = conn.connect();
+
+        try{
+            preparesStatemnt = cnn.prepareStatement(query);
+            resultSet = preparesStatemnt.executeQuery();
+            if(resultSet.next()){
+                personType = resultSet.getInt(1);
+            }
+            cnn.close();
+            preparesStatemnt.close();
+            resultSet.close();
+        }
+
+        catch (Exception ex){ex.printStackTrace();}
+        finally {
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (resultSet != null) {resultSet.close();}
+        }
+
+        return personType;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           // get Person Name
     public String get_Person_Name(int PersonID) throws SQLException {
         String personName ="";
@@ -634,6 +704,72 @@ public class Utility {
 
 
     }
+
+
+    public double get_caisse_total() throws SQLException {
+
+        ResultSet   rs = null;
+        double sum_amount=0.25;
+        try{
+
+            String Query =" SELECT sum(total_caisse) FROM demo.person_reglement_table where id=0";
+            rs = conn.connect().createStatement().executeQuery(Query);
+            if (rs.next()){
+                sum_amount = rs.getDouble(1);
+            }
+            //label.setText("TOTAL : "+String.format("%,.2f", sum_amount)+" DZD");
+        }
+
+        catch (Exception ex){ex.printStackTrace();}
+
+        finally {
+
+            if (conn.connect()   != null) {conn.connect().close();}
+            if (preparesStatemnt != null) {preparesStatemnt.close();}
+            if (rs != null) {rs.close();}
+        }
+
+
+        return sum_amount;
+    }
+
+
+
+    public void Product_Notification(double Quan,int Alert,String productName) throws SQLException {
+
+        if ( Quan<= (double) Alert  ){
+
+            String query = "INSERT INTO demo.notification_table (id,note,date,status) VALUES (?,?,?,?)";
+            int id = getMax_ID("demo.notification_table","id")+1;
+            preparesStatemnt = conn.connect().prepareStatement(query);
+            preparesStatemnt.setInt(1, id);
+            preparesStatemnt.setString(2, productName+"Stock Limit");
+            preparesStatemnt.setString(3, LocalDate.now().toString());
+            preparesStatemnt.setString(4, "unread");
+            preparesStatemnt.execute();
+            preparesStatemnt.close();
+            conn.connect().close();
+
+          }
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public void show_TrayNotification(String message){
 
         String title = "Congratulations sir";
